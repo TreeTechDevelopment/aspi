@@ -8,6 +8,7 @@ function Form() {
             <input type="input" placeholder="Modelo"/>
             <input type="input" placeholder="Cilindraje"/>
             <input type="input" placeholder="Motor"/>
+            <button>Buscar</button>
         </form>
     )
 }
