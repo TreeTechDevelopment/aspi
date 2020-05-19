@@ -13,10 +13,10 @@ function Navbar() {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/orden-servicio">Orden de Servicio</Link> 
+                    <Link to="/service-order" className="links">Orden de Servicio</Link> 
                 </li>
                 <li>
-                    <Link to="/equivalencias">Equivalencias</Link>
+                    <Link to="/cross">Referencias Cruzadas</Link>
                 </li>
                 <li>
                     <Link to="/iniciar-sesion">Iniciar Sesión</Link>         
