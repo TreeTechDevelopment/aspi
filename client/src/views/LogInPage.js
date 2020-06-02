@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 
 import FormIS from '../components/login/FormIS'

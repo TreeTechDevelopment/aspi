@@ -3,8 +3,12 @@ const path = require('path');
 
 const app = express();
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join( __dirname, '..', 'public', 'index.html' ))
-})
+const clientRoutes = require('./client');
+const carsRoutes = require('./cars');
+const usersRoutes = require('./users');
+
+app.use('/', clientRoutes)
+app.use('/cars', carsRoutes)
+app.use('/users', usersRoutes)
 
 module.exports = app
