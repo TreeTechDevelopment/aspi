@@ -1,13 +1,31 @@
 import React from 'react';
 
-import Form from '../components/serviceOrder/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../components/Navbar';
+import Form from '../components/serviceOrder/Form';
+import Service from '../components/service/Service';
 
 function ServiceOrd() {
     return (
         <>
-            <Navbar />
-            <Form />
+        <Navbar />
+            <div>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <Form />
+                    </div>
+                    <div className="col">
+                    <Service />
+        
+                        </div>
+                </div>
+
+            </div>
+                
+                
+            </div>
+            
         </>
     )
 }
