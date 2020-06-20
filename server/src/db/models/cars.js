@@ -18,20 +18,15 @@ const carSchema = new Schema({
     },
     motor: {
         required: true,
-        type: Schema.Types.ObjectId,
-        ref: 'motores'
+        type: String
     },
-    yearFrom: {
+    year: [{
         required: true,
         type: Number,
-    },
-    yearTo: {
-        required: true,
-        type: Number,
-    },
-    airFilter: { type: Array },
-    oilFilter: { type: Array },
-    fuelFilter: { type: Array }
+    }],
+    airFilter: { type: Array, default: [] },
+    oilFilter: { type: Array, default: [] },
+    fuelFilter: { type: Array, default: [] }
 })
 
 module.exports = mongoose.model('carros', carSchema)

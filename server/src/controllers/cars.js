@@ -2,14 +2,23 @@
 const Model = require('../db/models/modelos');
 const Car = require('../db/models/cars');
 const Make = require('../db/models/marcas');
-const Motor = require('../db/models/motores');
 
 const getAllInfo = async (req, res) => {
     try{
-        const models = await Model.find({}).populate('make')
-        const makes = await Make.find({})
-        const motors = await Motor.find({})
-        res.status(200).json({ models, makes, motors })
+        const models = await Model.find({})
+        const makes = await Make.find({})        
+        res.json({ models, makes })
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const getCars = async (req, res) => {
+    try{
+        const { model, make } = req.query
+        const cars = await Car.find({ make, model })
+        res.json({ cars })
     }catch(e){
         console.log(e)
         res.sendStatus(500)
@@ -17,5 +26,6 @@ const getAllInfo = async (req, res) => {
 }
 
 module.exports = {
-    getAllInfo
+    getAllInfo,
+    getCars
 }

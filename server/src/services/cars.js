@@ -2,9 +2,12 @@
 const Make = require('../db/models/marcas');
 const Model = require('../db/models/modelos');
 const Car = require('../db//models/cars');
-const Motor = require('../db/models/motores');
 
-const createCarDB = async (car) => {
+let string = ''
+string.toUpperCase()
+
+const createCarDB = async (car, models) => {
+
     let newCar = {
         oilFilter: [],
         airFilter: [],
@@ -15,46 +18,34 @@ const createCarDB = async (car) => {
 
     for(let i = 0; i < car.length; i++){
         if(i === 0){
-            try{
-                let make = new Make({
-                    name: car[i]
-                })
-                const newMake = await make.save()
-                newCar.make = newMake._id
-            }catch(e){
-                let make = await Make.findOne({ 'name': car[i] })
-                newCar.make = make._id
-            }
+            let index = models.findIndex( model => model.brand.toUpperCase() === car[i].trim() )
+            let make = await Make.findOne({ name: models[index].brand })
+            newCar.make = make._id
         }else if(i === 1){
-            try{
-                let model = new Model({
-                    name: car[i],
-                    make: newCar.make
-                })
-                const newModel = await model.save()
-                newCar.model = newModel._id
-            }catch(e){
-                let model = await Model.findOne({ 'name': car[i] })
-                newCar.model = model._id
-            }
+            let modelsDB = await Model.find({ make: newCar.make })
+            let index = modelsDB.findIndex( model => model.name === car[i].trim() ) 
+            newCar.model = modelsDB[index]._id
         }else if(i === 2){
-            newCar.yearFrom = Number(car[i].split(' ')[1].replace(',',''))
-            newCar.yearTo = Number(car[i].split(' ')[ car[i].split(' ').length - 1 ])
+            let yearFrom = Number(car[i].trim().split(' ')[1].replace(',',''))
+            let yearTo = Number(car[i].trim().split(' ')[ car[i].trim().split(' ').length - 1 ])
+
+            if(yearFrom < 21){ yearFrom += 2000 }
+            else{ yearFrom += 1900 } 
+
+            if(yearTo < 21){ yearTo += 2000 }
+            else{ yearTo += 1900 } 
+
+            let years = []
+            for(let i = yearFrom; i <= yearTo; i++){ years.push(i) }
+
+            newCar.year = years
+            
         }else if(i === 3){
-            newCar.cylinder = car[i]
+            newCar.cylinder = car[i].trim()
         }else if(i === 4){
-            try{
-                let motor = new Motor({
-                    name: car[i]
-                })
-                const newMotor = await motor.save()
-                newCar.motor = newMotor._id
-            }catch(e){
-                let motor = await Motor.findOne({ 'name': car[i] })
-                newCar.motor = motor._id
-            }
+            newCar.motor = car[i].trim()
         }else if(i >= 5){
-            switch(car[i]){
+            switch(car[i].trim()){
                 case "OF":
                     filterControl = 'OF'
                     break;
@@ -65,27 +56,27 @@ const createCarDB = async (car) => {
                     filterControl = 'FGI'
                     break;
                 default:
-                    if(car[i] !== "."){
+                    if(car[i].trim() !== "."){
                         if(car[i].indexOf('/') >= 0){
                             let carArray = car[i].split('/').map(element => (
                                 element.replace(/^\s+/g, '').replace(/\s+$/g, '')
                             ));
-                            if(filterControl === "OF"){ newCar.oilFilter.push(`${filterControl}-${carArray[0]}`) }
-                            if(filterControl === "F"){ newCar.airFilter.push(`${filterControl}-${carArray[0]}`) }
-                            if(filterControl === "FGI"){ newCar.fuelFilter.push(`${filterControl}-${carArray[0]}`) }
+                            if(filterControl === "OF"){ newCar.oilFilter.push(`${filterControl}-${carArray[0].trim()}`) }
+                            if(filterControl === "F"){ newCar.airFilter.push(`${filterControl}-${carArray[0].trim()}`) }
+                            if(filterControl === "FGI"){ newCar.fuelFilter.push(`${filterControl}-${carArray[0].trim()}`) }
                             filterControl = carArray[1]
                         }else{
-                            if(filterControl === "OF"){ newCar.oilFilter.push(`${filterControl}-${car[i]}`) }
-                            if(filterControl === "F"){ newCar.airFilter.push(`${filterControl}-${car[i]}`) }
-                            if(filterControl === "FGI"){ newCar.fuelFilter.push(`${filterControl}-${car[i]}`) }
+                            if(filterControl === "OF"){ newCar.oilFilter.push(`${filterControl}-${car[i].trim()}`) }
+                            if(filterControl === "F"){ newCar.airFilter.push(`${filterControl}-${car[i].trim()}`) }
+                            if(filterControl === "FGI"){ newCar.fuelFilter.push(`${filterControl}-${car[i].trim()}`) }
                         }
                     }
             }
 
         }
     }
-    let carDB = new Car(newCar)
-    carDB.save()
+    
+    return newCar
 }
 
 module.exports = {

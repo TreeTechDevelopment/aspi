@@ -4,9 +4,11 @@ const path = require('path');
 const app = express();
 
 const {
-    getAllInfo
+    getAllInfo,
+    getCars
 } = require('../controllers/cars')
 
-app.get('/', getAllInfo)
+app.get('/all', getAllInfo)
+app.get('/', getCars)
 
 module.exports = app

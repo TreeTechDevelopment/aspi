@@ -5,7 +5,6 @@ const modelSchema = new Schema({
     name: {
         required: true,
         type: String,
-        unique: true
     },
     make: {
         required: true,

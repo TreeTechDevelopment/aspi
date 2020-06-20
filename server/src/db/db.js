@@ -8,9 +8,13 @@ const result = excelToJson({
     source: fs.readFileSync(path.resolve( __dirname, '../../../OSCAR.xlsx' )) 
 });
 
+const models = JSON.parse( fs.readFileSync(path.join(__dirname, '/modelos.json')) )
+
 const { createCarDB } = require('../services/cars')
 
-const Car = require('../db/models/cars');
+const Make = require('./models/marcas');
+const Model = require('./models/modelos');
+const Car = require('./models/cars');
 
 const DBconfig = { 
     useNewUrlParser: true, 
@@ -21,9 +25,16 @@ const DBconfig = {
 
 mongoose.connect( process.env.DB, DBconfig ,async (db) => {
     console.log("DB connected")
-    /* let car = result.sheet1[2181].C.split('-').map(element => (
-        element.replace(/^\s+/g, '').replace(/\s+$/g, '')
-    )); */
-    //await createCarDB(car)
-    //await Car.findByIdAndRemove('5ed5aedb18bca12da0e05633')
+    
+   /*  for(let i = 3708; i < 3710; i++){
+        let newCar = await createCarDB(result.sheet1[i].C.split('-'), models)
+        let newcarDB = new Car(newCar)
+        newcarDB.save()
+        console.log(newCar)
+    }
+
+    //await Model.findByIdAndRemove('5ee6c974b79c46273c2a1849')
+
+    console.log('TERMINADO') */
+    
 } )

@@ -1,69 +1,157 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 
 import { url, messageServerError } from '../../../app.json'
 
-const Form = () => {
+const Form = ({ setCar }) => {
 
-    const [year, setYear] = useState('a')
+    const [years, setYears] = useState([])
+    const [makesSelect, setMakesSelect] = useState([])
     const [makes, setMakes] = useState([])
     const [models, setModels] = useState([])
     const [modelsSelect, setModelsSelect] = useState([])
     const [motors, setMotors] = useState([])
-    const [make, setMake] = useState('')
-    const [model, setModel] = useState('')
-    const [motor, setMotor] = useState('')  
-    const [infoFetched, setInfoFetched] = useState(false)    
+    const [cylinders, setCylinders] = useState([])
+    const [cars, setCars] = useState([])
+    const [make, setMake] = useState({})
+    const [model, setModel] = useState({})
+    const [motor, setMotor] = useState({})
+    const [cylinder, setCylinder] = useState({})
+    const [year, setYear] = useState({})  
+    const [infoFetched, setInfoFetched] = useState(false) 
+    const [airFilter, setAirFilter] = useState('') 
 
-    const handleSelect = (e) => { setYear(e.target.value) }
-
-    const handlePicker = (e) => { 
-        console.log(e)
-    }
-
-    const setData = (models, motors, makes) => {
-        console.log(models)
+    const setData = (models, makes) => {        
         setMakes(makes)
-        setMake(makes[0].name)
+        let makesSelect = makes.map( make => { return { label: make.name, value: make._id } } )
+        setMakesSelect(makesSelect)
+        setMake(makesSelect[0])
 
-        let newModels = models.filter( model => model.make.name === makes[0].name )
+        let modelsSelect = models.filter( model => model.make === makes[0]._id )
+        modelsSelect = modelsSelect.map( model => { return { label: model.name, value: model._id } } )
         setModels(models)
-        setModelsSelect(newModels)
-        setModel(newModels[0].name)
+        setModelsSelect(modelsSelect)
+        setModel(modelsSelect[0])
 
-        setMotors(motors)
-        setMotor(motors[0].name)
         setInfoFetched(true)
     }
 
+    const setDataCars = cars => {
+        let yearsSelect = []
+        for(let i = 0; i < cars.length; i++){
+            for(let j = 0; j < cars[i].year.length; j++){
+                yearsSelect.push(cars[i].year[j])
+            }
+        }
+        yearsSelect = [...new Set(yearsSelect)].sort((a, b) => a - b);
+        yearsSelect = yearsSelect.map( year => { return { value: year, label: year } } )
+        setYears(yearsSelect)
+        setYear(yearsSelect[0])
+
+        let motorsSelect = cars.filter( car => car.year.indexOf(yearsSelect[0].value) >= 0 )        
+        motorsSelect = motorsSelect.map( car => car.motor )
+        motorsSelect = [...new Set(motorsSelect)]
+        motorsSelect = motorsSelect.map( motor => { return { value: motor, label: motor } } )
+        setMotors(motorsSelect)
+        setMotor(motorsSelect[0])
+
+        let cylindersSelect = cars.filter( car => car.motor == motorsSelect[0].value )        
+        cylindersSelect = cylindersSelect.map( car => car.cylinder )
+        cylindersSelect = [...new Set(cylindersSelect)]
+        cylindersSelect = cylindersSelect.map( cylinder => { return { value: cylinder, label: cylinder } } )
+        setCylinders(cylindersSelect)
+        setCylinder(cylindersSelect[0])
+        
+        setCars(cars)
+    }
+
+    const fetchCars = async () => {
+        const res = await axios({
+            method: 'GET',
+            url : `${url}/cars?make=${make.value}&model=${model.value}`,
+            timeout: 5000
+        })
+        return res.data
+    }
+
     useEffect(() => {
-        fetchCars().then(({ models, motors, makes }) => {
-            setData(models, motors, makes)
+        fetchInfo().then(({ models, makes }) => {
+            setData(models, makes)
         }).catch((e) => {
             setInfoFetched(true)
             alert(`${messageServerError}`)
         })
     },[])
 
-    const fetchCars = async () => {
+    useEffect(() => {
+        if(make.value && model.value){    
+            fetchCars().then(({cars}) => {
+                setDataCars(cars)
+            }).catch(e => alert(`${messageServerError}`))
+        }
+    },[model, make])
+
+    useEffect(() => {
+        if(cars.length != 0){
+            let car = cars.find(car => car.year.indexOf(year.value) >= 0 && car.motor == motor.value && car.cylinder == cylinder.value  )
+            setCar(car)
+        }
+    },[make, model, year, motor, cylinder, cars])
+
+    const fetchInfo = async () => {
         const res = await axios({
             method: 'GET',
-            url : `${url}/cars`,
+            url : `${url}/cars/all`,
             timeout: 5000
         })
         return res.data
     }
 
-    const handleMakeSelect = e => {
-        setMake(e.target.value)
+    const handleMakeSelect = newMake => {
 
-        let newModels = models.filter( model => model.make.name === e.target.value ) 
+        setMake(newMake)
+
+        let newModels = models.filter( model => model.make == newMake.value )         
+        newModels = newModels.map( model => { return { label: model.name, value: model._id } } )
         setModelsSelect(newModels)
+        setModel(newModels[0])
+        
     }
 
-    const handleModelSelect = e => setModel(e.target.value)
+    const handleYearsSelect = newYear => {
+        setYear(newYear)
 
-    const handleMotorSelect = e => setMotor(e.target.value)
+        let motorsSelect = cars.filter( car => car.year.indexOf(newYear.value) >= 0 )
+        motorsSelect = motorsSelect.map( car => car.motor )
+        motorsSelect = [...new Set(motorsSelect)]
+        motorsSelect = motorsSelect.map( motor => { return { value: motor, label: motor } } )
+        setMotors(motorsSelect)
+        setMotor(motorsSelect[0])
+
+        let cylindersSelect = cars.filter( car => car.motor == motorsSelect[0].value )
+        cylindersSelect = cylindersSelect.map( car => car.cylinder )
+        cylindersSelect = [...new Set(cylindersSelect)]
+        cylindersSelect = cylindersSelect.map( cylinder => { return { value: cylinder, label: cylinder } } )
+        setCylinders(cylindersSelect)
+        setCylinder(cylindersSelect[0])
+    }
+
+    const handleMotorSelect = newMotor => {
+        setMotor(newMotor)
+
+        let cylindersSelect = cars.filter( car => car.motor == motorsSelect[0].value )
+        cylindersSelect = cylindersSelect.map( car => car.cylinder )
+        cylindersSelect = [...new Set(cylindersSelect)]
+        cylindersSelect = cylindersSelect.map( cylinder => { return { value: cylinder, label: cylinder } } )
+        setCylinders(cylindersSelect)
+        setCylinder(cylindersSelect[0])
+    }
+
+    const handleModelSelect = newModel => setModel(newModel)
+
+    const handleCylinderSelect = newCylinder => setCylinder(newCylinder)
+    
 
     return (
         <>
@@ -72,23 +160,40 @@ const Form = () => {
                      <h1>Orden de servicio</h1>
                     <form id="form-service-order">
                         <label>Marca</label>
-                        <select onChange={handleMakeSelect} value={make}>
-                            {makes.map(make => (
-                                <option key={make._id} value={make.name}>{make.name}</option>
-                            ))}
-                        </select>
+                        <Select 
+                            options={makesSelect}
+                            onChange={handleMakeSelect}
+                            value={make}
+                            className="select"
+                        />
                         <label>Modelo</label>
-                        <select value={model} onChange={handleModelSelect}>
-                            {modelsSelect.map(model => (
-                                <option key={model._id} value={model.name}>{model.name}</option>
-                            ))}
-                        </select>
+                        <Select 
+                            options={modelsSelect}
+                            onChange={handleModelSelect}
+                            value={model}
+                            className="select"
+                        />
+                        <label>Año</label>
+                        <Select 
+                            options={years}
+                            onChange={handleYearsSelect}
+                            value={year}
+                            className="select"
+                        />
                         <label>Motor</label>
-                        <select value={motor} onChange={handleMotorSelect}>
-                            {motors.map(motor => (
-                                <option key={motor._id} value={motor.name}>{motor.name}</option>
-                            ))}
-                        </select>
+                        <Select 
+                            options={motors}
+                            onChange={handleMotorSelect}
+                            value={motor}
+                            className="select"
+                        />
+                        <label>Cilindros</label>
+                        <Select 
+                            options={cylinders}
+                            onChange={handleCylinderSelect}
+                            value={cylinder}
+                            className="select"
+                        />
                     </form>
                 </>
             )}
