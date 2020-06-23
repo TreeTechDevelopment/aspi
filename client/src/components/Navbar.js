@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-import logo from '../images/logo.jpg'
+import { url } from '../../app.json'
 
 function Navbar() {
     return (
@@ -9,7 +9,7 @@ function Navbar() {
             <ul className="navbar">
                 <li>
                     <Link to="/" className="links">
-                        <img src={logo} id="imgLogo"/>
+                        <img src={`${url}/images/logo.jpg`} id="imgLogo"/>
                     </Link>
                 </li>
                 <li>
@@ -17,6 +17,9 @@ function Navbar() {
                 </li>
                 <li>
                     <Link to="/cross">Referencias Cruzadas</Link>
+                </li>
+                <li>
+                    <Link to="/records">Registros</Link>
                 </li>
                 <li>
                     <Link to="/iniciar-sesion">Iniciar Sesión</Link>         

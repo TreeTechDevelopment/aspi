@@ -4,7 +4,7 @@ import Select from 'react-select';
 
 import { url, messageServerError } from '../../../app.json'
 
-const Form = ({ setCar }) => {
+const Form = ({ setCar, setMakeCar, setModelCar, setYearCar }) => {
 
     const [years, setYears] = useState([])
     const [makesSelect, setMakesSelect] = useState([])
@@ -66,7 +66,7 @@ const Form = ({ setCar }) => {
         setCars(cars)
     }
 
-    const fetchCars = async () => {
+    const fetchCar = async () => {
         const res = await axios({
             method: 'GET',
             url : `${url}/cars?make=${make.value}&model=${model.value}`,
@@ -86,7 +86,7 @@ const Form = ({ setCar }) => {
 
     useEffect(() => {
         if(make.value && model.value){    
-            fetchCars().then(({cars}) => {
+            fetchCar().then(({cars}) => {
                 setDataCars(cars)
             }).catch(e => alert(`${messageServerError}`))
         }
@@ -95,14 +95,19 @@ const Form = ({ setCar }) => {
     useEffect(() => {
         if(cars.length != 0){
             let car = cars.find(car => car.year.indexOf(year.value) >= 0 && car.motor == motor.value && car.cylinder == cylinder.value  )
-            setCar(car)
+            if(car){
+                setCar(car)
+                setMakeCar(make.label)
+                setModelCar(model.label)
+                setYearCar(year.label)
+            }
         }
     },[make, model, year, motor, cylinder, cars])
 
     const fetchInfo = async () => {
         const res = await axios({
             method: 'GET',
-            url : `${url}/cars/all`,
+            url : `${url}/cars/info`,
             timeout: 5000
         })
         return res.data

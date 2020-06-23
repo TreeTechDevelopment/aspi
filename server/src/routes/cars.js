@@ -5,10 +5,12 @@ const app = express();
 
 const {
     getAllInfo,
+    getCar,
     getCars
 } = require('../controllers/cars')
 
-app.get('/all', getAllInfo)
-app.get('/', getCars)
+app.get('/info', getAllInfo)
+app.get('/all', getCars)
+app.get('/', getCar)
 
 module.exports = app

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Select from "react-select";
 
-const Service = ({ car }) => {
+import CreatePDF from './CreatePDF'
+
+const Service = ({ car, make, model, year }) => {
   const [airFilterSelect, setAirFilterSelect] = useState([]);
   const [oilFilterSelect, setOilFilterSelect] = useState([]);
   const [fuelFilterSelect, setFuelFilterSelect] = useState([]);
@@ -14,6 +16,7 @@ const Service = ({ car }) => {
         let airFilters = car.airFilter.map((airFilter) => {
             return { value: airFilter, label: airFilter };
         });
+        
         setAirFilterSelect(airFilters);
         setAirFilter(airFilters[0]);
 
@@ -51,16 +54,17 @@ const Service = ({ car }) => {
   ];
 
   const [datos, guardarDatos] = useState({
-    CleaningInj: "",
-    CleaningAB: "",
+    CleaningInj: "Si",
+    CleaningAB: "Si",
     aceite: "",
-    ChangeAirFiltter: "",
-    ChangeCabinAirFiltter: "",
+    ChangeAirFiltter: "Si",
+    ChangeCabinAirFiltter: "Si",
     Oil: "",
-    ChangeOilFiltter: "",
-    plugs: "",
-    wiresets: "",
-    brakeshoe: "",
+    ChangeOilFiltter: "Si",
+    ChangeFuelFiltter: "Si",
+    plugs: "Si",
+    wiresets: "Si",
+    brakeshoe: "Si",
   });
 
   const {
@@ -71,6 +75,7 @@ const Service = ({ car }) => {
     Oil,
     ChangeOilFiltter,
     ChangeCabinAirFiltter,
+    ChangeFuelFiltter,
     plugs,
     wiresets,
     brakeshoe,
@@ -264,9 +269,9 @@ const Service = ({ car }) => {
         <div>
           <input
             /* className="form-check-input"  */ type="radio"
-            name="ChangeOilFiltter"
+            name="ChangeFuelFiltter"
             value="Si"
-            checked={ChangeOilFiltter === "Si"}
+            checked={ChangeFuelFiltter === "Si"}
             onChange={obtenerInformacion}
           />{" "}
           Si
@@ -275,9 +280,9 @@ const Service = ({ car }) => {
                 <div className="form-check form-check-inline"> */}
           <input
             /* className="form-check-input"  */ type="radio"
-            name="ChangeOilFiltter"
+            name="ChangeFuelFiltter"
             value="No"
-            checked={ChangeOilFiltter === "No"}
+            checked={ChangeFuelFiltter === "No"}
             onChange={obtenerInformacion}
           />{" "}
           No
@@ -349,6 +354,20 @@ const Service = ({ car }) => {
           />{" "}
           No
         </div>
+        <CreatePDF 
+          car={car}
+          make={make}
+          model={model}
+          year={year}
+          airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.value : ''}
+          oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.value : ''}
+          fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.value : ''}
+          cleanInj={CleaningInj}
+          cleanAB={CleaningAB}
+          plugs={plugs}
+          wiresets={wiresets}
+          brakeshoe={brakeshoe}
+        />
       </form>
     </>
   );

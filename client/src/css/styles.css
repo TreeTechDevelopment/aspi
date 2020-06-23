@@ -72,3 +72,25 @@ form{
 .select { 
     width: 80%;
 }
+
+.btn-container-records {
+    width: 100%;
+    height: 85%;
+    border: 1px solid red;
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btn-records{
+    width: 40%;
+    margin-bottom: 1%;
+}
+
+.form-car{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;    
+}
