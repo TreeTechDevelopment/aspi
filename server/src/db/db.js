@@ -27,13 +27,13 @@ mongoose.connect( process.env.DB, DBconfig ,async (db) => {
     console.log("DB connected")
 
     //GUARDAR CARROS EN BASE DE DATOS
-    for(let i = 0; i < 20; i++){
+    /* for(let i = 830; i < 838; i++){
         let newCar = await createCarDB(result.Hoja1[i].A.split('-'), models)
         //guardar
         //let newcarDB = new Car(newCar)
         //newcarDB.save()
         console.log(newCar)
-    }
+    } */
 
 
     //GUARDAR NUEVOS MODELOS EN BASE DE DATOS DESDE EL JSON
@@ -44,21 +44,23 @@ mongoose.connect( process.env.DB, DBconfig ,async (db) => {
                 name: models[i].models[j],
                 make: make._id
             })
-            newModel.save()
+            //newModel.save()
+            console.log(newModel)
         }
     } */
 
     //GUARDAR NUEVO MODELO DIRECTAMENTE
-    /* let make = await Make.findOne({ name: 'BMW' })
+    /* let make = await Make.findOne({ name: 'Volkswagen' })
     let newModel = new Model({
-        name: '330Ci',
+        name: 'Manhatan',
         make: make._id
     })
 
-    newModel.save() */
+    newModel.save()
+    console.log(newModel) */
 
     //borrar con el id
-    //await Model.findByIdAndRemove('5ef16f640ebf492de8a46843')
+    //await Model.findByIdAndRemove('5ef3e4a357fe1b314c6a68e2')
 
     //await Model.findByIdAndRemove('5ee6c974b79c46273c2a1849')
 
