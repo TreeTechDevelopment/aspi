@@ -13,10 +13,12 @@ import Records from './src/views/Records';
 import RecordsCars from './src/views/RecordsCars';
 import RecordsFilters from './src/views/RecordsFilters';
 import RecordsServices from './src/views/RecordsServices';
+import Provider from './src/context/Provider';
+
 
 function Routes() {
-    return (
-        <Router>
+  return (
+      <Router>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -25,7 +27,7 @@ function Routes() {
             <CrossR />
           </Route>
           <Route exact path="/service-order">
-            <ServiceOrd />
+            <Provider> <ServiceOrd /> </Provider>
           </Route>
           <Route exact path="/iniciar-sesion">
             <LogInPage />

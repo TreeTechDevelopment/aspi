@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Select from "react-select";
+import Loader from 'react-loader-spinner';
 
 import Navbar from '../components/Navbar'
+import CarItem from '../components/recordsCars/CarItem'
+import Form from '../components/recordsCars/Form'
 import { url, messageServerError } from '../../app.json'
 
 function RecordsCars() {
 
     const [makes, setMakes] = useState([])
-    const [makesSelect, setMakesSelect] = useState([])
-    const [make, setMake] = useState({})
     const [models, setModels] = useState([])
-    const [modelsSelect, setModelsSelect] = useState([])
-    const [model, setModel] = useState({})
+    const [makesSelect, setMakesSelect] = useState([])
+    const [cars, setCars] = useState([])  
+    const [loading, setLoading] = useState(true)  
+    const [openModalNewCar, setOpenModalNewCar] = useState(false)  
+    const [make, setMake] = useState({})      
 
     useEffect(() => {
         fetchInfo().then(({ makes, models }) => {
@@ -20,13 +24,30 @@ function RecordsCars() {
             let makesSelect = makes.map(make => { return { value: make._id, label: make.name } } )
             setMakesSelect(makesSelect)
             setMake(makesSelect[0])
-            
             setModels(models)
-            let modelsSelect = models.map(model => { return { value: model._id, label: model.name } } )
-            setModelsSelect(modelsSelect)
-            setModel(modelsSelect[0])
         }).catch(() => alert(`${messageServerError}`))
     }, [])
+
+    useEffect(() => {
+        if(make.value){
+            fetchCars().then(({ cars }) => {
+                setLoading(false)
+                setCars(cars)                
+            }).catch(() => {
+                setLoading(false)
+                alert(`${messageServerError}`)
+            })
+        }
+    },[make])
+
+    const fetchCars = async () => {
+        const res = await axios({
+            url: `${url}/cars?make=${make.value}`,
+            method: 'GET',
+            timeout: 5000
+        })
+        return res.data
+    }
 
     const fetchInfo = async () => {
         const res = await axios({
@@ -37,28 +58,67 @@ function RecordsCars() {
         return res.data
     }
 
-    const handleMakeSelect = newMake => setMake(newMake)
-    const handleModelSelect = newModel => setModel(newModel)
+    const handleMakeSelect = newMake => {
+        if(newMake.value != make.value){ setLoading(true) } 
+        setMake(newMake)
+    }
+
+    const openModal = () => setOpenModalNewCar(true) 
+    
+    const closeModal = () => setOpenModalNewCar(false) 
+
+    const addCar = newCar => {
+        let newCars = [...cars]
+        newCars.push(newCar)
+        setCars(newCars)
+    }
 
     return (
         <>
             <Navbar />
-            <form className="form-car">
-                <label>Marca</label>     
+            <Form 
+                modalIsOpen={openModalNewCar}
+                models={models}
+                make={make}
+                closeModal={closeModal}
+                addCar={addCar}
+            />
+            <div className="body">
                 <Select 
                     options={makesSelect}
                     value={make}
                     onChange={handleMakeSelect}
                     className="select"
-                />  
-                <label>Modelo</label>     
-                <Select 
-                    options={modelsSelect}
-                    value={model}
-                    onChange={handleModelSelect}
-                    className="select"
-                />           
-            </form>
+                />
+                <div className="table-records-container">
+                    {loading ? (
+                        <Loader
+                            type="Rings"
+                            color="#00BFFF"
+                            height={100}
+                            width={100}
+                        />
+                    ): (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Marca</th>
+                                    <th>Model</th>
+                                    <th>Años</th>
+                                    <th>Cilindros</th>
+                                    <th>Motor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cars.map( car => (
+                                    <CarItem car={car} key={car._id} />
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
+                <button className="btn btn-primary" onClick={openModal}>Agregar Carro</button>
+            </div>
         </>
     )
 }

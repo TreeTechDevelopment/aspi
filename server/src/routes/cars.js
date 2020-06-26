@@ -6,11 +6,14 @@ const app = express();
 const {
     getAllInfo,
     getCar,
-    getCars
+    getCars,
+    postNewCar
 } = require('../controllers/cars')
 
 app.get('/info', getAllInfo)
 app.get('/all', getCars)
 app.get('/', getCar)
+
+app.post('/', postNewCar)
 
 module.exports = app

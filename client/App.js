@@ -1,9 +1,11 @@
 import React from 'react'
-import styles from './src/css/styles.css'
 
 import Routes from './Routes'
 
+import './src/css/styles.css'
+
 function App() {
+
     return (
         <Routes />
     )

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 
 import { url, messageServerError } from '../../../app.json'
+import { appContext } from '../../context/Provider'
 
-const Form = ({ setCar, setMakeCar, setModelCar, setYearCar }) => {
+function Form(){
+
+    const context = useContext(appContext)
 
     const [years, setYears] = useState([])
     const [makesSelect, setMakesSelect] = useState([])
@@ -20,7 +23,6 @@ const Form = ({ setCar, setMakeCar, setModelCar, setYearCar }) => {
     const [cylinder, setCylinder] = useState({})
     const [year, setYear] = useState({})  
     const [infoFetched, setInfoFetched] = useState(false) 
-    const [airFilter, setAirFilter] = useState('') 
 
     const setData = (models, makes) => {        
         setMakes(makes)
@@ -79,6 +81,7 @@ const Form = ({ setCar, setMakeCar, setModelCar, setYearCar }) => {
         fetchInfo().then(({ models, makes }) => {
             setData(models, makes)
         }).catch((e) => {
+            console.log(e)
             setInfoFetched(true)
             alert(`${messageServerError}`)
         })
@@ -95,11 +98,11 @@ const Form = ({ setCar, setMakeCar, setModelCar, setYearCar }) => {
     useEffect(() => {
         if(cars.length != 0){
             let car = cars.find(car => car.year.indexOf(year.value) >= 0 && car.motor == motor.value && car.cylinder == cylinder.value  )
-            if(car){
-                setCar(car)
-                setMakeCar(make.label)
-                setModelCar(model.label)
-                setYearCar(year.label)
+            if(car){                
+                context.dispatchCar({ type: 'SET', value: car })
+                context.dispatchModel({ type: 'SET', value: model.label })
+                context.dispatchMake({ type: 'SET', value: make.label })
+                context.dispatchYear({ type: 'SET', value: year.label })
             }
         }
     },[make, model, year, motor, cylinder, cars])

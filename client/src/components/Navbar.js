@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { url } from '../../app.json'
 
+
+
 function Navbar() {
     return (
         <nav>

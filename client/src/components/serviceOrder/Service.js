@@ -1,9 +1,15 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
 
 import CreatePDF from './CreatePDF'
+import { appContext } from '../../context/Provider'
 
-const Service = ({ car, make, model, year }) => {
+
+
+const Service = () => {
+
+  const context = useContext(appContext)
+
   const [airFilterSelect, setAirFilterSelect] = useState([]);
   const [oilFilterSelect, setOilFilterSelect] = useState([]);
   const [fuelFilterSelect, setFuelFilterSelect] = useState([]);
@@ -12,27 +18,27 @@ const Service = ({ car, make, model, year }) => {
   const [fuelFilter, setFuelFilter] = useState({});
 
   useEffect(() => {
-    if (car.airFilter) {
-        let airFilters = car.airFilter.map((airFilter) => {
+    if (context.car.airFilter) {
+        let airFilters = context.car.airFilter.map((airFilter) => {
             return { value: airFilter, label: airFilter };
         });
         
         setAirFilterSelect(airFilters);
         setAirFilter(airFilters[0]);
 
-        let oilFilters = car.oilFilter.map((oilFilter) => {
+        let oilFilters = context.car.oilFilter.map((oilFilter) => {
             return { value: oilFilter, label: oilFilter };
         });
         setOilFilterSelect(oilFilters);
         setOilFilter(oilFilters[0]);
 
-        let fuelFilters = car.fuelFilter.map((fuelFilter) => {
+        let fuelFilters = context.car.fuelFilter.map((fuelFilter) => {
             return { value: fuelFilter, label: fuelFilter };
         });
         setFuelFilterSelect(fuelFilters);
         setFuelFilter(fuelFilters[0]);
     }
-  }, [car]);
+  }, [context.car]);
 
   const optionAirFiltter = [
     { value: "F-28A11", label: "F-28A11" },
@@ -354,11 +360,7 @@ const Service = ({ car, make, model, year }) => {
           />{" "}
           No
         </div>
-        <CreatePDF 
-          car={car}
-          make={make}
-          model={model}
-          year={year}
+        <CreatePDF          
           airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.value : ''}
           oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.value : ''}
           fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.value : ''}

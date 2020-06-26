@@ -16,7 +16,14 @@ const getAllInfo = async (req, res) => {
 const getCar = async (req, res) => {
     try{
         const { model, make } = req.query
-        const cars = await Car.find({ make, model })
+
+        let query = {}
+
+        if(model){ query.model = model }
+        if(make){ query.make = make }
+
+        const cars = await Car.find(query).populate('make').populate('model')
+
         res.json({ cars })
     }catch(e){
         res.sendStatus(500)
@@ -32,8 +39,28 @@ const getCars = async (req, res) => {
     }
 }
 
+const postNewCar = async (req, res) => {
+    try{        
+        const newCar = req.body
+        console.log(newCar)
+
+        const make = await Make.findById(newCar.make)
+        const model = await Model.findById(newCar.model)
+
+        newCar.make = make
+        newCar.model = model
+        newCar._id = Math.random().toString()
+        
+        res.json({ newCar })
+    }catch(e){        
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
 module.exports = {
     getAllInfo,
     getCar,
-    getCars
+    getCars,
+    postNewCar
 }
