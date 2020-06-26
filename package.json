@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "dev": "nodemon server/server ",
-    "wp": "webpack --mode development --watch"
+    "wp": "webpack --mode development --watch",
+    "start": "node server/server"
   },
   "author": "Tree Tech Development",
   "license": "ISC",
