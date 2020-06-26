@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 //const bcrypt = require('bcrypt');
 const fs = require('fs')
 const path = require('path')
-const excelToJson = require('convert-excel-to-json');
+/* const excelToJson = require('convert-excel-to-json');
 
 const result = excelToJson({
     source: fs.readFileSync(path.resolve( __dirname, '../../../oscar-nuevos.xlsx' )) 
@@ -10,7 +10,7 @@ const result = excelToJson({
 
 const models = JSON.parse(fs.readFileSync(path.join(__dirname, '/modelos.json')) )
 
-const { createCarDB } = require('../services/cars')
+const { createCarDB } = require('../services/cars') */
 
 const Make = require('./models/marcas');
 const Model = require('./models/modelos');
