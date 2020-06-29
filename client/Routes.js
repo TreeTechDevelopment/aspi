@@ -36,10 +36,10 @@ function Routes() {
             <Records />
           </Route>
           <Route exact path="/records/cars">
-            <RecordsCars />
+            <Provider> <RecordsCars /> </Provider>
           </Route>
           <Route exact path="/records/filters">
-            <RecordsFilters />
+            <Provider> <RecordsFilters /> </Provider>
           </Route>
           <Route exact path="/records/services">
             <RecordsServices />

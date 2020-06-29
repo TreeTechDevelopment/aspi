@@ -2,13 +2,26 @@
 const Model = require('../db/models/modelos');
 const Car = require('../db/models/cars');
 const Make = require('../db/models/marcas');
+const App = require('../db/models/aplication');
 
 const getAllInfo = async (req, res) => {
     try{
+        const { newIDOrder } = req.query
+
+        let app = await App.findOne({})
         const models = await Model.find({})
-        const makes = await Make.find({})         
-        res.json({ models, makes })
+        const makes = await Make.find({}) 
+
+        const idOrder = app.idOrder
+
+        if(newIDOrder === "true"){
+            app.idOrder = idOrder + 1
+            app.save()
+        }
+        
+        res.json({ models, makes, idOrder })
     }catch(e){
+        console.log(e)
         res.sendStatus(500)
     }
 }
@@ -47,11 +60,41 @@ const postNewCar = async (req, res) => {
         const make = await Make.findById(newCar.make)
         const model = await Model.findById(newCar.model)
 
-        newCar.make = make
-        newCar.model = model
-        newCar._id = Math.random().toString()
+        let car = new Car(newCar)
+        car.save(newCarDB => {
+            console.log(newCarDB)
+            newCarDB.make = make
+            newCarDB.model = model
+            res.json({ newCar: newCarDB })
+        })
         
-        res.json({ newCar })
+    }catch(e){        
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const updateCar = async (req, res) => {
+    try{        
+        const newCar = req.body
+
+        let car = await Car.findById(newCar.id)
+
+        const make = await Make.findById(newCar.make)
+        const model = await Model.findById(newCar.model)
+
+        car.cylinder = newCar.cylinder
+        car.motor = newCar.motor
+        car.airFilter = newCar.airFilter
+        car.oilFilter = newCar.oilFilter
+        car.fuelFilter = newCar.fuelFilter
+
+        car.save(newCarDB => {
+            newCarDB.make = make
+            newCarDB.model = model
+            res.json({ newCar: newCarDB })
+        })
+        
     }catch(e){        
         console.log(e)
         res.sendStatus(500)
@@ -62,5 +105,6 @@ module.exports = {
     getAllInfo,
     getCar,
     getCars,
-    postNewCar
+    postNewCar,
+    updateCar
 }

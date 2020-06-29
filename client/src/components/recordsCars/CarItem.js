@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
-function CarItem({ car }) {
+import { appContext } from '../../context/Provider';
+
+function CarItem({ car, openModal }) {
+
+    const context = useContext(appContext)
+
+    const setCarToEdit = () => {
+        context.dispatchCarToEdit({ type: 'SET', value: car })
+        openModal()        
+    }
 
     return (
         <tr>
@@ -9,6 +18,9 @@ function CarItem({ car }) {
             <td>{ car.year.length === 1 ? car.year[0] : `${car.year[0]}-${car.year[ car.year.length - 1 ]}`}</td>
             <td>{ car.cylinder}</td>
             <td>{ car.motor}</td>
+            <td>
+                <button className="bnt btn-primary" onClick={setCarToEdit}>EDITAR</button>
+            </td>
         </tr>
     )
 }

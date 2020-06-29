@@ -6,7 +6,7 @@ import { appContext } from '../../context/Provider'
 
 
 
-const Service = () => {
+const Service = () => { 
 
   const context = useContext(appContext)
 
@@ -71,6 +71,9 @@ const Service = () => {
     plugs: "Si",
     wiresets: "Si",
     brakeshoe: "Si",
+    coil: "Si",
+    antifreeze: "Si",
+    transmission: "Si"
   });
 
   const {
@@ -85,7 +88,11 @@ const Service = () => {
     plugs,
     wiresets,
     brakeshoe,
+    coil,
+    antifreeze,
+    transmission
   } = datos;
+
   const obtenerInformacion = (e) => {
     guardarDatos({
       ...datos,
@@ -360,6 +367,72 @@ const Service = () => {
           />{" "}
           No
         </div>
+        <div>
+          <h4>Bobinas</h4>
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="coil"
+            value="Si"
+            checked={coil === "Si"}
+            onChange={obtenerInformacion}
+          />{" "}
+          Si
+          {/* <label className="form-check-label" htmlFor="AirFiltter1">Si</label> */}
+          {/*  </div>
+                     <div className="form-check form-check-inline"> */}
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="coil"
+            value="No"
+            checked={coil === "No"}
+            onChange={obtenerInformacion}
+          />{" "}
+          No
+        </div>
+        <div>
+          <h4>Anticongelante</h4>
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="antifreeze"
+            value="Si"
+            checked={antifreeze === "Si"}
+            onChange={obtenerInformacion}
+          />{" "}
+          Si
+          {/* <label className="form-check-label" htmlFor="AirFiltter1">Si</label> */}
+          {/*  </div>
+                     <div className="form-check form-check-inline"> */}
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="antifreeze"
+            value="No"
+            checked={antifreeze === "No"}
+            onChange={obtenerInformacion}
+          />{" "}
+          No
+        </div>
+        <div>
+          <h4>Cambio de Aceite</h4>
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="transmission"
+            value="Si"
+            checked={transmission === "Si"}
+            onChange={obtenerInformacion}
+          />{" "}
+          Si
+          {/* <label className="form-check-label" htmlFor="AirFiltter1">Si</label> */}
+          {/*  </div>
+                     <div className="form-check form-check-inline"> */}
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="transmission"
+            value="No"
+            checked={transmission === "No"}
+            onChange={obtenerInformacion}
+          />{" "}
+          No
+        </div>
         <CreatePDF          
           airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.value : ''}
           oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.value : ''}
@@ -369,6 +442,9 @@ const Service = () => {
           plugs={plugs}
           wiresets={wiresets}
           brakeshoe={brakeshoe}
+          coil={coil}
+          antifreeze={antifreeze}
+          transmission={transmission}
         />
       </form>
     </>

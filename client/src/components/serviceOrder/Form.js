@@ -74,18 +74,25 @@ function Form(){
             url : `${url}/cars?make=${make.value}&model=${model.value}`,
             timeout: 5000
         })
-        return res.data
+        return res.data 
     }
 
     useEffect(() => {
-        fetchInfo().then(({ models, makes }) => {
+        let newIDOrDER = false
+        let IDOrder = getIDORder()
+        if(Number(IDOrder) === -1 || !IDOrder){ newIDOrDER = true }
+        fetchInfo(newIDOrDER).then(({ models, makes, idOrder }) => {
             setData(models, makes)
+            if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
         }).catch((e) => {
-            console.log(e)
             setInfoFetched(true)
             alert(`${messageServerError}`)
         })
     },[])
+
+    const setIDORder = (idOrder) => window.localStorage.setItem('@IDOrder', idOrder )
+
+    const getIDORder = () => window.localStorage.getItem('@IDOrder')
 
     useEffect(() => {
         if(make.value && model.value){    
@@ -107,10 +114,10 @@ function Form(){
         }
     },[make, model, year, motor, cylinder, cars])
 
-    const fetchInfo = async () => {
+    const fetchInfo = async (newIDOrDER) => {
         const res = await axios({
             method: 'GET',
-            url : `${url}/cars/info`,
+            url : `${url}/cars/info?newIDOrDER=${newIDOrDER}`,
             timeout: 5000
         })
         return res.data

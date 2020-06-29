@@ -15,7 +15,7 @@ function RecordsCars() {
     const [makesSelect, setMakesSelect] = useState([])
     const [cars, setCars] = useState([])  
     const [loading, setLoading] = useState(true)  
-    const [openModalNewCar, setOpenModalNewCar] = useState(false)  
+    const [openModalNewCar, setOpenModalNewCar] = useState(false)    
     const [make, setMake] = useState({})      
 
     useEffect(() => {
@@ -73,6 +73,15 @@ function RecordsCars() {
         setCars(newCars)
     }
 
+    const updateCar = newCar => {
+        let newCars = [...cars]
+        let idx = newCars.findIndex( car => car._id == newCar._id )
+        newCars[idx] = newCar
+        setCars(newCars)
+    }
+
+    const openModalEditCar = () => setOpenModalNewCar(true)
+
     return (
         <>
             <Navbar />
@@ -82,6 +91,7 @@ function RecordsCars() {
                 make={make}
                 closeModal={closeModal}
                 addCar={addCar}
+                updateCar={updateCar}
             />
             <div className="body">
                 <Select 
@@ -111,7 +121,11 @@ function RecordsCars() {
                             </thead>
                             <tbody>
                                 {cars.map( car => (
-                                    <CarItem car={car} key={car._id} />
+                                    <CarItem 
+                                        car={car} 
+                                        key={car._id} 
+                                        openModal={openModalEditCar}
+                                    />
                                 ))}
                             </tbody>
                         </table>

@@ -1,4 +1,4 @@
 {
-    "url": "https://talleraspi.herokuapp.com",
+    "url": "http://192.168.0.8:3000",
     "messageServerError": "Ha ocurrido un error en el servidor. Intentalo más tarde."
 }

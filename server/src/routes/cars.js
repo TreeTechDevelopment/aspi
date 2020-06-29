@@ -7,7 +7,8 @@ const {
     getAllInfo,
     getCar,
     getCars,
-    postNewCar
+    postNewCar,
+    updateCar
 } = require('../controllers/cars')
 
 app.get('/info', getAllInfo)
@@ -15,5 +16,7 @@ app.get('/all', getCars)
 app.get('/', getCar)
 
 app.post('/', postNewCar)
+
+app.put('/', updateCar)
 
 module.exports = app

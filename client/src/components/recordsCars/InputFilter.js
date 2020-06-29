@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
-function InputFilter({ idx, setFilters }) {
+import { appContext }  from '../../context/Provider';
+
+function InputFilter({ idx, setFilters, type }) {
+
+    const context = useContext(appContext)
 
     const [filter, setFilter] = useState('')
 
@@ -8,6 +12,22 @@ function InputFilter({ idx, setFilters }) {
         setFilter(e.target.value)
         setFilters(e.target.value, idx)
     }
+
+    useEffect(() => {
+        if( JSON.stringify(context.carToEdit) !== "{}"){
+            switch(type){
+                case 'airFilter':   
+                    if(context.carToEdit.airFilter[idx]){ setFilter(context.carToEdit.airFilter[idx]) }
+                    break;
+                case 'oilFilter':
+                    if(context.carToEdit.oilFilter[idx]){ setFilter(context.carToEdit.oilFilter[idx]) }
+                    break;
+                case 'fuelFilter':
+                    if(context.carToEdit.fuelFilter[idx]){ setFilter(context.carToEdit.fuelFilter[idx]) }
+                    break;
+            }
+        }
+    }, [context.carToEdit])
 
     return (
         <input 

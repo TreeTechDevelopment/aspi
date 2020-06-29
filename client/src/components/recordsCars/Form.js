@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import Select from "react-select";
 import Modal from 'react-modal';
@@ -6,10 +6,13 @@ import Loader from 'react-loader-spinner';
 
 import InputFilter from './InputFilter';
 import { url, messageServerError } from '../../../app.json'
+import { appContext } from '../../context/Provider'
 
 Modal.setAppElement('#app')
 
-function Form({ modalIsOpen, make, models, closeModal, addCar }) {
+function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
+
+    const context = useContext(appContext)
     
     const [modelsSelect, setModelsSelect] = useState([])
     const [airFilters, setAirFilter] = useState([])
@@ -24,17 +27,48 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
     const [yearTo, setYearTo] = useState('')
     const [cylinder, setCylinder] = useState('')
     const [motor, setMotor] = useState('')
+    const [makeEdit, setMakeEdit] = useState('')
     const [loading, setLoading] = useState(false)
     const [errYear, setErrYear] = useState(false)
     const [errCylinder, setErrCylinder] = useState(false)
     const [errMotor, setErrMotor] = useState(false)
+    const [selectDisable, setSelectDisable] = useState(false)
 
-    useEffect(() => {        
-        let modelsSelect = models.map( model => { return { value: model._id, label: model.name } })
-        setModelsSelect(modelsSelect)
-        setModel(modelsSelect[0])
-    }, [make, models])    
-    
+    useEffect(() => {
+        if( JSON.stringify(context.carToEdit) !== "{}"){
+            setMakeEdit({ value: context.carToEdit.make._id, label: context.carToEdit.make.name })
+            setModel({ value: context.carToEdit.model._id, label: context.carToEdit.model.name })
+            setSelectDisable(true)
+            setCylinder(context.carToEdit.cylinder)
+            setMotor(context.carToEdit.motor)
+            if(context.carToEdit.year.length === 1){ setYearFrom( context.carToEdit.year[0].toString() ) }
+            else{
+                setYearFrom( context.carToEdit.year[0].toString() )
+                setYearTo( context.carToEdit.year[ context.carToEdit.year.length - 1 ].toString() )
+            }
+            setAirFilter(context.carToEdit.airFilter)
+            setOilFilter(context.carToEdit.oilFilter)
+            setFuelFilter(context.carToEdit.fuelFilter)
+            
+            let newAirFilterRender = []
+            for(let i = 0; i < context.carToEdit.airFilter.length; i++){ newAirFilterRender.push(Math.random().toString()) }
+            setAirFiltersRender(newAirFilterRender)
+
+            let newOilFilterRender = []
+            for(let i = 0; i < context.carToEdit.oilFilter.length; i++){ newOilFilterRender.push(Math.random().toString()) }
+            setOilFiltersRender(newOilFilterRender)
+
+            let newFuelFilterRender = []
+            for(let i = 0; i < context.carToEdit.fuelFilter.length; i++){ newFuelFilterRender.push(Math.random().toString()) }
+            setFuelFiltersRender(newFuelFilterRender)
+        }else{
+            setMakeEdit(make)
+            let modelsSelect = models.map( model => { return { value: model._id, label: model.name } })
+            setModelsSelect(modelsSelect)
+            setModel(modelsSelect[0])
+        }
+    }, [make, models, context.carToEdit])
+         
     const handleModelSelect = newModel => setModel(newModel)
 
     const handleNewModel = e => setNewModel(e.target.value)
@@ -87,10 +121,24 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
         setAirFiltersRender(newAirFilters)
     }
 
+    const removeAirFilter = (e) => {
+        e.preventDefault()
+        let newAirFilters = [...airFiltersRender]
+        newAirFilters.splice(-1, 1)
+        setAirFiltersRender(newAirFilters)
+    }
+
     const addOilFilter = (e) => {
         e.preventDefault()
         let newOilFilters = [...oilFiltersRender]
         newOilFilters.push(Math.random().toString())
+        setOilFiltersRender(newOilFilters)
+    }
+
+    const removeOilFilter = (e) => {
+        e.preventDefault()
+        let newOilFilters = [...oilFiltersRender]
+        newOilFilters.splice(-1, 1)
         setOilFiltersRender(newOilFilters)
     }
 
@@ -101,6 +149,13 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
         setFuelFiltersRender(newFuelFilters)
     }
 
+    const removeFuelFilter = (e) => {
+        e.preventDefault()
+        let newFuelFilters = [...fuelFiltersRender]
+        newFuelFilters.splice(-1, 1)
+        setFuelFiltersRender(newFuelFilters)
+    }
+
     const saveCar = (e) => {
         e.preventDefault()
 
@@ -108,7 +163,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
             setLoading(true)
 
             let data = {
-                make: make.value,            
+                make: makeEdit.value,            
                 cylinder,
                 motor,
                 airFilter: airFilters,
@@ -127,14 +182,28 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
             }else{ years= [Number(yearFrom)] }
             data.year = years
 
-            fetchNewCar(data).then(({ newCar }) => {
-                closeModal()
-                addCar(newCar)
-                setLoading(false)
-            }).catch((e) => {
-                setLoading(false)
-                alert(`${messageServerError}`)
-            })
+
+            if( JSON.stringify(context.carToEdit) === "{}" ){
+                fetchNewCar(data).then(({ newCar }) => {
+                    doBeforeCloseModal()
+                    addCar(newCar)
+                    setLoading(false)
+                }).catch((e) => {
+                    setLoading(false)
+                    alert(`${messageServerError}`)
+                })
+            }else{
+                data.id = context.carToEdit._id
+
+                fetchUpdateCar(data).then(({ newCar }) => {
+                    closeModal()
+                    updateCar(newCar)
+                    setLoading(false)
+                }).catch((e) => {
+                    setLoading(false)
+                    alert(`${messageServerError}`)
+                })
+            }
 
         }else{
             alert('Revisa el formulario')
@@ -161,22 +230,35 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
         return res.data
     }
 
+    const fetchUpdateCar = async (data) => {
+        const res  = await axios({
+            url: `${url}/cars`,
+            data,
+            method: 'PUT',
+            timeout: 5000
+        })
+        return res.data
+    }
+
+    const doBeforeCloseModal = () => {
+        context.dispatchCarToEdit({ type: 'SET', value: {} })
+        closeModal()
+    }
 
     return (
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}          
-          contentLabel="Example Modal"
+          onRequestClose={doBeforeCloseModal}          
         >
             <form className="form-car">
-                <span>Marca {make.label}</span>
+                <span>Marca {makeEdit.label}</span>
                 <label>Modelo</label>     
                 <Select 
                     options={modelsSelect}
                     value={model}
                     onChange={handleModelSelect}
                     className="select"
-                    isDisabled={ newModel !== "" }
+                    isDisabled={ newModel !== "" || selectDisable}
                 /> 
                 <label>Nuevo Modelo (Opcional)</label>     
                 <input
@@ -217,9 +299,13 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
                                 idx={idx}
                                 setFilters={setAirFilters}
                                 key={ key }
+                                type="airFilter"
                             />
                         ))}
-                        <button className="btn btn-primary" onClick={addAirFilter}>+</button>
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeAirFilter}>-</button>
+                            <button className="btn btn-primary" onClick={addAirFilter}>+</button>
+                        </div>
                     </div>
                     <div className="input-filters-container">
                         <span>Filtro de Aceite</span>
@@ -228,9 +314,13 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
                                 idx={idx}
                                 setFilters={setOilFilters}
                                 key={ key }
+                                type="oilFilter"
                             />
                         ))}
-                        <button className="btn btn-primary" onClick={addOilFilter}>+</button>
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeOilFilter}>-</button>
+                            <button className="btn btn-primary" onClick={addOilFilter}>+</button>
+                        </div>
                     </div>
                      <div className="input-filters-container">
                         <span>Filtro de Gasolina</span>
@@ -239,9 +329,13 @@ function Form({ modalIsOpen, make, models, closeModal, addCar }) {
                                 idx={idx}
                                 setFilters={setFuelFilters}
                                 key={ key }
+                                type="fuelFilter"
                             />
                         ))}
-                        <button className="btn btn-primary" onClick={addFuelFilter}>+</button>
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeFuelFilter}>-</button>
+                            <button className="btn btn-primary" onClick={addFuelFilter}>+</button>
+                        </div>
                     </div>
                 </div>
                 <button className="btn btn-primary" onClick={saveCar}>GUARDAR</button>

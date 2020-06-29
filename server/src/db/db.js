@@ -26,6 +26,6 @@ const DBconfig = {
 }
 
 mongoose.connect( process.env.DB, DBconfig ,async (db) => {
-    console.log("DB connected")
+    console.log("DB connected")  
     
 } )

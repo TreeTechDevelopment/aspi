@@ -13,7 +13,7 @@ app.get('/cross', handleClient)
 app.get('/iniciar-sesion', handleClient)
 app.get('/records', handleClient)
 app.get('/records/cars', handleClient)
-app.get('/records/fliters', handleClient)
-app.get('/records/services', handleClient)
+app.get('/records/*', handleClient)
+
 
 module.exports = app

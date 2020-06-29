@@ -119,3 +119,18 @@ form{
     flex-direction: row;
     justify-content: space-around;
 }
+
+.btns-filter-container{
+    display: flex;
+    flex-direction: row;    
+    justify-content: space-around;    
+}
+
+.column-table-filter{
+    display: flex;
+    flex-direction: column;
+}
+
+#hidden-atag{
+    display: none;
+}
