@@ -11,13 +11,15 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-const cors = require('cors')
 
 const app = express()
 
 const PORT = process.env.PORT || 3000
 
-if (process.env.NODE_ENV !== 'production') { app.use(cors({credentials: true, origin: 'http://localhost:3000'})) }
+if (process.env.NODE_ENV !== 'production') { 
+    const cors = require('cors')
+    app.use(cors({credentials: true, origin: 'http://localhost:3000'})) 
+}
 app.use(express.static(path.resolve( __dirname, 'src/public' )))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
