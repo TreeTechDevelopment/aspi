@@ -1,19 +1,33 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt')
+const passport = require('passport')
 
-const User = require('../db/models/users')
-
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     try{
-        const { userName, password } = req.body
-        const user = await User.findOne({ 'userName': userName })
-        if(!user){ return res.status(400).json({ ok: false, message: "Usuario o contraseña incorrectos" }) }
-        if(!bcrypt.compareSync( password, user.password )){ 
-            return res.status(400).json({ ok: false, message: "Usuario o contraseña incorrectos" }) 
-        }
-        const userResponse = { userName: user.userName }
-        const token = jwt.sign(userResponse, process.env.JWT_KEY, { expiresIn: "2d" })
-        res.json({ ok: true, user: userResponse, token })
+        const handler = passport.authenticate('local', {
+            successRedirect : '/cross', 
+            failureRedirect : '/records'            
+        });
+        handler(req, res, next);
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const logout = (req, res) => {
+    try{
+        req.logout()
+        res.redirect('/')
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const isAuthenticated = (req, res) => {
+    try{
+        const isAuthenticated = req.isAuthenticated()
+        console.log(isAuthenticated)
+        res.json({ authenticated: isAuthenticated })
     }catch(e){
         console.log(e)
         res.sendStatus(500)
@@ -21,5 +35,7 @@ const login = async (req, res) => {
 }
 
 module.exports = {
-    login
+    login,
+    logout,
+    isAuthenticated
 }

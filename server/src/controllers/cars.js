@@ -6,7 +6,7 @@ const App = require('../db/models/aplication');
 
 const getAllInfo = async (req, res) => {
     try{
-        const { newIDOrder } = req.query
+        const { newIDOrder } = req.query        
 
         let app = await App.findOne({})
         const models = await Model.find({})
@@ -55,14 +55,12 @@ const getCars = async (req, res) => {
 const postNewCar = async (req, res) => {
     try{        
         const newCar = req.body
-        console.log(newCar)
 
         const make = await Make.findById(newCar.make)
         const model = await Model.findById(newCar.model)
 
         let car = new Car(newCar)
         car.save(newCarDB => {
-            console.log(newCarDB)
             newCarDB.make = make
             newCarDB.model = model
             res.json({ newCar: newCarDB })

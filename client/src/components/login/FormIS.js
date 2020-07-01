@@ -1,35 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageLoginError } from '../../../app.json'
 
 function FormIS() {
 
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
+    const [redirect, setReirect] = useState(false)
 
     const handleInputUserName = (e) => setUserName(e.target.value)
 
     const handleInputPassword = (e) => setPassword(e.target.value)
 
-    const login = (e) => {
+    const login = (e) => {        
         e.preventDefault()
         fetchLogin().then(({user, token}) => {
-            setToken(token)
-            setUser(user)
-        }).catch(() => { alert(`messageServerError`) })
+            setReirect(true)
+        }).catch((e) => { 
+            if(e.response.status === 401){ return alert(`${messageLoginError}`)  }
+            alert(`${messageServerError}`) 
+        })
     }
-
-    const setToken = token => window.localStorage.setItem('@token', token )
-
-    const setUser = user => window.localStorage.setItem('@user', user )
 
     const fetchLogin = async () => {
         const res = await axios({
-            url: `${url}/users`,
+            url: `${url}/users/login`,
             method: 'POST',
             data: {
-                userName,
+                username: userName,
                 password
             },
             timeout: 5000
@@ -37,21 +37,30 @@ function FormIS() {
         return res.data
     }
 
+    if(redirect){ return <Redirect to="/"/> }
+
     return (
-        <form id="login-form" onSubmit={login}>
+        <form 
+            id="login-form" 
+            //onSubmit={login}
+            method="POST"
+            action="/users/login"
+        >
             <input 
                 type="input" 
                 placeholder="Usuario" 
+                name="username"
                 value={userName}
                 onChange={handleInputUserName}
             />
             <input 
                 type="password" 
                 placeholder="Contraseña"
+                name="password"
                 value={password}
                 onChange={handleInputPassword}
             />
-            <button className="btn btn-primary">Entrar</button>
+            <button className="btn btn-primary" type="submit">Entrar</button>
         </form>
         
     )

@@ -81,6 +81,8 @@ function Form(){
         let newIDOrDER = false
         let IDOrder = getIDORder()
         if(Number(IDOrder) === -1 || !IDOrder){ newIDOrDER = true }
+        console.log(Number(IDOrder))
+        console.log(newIDOrDER)
         fetchInfo(newIDOrDER).then(({ models, makes, idOrder }) => {
             setData(models, makes)
             if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
@@ -115,9 +117,10 @@ function Form(){
     },[make, model, year, motor, cylinder, cars])
 
     const fetchInfo = async (newIDOrDER) => {
+        console.log(newIDOrDER)
         const res = await axios({
             method: 'GET',
-            url : `${url}/cars/info?newIDOrDER=${newIDOrDER}`,
+            url : `${url}/cars/info?newIDOrder=${newIDOrDER}`,
             timeout: 5000
         })
         return res.data
