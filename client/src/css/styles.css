@@ -131,6 +131,6 @@ form{
     flex-direction: column;
 }
 
-#hidden-atag{
+.hidden-atag{
     display: none;
 }

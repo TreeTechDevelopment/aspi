@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
+import axios from 'axios';
 
 import CreatePDF from './CreatePDF'
 import { appContext } from '../../context/Provider'
-
-
+import { url, messageServerError } from '../../../app.json'
 
 const Service = () => { 
 
@@ -62,10 +62,11 @@ const Service = () => {
   const [datos, guardarDatos] = useState({
     CleaningInj: "Si",
     CleaningAB: "Si",
-    aceite: "",
+    aceite: optionOil[0],
     ChangeAirFiltter: "Si",
     ChangeCabinAirFiltter: "Si",
-    Oil: "",
+    Oil: "Si",
+    aceiteLts: optionOillts[0],
     ChangeOilFiltter: "Si",
     ChangeFuelFiltter: "Si",
     plugs: "Si",
@@ -73,13 +74,17 @@ const Service = () => {
     brakeshoe: "Si",
     coil: "Si",
     antifreeze: "Si",
-    transmission: "Si"
+    transmission: "Si",
+    note: '',
+    totalFilters: 0,
+    renderBTNPDF: false
   });
 
   const {
     CleaningInj,
     CleaningAB,
     aceite,
+    aceiteLts,
     ChangeAirFiltter,
     Oil,
     ChangeOilFiltter,
@@ -90,7 +95,10 @@ const Service = () => {
     brakeshoe,
     coil,
     antifreeze,
-    transmission
+    transmission,
+    note,
+    renderBTNPDF,
+    totalFilters
   } = datos;
 
   const obtenerInformacion = (e) => {
@@ -99,6 +107,53 @@ const Service = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleSelectOil = (newOil) => {
+    guardarDatos({
+      ...datos,
+      aceite: newOil,
+    });
+  }
+
+  const handleSelectOilLts = (newOilLts) => {
+    guardarDatos({
+      ...datos,
+      aceiteLts: newOilLts,
+    });
+  }
+
+  const createPDF = (e) => {
+    e.preventDefault()
+    fetchTotalFilters().then(({ total, ok }) => {
+      if(ok){
+        guardarDatos({
+          ...datos,
+          renderBTNPDF: true,
+          totalFilters: total
+        });
+      }else{
+        alert('Ha alguno de los filtros no existe en la base de datos. Registrelo y después podrá continuar.')
+      }
+    }).catch(() => {
+      alert(`${messageServerError}`)
+    })
+  }
+
+  const handleSelectAirFilter = newValue => setAirFilter(newValue)
+  
+  const handleSelectOilFilter = newValue => setOilFilter(newValue)
+  
+  const handleSelectFuelFilter = newValue => setFuelFilter(newValue)
+
+  const fetchTotalFilters = async () => {
+    const res = await axios({
+      url: `${url}/filters/total?airFilter=${airFilter.value}&oilFilter=${oilFilter.value}&fuelFilter=${fuelFilter.value}`,
+      method: 'GET',
+      timeout: 5000
+    })
+
+    return res.data
+  }
 
   return (
     <>
@@ -154,11 +209,10 @@ const Service = () => {
           <div>
             <label>Aceite</label>
             <Select
-              placeholder="Aceite"
-              name="aceite"
+              placeholder="Aceite"          
               value={aceite}
               options={optionOil}
-              onChange={obtenerInformacion}
+              onChange={handleSelectOil}
             />
           </div>
           <div /*  className="form-check form-check-inline" */>
@@ -183,7 +237,13 @@ const Service = () => {
             No
             {/* <label className="form-check-label" htmlFor="Oil0">No</label> */}
           </div>
-          <Select options={optionOillts} placeholder="Litros" />
+          <Select 
+            options={optionOillts} 
+            placeholder="Litros"             
+            value={aceiteLts}
+            onChange={handleSelectOilLts}
+            isDisabled={Oil === "No"}
+          />
         </div>
         <div>
           <h4>Filtro de Aire</h4>
@@ -191,6 +251,7 @@ const Service = () => {
             options={airFilterSelect}
             placeholder="Filtro de Aire"
             value={airFilter}
+            onChange={handleSelectAirFilter}
           />
         </div>
         <div>
@@ -209,7 +270,7 @@ const Service = () => {
             /* className="form-check-input"  */ type="radio"
             name="ChangeAirFiltter"
             value="No"
-            checked={ChangeAirFiltter === "No"}
+            checked={ChangeAirFiltter === "No"} 
             onChange={obtenerInformacion}
           />{" "}
           No
@@ -247,6 +308,7 @@ const Service = () => {
             options={oilFilterSelect}
             placeholder="Filtro de Aceite"
             value={oilFilter}
+            onChange={handleSelectOilFilter}
           />
         </div>
         <div>
@@ -277,6 +339,7 @@ const Service = () => {
             options={fuelFilterSelect}
             placeholder="Filtro de Aceite"
             value={fuelFilter}
+            onChange={handleSelectFuelFilter}
           />
         </div>
         <div>
@@ -412,7 +475,7 @@ const Service = () => {
           No
         </div>
         <div>
-          <h4>Cambio de Aceite</h4>
+          <h4>Cambio de Aceite de Transmisión</h4>
           <input
             /* className="form-check-input"  */ type="radio"
             name="transmission"
@@ -430,22 +493,39 @@ const Service = () => {
             value="No"
             checked={transmission === "No"}
             onChange={obtenerInformacion}
-          />{" "}
+          />
           No
         </div>
-        <CreatePDF          
-          airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.value : ''}
-          oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.value : ''}
-          fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.value : ''}
-          cleanInj={CleaningInj}
-          cleanAB={CleaningAB}
-          plugs={plugs}
-          wiresets={wiresets}
-          brakeshoe={brakeshoe}
-          coil={coil}
-          antifreeze={antifreeze}
-          transmission={transmission}
-        />
+        <div>
+          <h4>Notas</h4>
+          <textarea
+            name="note"
+            value={note}
+            onChange={obtenerInformacion}
+          />
+        </div>
+        <button onClick={createPDF} className="btn btn-primary">CREAR PDF</button>
+        { renderBTNPDF && (
+          <CreatePDF 
+            aceite={aceite.value}
+            Oil={Oil}
+            aceiteLts={aceiteLts.value}
+            airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.value : ''}
+            oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.value : ''}
+            fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.value : ''}
+            cleanInj={CleaningInj}
+            cleanAB={CleaningAB}
+            plugs={plugs}
+            wiresets={wiresets}
+            brakeshoe={brakeshoe}
+            coil={coil}
+            antifreeze={antifreeze}
+            transmission={transmission}
+            note={note}
+            totalFilters={totalFilters}
+          />
+        ) }
+        
       </form>
     </>
   );

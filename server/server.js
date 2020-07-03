@@ -27,21 +27,11 @@ app.use(cookieParser(process.env.SESSION_SECRET_KEY))
 app.use(session({
     secret: process.env.SESSION_SECRET_KEY,    
     saveUninitialized: false,
-    resave: false,
-    cookie:{httpOnly:true/*, secure: true*/},
+    resave: false,    
     // PRODUCTION cookie: { secure: true }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-    res.header("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
-    next();
-});
 
 //PRODUCTION app.set('trust proxy', 1)
 

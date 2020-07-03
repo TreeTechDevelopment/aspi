@@ -51,6 +51,8 @@ const updateFilter = async (req, res) => {
     try{
         const newFilter = req.body
 
+        console.log(newFilter)
+
         let filter = await Filter.findById(newFilter.id)
 
         filter.OEM = newFilter.OEM
@@ -61,10 +63,41 @@ const updateFilter = async (req, res) => {
         filter.Purolator = newFilter.Purolator
         filter.Wix = newFilter.Wix
         filter.Mann = newFilter.Mann
+        filter.price = newFilter.price
 
-        filter.save(newFilterDB => {
+        filter.save((err, newFilterDB) => {
+            if(err){ return res.sendStatus(500) }
             res.json({ newFilter: newFilterDB })
         })
+
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const getTotal = async (req, res) => {
+    try{
+        
+        const { airFilter, oilFilter, fuelFilter } = req.query
+
+        const airFilterDB = await Filter.findOne({ filterType: 'air', interfill: airFilter })
+        const oilFilterDB = await Filter.findOne({ filterType: 'oil', interfill: oilFilter })
+        const fuelFilterDB = await Filter.findOne({ filterType: 'fuel', interfill: fuelFilter })
+
+        let ok = true
+        let total = 0
+
+        if(airFilterDB){ total += airFilterDB.price }
+        else{ ok = false }
+
+        if(oilFilterDB){ total += oilFilterDB.price }
+        else{ ok = false }
+
+        if(fuelFilterDB){ total += fuelFilterDB.price }
+        else{ ok = false }
+
+        res.json({ ok, total })
 
     }catch(e){
         console.log(e)
@@ -75,5 +108,6 @@ const updateFilter = async (req, res) => {
 module.exports = {
     getFilters,
     createFilter,
-    updateFilter
+    updateFilter,
+    getTotal
 }

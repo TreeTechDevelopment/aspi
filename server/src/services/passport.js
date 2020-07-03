@@ -19,3 +19,20 @@ passport.use( new LocalStrategy(async (username, password, done) => {
     if (!bcrypt.compareSync( password, user.password )) { return done(null, false);  }
     return done(null, user);    
 }) )
+
+passport.use( 'signup', new LocalStrategy(async (username, password, done) => {   
+    
+    if(!username){ return done(null, false) }
+    if(!password){ return done(null, false) }
+   
+    let newUser = new User({
+        userName: username,
+        password
+    })  
+
+    newUser.save((err, user) => {
+        if(err){ return done(err) }
+        done(null, user)
+    }) 
+    
+}) )

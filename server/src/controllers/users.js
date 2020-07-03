@@ -23,19 +23,7 @@ const logout = (req, res) => {
     }
 }
 
-const isAuthenticated = (req, res) => {
-    try{
-        const isAuthenticated = req.isAuthenticated()
-        console.log(isAuthenticated)
-        res.json({ authenticated: isAuthenticated })
-    }catch(e){
-        console.log(e)
-        res.sendStatus(500)
-    }
-}
-
 module.exports = {
     login,
-    logout,
-    isAuthenticated
+    logout
 }

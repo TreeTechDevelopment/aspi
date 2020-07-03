@@ -1,30 +1,30 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React from 'react';
 
 import { url } from '../../app.json'
-
-
 
 function Navbar() {
     return (
         <nav>
             <ul className="navbar">
                 <li>
-                    <Link to="/" className="links">
+                    <a href={`${url}/`}>
                         <img src={`${url}/images/logo.jpg`} id="imgLogo"/>
-                    </Link>
+                    </a>
                 </li>
-                <li>
-                    <Link to="/service-order" className="links">Orden de Servicio</Link> 
+                <li>                    
+                    <a href={`${url}/orders`}>Ordenes</a>
                 </li>
-                <li>
-                    <Link to="/cross">Referencias Cruzadas</Link>
+                <li>                    
+                    <a href={`${url}/service-order`}>Orden de Servicio</a>
                 </li>
-                <li>
-                    <Link to="/records">Registros</Link>
+                <li>                    
+                    <a href={`${url}/cross`}>Referencias Cruzadas</a>
                 </li>
-                <li>
-                    <Link to="/iniciar-sesion">Iniciar Sesión</Link>         
+                <li>                    
+                    <a href={`${url}/records`}>Registros</a>
+                </li>
+                <li>                    
+                    <a href={`${url}/iniciar-sesion`}>Iniciar Sesión</a>        
                 </li>
             </ul>
         </nav>

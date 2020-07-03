@@ -1,18 +1,24 @@
 const express = require('express');
-const path = require('path');
 
 const app = express();
 
 const {
     getFilters,
     createFilter,
-    updateFilter
+    updateFilter,
+    getTotal
 } = require('../controllers/filters')
 
-app.get('/', getFilters)
+const {
+    isAuthenticated,
+    isAuthenticatedAdmin
+} = require('../controllers/client')
 
-app.post('/', createFilter)
+app.get('/', isAuthenticated, getFilters)
+app.get('/total', getTotal)
 
-app.put('/', updateFilter)
+app.post('/', isAuthenticatedAdmin, createFilter)
+
+app.put('/', isAuthenticatedAdmin, updateFilter)
 
 module.exports = app

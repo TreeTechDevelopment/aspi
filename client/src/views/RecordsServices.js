@@ -1,10 +1,14 @@
 import React from 'react'
 
+import Navbar from '../components/Navbar';
+import Services from '../components/recordServices/Services';
+
 function RecordsServices() {
     return (
-        <div>
-            Registros de Servicios
-        </div>
+        <>  
+            <Navbar />
+            <Services />
+        </>
     )
 }
 

@@ -31,6 +31,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter }) 
 
     const [loading, setLoading] = useState(false)
     const [interfill, setInterfill] = useState('')
+    const [price, setPrice] = useState('')
 
     const addOEMFilter = (e) => {
         e.preventDefault()
@@ -198,22 +199,23 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter }) 
         setLoading(true)
         let data = {
             interfill, OEM, ACD, Fram, Gonher, Motorcraft,
-            Purolator, Wix, Mann
+            Purolator, Wix, Mann, price
         }
         if(JSON.stringify(context.filter) !== "{}") {
-            data.id = context.fikter._id
+            data.id = context.filter._id
             updateFilter(data).then(({newFilter}) => {
                 setLoading(false)
-                setNewFilter(newFilter)
+                setFilter(newFilter)
                 doBeforeCloseModal()
-            }).catch(() => {
+            }).catch((e) => {
+                console.log(e)
                 setLoading(false)
                 alert(`${messageServerError}`)
             })
         }else{
             createFilter(data).then(({newFilter}) => {
                 setLoading(false)
-                setFilter(newFilter)
+                setNewFilter(newFilter)
                 doBeforeCloseModal()
             }).catch(() => {
                 setLoading(false)
@@ -224,7 +226,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter }) 
 
     const createFilter = async (data) => {
         const res = await axios({
-            url: `${url}/filters`,
+            url: `${url}/filters/`,
             method: 'POST',
             timeout: 5000,
             data
@@ -235,7 +237,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter }) 
 
     const updateFilter = async (data) => {
         const res = await axios({
-            url: `${url}/filters`,
+            url: `${url}/filters/`,
             method: 'PUT',
             timeout: 5000,
             data
@@ -255,6 +257,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter }) 
             setPurolator(context.filter.Purolator)
             setWix(context.filter.Wix)            
             setMann(context.filter.Mann)
+            setPrice(context.filter.price.toString())
 
             let newOEMFilters = []
             for(let i = 0; i < context.filter.OEM.length; i++){ newOEMFilters.push(Math.random().toString()) }
@@ -287,6 +290,8 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter }) 
         context.dispatchFilter({ type: 'SET', value: {} })
         closeModal()
     }
+
+    const handleInputPrice = e => setPrice(e.target.value.replace(/[^0-9]/g, ''))
     
 
     return (
@@ -295,7 +300,14 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter }) 
             onRequestClose={doBeforeCloseModal}
         >
             <div className="form-car">
-                <span>{ filterType.label }</span>                
+                <span>{ filterType.label }</span>
+                <div className="input-filters-container">
+                    <span>Precio</span>
+                    <input 
+                        value={price}
+                        onChange={handleInputPrice}
+                    />
+                </div>               
                 <div id="input-filters-container-group">
                     <div className="input-filters-container">
                         <span>interfill</span>

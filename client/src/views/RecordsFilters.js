@@ -21,7 +21,7 @@ function RecordsFilters() {
     const [typeFilter, setTypeFilter] = useState(optionsTypeFilter[0])
 
     useEffect(() => {
-        fetchFilters().then(({ filters }) => {
+        fetchFilters().then(({ filters }) => {            
             setFilters(filters)
             setLoading(false)
         }).catch((e) => {
@@ -56,7 +56,7 @@ function RecordsFilters() {
     const updateFilter = (newFilter) => {
         let newFilters = [...filters]
         let idx = newFilters.findIndex( filter => filter._id == newFilter._id )
-        newfilters[idx] = newFilter
+        newFilters[idx] = newFilter
         setFilters(newFilters)
     }
 

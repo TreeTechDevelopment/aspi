@@ -1,165 +1,11 @@
-import React, { useContext, useRef } from 'react';
-import { Page, Text, View, Document, StyleSheet, Image, BlobProvider, PDFDownloadLink } from '@react-pdf/renderer';
+import React, { useContext, useRef, useCallback } from 'react';
+import { BlobProvider } from '@react-pdf/renderer';
+import axios from 'axios';
 
-import { url } from '../../../app.json'
-import { appContext } from '../../context/Provider'
-
-const styles = StyleSheet.create({
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1
-    },
-    header: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
-    logo: {
-        width: 50,
-        height: 50,
-    },
-    title: {
-        fontWeight: 'bold'
-    },
-    textHeaderContainer: {
-        alignItems: 'center'
-    },
-    dateOrdenIDContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    dateContainer: {
-        width: 200,
-        height: 70,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    textHeader: {
-        fontSize: 10
-    },
-    body: {
-        flex: 5,
-        paddingHorizontal: 20,
-        paddingVertical: 20
-    },
-    textBody:{ marginBottom: 10 }
-});
-
-const PDF = ({ 
-        airFilter,
-        oilFilter,
-        fuelFilter,
-        plugs,
-        wiresets,
-        brakeshoe,
-        cleanInj, 
-        cleanAB,
-        coil,
-        transmission,
-        antifreeze,
-        date,
-        make,
-        model,
-        year,
-        car,
-        IDOrder
-    }) => {
-
-    return(
-        <Document>
-        <Page size="A4" style={styles.page}>
-            <View style={styles.header}>
-                <Image source={{ uri: `${url}/images/logo.jpg`, method: 'GET', headers: {}, body: '' }} style={styles.logo}/>
-                <View style={styles.textHeaderContainer}>
-                    <Text style={styles.title}>Tornillos y Lubricantes</Text>
-                    <Text style={styles.textHeader}>JULIO AZPIZU RUIZ</Text>
-                    <Text style={styles.textHeader}>AVE. MINA No. 1077 SUR GÓMEZ PALACIO, DGO.</Text>
-                    <Text style={styles.textHeader}>TEL/FAX (871)714-4045</Text>
-                </View>
-            </View>
-            <View style={styles.dateOrdenIDContainer}>                      
-                <Text>FECHA: {date}</Text>
-                <Text>ORDEN DE TRABAJO: No. {IDOrder}</Text>
-            </View>
-            <View style={styles.body}>                      
-                <Text style={styles.textBody}>VEHÍCULO: {make} {model} {year} {car.motor} {car.cylinder}</Text>
-                <Text style={styles.textBody}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>
-                <Text style={styles.textBody}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>
-                <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter}</Text>
-                <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter}</Text>
-                <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter}</Text>
-                {plugs === "Si" && <Text style={styles.textBody}>BUJÍAS: {plugs}</Text>}
-                {wiresets === "Si" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
-                {brakeshoe === "Si" && <Text style={styles.textBody}>BALATAS: {brakeshoe}</Text>}
-                {coil === "Si" && <Text style={styles.textBody}>BOBINA: {coil}</Text>}
-                {antifreeze === "Si" && <Text style={styles.textBody}>ANTICONGELANTE: {antifreeze}</Text>}
-                {transmission === "Si" && <Text style={styles.textBody}>CAMBIO DE ACEITE DE TRANSMISIÓN: {transmission}</Text>}
-            </View>
-        </Page>
-    </Document>
-    )
-
-}
-
-const PDFClient = ({ 
-    airFilter,
-    oilFilter,
-    fuelFilter,
-    plugs,
-    wiresets,
-    brakeshoe,
-    cleanInj, 
-    cleanAB,
-    coil,
-    transmission,
-    antifreeze,
-    date,
-    make,
-    model,
-    year,
-    car,
-    IDOrder
-}) => {
-
-return(
-    <Document>
-    <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-            <Image source={{ uri: `${url}/images/logo.jpg`, method: 'GET', headers: {}, body: '' }} style={styles.logo}/>
-            <View style={styles.textHeaderContainer}>
-                <Text style={styles.title}>Tornillos y Lubricantes</Text>
-                <Text style={styles.textHeader}>JULIO AZPIZU RUIZ</Text>
-                <Text style={styles.textHeader}>AVE. MINA No. 1077 SUR GÓMEZ PALACIO, DGO.</Text>
-                <Text style={styles.textHeader}>TEL/FAX (871)714-4045</Text>
-            </View>
-        </View>
-        <View style={styles.dateOrdenIDContainer}>                      
-            <Text>FECHA: {date}</Text>
-            <Text>ORDEN DE TRABAJO: No. {IDOrder}</Text>
-        </View>
-        <View style={styles.body}>                      
-            <Text style={styles.textBody}>VEHÍCULO: {make} {model} {year} {car.motor} {car.cylinder}</Text>
-            <Text style={styles.textBody}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>
-            <Text style={styles.textBody}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>
-            <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter}</Text>
-            <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter}</Text>
-            <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter}</Text>
-            {plugs === "Si" && <Text style={styles.textBody}>BUJÍAS: {plugs}</Text>}
-            {wiresets === "Si" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
-            {brakeshoe === "Si" && <Text style={styles.textBody}>BALATAS: {brakeshoe}</Text>}
-            {coil === "Si" && <Text style={styles.textBody}>BOBINA: {coil}</Text>}
-            {antifreeze === "Si" && <Text style={styles.textBody}>ANTICONGELANTE: {antifreeze}</Text>}
-            {transmission === "Si" && <Text style={styles.textBody}>CAMBIO DE ACEITE DE TRANSMISIÓN: {transmission}</Text>}
-        </View>
-    </Page>
-</Document>
-)
-
-}
+import { url, messageServerError } from '../../../app.json';
+import { appContext } from '../../context/Provider';
+import PDF from './PDF';
+import PDFClient from './PDFClient';
 
 function CreatePDF({ 
         airFilter,
@@ -172,11 +18,54 @@ function CreatePDF({
         transmission,
         antifreeze,
         cleanInj, 
+        totalFilters,
+        aceite,
+        Oil,
+        aceiteLts,
+        note,
         cleanAB }) {
+
+    function useHookWithRefCallback() {
+        const ref = useRef(null)
+        const setRef = useCallback(node => {          
+            if (node) {
+                if(node.id === "atag2"){
+                    node.click()
+                    let order = {
+                        car: context.car._id,
+                        carYear: context.year,
+                        oil:{
+                            oilRequired: Oil, 
+                            oilType: aceite,
+                            oilLts: aceiteLts
+                        },
+                        filters: {
+                            airFilter, fuelFilter, oilFilter
+                        },
+                        note, cleanAB, cleanInj, brakeshoe,
+                        coil, transmission, antifreeze, plugs,
+                        idOrder: Number(getIDOrder()),
+                        total: getTotal()
+                    }
+                    createOrder(order).then(() => {
+                        resetIDORder()
+                        window.location.reload()
+                    }).catch((e) => {
+                        alert(`${messageServerError}`)
+                    })
+                    
+                }else{ node.click() }
+            }            
+            ref.current = node
+        }, [])
+        
+        return [setRef]
+    }
 
     const context = useContext(appContext)   
 
-    const aRef = useRef(); 
+    const [aRef] = useHookWithRefCallback(); 
+    const [aRef2] = useHookWithRefCallback(); 
 
     const returnDate = () => {
         let month = ''
@@ -195,12 +84,60 @@ function CreatePDF({
         if(new Date().getMinutes() < 10){ minutes = `0${new Date().getMinutes()}` }
         else{ minutes = `${new Date().getMinutes()}` }
 
-        `${hours}:${minutes}`
+        return `${hours}:${minutes}`
+    } 
+
+    const getTotal = () => {
+        let total = 0
+        const services = context.services
+        if(cleanAB === "Si"){
+            let idx = services.findIndex( service => service.name === "cleanAB" )
+            total += services[idx].price
+        }if(cleanInj === "Si"){
+            let idx = services.findIndex( service => service.name === "cleanInj" )
+            total += services[idx].price
+        }if(plugs === "Si"){
+            let idx = services.findIndex( service => service.name === "plugs" )
+            total += services[idx].price
+        }if(transmission === "Si"){
+            let idx = services.findIndex( service => service.name === "transmission" )
+            total += services[idx].price
+        }if(coil === "Si"){
+            let idx = services.findIndex( service => service.name === "coil" )
+            total += services[idx].price
+        }if(wiresets === "Si"){
+            let idx = services.findIndex( service => service.name === "wiresets" )
+            total += services[idx].price
+        }if(airFilter !== ""){
+            let idx = services.findIndex( service => service.name === "changeAirFilter" )
+            total += services[idx].price
+        }if(oilFilter !== ""){
+            let idx = services.findIndex( service => service.name === "changeOilFilter" )
+            total += services[idx].price
+        }if(fuelFilter !== ""){
+            let idx = services.findIndex( service => service.name === "changeFuelFilter" )
+            total += services[idx].price
+        }if(brakeshoe === "Si"){
+            let idx = services.findIndex( service => service.name === "brakeshoe" )
+            total += services[idx].price
+        }if(antifreeze === "Si"){
+            let idx = services.findIndex( service => service.name === "antifreeze" )
+            total += services[idx].price
+        }
+        total += totalFilters
+        return total
+    } 
+
+    const createOrder = async (data) => {
+        const res = await axios({
+            url: `${url}/orders`,
+            method: 'POST',
+            timeout: 5000,
+            data
+        })
+
+        return res.data
     }
-
-    const openPDFWindow = (url) => window.open(url, "PDF", "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes");
-
-    const getIDOrder = () => window.localStorage.getItem('@IDOrder')
 
     const returnNumberIDOrder = () => {
         let IDOrder = Number(getIDOrder())
@@ -210,16 +147,11 @@ function CreatePDF({
         if(IDOrder >= 100){ IDOrderString = `0${IDOrder}` }
         if(IDOrder >= 1000){ IDOrderString = `${IDOrder}` }
         return IDOrderString
-    }
-
-    const downloadPDF = (e) => {
-        e.preventDefault()
-        aRef.current.click()
-        resetIDORder()
-        window.location.reload()
-    }
+    }       
 
     const resetIDORder = () => window.localStorage.setItem('@IDOrder', -1 )
+
+    const getIDOrder = () => window.localStorage.getItem('@IDOrder')
     
     return(
         <>
@@ -242,29 +174,79 @@ function CreatePDF({
                     model={context.model}
                     year={context.year}
                     car={context.car}
+                    aceite={aceite}
+                    Oil={Oil}
+                    aceiteLts={aceiteLts}
                     IDOrder={returnNumberIDOrder()}
+                    note={note}
+                    total={getTotal()}
                 />
-            } 
-            //fileName={`Orden de Servicio ${returnDate()} ${returnTime()}.pdf`}
+            }             
         >
             {({ blob, url, loading, error }) =>{
-                if(blob){
-                    return (
+
+                let url1 = url
+
+                return(
+                    !loading ? (
                         <>
-                        <button 
-                            className="btn btn-primary" 
-                            onClick={downloadPDF} 
-                        >CREAR PDF</button>
-                        <a 
-                            href={url} 
-                            download={`Orden de Servicio ${returnDate()} ${returnTime()}.pdf`} 
-                            id="hidden-atag"
-                            ref={aRef}
-                        ></a>
+
+                        <BlobProvider 
+                            document={
+                                <PDFClient                      
+                                    cleanInj={cleanInj}
+                                    cleanAB={cleanAB}
+                                    airFilter={airFilter}
+                                    oilFilter={oilFilter}
+                                    fuelFilter={fuelFilter}
+                                    plugs={plugs}
+                                    coil={coil}
+                                    antifreeze={antifreeze}
+                                    transmission={transmission}
+                                    wiresets={wiresets}
+                                    brakeshoe={brakeshoe}
+                                    date={returnDate()}
+                                    make={context.make}
+                                    model={context.model}
+                                    year={context.year}
+                                    car={context.car}
+                                    aceite={aceite}
+                                    Oil={Oil}
+                                    aceiteLts={aceiteLts}
+                                    IDOrder={returnNumberIDOrder()}
+                                    note={note}
+                                    total={getTotal()}
+                                />
+                            }             
+                        >
+                            {({ blob, url, loading, error }) =>{
+                                
+                                return(
+                                    !loading ? (
+                                        <>
+                                        <a 
+                                            href={url1} 
+                                            download={`Orden de Servicio ${returnDate()} ${returnTime()}.pdf`} 
+                                            className="hidden-atag"
+                                            id="atag1"
+                                            ref={aRef}
+                                        ></a>
+                                        <a 
+                                            href={url} 
+                                            download={`Orden de Cliente ${returnDate()} ${returnTime()}.pdf`} 
+                                            className="hidden-atag"
+                                            id="atag2"
+                                            ref={aRef2}
+                                        ></a>
+                                        
+                                        </>
+                                    ): ( <></> )
+                                )
+                            }}
+                        </BlobProvider>
                         </>
-                    )
-                }
-                return <button className="btn btn-primary" disabled={true}>CREAR PDF</button>
+                    ): ( <></> )
+                )
             }}
         </BlobProvider>
         
