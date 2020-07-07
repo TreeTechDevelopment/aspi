@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loader from 'react-loader-spinner';
 
 import { url, messageServerError } from '../../../app.json'
-import FilterItem from '../recordsFilters/FilterItem'
+import FilterItem from '../recordsProducts/FilterItem'
 
 function FormEq() {
 

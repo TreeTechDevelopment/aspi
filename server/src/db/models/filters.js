@@ -51,11 +51,6 @@ const filterSchema = new Schema({
         required: true,
         default: []
     },
-    MH: {
-        type: Array,
-        required: true,
-        default: []
-    },
     price: {
         type: Number,
         required: true

@@ -11,6 +11,7 @@ function CreatePDF({
         airFilter,
         oilFilter,
         fuelFilter,
+        cabineFilter,
         plugs,
         wiresets,
         brakeshoe,
@@ -40,7 +41,7 @@ function CreatePDF({
                             oilLts: aceiteLts
                         },
                         filters: {
-                            airFilter, fuelFilter, oilFilter
+                            airFilter, fuelFilter, oilFilter, cabineFilter
                         },
                         note, cleanAB, cleanInj, brakeshoe,
                         coil, transmission, antifreeze, plugs,
@@ -117,6 +118,9 @@ function CreatePDF({
         }if(fuelFilter !== ""){
             let idx = services.findIndex( service => service.name === "changeFuelFilter" )
             total += services[idx].price
+        }if(cabineFilter !== ""){
+            let idx = services.findIndex( service => service.name === "changeCabineFilter" )
+            total += services[idx].price
         }if(brakeshoe === "Si"){
             let idx = services.findIndex( service => service.name === "brakeshoe" )
             total += services[idx].price
@@ -163,6 +167,7 @@ function CreatePDF({
                     airFilter={airFilter}
                     oilFilter={oilFilter}
                     fuelFilter={fuelFilter}
+                    cabineFilter={cabineFilter}
                     plugs={plugs}
                     coil={coil}
                     antifreeze={antifreeze}
@@ -199,6 +204,7 @@ function CreatePDF({
                                     airFilter={airFilter}
                                     oilFilter={oilFilter}
                                     fuelFilter={fuelFilter}
+                                    cabineFilter={cabineFilter}
                                     plugs={plugs}
                                     coil={coil}
                                     antifreeze={antifreeze}

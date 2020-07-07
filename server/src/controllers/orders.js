@@ -1,19 +1,44 @@
 const Order = require('../db/models/orders');
 const Service = require('../db/models/services');
 
-const createOrder = (req, res) => {
+const createOrder = async (req, res) => {
     try{
         
         const order = req.body
+
+        let prevOrder = await Order.findOne({ 'idOrder': order.idOrder })
+
+        if(prevOrder){
+            prevOrder.car = order.car
+            prevOrder.carYear = order.carYear
+            prevOrder.cleanAB = order.cleanAB
+            prevOrder.cleanInj = order.cleanInj
+            prevOrder.brakeshoe = order.brakeshoe
+            prevOrder.coil = order.coil
+            prevOrder.transmission = order.transmission
+            prevOrder.antifreeze = order.antifreeze
+            prevOrder.plugs = order.plugs
+            prevOrder.note = order.note
+            prevOrder.oil = order.oil
+            prevOrder.filters = order.filters
+            prevOrder.total = order.total
+
+            prevOrder.save((err, orderDB) => {
+                console.log(err)
+                if(err){ return res.sendStatus(500) }
+
+                res.sendStatus(200)
+            })
+        }else{
+            let newOrder = new Order(order)
+            newOrder.save((err, orderDB) => {
+                console.log(err)
+                if(err){ return res.sendStatus(500) }
+
+                res.sendStatus(200)
+            })
+        }
         
-        let newOrder = new Order(order)
-        newOrder.save((err, orerDB) => {
-            console.log(err)
-            if(err){ return res.sendStatus(500) }
-
-            res.sendStatus(200)
-        })
-
     }catch(e){
         console.log(e)
         res.sendStatus(500)

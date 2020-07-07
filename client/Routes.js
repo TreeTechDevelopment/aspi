@@ -11,7 +11,7 @@ import ServiceOrd from './src/views/ServiceOrder';
 import LogInPage from './src/views/LogInPage';
 import Records from './src/views/Records';
 import RecordsCars from './src/views/RecordsCars';
-import RecordsFilters from './src/views/RecordsFilters';
+import RecordsProduts from './src/views/RecordsProducts';
 import RecordsServices from './src/views/RecordsServices';
 import Orders from './src/views/Orders';
 import SignUp from './src/views/SignUp';
@@ -43,8 +43,8 @@ function Routes() {
           <Route exact path="/records/cars">
             <Provider> <RecordsCars /> </Provider>
           </Route>
-          <Route exact path="/records/filters">
-            <Provider> <RecordsFilters /> </Provider>
+          <Route exact path="/records/products">
+            <Provider> <RecordsProduts /> </Provider>
           </Route>
           <Route exact path="/records/services">
             <RecordsServices />

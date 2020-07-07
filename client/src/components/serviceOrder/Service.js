@@ -13,9 +13,11 @@ const Service = () => {
   const [airFilterSelect, setAirFilterSelect] = useState([]);
   const [oilFilterSelect, setOilFilterSelect] = useState([]);
   const [fuelFilterSelect, setFuelFilterSelect] = useState([]);
+  const [cabineFilterSelect, setCabineFilterSelect] = useState([]);
   const [airFilter, setAirFilter] = useState({});
   const [oilFilter, setOilFilter] = useState({});
   const [fuelFilter, setFuelFilter] = useState({});
+  const [cabineFilter, setCabineFilter] = useState({});
 
   useEffect(() => {
     if (context.car.airFilter) {
@@ -37,15 +39,17 @@ const Service = () => {
         });
         setFuelFilterSelect(fuelFilters);
         setFuelFilter(fuelFilters[0]);
+
+        if(context.car.cabineFilter){
+          let cabineFilters = context.car.cabineFilter.map((cabineFilter) => {
+            return { value: cabineFilter, label: cabineFilter };
+          });
+          setCabineFilterSelect(cabineFilters);
+          setCabineFilter(cabineFilters[0]);
+        }
     }
   }, [context.car]);
 
-  const optionAirFiltter = [
-    { value: "F-28A11", label: "F-28A11" },
-    { value: "CA-10564", label: "CA-10564" },
-    { value: "C2674/1", label: "C2674/1" },
-    { value: "ECA-1000", label: "ECA-1000" },
-  ];
   const optionOil = [
     { value: "Quacker", label: "Quacker" },
     { value: "Motorcracft", label: "Motorcracft" },
@@ -145,9 +149,19 @@ const Service = () => {
   
   const handleSelectFuelFilter = newValue => setFuelFilter(newValue)
 
+  const handleSelectCabineFilter = newValue => setCabineFilter(newValue)
+
   const fetchTotalFilters = async () => {
     const res = await axios({
-      url: `${url}/filters/total?airFilter=${airFilter.value}&oilFilter=${oilFilter.value}&fuelFilter=${fuelFilter.value}`,
+      url: `${url}/filters/total?${ 
+        ChangeAirFiltter === "Si" ? `airFilter=${airFilter.value}` : ''
+      }&${
+        ChangeOilFiltter === "Si" ? `oilFilter=${oilFilter.value}` : ''
+      }&${
+        ChangeAirFiltter === "Si" ? `fuelFilter=${fuelFilter.value}` : ''
+      }&${
+        ChangeCabinAirFiltter === "Si" ? `cabineFilter=${cabineFilter.value}` : ''
+      }`,
       method: 'GET',
       timeout: 5000
     })
@@ -213,6 +227,7 @@ const Service = () => {
               value={aceite}
               options={optionOil}
               onChange={handleSelectOil}
+              isDisabled={Oil === "No"}
             />
           </div>
           <div /*  className="form-check form-check-inline" */>
@@ -252,6 +267,7 @@ const Service = () => {
             placeholder="Filtro de Aire"
             value={airFilter}
             onChange={handleSelectAirFilter}
+            isDisabled={ChangeAirFiltter === "No"}
           />
         </div>
         <div>
@@ -278,7 +294,13 @@ const Service = () => {
         </div>
         <div>
           <h4>Filtro de Aire Cabina</h4>
-          <Select options={optionAirFiltter} placeholder="Filtro de Aire" />
+          <Select 
+            options={cabineFilterSelect} 
+            value={cabineFilter}
+            placeholder="Filtro de Aire" 
+            isDisabled={ChangeCabinAirFiltter === "No"}
+            onChange={handleSelectCabineFilter}
+          />
         </div>
         <div>
           <input
@@ -309,6 +331,7 @@ const Service = () => {
             placeholder="Filtro de Aceite"
             value={oilFilter}
             onChange={handleSelectOilFilter}
+            isDisabled={ChangeOilFiltter === "No"}
           />
         </div>
         <div>
@@ -340,6 +363,7 @@ const Service = () => {
             placeholder="Filtro de Aceite"
             value={fuelFilter}
             onChange={handleSelectFuelFilter}
+            isDisabled={ChangeFuelFiltter === "No"}
           />
         </div>
         <div>
@@ -513,6 +537,7 @@ const Service = () => {
             airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.value : ''}
             oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.value : ''}
             fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.value : ''}
+            cabineFilter={ (ChangeCabinAirFiltter === "Si" && cabineFilter && cabineFilter.value) ? cabineFilter.value : ''}
             cleanInj={CleaningInj}
             cleanAB={CleaningAB}
             plugs={plugs}

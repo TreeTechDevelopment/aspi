@@ -25,6 +25,9 @@ function InputFilter({ idx, setFilters, type }) {
                 case 'fuelFilter':
                     if(context.carToEdit.fuelFilter[idx]){ setFilter(context.carToEdit.fuelFilter[idx]) }
                     break;
+                case 'cabineFilter':
+                    if(context.carToEdit.cabineFilter && context.carToEdit.cabineFilter[idx]){ setFilter(context.carToEdit.cabineFilter[idx]) }
+                    break;
             }
         }
     }, [context.carToEdit])

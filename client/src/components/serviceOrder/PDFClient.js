@@ -8,6 +8,7 @@ const PDFClient = ({
     airFilter,
     oilFilter,
     fuelFilter,
+    cabineFilter,
     plugs,
     wiresets,
     brakeshoe,
@@ -53,6 +54,7 @@ return(
             <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter !== "" ? 'Si' : 'No'}</Text>
             <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter !== "" ? 'Si' : 'No'}</Text>
             <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter !== "" ? 'Si' : 'No'}</Text>
+            <Text style={styles.textBody}>FILTRO DE AIRE DE CABINA: {cabineFilter !== "" ? 'Si' : 'No'}</Text>
             {plugs === "Si" && <Text style={styles.textBody}>BUJÍAS: {plugs}</Text>}
             {wiresets === "Si" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
             {brakeshoe === "Si" && <Text style={styles.textBody}>BALATAS: {brakeshoe}</Text>}

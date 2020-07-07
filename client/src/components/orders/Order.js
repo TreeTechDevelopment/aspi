@@ -7,12 +7,6 @@ import { url, messageServerError } from '../../../app.json'
 
 function Order({ order, services }) {
 
-    const optionAirFiltter = [
-        { value: "F-28A11", label: "F-28A11" },
-        { value: "CA-10564", label: "CA-10564" },
-        { value: "C2674/1", label: "C2674/1" },
-        { value: "ECA-1000", label: "ECA-1000" },
-      ];
       const optionOil = [
         { value: "Quacker", label: "Quacker" },
         { value: "Motorcracft", label: "Motorcracft" },
@@ -29,9 +23,11 @@ function Order({ order, services }) {
     const [airFilterSelect, setAirFilterSelect] = useState([]);
     const [oilFilterSelect, setOilFilterSelect] = useState([]);
     const [fuelFilterSelect, setFuelFilterSelect] = useState([]);
+    const [cabineFilterSelect, setCabineFilterSelect] = useState([]);
     const [airFilter, setAirFilter] = useState({});
     const [oilFilter, setOilFilter] = useState({});
     const [fuelFilter, setFuelFilter] = useState({});
+    const [cabineFilter, setCabineFilter] = useState({});
     const [datos, guardarDatos] = useState({
         CleaningInj: "Si",
         CleaningAB: "Si",
@@ -93,6 +89,8 @@ function Order({ order, services }) {
       const handleSelectAirFilter = (newAirFilter) => setAirFilter(newAirFilter)
 
       const handleSelectFuelFilter = (newFuelFilter) => setFuelFilter(newFuelFilter)
+
+      const handleSelectCabineFilter = newValue => setCabineFilter(newValue)
     
       const handleSelectOilLts = (newOilLts) => {
         guardarDatos({
@@ -125,7 +123,7 @@ function Order({ order, services }) {
         let airFiltersIndex = order.car.airFilter.findIndex( filter => filter === order.filters.airFilter )
         
         setAirFilterSelect(airFilters);
-        setAirFilter(airFilters[airFiltersIndex]);
+        setAirFilter(airFilters[airFiltersIndex]);       
 
         let oilFilters = order.car.oilFilter.map((oilFilter) => {
             return { value: oilFilter, label: oilFilter };
@@ -133,7 +131,7 @@ function Order({ order, services }) {
         let oilFiltersIndex = order.car.oilFilter.findIndex( filter => filter === order.filters.oilFilter )
 
         setOilFilterSelect(oilFilters);
-        setOilFilter(oilFilters[oilFiltersIndex]);
+        setOilFilter(oilFilters[oilFiltersIndex]);        
 
         let fuelFilters = order.car.fuelFilter.map((fuelFilter) => {
             return { value: fuelFilter, label: fuelFilter };
@@ -141,7 +139,18 @@ function Order({ order, services }) {
         let fuelFiltersIndex = order.car.fuelFilter.findIndex( filter => filter === order.filters.fuelFilter )
 
         setFuelFilterSelect(fuelFilters);
-        setFuelFilter(fuelFilters[fuelFiltersIndex]);
+        setFuelFilter(fuelFilters[fuelFiltersIndex]);       
+
+        let cabineFiltersIndex = -1
+        if(order.car.cabineFilter){
+            let cabineFilters = order.car.cabineFilter.map((cabineFilter) => {
+                return { value: cabineFilter, label: cabineFilter };
+            });
+            cabineFiltersIndex = order.car.cabineFilter.findIndex( filter => filter === order.filters.cabineFilter )
+    
+            setCabineFilterSelect(cabineFilters);
+            setCabineFilter(cabineFilters[cabineFiltersIndex]);
+        }
 
         let oil = optionOil.find( option => option.value === order.oil.oilType )
         let oilLTS = optionOillts.find( option => option.value === order.oil.oilLts )
@@ -157,7 +166,11 @@ function Order({ order, services }) {
             CleaningInj: order.cleanInj,
             coil: order.coil,
             antifreeze: order.antifreeze,
-            note: order.note
+            note: order.note,
+            ChangeAirFiltter: airFiltersIndex === -1 ? 'No' : 'Si',
+            ChangeOilFiltter: oilFiltersIndex === -1 ? 'No' : 'Si',
+            ChangeFuelFiltter: fuelFiltersIndex === -1 ? 'No' : 'Si',
+            ChangeCabinAirFiltter: (cabineFiltersIndex === -1) ? 'No' : 'Si'
         })
     }, [order])
 
@@ -233,10 +246,11 @@ function Order({ order, services }) {
                 <div>
                     <label>Aceite</label>
                     <Select
-                    placeholder="Aceite"          
-                    value={aceite}
-                    options={optionOil}
-                    onChange={handleSelectAceite}
+                        placeholder="Aceite"          
+                        value={aceite}
+                        options={optionOil}
+                        onChange={handleSelectAceite}
+                        isDisabled={Oil === "No"}
                     />
                 </div>
                 <div /*  className="form-check form-check-inline" */>
@@ -276,6 +290,7 @@ function Order({ order, services }) {
                     placeholder="Filtro de Aire"
                     value={airFilter}
                     onChange={handleSelectAirFilter}
+                    isDisabled={ChangeAirFiltter === "No"}
                 />
                 </div>
                 <div>
@@ -302,7 +317,13 @@ function Order({ order, services }) {
                 </div>
                 <div>
                 <h4>Filtro de Aire Cabina</h4>
-                <Select options={optionAirFiltter} placeholder="Filtro de Aire" />
+                <Select 
+                    options={cabineFilterSelect} 
+                    value={cabineFilter}
+                    placeholder="Filtro de Aire" 
+                    isDisabled={ChangeCabinAirFiltter === "No"}
+                    onChange={handleSelectCabineFilter} 
+                />
                 </div>
                 <div>
                 <input
@@ -333,6 +354,7 @@ function Order({ order, services }) {
                     placeholder="Filtro de Aceite"
                     value={oilFilter}
                     onChange={handleSelectOilFilter}
+                    isDisabled={ChangeOilFiltter === "No"}
                 />
                 </div>
                 <div>
@@ -364,6 +386,7 @@ function Order({ order, services }) {
                     placeholder="Filtro de Aceite"
                     value={fuelFilter}
                     onChange={handleSelectFuelFilter}
+                    isDisabled={ChangeFuelFiltter === "No"}
                 />
                 </div>
                 <div>
@@ -537,6 +560,7 @@ function Order({ order, services }) {
                     airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.value : ''}
                     oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.value : ''}
                     fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.value : ''}
+                    cabineFilter={ (ChangeCabinAirFiltter === "Si" && cabineFilter && cabineFilter.value) ? cabineFilter.value : ''}
                     cleanInj={CleaningInj}
                     cleanAB={CleaningAB}
                     plugs={plugs}

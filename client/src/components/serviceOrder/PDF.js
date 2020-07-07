@@ -52,6 +52,7 @@ const PDF = ({
     airFilter,
     oilFilter,
     fuelFilter,
+    cabineFilter,
     plugs,
     wiresets,
     brakeshoe,
@@ -97,6 +98,7 @@ return(
             <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter}</Text>
             <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter}</Text>
             <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter}</Text>
+            <Text style={styles.textBody}>FILTRO DE AIRE DE CABINA: {cabineFilter}</Text>
             {plugs === "Si" && <Text style={styles.textBody}>BUJÍAS: {plugs}</Text>}
             {wiresets === "Si" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
             {brakeshoe === "Si" && <Text style={styles.textBody}>BALATAS: {brakeshoe}</Text>}

@@ -8,18 +8,10 @@ const orderSchema = new Schema({
         ref: 'carros'
     },
     filters:{
-        airFilter: {
-            required: true,
-            type: String
-        },
-        fuelFilter: {
-            required: true,
-            type: String
-        },
-        oilFilter: {
-            required: true,
-            type: String
-        }
+        airFilter: { type: String },
+        fuelFilter: { type: String },
+        oilFilter: { type: String },
+        cabineFilter: { type: String }
     },
     carYear: {
         required: true,

@@ -13,6 +13,7 @@ function Provider({ children }) {
     const [car, dispatchCar] = useReducer(defaultReducer, {})
     const [carToEdit, dispatchCarToEdit] = useReducer(defaultReducer, {})
     const [filter, dispatchFilter] = useReducer(defaultReducer, {})
+    const [product, dispatchProduct] = useReducer(defaultReducer, {})
     const [services, dispatchServices] = useReducer(defaultReducer, [])
 
     return (
@@ -25,6 +26,7 @@ function Provider({ children }) {
                 IDOrder,
                 carToEdit,
                 filter,
+                product,
                 services,
                 dispatchMake,
                 dispatchModel,
@@ -33,7 +35,8 @@ function Provider({ children }) {
                 dispatchYear,
                 dispatchCarToEdit,
                 dispatchFilter,
-                dispatchServices
+                dispatchServices,
+                dispatchProduct
             }}
         >
             {children}

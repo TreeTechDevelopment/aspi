@@ -7,7 +7,7 @@ const Service = require('../db/models/services');
 
 const getAllInfo = async (req, res) => {
     try{
-        const { newIDOrder } = req.query        
+        const { newIDOrder } = req.query
 
         let app = await App.findOne({})
         const models = await Model.find({})
@@ -17,7 +17,8 @@ const getAllInfo = async (req, res) => {
         const idOrder = app.idOrder
 
         if(newIDOrder === "true"){
-            app.idOrder = idOrder + 1
+            if(idOrder + 1 === 10000){ app.idOrder = 1 }
+            else{ app.idOrder = idOrder + 1 }
             app.save()
         }
         
@@ -62,7 +63,8 @@ const postNewCar = async (req, res) => {
         const model = await Model.findById(newCar.model)
 
         let car = new Car(newCar)
-        car.save(newCarDB => {
+        car.save((err, newCarDB) => {
+            if(err){ return res.sendStatus(500) }
             newCarDB.make = make
             newCarDB.model = model
             res.json({ newCar: newCarDB })
@@ -88,8 +90,10 @@ const updateCar = async (req, res) => {
         car.airFilter = newCar.airFilter
         car.oilFilter = newCar.oilFilter
         car.fuelFilter = newCar.fuelFilter
+        car.cabineFilter = newCar.cabineFilter
 
-        car.save(newCarDB => {
+        car.save((err, newCarDB) => {
+            if(err){ return res.sendStatus(500) }
             newCarDB.make = make
             newCarDB.model = model
             res.json({ newCar: newCarDB })

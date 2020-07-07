@@ -14,7 +14,7 @@ function Records({  }) {
     const handleRedirectServies = () => setRedirectServices(true)
 
     if(redirectCars){ return <Redirect to="records/cars"/> }
-    if(redirectFilters){ return <Redirect to="records/filters"/> }
+    if(redirectFilters){ return <Redirect to="records/products"/> }
     if(redirectServices){ return <Redirect to="records/services"/> }
 
     return (
@@ -22,7 +22,7 @@ function Records({  }) {
             <Navbar />
             <div className="btn-container-records">
                 <button className="btn btn-primary btn-records" onClick={handleRedirectCars}>Carros</button>
-                <button className="btn btn-primary btn-records" onClick={handleRedirectFilters}>Filtros</button>
+                <button className="btn btn-primary btn-records" onClick={handleRedirectFilters}>Productos</button>
                 <button className="btn btn-primary btn-records" onClick={handleRedirectServies}>Servicios</button>
             </div>
         </>        

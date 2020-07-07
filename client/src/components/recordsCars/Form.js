@@ -18,9 +18,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const [airFilters, setAirFilter] = useState([])
     const [oilFilters, setOilFilter] = useState([])
     const [fuelFilters, setFuelFilter] = useState([])
+    const [cabineFilters, setCabineFilter] = useState([])
     const [airFiltersRender, setAirFiltersRender] = useState([Math.random().toString()])
     const [oilFiltersRender, setOilFiltersRender] = useState([Math.random().toString()])
     const [fuelFiltersRender, setFuelFiltersRender] = useState([Math.random().toString()])
+    const [cabineFiltersRender, setCabineFiltersRender] = useState([Math.random().toString()])
     const [model, setModel] = useState({})
     const [newModel, setNewModel] = useState('')
     const [yearFrom, setYearFrom] = useState('')
@@ -49,6 +51,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             setAirFilter(context.carToEdit.airFilter)
             setOilFilter(context.carToEdit.oilFilter)
             setFuelFilter(context.carToEdit.fuelFilter)
+            if(context.carToEdit.cabineFilter){ setCabineFilter(context.carToEdit.cabineFilter) }
             
             let newAirFilterRender = []
             for(let i = 0; i < context.carToEdit.airFilter.length; i++){ newAirFilterRender.push(Math.random().toString()) }
@@ -61,6 +64,12 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             let newFuelFilterRender = []
             for(let i = 0; i < context.carToEdit.fuelFilter.length; i++){ newFuelFilterRender.push(Math.random().toString()) }
             setFuelFiltersRender(newFuelFilterRender)
+
+            if(context.carToEdit.cabineFilter){ 
+                let newCabineFilterRender = []
+                for(let i = 0; i < context.carToEdit.cabineFilter.length; i++){ newCabineFilterRender.push(Math.random().toString()) }
+                setCabineFiltersRender(newCabineFilterRender)
+            }
         }else{
             setMakeEdit(make)
             let modelsSelect = models.map( model => { return { value: model._id, label: model.name } })
@@ -114,6 +123,12 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
         setFuelFilter(newFuelFilters)
     }
 
+    const setCabineFilters = (filter, idx) => {
+        let newCabineFilters = [...cabineFilters]
+        newCabineFilters[idx] = filter
+        setCabineFilter(newCabineFilters)
+    }
+
     const addAirFilter = (e) => {
         e.preventDefault()
         let newAirFilters = [...airFiltersRender]
@@ -156,6 +171,20 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
         setFuelFiltersRender(newFuelFilters)
     }
 
+    const addCabineFilter = (e) => {
+        e.preventDefault()
+        let newCabineFilters = [...cabineFiltersRender]
+        newCabineFilters.push(Math.random().toString())
+        setCabineFiltersRender(newCabineFilters)
+    }
+
+    const removeCabineFilter = (e) => {
+        e.preventDefault()
+        let newCabineFilters = [...cabineFiltersRender]
+        newCabineFilters.splice(-1, 1)
+        setCabineFiltersRender(newCabineFilters)
+    }
+
     const saveCar = (e) => {
         e.preventDefault()
 
@@ -168,7 +197,8 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 motor,
                 airFilter: airFilters,
                 oilFilter: oilFilters,
-                fuelFilter: fuelFilters,            
+                fuelFilter: fuelFilters,  
+                cabineFilter: cabineFilters          
             }
 
             if(newModel !== ""){ data.model = newModel }
@@ -335,6 +365,21 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                         <div className="btns-filter-container">
                             <button className="btn btn-primary" onClick={removeFuelFilter}>-</button>
                             <button className="btn btn-primary" onClick={addFuelFilter}>+</button>
+                        </div>
+                    </div>
+                    <div className="input-filters-container">
+                        <span>Filtro de Aire de Cabina</span>
+                        {cabineFiltersRender.map( (key, idx) => (
+                            <InputFilter
+                                idx={idx}
+                                setFilters={setCabineFilters}
+                                key={ key }
+                                type="cabineFilter"
+                            />
+                        ))}
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeCabineFilter}>-</button>
+                            <button className="btn btn-primary" onClick={addCabineFilter}>+</button>
                         </div>
                     </div>
                 </div>
