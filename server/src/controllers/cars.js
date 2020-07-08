@@ -4,6 +4,7 @@ const Car = require('../db/models/cars');
 const Make = require('../db/models/marcas');
 const App = require('../db/models/aplication');
 const Service = require('../db/models/services');
+const Filter = require('../db/models/filters');
 
 const getAllInfo = async (req, res) => {
     try{
@@ -13,6 +14,7 @@ const getAllInfo = async (req, res) => {
         const models = await Model.find({})
         const makes = await Make.find({}) 
         const services = await Service.find({})
+        const filters = await Filter.find({})
 
         const idOrder = app.idOrder
 
@@ -22,7 +24,7 @@ const getAllInfo = async (req, res) => {
             app.save()
         }
         
-        res.json({ models, makes, idOrder, services})
+        res.json({ models, makes, idOrder, services, filters})
     }catch(e){
         console.log(e)
         res.sendStatus(500)

@@ -74,16 +74,17 @@ function Form(){
             url : `${url}/cars?make=${make.value}&model=${model.value}`,
             timeout: 5000
         })
-        return res.data 
+        return res.data  
     }
 
     useEffect(() => {
         let newIDOrDER = false
         let IDOrder = getIDORder()
         if(Number(IDOrder) === -1 || !IDOrder){ newIDOrDER = true }
-        fetchInfo(newIDOrDER).then(({ models, makes, idOrder, services }) => {
+        fetchInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters }) => {
             setData(models, makes)
             context.dispatchServices({ type: 'SET', value: services })
+            context.dispatchFilters({ type: 'SET', value: filters })
             if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
         }).catch((e) => {
             setInfoFetched(true)

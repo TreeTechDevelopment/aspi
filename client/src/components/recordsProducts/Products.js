@@ -65,7 +65,7 @@ function Products({ typeProduct }) {
                         <>
 
                         </>
-                    ) : typeProduct.value === "wiresets" ? (
+                    ) : typeProduct.value === "wiresets" ? ( 
                         <>
         
                         </>

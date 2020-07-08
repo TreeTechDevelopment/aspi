@@ -8,7 +8,7 @@ const App = require('./models/aplication');
 const Service = require('./models/services');
 const Order = require('./models/orders');
 
-const excelToJson = require('convert-excel-to-json');
+/* const excelToJson = require('convert-excel-to-json');
 const fs = require('fs')
 const path = require('path')
 
@@ -18,7 +18,7 @@ const result = excelToJson({
 
 const { createFilterDB } = require('../services/filter')
 
-const filters = JSON.parse(fs.readFileSync(path.resolve( __dirname, '../../../equivalecias.json' )))
+const filters = JSON.parse(fs.readFileSync(path.resolve( __dirname, '../../../equivalecias.json' ))) */
 
 const DBconfig = { 
     useNewUrlParser: true, 

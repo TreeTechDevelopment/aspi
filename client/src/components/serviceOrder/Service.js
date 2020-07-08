@@ -21,32 +21,66 @@ const Service = () => {
 
   useEffect(() => {
     if (context.car.airFilter) {
-        let airFilters = context.car.airFilter.map((airFilter) => {
-            return { value: airFilter, label: airFilter };
+
+        let airFilters = context.filters.filter( filterDB => filterDB.filterType === "air" )
+        let oilFilters = context.filters.filter( filterDB => filterDB.filterType === "oil" )
+        let fuelFilters = context.filters.filter( filterDB => filterDB.filterType === "fuel" )
+        let cabineFilters = context.filters.filter( filterDB => filterDB.filterType === "cabine" )
+
+        let airFiltersSelect = []
+        airFilters = airFilters.filter( filter => context.car.airFilter.some( airFilter => airFilter == filter.interfil )  )
+        for(let i = 0; i < airFilters.length; i++){
+          airFiltersSelect = [...airFiltersSelect, airFilters[i].interfil, ...airFilters[i].OEM, ...airFilters[i].ACD,
+                            ...airFilters[i].Fram, ...airFilters[i].Gonher, ...airFilters[i].Motorcraft, ...airFilters[i].Purolator,
+                            ...airFilters[i].Wix, ...airFilters[i].Mann]
+        }
+
+        let oilFiltersSelect = []
+        oilFilters = oilFilters.filter( filter => context.car.oilFilter.some( oilFilter => oilFilter == filter.interfil )  )
+        for(let i = 0; i < oilFilters.length; i++){
+          oilFiltersSelect = [...oilFiltersSelect, oilFilters[i].interfil, ...oilFilters[i].OEM, ...oilFilters[i].ACD,
+                            ...oilFilters[i].Fram, ...oilFilters[i].Gonher, ...oilFilters[i].Motorcraft, ...oilFilters[i].Purolator,
+                            ...oilFilters[i].Wix, ...oilFilters[i].Mann]
+        }
+
+        let fuelFiltersSelect = []
+        fuelFilters = fuelFilters.filter( filter => context.car.fuelFilter.some( fuelFilter => fuelFilter == filter.interfil )  )
+        for(let i = 0; i < fuelFilters.length; i++){
+          fuelFiltersSelect = [...fuelFiltersSelect, fuelFilters[i].interfil, ...fuelFilters[i].OEM, ...fuelFilters[i].ACD,
+                            ...fuelFilters[i].Fram, ...fuelFilters[i].Gonher, ...fuelFilters[i].Motorcraft, ...fuelFilters[i].Purolator,
+                            ...fuelFilters[i].Wix, ...fuelFilters[i].Mann]
+        }
+
+        let cabineFiltersSelect = []
+        cabineFilters = cabineFilters.filter( filter => context.car.cabineFilter.some( cabineFilter => cabineFilter == filter.interfil )  )
+        for(let i = 0; i < cabineFilters.length; i++){
+          cabineFiltersSelect = [...cabineFiltersSelect, cabineFilters[i].interfil, ...cabineFilters[i].OEM, ...cabineFilters[i].ACD,
+                            ...cabineFilters[i].Fram, ...cabineFilters[i].Gonher, ...cabineFilters[i].Motorcraft, ...cabineFilters[i].Purolator,
+                            ...cabineFilters[i].Wix, ...cabineFilters[i].Mann]
+        }
+
+        airFiltersSelect = airFiltersSelect.map( filter => {
+            return { value: filter, label: filter };
+        });
+        oilFiltersSelect = oilFiltersSelect.map( filter => {
+          return { value: filter, label: filter };
+        });
+        fuelFiltersSelect = fuelFiltersSelect.map( filter => {
+            return { value: filter, label: filter };
+        });
+        cabineFiltersSelect = cabineFiltersSelect.map( filter => {
+          return { value: filter, label: filter };
         });
         
-        setAirFilterSelect(airFilters);
-        setAirFilter(airFilters[0]);
+        setAirFilterSelect(airFiltersSelect);
+        setAirFilter(airFiltersSelect[0]);
+        setOilFilterSelect(oilFiltersSelect);
+        setOilFilter(oilFiltersSelect[0]);
+        setFuelFilterSelect(fuelFiltersSelect);
+        setFuelFilter(fuelFiltersSelect[0]);
+        setCabineFilterSelect(cabineFiltersSelect);
+        setCabineFilter(cabineFiltersSelect[0]);
 
-        let oilFilters = context.car.oilFilter.map((oilFilter) => {
-            return { value: oilFilter, label: oilFilter };
-        });
-        setOilFilterSelect(oilFilters);
-        setOilFilter(oilFilters[0]);
-
-        let fuelFilters = context.car.fuelFilter.map((fuelFilter) => {
-            return { value: fuelFilter, label: fuelFilter };
-        });
-        setFuelFilterSelect(fuelFilters);
-        setFuelFilter(fuelFilters[0]);
-
-        if(context.car.cabineFilter){
-          let cabineFilters = context.car.cabineFilter.map((cabineFilter) => {
-            return { value: cabineFilter, label: cabineFilter };
-          });
-          setCabineFilterSelect(cabineFilters);
-          setCabineFilter(cabineFilters[0]);
-        }
     }
   }, [context.car]);
 
@@ -64,21 +98,21 @@ const Service = () => {
   ];
 
   const [datos, guardarDatos] = useState({
-    CleaningInj: "Si",
-    CleaningAB: "Si",
+    CleaningInj: "No",
+    CleaningAB: "No",
     aceite: optionOil[0],
-    ChangeAirFiltter: "Si",
-    ChangeCabinAirFiltter: "Si",
-    Oil: "Si",
+    ChangeAirFiltter: "No",
+    ChangeCabinAirFiltter: "No",
+    Oil: "No",
     aceiteLts: optionOillts[0],
-    ChangeOilFiltter: "Si",
-    ChangeFuelFiltter: "Si",
-    plugs: "Si",
-    wiresets: "Si",
-    brakeshoe: "Si",
-    coil: "Si",
-    antifreeze: "Si",
-    transmission: "Si",
+    ChangeOilFiltter: "No",
+    ChangeFuelFiltter: "No",
+    plugs: "No",
+    wiresets: "No",
+    brakeshoe: "No",
+    coil: "No",
+    antifreeze: "No",
+    transmission: "No",
     note: '',
     totalFilters: 0,
     renderBTNPDF: false
