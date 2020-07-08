@@ -4,6 +4,8 @@ import { appContext } from '../../context/Provider';
 
 function CarItem({ car, openModal }) {
 
+    if(!car.make || !car.model){ console.log(car) }
+
     const context = useContext(appContext)
 
     const setCarToEdit = () => {

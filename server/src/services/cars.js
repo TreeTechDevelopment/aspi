@@ -11,7 +11,12 @@ const createCarDB = async (car, models) => {
     let newCar = {
         oilFilter: [],
         airFilter: [],
-        fuelFilter: []
+        fuelFilter: [],
+        cabineFilter: [],
+        sparkPlug: [],
+        wiresets: [],
+        brakeShoeFront: [],
+        brakeShoeBack: []
     }
     
     let filterControl = ''

@@ -11,7 +11,7 @@ const getFilters = async (req, res) => {
         }        
 
         let filters = await Filter.find({ $or: [
-            { 'interfill': { $regex : new RegExp(filter, "i") } },
+            { 'interfil': { $regex : new RegExp(filter, "i") } },
             { 'OEM': { $in: [new RegExp(filter, "i")] } },
             { 'ACD': { $in: [new RegExp(filter, "i")] } },
             { 'Fram': { $in: [new RegExp(filter, "i")] } },
@@ -88,22 +88,22 @@ const getTotal = async (req, res) => {
         let total = 0
 
         if(airFilter){ 
-            airFilterDB = await Filter.findOne({ filterType: 'air', interfill: airFilter }) 
+            airFilterDB = await Filter.findOne({ filterType: 'air', interfil: airFilter }) 
             if(airFilterDB){ total += airFilterDB.price }
             else{ ok = false }
         }
         if(oilFilter){ 
-            oilFilterDB = await Filter.findOne({ filterType: 'oil', interfill: oilFilter }) 
+            oilFilterDB = await Filter.findOne({ filterType: 'oil', interfil: oilFilter }) 
             if(oilFilterDB){ total += oilFilterDB.price }
             else{ ok = false }
         }
         if(fuelFilter){ 
-            fuelFilterDB = await Filter.findOne({ filterType: 'fuel', interfill: fuelFilter }) 
+            fuelFilterDB = await Filter.findOne({ filterType: 'fuel', interfil: fuelFilter }) 
             if(fuelFilterDB){ total += fuelFilterDB.price }
             else{ ok = false }
         }
         if(cabineFilter){ 
-            cabineFilterDB = await Filter.findOne({ filterType: 'cabine', interfill: cabineFilter }) 
+            cabineFilterDB = await Filter.findOne({ filterType: 'cabine', interfil: cabineFilter }) 
             if(cabineFilterDB){ total += cabineFilterDB.price }
             else{ ok = false }
         }

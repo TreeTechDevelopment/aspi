@@ -37,7 +37,7 @@ function FormEq() {
 
     const fetchFilter  = async () => {
         const res = await axios({
-            url: `${url}/filters?filter=${filterToSearch}`
+            url: `${url}/products/filter?filter=${filterToSearch}`
         })
 
         return res.data

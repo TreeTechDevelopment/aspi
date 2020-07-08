@@ -4,15 +4,15 @@ import FilterItem from './FilterItem';
 
 function FilterProducts({ filters, openModal, typeFilter }) {
     return (
-        <table>
+        <table className="table-products">
             <thead>
                 <tr>
-                    <th>Interfill</th>
+                    <th>Interfil</th>
                     <th>OEM</th>
                     <th>ACDelco</th>
                     <th>Fram</th>
                     <th>Gonher</th>
-                    <th>Motorcraft</th>
+                    <th>Motorcraft</th> 
                     <th>Purolator</th>
                     <th>Wix</th>
                     <th>Mann</th>

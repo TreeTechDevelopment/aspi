@@ -7,14 +7,14 @@ function FilterItem({ filter, openModal, edit, typeFilter }) {
     const context = useContext(appContext)
 
     const editFilter = () => {        
-        context.dispatchProduct({ type: 'SET', value: filter })
+        context.dispatchProduct({ type: 'SET', value: filter }) 
         openModal()
     }
     
     return (
         <tr>
             <td>
-                <p>{ filter.interfill }</p>
+                <p>{ filter.interfil }</p>
             </td>
             <td >
                 { filter.OEM.map( OEM => (

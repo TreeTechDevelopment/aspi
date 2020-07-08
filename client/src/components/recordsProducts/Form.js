@@ -43,7 +43,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
     const [Wagner, setWagner] = useState([])
 
     const [loading, setLoading] = useState(false)
-    const [interfill, setInterfill] = useState('')
+    const [interfil, setInterfill] = useState('')
     const [price, setPrice] = useState('')
 
     const getArrayProductsRender = product => {
@@ -143,7 +143,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
     const saveFilter = () => {
         setLoading(true)
         let data = {
-            interfill, OEM, ACD, Fram, Gonher, Motorcraft,
+            interfil, OEM, ACD, Fram, Gonher, Motorcraft,
             Purolator, Wix, Mann, price, product: typeProduct.value,
             NGK, Champions, Bosh, LS, Roadstar, Wagner
         }
@@ -195,7 +195,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
     useEffect(() => {
         if( JSON.stringify(context.product) !== "{}"){
             
-            if(context.product.interfill){ setInterfill(context.product.interfill) }
+            if(context.product.interfil){ setInterfill(context.product.interfil) }
             if(context.product.OEM){ 
                 setOEM(context.product.OEM) 
                 let newOEMFilters = []
@@ -310,9 +310,9 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
                     { typeProduct.value === 'filter' ? (
                         <>
                         <div className="input-filters-container">
-                            <span>interfill</span>
+                            <span>interfil</span>
                             <input 
-                                value={interfill}
+                                value={interfil}
                                 onChange={handleInputInterfill}
                             />
                         </div>                        <div className="input-filters-container">

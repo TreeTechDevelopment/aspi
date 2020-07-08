@@ -28,21 +28,10 @@ const carSchema = new Schema({
     oilFilter: { type: Array, default: [] },
     fuelFilter: { type: Array, default: [] },
     cabineFilter: { type: Array, default: [] },
-    sparkPlug: {
-        required: true,
-        type: Schema.Types.ObjectId,
-        ref: 'plugs'
-    },
-    wiresets: {
-        required: true,
-        type: Schema.Types.ObjectId,
-        ref: 'wiresets'
-    },
-    brakeShoe: {
-        required: true,
-        type: Schema.Types.ObjectId,
-        ref: 'brakeshoe'
-    }
+    sparkPlug: { type: Array, default: [] },
+    wiresets: { type: Array, default: [] },
+    brakeShoeFront: { type: Array, default: [] },
+    brakeShoeBack: { type: Array, default: [] }
 })
 
 module.exports = mongoose.model('carros', carSchema)

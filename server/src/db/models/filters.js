@@ -6,7 +6,7 @@ const filterSchema = new Schema({
         type: String,
         required: true
     },
-    interfill: {
+    interfil: {
         type: String,
         required: true,
         unique: true

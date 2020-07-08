@@ -52,6 +52,7 @@ function CreatePDF({
                         resetIDORder()
                         window.location.reload()
                     }).catch((e) => {
+                        console.log(e)
                         alert(`${messageServerError}`)
                     })
                     

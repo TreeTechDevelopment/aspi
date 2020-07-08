@@ -134,3 +134,7 @@ form{
 .hidden-atag{
     display: none;
 }
+
+.table-products{
+    width: 80%;
+}

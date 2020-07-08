@@ -3841,7 +3841,7 @@
         },
         {
             "Interfil": "F-68A50",
-            "OEM": "1654686G00/16546G03S0",
+            "OEM": "1654686G00 / 16546G03S0",
             "ACDelco": "A1256C",
             "Fram": "CA6850",
             "Gonher": "GAD-294",
@@ -3852,6 +3852,7 @@
         },
         {
             "Interfil": "F-69A22",
+            "OEM": "",
             "ACDelco": "",
             "Fram": "",
             "Gonher": "",
@@ -7449,7 +7450,7 @@
             "Mann": ""
         }
     ],
-    "   FuelFilter": [
+    "FuelFilter": [
         {
             "Interfil": "FGI-01",
             "OEM": "88SY9155AA",
@@ -10567,1375 +10568,1376 @@
     "CabinFiltter": [
         {
             "Interfil": "CFI-3223",
-            "O.E.M.": "272773223R",
-            "Mann & Hummel": "",
+            "OEM": "272773223R",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-3321",
-            "O.E.M.": "97133F2100",
-            "Mann & Hummel": "",
+            "OEM": "97133F2100",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-3471",
-            "O.E.M.": "92234714",
-            "Mann & Hummel": "",
+            "OEM": "92234714",
+            "Mann": "",
             "Fram": "CF11667",
             "Purolator": "C46126",
             "Wix": "24104"
         },
         {
             "Interfil": "CFI-3570",
-            "O.E.M.": "357819638",
-            "Mann & Hummel": "CU2750",
+            "OEM": "357819638",
+            "Mann": "CU2750",
             "Fram": "",
             "Purolator": "C35765",
             "Wix": "24779"
         },
         {
             "Interfil": "CFI-3778",
-            "O.E.M.": "3778819638",
-            "Mann & Hummel": "",
+            "OEM": "3778819638",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-4093",
-            "O.E.M.": "7700424093",
-            "Mann & Hummel": "CU2424",
+            "OEM": "7700424093",
+            "Mann": "CU2424",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6860"
         },
         {
             "Interfil": "CFI-4672",
-            "O.E.M.": "46723321",
-            "Mann & Hummel": "CU2026",
+            "OEM": "46723321",
+            "Mann": "CU2026",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9210"
         },
         {
             "Interfil": "CFI-4701",
-            "O.E.M.": "72880AG00A",
-            "Mann & Hummel": "",
+            "OEM": "72880AG00A",
+            "Mann": "",
             "Fram": "CF9846A",
             "Purolator": "C35516",
             "Wix": "24875"
         },
         {
             "Interfil": "CFI-47AZ",
-            "O.E.M.": "6447AZ/6447TF",
-            "Mann & Hummel": "CU3448",
+            "OEM": "6447AZ/6447TF",
+            "Mann": "CU3448",
             "Fram": "CF9071",
             "Purolator": "",
             "Wix": "WP6926"
         },
         {
             "Interfil": "CFI-47S5",
-            "O.E.M.": "6447S5",
-            "Mann & Hummel": "CU3340",
+            "OEM": "6447S5",
+            "Mann": "CU3340",
             "Fram": "",
             "Purolator": "",
             "Wix": "24202"
         },
         {
             "Interfil": "CFI-47VY",
-            "O.E.M.": "6447VY",
-            "Mann & Hummel": "CU21000-2",
+            "OEM": "6447VY",
+            "Mann": "CU21000-2",
             "Fram": "CF10204-2",
             "Purolator": "",
             "Wix": "WP9256"
         },
         {
             "Interfil": "CFI-4A08",
-            "O.E.M.": "4A0819439A",
-            "Mann & Hummel": "CU3192",
+            "OEM": "4A0819439A",
+            "Mann": "CU3192",
             "Fram": "CF10560",
             "Purolator": "C38201",
             "Wix": "24866"
         },
         {
             "Interfil": "CFI-5013",
-            "O.E.M.": "05013595AA",
-            "Mann & Hummel": "MC1021",
+            "OEM": "05013595AA",
+            "Mann": "MC1021",
             "Fram": "CF10363",
             "Purolator": "C15599",
             "Wix": "24903"
         },
         {
             "Interfil": "CFI-5058",
-            "O.E.M.": "5058693AA",
-            "Mann & Hummel": "CU2227",
+            "OEM": "5058693AA",
+            "Mann": "CU2227",
             "Fram": "CF10729",
             "Purolator": "C25869",
             "Wix": "24313"
         },
         {
             "Interfil": "CFI-5109",
-            "O.E.M.": "7701 055 109",
-            "Mann & Hummel": "CU2316",
+            "OEM": "7701 055 109",
+            "Mann": "CU2316",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9174"
         },
         {
             "Interfil": "CFI-5206",
-            "O.E.M.": "52063110",
-            "Mann & Hummel": "",
+            "OEM": "52063110",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-5219",
-            "O.E.M.": "7700845219",
-            "Mann & Hummel": "CU2930",
+            "OEM": "7700845219",
+            "Mann": "CU2930",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6930"
         },
         {
             "Interfil": "CFI-5248",
-            "O.E.M.": "52470574",
-            "Mann & Hummel": "CU2224",
+            "OEM": "52470574",
+            "Mann": "CU2224",
             "Fram": "CF8327",
             "Purolator": "C25246",
             "Wix": "24811"
         },
         {
             "Interfil": "CFI-5249",
-            "O.E.M.": "52493319",
-            "Mann & Hummel": "",
+            "OEM": "52493319",
+            "Mann": "",
             "Fram": "CF10361",
             "Purolator": "C35676",
             "Wix": "24882"
         },
         {
             "Interfil": "CFI-5570",
-            "O.E.M.": "55702456",
-            "Mann & Hummel": "CU2243",
+            "OEM": "55702456",
+            "Mann": "CU2243",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9250"
         },
         {
             "Interfil": "CFI-5822",
-            "O.E.M.": "64316935822",
-            "Mann & Hummel": "CU3139",
+            "OEM": "64316935822",
+            "Mann": "CU3139",
             "Fram": "",
             "Purolator": "C26078",
             "Wix": "49374"
         },
         {
             "Interfil": "CFI-6431",
-            "O.E.M.": "64316945585",
-            "Mann & Hummel": "CU2941-2",
+            "OEM": "64316945585",
+            "Mann": "CU2941-2",
             "Fram": "CF10936",
             "Purolator": "C16072",
             "Wix": "49585"
         },
         {
             "Interfil": "CFI-6479",
-            "O.E.M.": "6447NT",
-            "Mann & Hummel": "CU2940",
+            "OEM": "6447NT",
+            "Mann": "CU2940",
             "Fram": "CF9398",
             "Purolator": "",
             "Wix": "WP9112"
         },
         {
             "Interfil": "CFI-6516",
-            "O.E.M.": "D65161J6X",
-            "Mann & Hummel": "CU23001-2",
+            "OEM": "D65161J6X",
+            "Mann": "CU23001-2",
             "Fram": "",
             "Purolator": "C16203",
             "Wix": "24036"
         },
         {
             "Interfil": "CFI-6629",
-            "O.E.M.": "64316962548 / 64316946628",
-            "Mann & Hummel": "CU8430",
+            "OEM": "64316962548 / 64316946628",
+            "Mann": "CU8430",
             "Fram": "CF10727",
             "Purolator": "C25835",
             "Wix": "49371"
         },
         {
             "Interfil": "CFI-6710",
-            "O.E.M.": "64311496710",
-            "Mann & Hummel": "CU4624",
+            "OEM": "64311496710",
+            "Mann": "CU4624",
             "Fram": "CF9594A",
             "Purolator": "C15537",
             "Wix": "24758"
         },
         {
             "Interfil": "CFI-6809",
-            "O.E.M.": "68096453AA",
-            "Mann & Hummel": "",
+            "OEM": "68096453AA",
+            "Mann": "",
             "Fram": "CF11924",
             "Purolator": "C26185",
             "Wix": "24053"
         },
         {
             "Interfil": "CFI-6816",
-            "O.E.M.": "68169308AA-001",
-            "Mann & Hummel": "",
+            "OEM": "68169308AA-001",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-6Q08",
-            "O.E.M.": "6Q0820367",
-            "Mann & Hummel": "CU2545",
+            "OEM": "6Q0820367",
+            "Mann": "CU2545",
             "Fram": "CF10381",
             "Purolator": "C35661P",
             "Wix": "WP2086"
         },
         {
             "Interfil": "CFI-6Z19",
-            "O.E.M.": "CV6Z19N619A",
-            "Mann & Hummel": "",
+            "OEM": "CV6Z19N619A",
+            "Mann": "",
             "Fram": "CF11920",
             "Purolator": "",
             "Wix": "24419"
         },
         {
             "Interfil": "CFI-7079",
-            "O.E.M.": "7079682",
-            "Mann & Hummel": "CU2504",
+            "OEM": "7079682",
+            "Mann": "CU2504",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9242"
         },
         {
             "Interfil": "CFI-7082",
-            "O.E.M.": "7082301",
-            "Mann & Hummel": "CU2629",
+            "OEM": "7082301",
+            "Mann": "CU2629",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9280"
         },
         {
             "Interfil": "CFI-7133",
-            "O.E.M.": "971332H001",
-            "Mann & Hummel": "MC1050",
+            "OEM": "971332H001",
+            "Mann": "MC1050",
             "Fram": "CF10728",
             "Purolator": "C35660",
             "Wix": "49377"
         },
         {
             "Interfil": "CFI-7173",
-            "O.E.M.": "46723435",
-            "Mann & Hummel": "CU2422",
+            "OEM": "46723435",
+            "Mann": "CU2422",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9117"
         },
         {
             "Interfil": "CFI-7277",
-            "O.E.M.": "272771KK0A",
-            "Mann & Hummel": "",
+            "OEM": "272771KK0A",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP2026"
         },
         {
             "Interfil": "CFI-7404",
-            "O.E.M.": "647904",
-            "Mann & Hummel": "CU3240",
+            "OEM": "647904",
+            "Mann": "CU3240",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-7513",
-            "O.E.M.": "7701047513",
-            "Mann & Hummel": "CU2240",
+            "OEM": "7701047513",
+            "Mann": "CU2240",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6938"
         },
         {
             "Interfil": "CFI-7700",
-            "O.E.M.": "7700424098",
-            "Mann & Hummel": "CU2945",
+            "OEM": "7700424098",
+            "Mann": "CU2945",
             "Fram": "CF8838",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-7701",
-            "O.E.M.": "7701050319",
-            "Mann & Hummel": "CU3454",
+            "OEM": "7701050319",
+            "Mann": "CU3454",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-7727",
-            "O.E.M.": "27277JA00A",
-            "Mann & Hummel": "CU29001",
+            "OEM": "27277JA00A",
+            "Mann": "CU29001",
             "Fram": "CF11173",
             "Purolator": "C45871",
             "Wix": "24400"
         },
         {
             "Interfil": "CFI-7736",
-            "O.E.M.": "77364561",
-            "Mann & Hummel": "CU2040",
+            "OEM": "77364561",
+            "Mann": "CU2040",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9320"
         },
         {
             "Interfil": "CFI-7850",
-            "O.E.M.": "9850A002",
-            "Mann & Hummel": "",
+            "OEM": "9850A002",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-7D08",
-            "O.E.M.": "7D0819989",
-            "Mann & Hummel": "CU1738",
+            "OEM": "7D0819989",
+            "Mann": "CU1738",
             "Fram": "",
             "Purolator": "C28233",
             "Wix": "WP6874"
         },
         {
             "Interfil": "CFI-7H08",
-            "O.E.M.": "7H0819631",
-            "Mann & Hummel": "CU2842",
+            "OEM": "7H0819631",
+            "Mann": "CU2842",
             "Fram": "CF9881",
             "Purolator": "C35762C",
             "Wix": "24631"
         },
         {
             "Interfil": "CFI-8029",
-            "O.E.M.": "80291S84A01",
-            "Mann & Hummel": "MC10102",
+            "OEM": "80291S84A01",
+            "Mann": "MC10102",
             "Fram": "CF8603A",
             "Purolator": "C15390",
             "Wix": "24752"
         },
         {
             "Interfil": "CFI-8090",
-            "O.E.M.": "80290SOXA01",
-            "Mann & Hummel": "MC 1015",
+            "OEM": "80290SOXA01",
+            "Mann": "MC 1015",
             "Fram": "CF8813",
             "Purolator": "C45459",
             "Wix": "24897"
         },
         {
             "Interfil": "CFI-8092",
-            "O.E.M.": "80292SDAA01",
-            "Mann & Hummel": "MC1008",
+            "OEM": "80292SDAA01",
+            "Mann": "MC1008",
             "Fram": "CF10134",
             "Purolator": "C35519",
             "Wix": "24815"
         },
         {
             "Interfil": "CFI-8201",
-            "O.E.M.": "8201153808",
-            "Mann & Hummel": "CU1829",
+            "OEM": "8201153808",
+            "Mann": "CU1829",
             "Fram": "CFA9691",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-8220",
-            "O.E.M.": "82205905",
-            "Mann & Hummel": "CU 3142",
+            "OEM": "82205905",
+            "Mann": "CU 3142",
             "Fram": "CF9597A",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-8615",
-            "O.E.M.": "9586157L00",
-            "Mann & Hummel": "CU24001",
+            "OEM": "9586157L00",
+            "Mann": "CU24001",
             "Fram": "",
             "Purolator": "",
             "Wix": "24120"
         },
         {
             "Interfil": "CFI-8617",
-            "O.E.M.": "9586171L00",
-            "Mann & Hummel": "CU2040",
+            "OEM": "9586171L00",
+            "Mann": "CU2040",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-8713",
-            "O.E.M.": "8713932010",
-            "Mann & Hummel": "CU2131",
+            "OEM": "8713932010",
+            "Mann": "CU2131",
             "Fram": "CF10132",
             "Purolator": "C35479",
             "Wix": "24883"
         },
         {
             "Interfil": "CFI-8719",
-            "O.E.M.": "8713906080",
-            "Mann & Hummel": "CU1919",
+            "OEM": "8713906080",
+            "Mann": "CU1919",
             "Fram": "CF10285",
             "Purolator": "C35667",
             "Wix": "24483"
         },
         {
             "Interfil": "CFI-8726",
-            "O.E.M.": "91175923",
-            "Mann & Hummel": "",
+            "OEM": "91175923",
+            "Mann": "",
             "Fram": "CF8726A",
             "Purolator": "C15506",
             "Wix": "24899"
         },
         {
             "Interfil": "CFI-8856",
-            "O.E.M.": "8713952010",
-            "Mann & Hummel": "CU1828",
+            "OEM": "8713952010",
+            "Mann": "CU1828",
             "Fram": "CF10139",
             "Purolator": "C38188",
             "Wix": "24900"
         },
         {
             "Interfil": "CFI-8898",
-            "O.E.M.": "88986533",
-            "Mann & Hummel": "MC1014",
+            "OEM": "88986533",
+            "Mann": "MC1014",
             "Fram": "CF10360",
             "Purolator": "C45527C",
             "Wix": "24814"
         },
         {
             "Interfil": "CFI-8A08",
-            "O.E.M.": "8A0819439",
-            "Mann & Hummel": "CU3955",
+            "OEM": "8A0819439",
+            "Mann": "CU3955",
             "Fram": "CF8110",
             "Purolator": "C28906",
             "Wix": "24774"
         },
         {
             "Interfil": "CFI-8E08",
-            "Mann & Hummel": "CU3037",
+            "Mann": "CU3037",
             "Fram": "CF10368",
             "Purolator": "C35484C",
-            "Wix": "24765"
+            "Wix": "24765",
+            "OEM": ""
         },
         {
             "Interfil": "CFI-8K08",
-            "O.E.M.": "8K0819439",
-            "Mann & Hummel": "CU2450",
+            "OEM": "8K0819439",
+            "Mann": "CU2450",
             "Fram": "CF11179",
             "Purolator": "C35845",
             "Wix": "24227"
         },
         {
             "Interfil": "CFI-8L8Z",
-            "O.E.M.": "8L8Z19N619B",
-            "Mann & Hummel": "",
+            "OEM": "8L8Z19N619B",
+            "Mann": "",
             "Fram": "CF10548",
             "Purolator": "C25685",
             "Wix": "49466"
         },
         {
             "Interfil": "CFI-8Z19",
-            "O.E.M.": "BE8Z19N619A",
-            "Mann & Hummel": "",
+            "OEM": "BE8Z19N619A",
+            "Mann": "",
             "Fram": "CF11670",
             "Purolator": "C26175",
             "Wix": "24619"
         },
         {
             "Interfil": "CFI-9052",
-            "O.E.M.": "90520689",
-            "Mann & Hummel": "CU3054",
+            "OEM": "90520689",
+            "Mann": "CU3054",
             "Fram": "",
             "Purolator": "C25837",
             "Wix": "49364"
         },
         {
             "Interfil": "CFI-9068",
-            "O.E.M.": "A906 830 0318",
-            "Mann & Hummel": "CU3569",
+            "OEM": "A906 830 0318",
+            "Mann": "CU3569",
             "Fram": "PA10436",
             "Purolator": "C35834",
             "Wix": "49366"
         },
         {
             "Interfil": "CFI-9318",
-            "O.E.M.": "93182435",
-            "Mann & Hummel": "CU4251",
+            "OEM": "93182435",
+            "Mann": "CU4251",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6800"
         },
         {
             "Interfil": "CFI-9336",
-            "O.E.M.": "30612666",
-            "Mann & Hummel": "CU2137",
+            "OEM": "30612666",
+            "Mann": "CU2137",
             "Fram": "CF9336",
             "Purolator": "C38210",
             "Wix": "24904"
         },
         {
             "Interfil": "CFI-93BW",
-            "O.E.M.": "93BW19N619AC",
-            "Mann & Hummel": "CU5257",
+            "OEM": "93BW19N619AC",
+            "Mann": "CU5257",
             "Fram": "CF8046",
             "Purolator": "C14860",
             "Wix": "WP9162"
         },
         {
             "Interfil": "CFI-9465",
-            "O.E.M.": "XW4Z19N619AC",
-            "Mann & Hummel": "",
+            "OEM": "XW4Z19N619AC",
+            "Mann": "",
             "Fram": "CF9465",
             "Purolator": "C35498",
             "Wix": "24884"
         },
         {
             "Interfil": "CFI-94BW",
-            "O.E.M.": "94BW19N619AB",
-            "Mann & Hummel": "CU5257",
+            "OEM": "94BW19N619AB",
+            "Mann": "CU5257",
             "Fram": "CF8046",
             "Purolator": "",
             "Wix": "24771"
         },
         {
             "Interfil": "CFI-9538",
-            "O.E.M.": "95947238",
-            "Mann & Hummel": "CU20010",
+            "OEM": "95947238",
+            "Mann": "CU20010",
             "Fram": "",
             "Purolator": "C36154",
             "Wix": "WP2020"
         },
         {
             "Interfil": "CFI-9585",
-            "O.E.M.": "9580-61M00-000",
-            "Mann & Hummel": "",
+            "OEM": "9580-61M00-000",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-9629",
-            "O.E.M.": "96296618",
-            "Mann & Hummel": "CU3040",
+            "OEM": "96296618",
+            "Mann": "CU3040",
             "Fram": "",
             "Purolator": "C26095",
             "Wix": "24906"
         },
         {
             "Interfil": "CFI-9642",
-            "O.E.M.": "96425700",
-            "Mann & Hummel": "CU2012",
+            "OEM": "96425700",
+            "Mann": "CU2012",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9378"
         },
         {
             "Interfil": "CFI-9655",
-            "O.E.M.": "9586085Z00",
-            "Mann & Hummel": "CU1719",
+            "OEM": "9586085Z00",
+            "Mann": "CU1719",
             "Fram": "CF10557",
             "Purolator": "C35860",
             "Wix": "24902"
         },
         {
             "Interfil": "CFI-9696",
-            "O.E.M.": "96962173",
-            "Mann & Hummel": "CU4251",
+            "OEM": "96962173",
+            "Mann": "CU4251",
             "Fram": "CF10546",
             "Purolator": "C35898",
             "Wix": "24685"
         },
         {
             "Interfil": "CFI-96FW",
-            "O.E.M.": "96FW16N619AB",
-            "Mann & Hummel": "CU3554",
+            "OEM": "96FW16N619AB",
+            "Mann": "CU3554",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6820"
         },
         {
             "Interfil": "CFI-9713",
-            "O.E.M.": "971331",
-            "Mann & Hummel": "CU2331",
+            "OEM": "971331",
+            "Mann": "CU2331",
             "Fram": "CF10719",
             "Purolator": "C35674",
             "Wix": "24484"
         },
         {
             "Interfil": "CFI-9761",
-            "O.E.M.": "976174H000",
-            "Mann & Hummel": "CU21005-2",
+            "OEM": "976174H000",
+            "Mann": "CU21005-2",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP2044"
         },
         {
             "Interfil": "CFI-9812",
-            "O.E.M.": "95981206",
-            "Mann & Hummel": "",
+            "OEM": "95981206",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP10168"
         },
         {
             "Interfil": "CFI-9910",
-            "O.E.M.": "52485513",
-            "Mann & Hummel": "MC 1000-2",
+            "OEM": "52485513",
+            "Mann": "MC 1000-2",
             "Fram": "CF8791",
             "Purolator": "C15388",
             "Wix": "24805"
         },
         {
             "Interfil": "CFI-9965",
-            "O.E.M.": "99657221901",
-            "Mann & Hummel": "CU3360",
+            "OEM": "99657221901",
+            "Mann": "CU3360",
             "Fram": "CF11919",
             "Purolator": "",
             "Wix": "24202"
         },
         {
             "Interfil": "CFI-999M",
-            "O.E.M.": "999M1VP001",
-            "Mann & Hummel": "MC1012",
+            "OEM": "999M1VP001",
+            "Mann": "MC1012",
             "Fram": "CF10140",
             "Purolator": "C35530",
             "Wix": "24857"
         },
         {
             "Interfil": "CFI-9Z19",
-            "O.E.M.": "DG9Z19N619A",
-            "Mann & Hummel": "",
+            "OEM": "DG9Z19N619A",
+            "Mann": "",
             "Fram": "CF11775",
             "Purolator": "C36286",
             "Wix": "WP10084"
         },
         {
             "Interfil": "CFI-10124",
-            "O.E.M.": "A1668300218",
-            "Mann & Hummel": "CU25002",
+            "OEM": "A1668300218",
+            "Mann": "CU25002",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP10124"
         },
         {
             "Interfil": "CFI-10142",
-            "O.E.M.": "68223044AA001",
-            "Mann & Hummel": "",
+            "OEM": "68223044AA001",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-10195",
-            "O.E.M.": "FR3Z19N619A",
-            "Mann & Hummel": "",
+            "OEM": "FR3Z19N619A",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP10195"
         },
         {
             "Interfil": "CFI-10370",
-            "O.E.M.": "4R3Z19N619AA",
-            "Mann & Hummel": "",
+            "OEM": "4R3Z19N619AA",
+            "Mann": "",
             "Fram": "CF10370",
             "Purolator": "C25572",
             "Wix": "24687"
         },
         {
             "Interfil": "CFI-10371",
-            "O.E.M.": "19130403",
-            "Mann & Hummel": "",
+            "OEM": "19130403",
+            "Mann": "",
             "Fram": "CF10371",
             "Purolator": "C45654P",
             "Wix": "24869"
         },
         {
             "Interfil": "CFI-10372",
-            "O.E.M.": "GK3J61148",
-            "Mann & Hummel": "",
+            "OEM": "GK3J61148",
+            "Mann": "",
             "Fram": "CF10372",
             "Purolator": "C35643",
             "Wix": "24907"
         },
         {
             "Interfil": "CFI-10388",
-            "O.E.M.": "999M1VP005",
-            "Mann & Hummel": "",
+            "OEM": "999M1VP005",
+            "Mann": "",
             "Fram": "CF10388",
             "Purolator": "C15850",
             "Wix": "24854"
         },
         {
             "Interfil": "CFI-10547",
-            "O.E.M.": "7T4Z19N619B",
-            "Mann & Hummel": "",
+            "OEM": "7T4Z19N619B",
+            "Mann": "",
             "Fram": "CF10547",
             "Purolator": "C25876P",
             "Wix": "24065"
         },
         {
             "Interfil": "CFI-10553",
-            "O.E.M.": "999M1VR006",
-            "Mann & Hummel": "",
+            "OEM": "999M1VR006",
+            "Mann": "",
             "Fram": "CF10553",
             "Purolator": "C25764",
             "Wix": "24683"
         },
         {
             "Interfil": "CFI-10559",
-            "O.E.M.": "9586080J00",
-            "Mann & Hummel": "CU21004",
+            "OEM": "9586080J00",
+            "Mann": "CU21004",
             "Fram": "CF10559",
             "Purolator": "",
             "Wix": "49700"
         },
         {
             "Interfil": "CFI-10563",
-            "O.E.M.": "272987B000",
-            "Mann & Hummel": "",
+            "OEM": "272987B000",
+            "Mann": "",
             "Fram": "CF10563",
             "Purolator": "C25547P",
             "Wix": "24896"
         },
         {
             "Interfil": "CFI-10627",
-            "O.E.M.": "9713307010",
-            "Mann & Hummel": "CU1910",
+            "OEM": "9713307010",
+            "Mann": "CU1910",
             "Fram": "CF10627",
             "Purolator": "",
             "Wix": "WP9344"
         },
         {
             "Interfil": "CFI-10728",
-            "O.E.M.": "97133-2H001",
-            "Mann & Hummel": "MC1050",
+            "OEM": "97133-2H001",
+            "Mann": "MC1050",
             "Fram": "CF10728",
             "Purolator": "C35660",
             "Wix": "49377"
         },
         {
             "Interfil": "CFI-10731",
-            "O.E.M.": "9586164J00",
-            "Mann & Hummel": "CU2138",
+            "OEM": "9586164J00",
+            "Mann": "CU2138",
             "Fram": "CF10731",
             "Purolator": "C25853",
             "Wix": "24200"
         },
         {
             "Interfil": "CFI-10742",
-            "O.E.M.": "20901295",
-            "Mann & Hummel": "",
+            "OEM": "20901295",
+            "Mann": "",
             "Fram": "CF10742",
             "Purolator": "C25836",
             "Wix": "49368"
         },
         {
             "Interfil": "CFI-10743",
-            "O.E.M.": "68127809AA",
-            "Mann & Hummel": "CU23003",
+            "OEM": "68127809AA",
+            "Mann": "CU23003",
             "Fram": "CF10743",
             "Purolator": "C25870P",
             "Wix": "24479"
         },
         {
             "Interfil": "CFI-10747",
-            "O.E.M.": "68033193AA",
-            "Mann & Hummel": "CU1811-2",
+            "OEM": "68033193AA",
+            "Mann": "CU1811-2",
             "Fram": "CF10747",
             "Purolator": "C16079",
             "Wix": "49093"
         },
         {
             "Interfil": "CFI-10900",
-            "O.E.M.": "05058040AA",
-            "Mann & Hummel": "CU2329",
+            "OEM": "05058040AA",
+            "Mann": "CU2329",
             "Fram": "CF10900",
             "Purolator": "C15857P",
             "Wix": "24725"
         },
         {
             "Interfil": "CFI-11176",
-            "O.E.M.": "AE9Z19N619A",
-            "Mann & Hummel": "",
+            "OEM": "AE9Z19N619A",
+            "Mann": "",
             "Fram": "CF11176",
             "Purolator": "C26155",
             "Wix": "24068"
         },
         {
             "Interfil": "CFI-11177",
-            "O.E.M.": "278913SG0A",
-            "Mann & Hummel": "CU15001",
+            "OEM": "278913SG0A",
+            "Mann": "CU15001",
             "Fram": "CF11177",
             "Purolator": "",
             "Wix": "24012"
         },
         {
             "Interfil": "CFI-11183",
-            "O.E.M.": "68079487AA",
-            "Mann & Hummel": "CU27008",
+            "OEM": "68079487AA",
+            "Mann": "CU27008",
             "Fram": "CF11183",
             "Purolator": "C36156P",
             "Wix": "24017"
         },
         {
             "Interfil": "CFI-11663",
-            "O.E.M.": "20958479",
-            "Mann & Hummel": "",
+            "OEM": "20958479",
+            "Mann": "",
             "Fram": "CF11663",
             "Purolator": "C26205C",
             "Wix": "WP10074"
         },
         {
             "Interfil": "CFI-11668",
-            "O.E.M.": "68071668AA",
-            "Mann & Hummel": "CU28003",
+            "OEM": "68071668AA",
+            "Mann": "CU28003",
             "Fram": "CF11668",
             "Purolator": "",
             "Wix": "24048"
         },
         {
             "Interfil": "CFI-BP4K",
-            "O.E.M.": "BP4K61J6X",
-            "Mann & Hummel": "CU22001-2",
+            "OEM": "BP4K61J6X",
+            "Mann": "CU22001-2",
             "Fram": "CF10218",
             "Purolator": "C15873",
             "Wix": "24482"
         },
         {
             "Interfil": "CFI-F6DZ",
-            "O.E.M.": "F6DZ19N619BA",
-            "Mann & Hummel": "MC1004",
+            "OEM": "F6DZ19N619BA",
+            "Mann": "MC1004",
             "Fram": "CF8109A",
             "Purolator": "C25082",
             "Wix": "24773"
         },
         {
             "Interfil": "CFI-GJ6A",
-            "O.E.M.": "GJ6A61P11",
-            "Mann & Hummel": "CU2043",
+            "OEM": "GJ6A61P11",
+            "Mann": "CU2043",
             "Fram": "CF11671",
             "Purolator": "C25858",
             "Wix": "24579"
         },
         {
             "Interfil": "CFI-MR88",
-            "O.E.M.": "MR398288",
-            "Mann & Hummel": "CUK2231",
+            "OEM": "MR398288",
+            "Mann": "CUK2231",
             "Fram": "CF10746",
             "Purolator": "C36125C",
             "Wix": "24756"
         },
         {
             "Interfil": "CFI-XF2Z",
-            "O.E.M.": "XF2Z19N619AB",
-            "Mann & Hummel": "MC1004",
+            "OEM": "XF2Z19N619AB",
+            "Mann": "MC1004",
             "Fram": "CF8921",
             "Purolator": "C15389",
             "Wix": "24807"
         },
         {
             "Interfil": "CFI-XS4H",
-            "O.E.M.": "XS4HH16N619AP",
-            "Mann & Hummel": "MC1018",
+            "OEM": "XS4HH16N619AP",
+            "Mann": "MC1018",
             "Fram": "CF9118",
             "Purolator": "C25387",
             "Wix": "24808"
         },
         {
             "Interfil": "CFI-YL84",
-            "O.E.M.": "YL8419N619AB",
-            "Mann & Hummel": "CU2746",
+            "OEM": "YL8419N619AB",
+            "Mann": "CU2746",
             "Fram": "CF10137",
             "Purolator": "C25478",
             "Wix": "24816"
         },
         {
             "Interfil": "CFI-1J08CA",
-            "O.E.M.": "1J0819644A",
-            "Mann & Hummel": "CUK2862",
+            "OEM": "1J0819644A",
+            "Mann": "CUK2862",
             "Fram": "CF8644",
             "Purolator": "C45383",
             "Wix": "24322"
         },
         {
             "Interfil": "CFI-1H08CA",
-            "O.E.M.": "1H0819644A",
-            "Mann & Hummel": "CUK2882",
+            "OEM": "1H0819644A",
+            "Mann": "CUK2882",
             "Fram": "CF8644",
             "Purolator": "C45383",
             "Wix": "24322"
         },
         {
             "Interfil": "CFI-1K28CA",
-            "O.E.M.": "1K2819653A",
-            "Mann & Hummel": "CUK2939-1",
+            "OEM": "1K2819653A",
+            "Mann": "CUK2939-1",
             "Fram": "CF10373",
             "Purolator": "C35586C",
             "Wix": "24489"
         },
         {
             "Interfil": "CFI-1054CA",
-            "O.E.M.": "YM2119N551AA",
-            "Mann & Hummel": "CU5480",
+            "OEM": "YM2119N551AA",
+            "Mann": "CU5480",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6849"
         },
         {
             "Interfil": "CFI-1064CA",
-            "O.E.M.": "7701064237",
-            "Mann & Hummel": "CUK2430",
+            "OEM": "7701064237",
+            "Mann": "CUK2430",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-1110CA",
-            "O.E.M.": "0001110V003",
-            "Mann & Hummel": "CUK2032",
+            "OEM": "0001110V003",
+            "Mann": "CUK2032",
             "Fram": "",
             "Purolator": "",
             "Wix": "49261"
         },
         {
             "Interfil": "CFI-1275CA",
-            "O.E.M.": "12758727",
-            "Mann & Hummel": "CUK3220",
+            "OEM": "12758727",
+            "Mann": "CUK3220",
             "Fram": "CF8778",
             "Purolator": "C28165C",
             "Wix": "49370"
         },
         {
             "Interfil": "CFI-1609CA",
-            "O.E.M.": "1609428080",
-            "Mann & Hummel": "CU21000-2",
+            "OEM": "1609428080",
+            "Mann": "CU21000-2",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9256"
         },
         {
             "Interfil": "CFI-1638CA",
-            "O.E.M.": "1638350147",
-            "Mann & Hummel": "CUK2338",
+            "OEM": "1638350147",
+            "Mann": "CUK2338",
             "Fram": "CF8717A",
             "Purolator": "",
             "Wix": "24867"
         },
         {
             "Interfil": "CFI-1688CA",
-            "O.E.M.": "1688300118",
-            "Mann & Hummel": "CUK3780",
+            "OEM": "1688300118",
+            "Mann": "CUK3780",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-1805CA",
-            "O.E.M.": "LR000901",
-            "Mann & Hummel": "CUK2733",
+            "OEM": "LR000901",
+            "Mann": "CUK2733",
             "Fram": "CF10442",
             "Purolator": "C25840C",
             "Wix": "49355"
         },
         {
             "Interfil": "CFI-1808CA",
-            "O.E.M.": "1808619",
-            "Mann & Hummel": "CUK3337",
+            "OEM": "1808619",
+            "Mann": "CUK3337",
             "Fram": "CF11669",
             "Purolator": "C25838",
             "Wix": "24472"
         },
         {
             "Interfil": "CFI-1899CA",
-            "O.E.M.": "64319071935",
-            "Mann & Hummel": "CUK6724",
+            "OEM": "64319071935",
+            "Mann": "CUK6724",
             "Fram": "CF10362",
             "Purolator": "C15510P",
             "Wix": "24673"
         },
         {
             "Interfil": "CFI-2118CA",
-            "O.E.M.": "2118300818",
-            "Mann & Hummel": "CUK18000- 2",
+            "OEM": "2118300818",
+            "Mann": "CUK18000- 2",
             "Fram": "CF12001",
             "Purolator": "",
             "Wix": "24797"
         },
         {
             "Interfil": "CFI-2128CA",
-            "O.E.M.": "2128300318",
-            "Mann & Hummel": "CUK29005",
+            "OEM": "2128300318",
+            "Mann": "CUK29005",
             "Fram": "CF10934",
             "Purolator": "C45844C",
             "Wix": "49357"
         },
         {
             "Interfil": "CFI-2620CA",
-            "O.E.M.": "272770840R",
-            "Mann & Hummel": "",
+            "OEM": "272770840R",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-2727CA",
-            "O.E.M.": "27277EN000",
-            "Mann & Hummel": "CUK1936",
+            "OEM": "27277EN000",
+            "Mann": "CUK1936",
             "Fram": "CF10550",
             "Purolator": "C25864",
             "Wix": "49352"
         },
         {
             "Interfil": "CFI-2789CA",
-            "O.E.M.": "B7200ED200",
-            "Mann & Hummel": "CU22007",
+            "OEM": "B7200ED200",
+            "Mann": "CU22007",
             "Fram": "CF10545",
             "Purolator": "C25877",
             "Wix": "24829"
         },
         {
             "Interfil": "CFI-2S5ACA",
-            "O.E.M.": "80292S7A003",
-            "Mann & Hummel": "CUK2327",
+            "OEM": "80292S7A003",
+            "Mann": "CUK2327",
             "Fram": "CF10135",
             "Purolator": "C15439",
             "Wix": "24817"
         },
         {
             "Interfil": "CFI-2S6HCA",
-            "O.E.M.": "1204464",
-            "Mann & Hummel": "CUK2433",
+            "OEM": "1204464",
+            "Mann": "CUK2433",
             "Fram": "CF9666",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-3063CA",
-            "O.E.M.": "30630754",
-            "Mann & Hummel": "CUK2855",
+            "OEM": "30630754",
+            "Mann": "CUK2855",
             "Fram": "CF8718A",
             "Purolator": "C45508",
             "Wix": "24818"
         },
         {
             "Interfil": "CFI-47S5CA",
-            "O.E.M.": "9406447PG0",
-            "Mann & Hummel": "",
+            "OEM": "9406447PG0",
+            "Mann": "",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6841"
         },
         {
             "Interfil": "CFI-5058CA",
-            "O.E.M.": "5058693AA",
-            "Mann & Hummel": "CUK2227",
+            "OEM": "5058693AA",
+            "Mann": "CUK2227",
             "Fram": "CF10729",
             "Purolator": "C25869",
             "Wix": "24313"
         },
         {
             "Interfil": "CFI-5248CA",
-            "O.E.M.": ["52470574", "1808609"],
-            "Mann & Hummel": "CUK224",
+            "OEM": "52470574 / 1808609",
+            "Mann": "CUK224",
             "Fram": "CF8327",
             "Purolator": "C25246",
             "Wix": "24811"
         },
         {
             "Interfil": "CFI-6411CA",
-            "O.E.M.": ["64110008138", "64118391198"],
-            "Mann & Hummel": "CU2736-2",
+            "OEM": "64110008138 / 64118391198",
+            "Mann": "CU2736-2",
             "Fram": "CF10369",
             "Purolator": "C35509C",
             "Wix": "49372"
         },
         {
             "Interfil": "CFI-6479CA",
-            "O.E.M.": ["6447KL", "6447NV","647932"],
-            "Mann & Hummel": "CUK2940",
+            "OEM": "6447KL / 6447NV / 647932",
+            "Mann": "CUK2940",
             "Fram": "CF9398",
             "Purolator": "",
             "Wix": "WP9113"
         },
         {
             "Interfil": "CFI-6493CA",
-            "O.E.M.": "647993",
-            "Mann & Hummel": "CUK29003-2",
+            "OEM": "647993",
+            "Mann": "CUK29003-2",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-6629CA",
-            "O.E.M.": "64316946628",
-            "Mann & Hummel": "CUK8430",
+            "OEM": "64316946628",
+            "Mann": "CUK8430",
             "Fram": "CF10727",
             "Purolator": "C25835",
             "Wix": "49371"
         },
         {
             "Interfil": "CFI-6Q08CA",
-            "O.E.M.": "6Q0820367",
-            "Mann & Hummel": "CUK2545",
+            "OEM": "6Q0820367",
+            "Mann": "CUK2545",
             "Fram": "CF10381",
             "Purolator": "C35661P",
             "Wix": "WP2086"
         },
         {
             "Interfil": "CFI-7700CA",
-            "O.E.M.": "7700424098",
-            "Mann & Hummel": "CUK2945",
+            "OEM": "7700424098",
+            "Mann": "CUK2945",
             "Fram": "CF8838",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-7984CA",
-            "O.E.M.": "20958479",
-            "Mann & Hummel": "",
+            "OEM": "20958479",
+            "Mann": "",
             "Fram": "CF11663",
             "Purolator": "C26205C",
             "Wix": "WP10074"
         },
         {
             "Interfil": "CFI-7H08CA",
-            "O.E.M.": "95557221910",
-            "Mann & Hummel": "CUK2842",
+            "OEM": "95557221910",
+            "Mann": "CUK2842",
             "Fram": "CF9881",
             "Purolator": "C35762C",
             "Wix": "24631"
         },
         {
             "Interfil": "CFI-8029CA",
-            "O.E.M.": "80291S84A01",
-            "Mann & Hummel": "MC10102",
+            "OEM": "80291S84A01",
+            "Mann": "MC10102",
             "Fram": "CF10135",
             "Purolator": "C15390",
             "Wix": "24752"
         },
         {
             "Interfil": "CFI-8092CA",
-            "O.E.M.": "80292-SDA-A01",
-            "Mann & Hummel": "MC1008",
+            "OEM": "80292-SDA-A01",
+            "Mann": "MC1008",
             "Fram": "CF10134",
             "Purolator": "C35519",
             "Wix": "24815"
         },
         {
             "Interfil": "CFI-8194CA",
-            "O.E.M.": "4H0819439",
-            "Mann & Hummel": "CUK2641",
+            "OEM": "4H0819439",
+            "Mann": "CUK2641",
             "Fram": "CF11436",
             "Purolator": "",
             "Wix": "24439"
         },
         {
             "Interfil": "CFI-8220CA",
-            "O.E.M.": "82205905",
-            "Mann & Hummel": "CUK3142",
+            "OEM": "82205905",
+            "Mann": "CUK3142",
             "Fram": "CF9597A",
             "Purolator": "C35494",
             "Wix": "24864"
         },
         {
             "Interfil": "CFI-8621CA",
-            "O.E.M.": "XF2Z19N619AB",
-            "Mann & Hummel": "MC1004",
+            "OEM": "XF2Z19N619AB",
+            "Mann": "MC1004",
             "Fram": "CF8921",
             "Purolator": "C15389",
             "Wix": "24807"
         },
         {
             "Interfil": "CFI-8719CA",
-            "O.E.M.": "8713906080",
-            "Mann & Hummel": "CU1919",
+            "OEM": "8713906080",
+            "Mann": "CU1919",
             "Fram": "CF10285",
             "Purolator": "C35667",
             "Wix": "24488"
         },
         {
             "Interfil": "CFI-8A08CA",
-            "O.E.M.": "3B0091800",
-            "Mann & Hummel": "CUK3955",
+            "OEM": "3B0091800",
+            "Mann": "CUK3955",
             "Fram": "CF8110",
             "Purolator": "C28906",
             "Wix": "24774"
         },
         {
             "Interfil": "CFI-8E08CA",
-            "O.E.M.": "4B0819439C",
-            "Mann & Hummel": "CUK3037",
+            "OEM": "4B0819439C",
+            "Mann": "CUK3037",
             "Fram": "CF10368",
             "Purolator": "C35484C",
             "Wix": "24765"
         },
         {
             "Interfil": "CFI-8Z19CA",
-            "O.E.M.": "BE8Z19N619A",
-            "Mann & Hummel": "",
+            "OEM": "BE8Z19N619A",
+            "Mann": "",
             "Fram": "CF11670",
             "Purolator": "C26175",
             "Wix": "24619"
         },
         {
             "Interfil": "CFI-9044CA",
-            "O.E.M.": "64318409044",
-            "Mann & Hummel": "CUK5366",
+            "OEM": "64318409044",
+            "Mann": "CUK5366",
             "Fram": "CF10830",
             "Purolator": "C15637",
             "Wix": "24827"
         },
         {
             "Interfil": "CFI-9068CA",
-            "O.E.M.": "68012876AA",
-            "Mann & Hummel": "CUK3569",
+            "OEM": "68012876AA",
+            "Mann": "CUK3569",
             "Fram": "PA10436",
             "Purolator": "C35834",
             "Wix": "49366"
         },
         {
             "Interfil": "CFI-9318CA",
-            "O.E.M.": "93182435",
-            "Mann & Hummel": "CUK4251",
+            "OEM": "93182435",
+            "Mann": "CUK4251",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6800"
         },
         {
             "Interfil": "CFI-93BWCA",
-            "O.E.M.": "1132445",
-            "Mann & Hummel": "CUK5257",
+            "OEM": "1132445",
+            "Mann": "CUK5257",
             "Fram": "CF8046",
             "Purolator": "C14860",
             "Wix": "WP9162"
         },
         {
             "Interfil": "CFI-94BWCA",
-            "O.E.M.": "94BW19N619AB",
-            "Mann & Hummel": "CUK5257",
+            "OEM": "94BW19N619AB",
+            "Mann": "CUK5257",
             "Fram": "CF8046",
             "Purolator": "",
             "Wix": "24771"
         },
         {
             "Interfil": "CFI-9538CA",
-            "O.E.M.": "95947238",
-            "Mann & Hummel": "CU20010",
+            "OEM": "95947238",
+            "Mann": "CU20010",
             "Fram": "",
             "Purolator": "C36154",
             "Wix": "WP2020"
         },
         {
             "Interfil": "CFI-9580CA",
-            "O.E.M.": "MR958017",
-            "Mann & Hummel": "CUK1830",
+            "OEM": "MR958017",
+            "Mann": "CUK1830",
             "Fram": "",
             "Purolator": "",
             "Wix": ""
         },
         {
             "Interfil": "CFI-96FWCA",
-            "O.E.M.": "96FW16N619AB",
-            "Mann & Hummel": "CUK3554",
+            "OEM": "96FW16N619AB",
+            "Mann": "CUK3554",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP6820"
         },
         {
             "Interfil": "CFI-9904CA",
-            "O.E.M.": "93174800",
-            "Mann & Hummel": "CU2143",
+            "OEM": "93174800",
+            "Mann": "CU2143",
             "Fram": "",
             "Purolator": "",
             "Wix": "WP9178"
         },
         {
             "Interfil": "CFI-9910CA",
-            "O.E.M.": "GM99105P",
-            "Mann & Hummel": "MC1000-2",
+            "OEM": "GM99105P",
+            "Mann": "MC1000-2",
             "Fram": "CF8791",
             "Purolator": "C15388",
             "Wix": "24805"
         },
         {
             "Interfil": "CFI-9965CA",
-            "O.E.M.": "99657121903",
-            "Mann & Hummel": "CUK3360",
+            "OEM": "99657121903",
+            "Mann": "CUK3360",
             "Fram": "CF11919",
             "Purolator": "",
             "Wix": "24202"
         },
         {
             "Interfil": "CFI-999MCA",
-            "O.E.M.": "999M1VP001",
-            "Mann & Hummel": "MC1012",
+            "OEM": "999M1VP001",
+            "Mann": "MC1012",
             "Fram": "CF1040",
             "Purolator": "C35530",
             "Wix": "24857"
         },
         {
             "Interfil": "CFI-10133CA",
-            "O.E.M.": "88568-02020",
-            "Mann & Hummel": "MC1013",
+            "OEM": "88568-02020",
+            "Mann": "MC1013",
             "Fram": "CF10133",
             "Purolator": "C35491",
             "Wix": "24873"
         },
         {
             "Interfil": "CFI-10364CA",
-            "O.E.M.": "4596501AB",
-            "Mann & Hummel": "CUK3137",
+            "OEM": "4596501AB",
+            "Mann": "CUK3137",
             "Fram": "CF10364",
             "Purolator": "C35677",
             "Wix": "24909"
         },
         {
             "Interfil": "CFI-10546CA",
-            "O.E.M.": "96962173",
-            "Mann & Hummel": "CUK4251",
+            "OEM": "96962173",
+            "Mann": "CUK4251",
             "Fram": "CF10546",
             "Purolator": "C35898",
             "Wix": "24685"
         },
         {
             "Interfil": "CFI-10553CA",
-            "O.E.M.": "999M1VR006",
-            "Mann & Hummel": "",
+            "OEM": "999M1VR006",
+            "Mann": "",
             "Fram": "CF10553",
             "Purolator": "C25764",
             "Wix": "24683"
         },
         {
             "Interfil": "CFI-10563CA",
-            "O.E.M.": "272987B000",
-            "Mann & Hummel": "",
+            "OEM": "272987B000",
+            "Mann": "",
             "Fram": "CF10563",
             "Purolator": "C25547P",
             "Wix": "24896"
         },
         {
             "Interfil": "CFI-XS4HCA",
-            "O.E.M.": "1139654",
-            "Mann & Hummel": "MC1018",
+            "OEM": "1139654",
+            "Mann": "MC1018",
             "Fram": "CF9118",
             "Purolator": "C25387",
             "Wix": "24808"
         },
         {
             "Interfil": "CFI-YL84CA",
-            "O.E.M.": "YL8419N619AB",
-            "Mann & Hummel": "CU2746",
+            "OEM": "YL8419N619AB",
+            "Mann": "CU2746",
             "Fram": "CF10137",
             "Purolator": "C25478",
             "Wix": "24816"

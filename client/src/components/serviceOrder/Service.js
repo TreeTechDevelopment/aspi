@@ -136,9 +136,10 @@ const Service = () => {
           totalFilters: total
         });
       }else{
-        alert('Ha alguno de los filtros no existe en la base de datos. Registrelo y después podrá continuar.')
+        alert('Alguno de los filtros no existe en la base de datos. Registrelo y después podrá continuar.')
       }
-    }).catch(() => {
+    }).catch((e) => {
+      console.log(e)
       alert(`${messageServerError}`)
     })
   }
@@ -153,14 +154,14 @@ const Service = () => {
 
   const fetchTotalFilters = async () => {
     const res = await axios({
-      url: `${url}/filters/total?${ 
-        ChangeAirFiltter === "Si" ? `airFilter=${airFilter.value}` : ''
+      url: `${url}/products/total?${ 
+        (ChangeAirFiltter === "Si" && airFilter ) ? `airFilter=${airFilter.value}` : ''
       }&${
-        ChangeOilFiltter === "Si" ? `oilFilter=${oilFilter.value}` : ''
+        (ChangeOilFiltter === "Si" && oilFilter) ? `oilFilter=${oilFilter.value}` : ''
       }&${
-        ChangeAirFiltter === "Si" ? `fuelFilter=${fuelFilter.value}` : ''
+        (ChangeAirFiltter === "Si" && fuelFilter) ? `fuelFilter=${fuelFilter.value}` : ''
       }&${
-        ChangeCabinAirFiltter === "Si" ? `cabineFilter=${cabineFilter.value}` : ''
+        (ChangeCabinAirFiltter === "Si" && cabineFilter) ? `cabineFilter=${cabineFilter.value}` : ''
       }`,
       method: 'GET',
       timeout: 5000
