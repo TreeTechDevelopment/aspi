@@ -8,7 +8,7 @@ import { url, messageServerError } from '../../../app.json'
 import InputFilter from './InputProduct'
 import BtnProduct from './BtnProduct'
 
-function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, typeProduct }) {
+function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, typeProduct }) {
 
     const context = useContext(appContext)
     
@@ -141,38 +141,42 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
     const handleInputInterfill = (e) => setInterfill(e.target.value)
 
     const saveFilter = () => {
-        setLoading(true)
-        let data = {
-            interfil, OEM, ACD, Fram, Gonher, Motorcraft,
-            Purolator, Wix, Mann, price, product: typeProduct.value,
-            NGK, Champions, Bosh, LS, Roadstar, Wagner
-        }
-        if(JSON.stringify(context.filter) !== "{}") {
-            data.id = context.filter._id
-            updateFilter(data).then(({newFilter}) => {
-                setLoading(false)
-                setFilter(newFilter)
-                doBeforeCloseModal()
-            }).catch((e) => {
-                console.log(e)
-                setLoading(false)
-                alert(`${messageServerError}`)
-            })
-        }else{
-            createFilter(data).then(({newFilter}) => {
-                setLoading(false)
-                setNewFilter(newFilter)
-                doBeforeCloseModal()
-            }).catch(() => {
-                setLoading(false)
-                alert(`${messageServerError}`)
-            })
-        }
+        if(price !== ""){
+            setLoading(true)
+            let data = {
+                interfil, OEM, ACD, Fram, Gonher, Motorcraft,
+                Purolator, Wix, Mann, price, product: typeProduct.value,
+                NGK, Champions, Bosh, LS, Roadstar, Wagner
+            }
+            if(JSON.stringify(context.product) !== "{}") {
+                data.id = context.product._id
+                updateProduct(data).then(({newProduct}) => {
+                    setLoading(false)
+                    setProduct(newProduct)
+                    doBeforeCloseModal()
+                }).catch((e) => {
+                    console.log(e)
+                    setLoading(false)
+                    alert(`${messageServerError}`)
+                })
+            }else{
+                createProduct(data).then(({newProduct}) => {
+                    setLoading(false)
+                    addNewProduct(newProduct)
+                    doBeforeCloseModal()
+                }).catch(() => {
+                    setLoading(false)
+                    alert(`${messageServerError}`)
+                })
+            }
+        }else{ alert('El campo precio es necesario') }
     }
 
-    const createFilter = async (data) => {
-        const res = await axios({
-            url: `${url}/filters/`,
+    let a
+
+    const createProduct = async (data) => {
+        const res = await axios({ 
+            url: `${url}/products/`,
             method: 'POST',
             timeout: 5000,
             data
@@ -181,9 +185,9 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
         return res.data
     }
 
-    const updateFilter = async (data) => {
+    const updateProduct = async (data) => {
         const res = await axios({
-            url: `${url}/filters/`,
+            url: `${url}/products/`,
             method: 'PUT',
             timeout: 5000,
             data
@@ -194,7 +198,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
 
     useEffect(() => {
         if( JSON.stringify(context.product) !== "{}"){
-            
+            console.log(context.product)
             if(context.product.interfil){ setInterfill(context.product.interfil) }
             if(context.product.OEM){ 
                 setOEM(context.product.OEM) 
@@ -214,14 +218,14 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
                 for(let i = 0; i < context.product.Fram.length; i++){ newFramFilters.push(Math.random().toString()) }
                 setFramToRender(newFramFilters)
             }
-            if(context.product.Motorcraft){ 
-                setMotorcraft(context.product.Motorcraft) 
+            if(context.product.Gonher){ 
+                setGonher(context.product.Gonher) 
                 let newGonherFilters = []
                 for(let i = 0; i < context.product.Gonher.length; i++){ newGonherFilters.push(Math.random().toString()) }
                 setGonherToRender(newGonherFilters)
             }
-            if(context.product.Gonher){ 
-                setGonher(context.product.Gonher) 
+            if(context.product.Motorcraft){ 
+                setMotorcraft(context.product.Motorcraft) 
                 let newMotorcraftFilters = []
                 for(let i = 0; i < context.product.Motorcraft.length; i++){ newMotorcraftFilters.push(Math.random().toString()) }
                 setMotorcraftToRender(newMotorcraftFilters)
@@ -251,7 +255,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
                 setNGKToRender(newNGKFilters)
             }
             if(context.product.Champions){ 
-                setNGK(context.product.Champions) 
+                setChampions(context.product.Champions) 
                 let newChampionsFilters = []
                 for(let i = 0; i < context.product.Champions.length; i++){ newChampionsFilters.push(Math.random().toString()) }
                 setChampionsToRender(newChampionsFilters)
@@ -285,7 +289,8 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
         }
     }, [context.product])
 
-    const doBeforeCloseModal = () => {        context.dispatchFilter({ type: 'SET', value: {} })
+    const doBeforeCloseModal = () => {        
+        context.dispatchProduct({ type: 'SET', value: {} })
         closeModal()
     }
 
@@ -480,7 +485,7 @@ function Form({ modalIsOpen, closeModal, filterType, setNewFilter, setFilter, ty
                         <>
                         <div className="input-filters-container">
                             <span>Motorcraft</span>
-                            {Motorcraft.map((key, idx) => (
+                            {MotorcraftToRender.map((key, idx) => (
                                 <InputFilter 
                                     key={key}
                                     idx={idx}

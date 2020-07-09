@@ -12,8 +12,12 @@ function RecordsProduts() {
                                 { value: 'wiresets', label: 'Juego de Cables' }]
         
     const [typeProduct, setTypeProduct] = useState(optionsTypeProducts[2])
+    const [loading, setLoading] = useState(true)
 
-    const handleSelectTypeProduct = newProduct => setTypeProduct(newProduct)
+    const handleSelectTypeProduct = newProduct => {
+        setTypeProduct(newProduct)
+        setLoading(true)
+    }
 
     return (
         <>
@@ -27,6 +31,8 @@ function RecordsProduts() {
                 />
                 <Products 
                     typeProduct={typeProduct}
+                    loading={loading}
+                    setLoading={setLoading}
                 />
             </div>
         </>

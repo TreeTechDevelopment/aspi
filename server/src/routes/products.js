@@ -4,9 +4,11 @@ const app = express();
 
 const {
     getFilters,
-    createFilter,
-    updateFilter,
-    getTotal
+    getSparkplug,
+    createProduct,
+    updateProduct,
+    getTotal,
+    getWireset
 } = require('../controllers/products')
 
 const {
@@ -15,10 +17,12 @@ const {
 } = require('../controllers/client')
 
 app.get('/filter', getFilters)
+app.get('/sparkPlug', getSparkplug)
+app.get('/wiresets', getWireset)
 app.get('/total', getTotal)
 
-app.post('/', createFilter)
+app.post('/', createProduct)
 
-app.put('/', updateFilter)
+app.put('/', updateProduct)
 
 module.exports = app

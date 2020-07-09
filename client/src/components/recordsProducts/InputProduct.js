@@ -46,8 +46,17 @@ function InputFilter({ idx, setProducts, type }) {
                 case "Bosh":
                     if(context.product.Bosh[idx]){ setProduct(context.product.Bosh[idx]) }
                     break;
-                case "Bosh":
-                    if(context.product.Bosh[idx]){ setProduct(context.product.Bosh[idx]) }
+                case "Champions":
+                    if(context.product.Champions[idx]){ setProduct(context.product.Champions[idx]) }
+                    break;
+                case "LS":
+                    if(context.product.LS[idx]){ setProduct(context.product.LS[idx]) }
+                    break;
+                case "Roadstar":
+                    if(context.product.Roadstar[idx]){ setProduct(context.product.Roadstar[idx]) }
+                    break;
+                case "Wagner":
+                    if(context.product.Wagner[idx]){ setProduct(context.product.Wagner[idx]) }
                     break;
             }
         }

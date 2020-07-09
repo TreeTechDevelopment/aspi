@@ -1,4 +1,6 @@
 const Filter = require('../db/models/filters')
+const Plug = require('../db/models/plugs')
+const Wireset = require('../db/models/wiresets')
 
 const getFilters = async (req, res) => {
     try{
@@ -31,15 +33,11 @@ const getFilters = async (req, res) => {
     }
 }
 
-const createFilter = async (req, res) => {
+const getSparkplug = async (req, res) => {
     try{
-        const newFilter = req.body
+        const plugs = await Plug.find({ })
 
-        let filter = new Filter(newFilter)
-
-        filter.save(newFilterDB => {
-            res.json({ newFilter: newFilterDB })
-        })
+        return res.json({ products: plugs })
 
     }catch(e){
         console.log(e)
@@ -47,29 +45,103 @@ const createFilter = async (req, res) => {
     }
 }
 
-const updateFilter = async (req, res) => {
+const getWireset = async (req, res) => {
     try{
-        const newFilter = req.body
+        const wiresets = await Wireset.find({ })
 
-        console.log(newFilter)
+        return res.json({ products: wiresets })
 
-        let filter = await Filter.findById(newFilter.id)
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
 
-        filter.OEM = newFilter.OEM
-        filter.ACD = newFilter.ACD
-        filter.Fram = newFilter.Fram
-        filter.Gonher = newFilter.Gonher
-        filter.Motorcraft = newFilter.Motorcraft
-        filter.Purolator = newFilter.Purolator
-        filter.Wix = newFilter.Wix
-        filter.Mann = newFilter.Mann
-        filter.price = newFilter.price
+const createProduct = async (req, res) => {
+    try{
+        const { interfil, OEM, ACD, Fram, Gonher, Motorcraft,
+            Purolator, Wix, Mann, price, product,
+            NGK, Champions, Bosh, LS, Roadstar, Wagner } = req.body
 
-        filter.save((err, newFilterDB) => {
-            if(err){ return res.sendStatus(500) }
-            res.json({ newFilter: newFilterDB })
-        })
+        switch(product){
+            case 'filter':
+                let filter = new Filter({
+                    interfil, OEM, ACD, Fram, Gonher, Motorcraft, Purolator,
+                    Wix, Mann, price
+                })
 
+                filter.save((err, newFilterDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newFilterDB })
+                })
+
+                break;
+                
+            case 'sparkPlug':
+                let sparkplug = new Plug({
+                    NGK, Champions, Bosh, ACD, Motorcraft, price
+                })
+
+                sparkplug.save((err, newSparkplugDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newSparkplugDB })
+                })
+
+                break;
+        }
+
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const updateProduct = async (req, res) => {
+    try{
+        const { interfil, OEM, ACD, Fram, Gonher, Motorcraft,
+            Purolator, Wix, Mann, price, product,
+            NGK, Champions, Bosh, LS, Roadstar, Wagner, id } = req.body
+
+        switch(product){
+            case 'filter':
+                let filter = await Filter.findById(id)
+
+                filter.OEM = OEM
+                filter.ACD = ACD
+                filter.Fram = Fram
+                filter.Gonher = Gonher
+                filter.Motorcraft = Motorcraft
+                filter.Purolator = Purolator
+                filter.Wix = Wix
+                filter.Mann = Mann
+                filter.price = price
+
+                filter.save((err, newFilterDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newFilterDB })
+                })
+
+                break;
+                
+            case 'sparkPlug':
+
+                let sparkPlug = await Plug.findById(id)
+
+                sparkPlug.NGK = NGK
+                sparkPlug.ACD = ACD
+                sparkPlug.Champions = Champions
+                sparkPlug.Bosh = Bosh
+                sparkPlug.Motorcraft = Motorcraft
+                sparkPlug.price = price
+
+                sparkPlug.save((err, newSparkplugDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newSparkplugDB })
+                })
+
+                break;
+        }
+        
     }catch(e){
         console.log(e)
         res.sendStatus(500)
@@ -163,7 +235,9 @@ const getTotal = async (req, res) => {
 
 module.exports = {
     getFilters,
-    createFilter,
-    updateFilter,
-    getTotal
+    getSparkplug,
+    createProduct,
+    updateProduct,
+    getTotal,
+    getWireset
 }

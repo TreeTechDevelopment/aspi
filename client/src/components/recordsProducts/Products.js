@@ -6,16 +6,17 @@ import Loader from 'react-loader-spinner';
 import { url, messageServerError } from '../../../app.json'  ;
 import Form from './Form';
 import FilterProducts from './FilterProducts';
+import SparkPlugProducts from './SparkPlugProducts';
+import WiresetsProducts from './WiresetsProducts';
 
-function Products({ typeProduct }) {
+function Products({ typeProduct, loading, setLoading }) {
 
     const optionsTypeFilter = [{ value: 'air', label: 'Filtro de Aire' },
                                 { value: 'oil', label: 'Filtro de Aceite' },
                                 { value: 'fuel', label: 'Filtro de Gasolina' },
-                                { value: 'cabine', label: 'Filtro de Cabina' }]
+                                { value: 'cabine', label: 'Filtro de Cabina' }] 
 
     const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
     const [modalProduct, setModalProduct] = useState(false)
     const [typeFilter, setTypeFilter] = useState(optionsTypeFilter[0])
 
@@ -25,8 +26,8 @@ function Products({ typeProduct }) {
 
     useEffect(() => {
         fetchProducts().then(({ products }) => {
-            setLoading(false)
             setProducts(products)
+            setLoading(false)
         }).catch(() => {
             alert(`${messageServerError}`)
         })
@@ -44,6 +45,19 @@ function Products({ typeProduct }) {
 
     const handleSelectTypeFilter = newFilter => setTypeFilter(newFilter)
 
+    const setProduct = newProduct => {
+        let newProducts = [...products]
+        let idx = newProducts.findIndex( product => product._id == newProduct._id )
+        newProducts[idx] = newProduct
+        setProducts(newProducts)
+    }
+
+    const addNewProduct = newProduct => {
+        let newProducts = [...products]
+        newProducts.push(newProduct)
+        setProducts(newProducts)
+    }
+
     return (
         <>
             <Form 
@@ -51,6 +65,8 @@ function Products({ typeProduct }) {
                 closeModal={closeModal}
                 filterType={typeFilter}
                 typeProduct={typeProduct}
+                setProduct={setProduct}
+                addNewProduct={addNewProduct}
             />
             <div className="table-records-container">
                 {loading ? (
@@ -62,13 +78,15 @@ function Products({ typeProduct }) {
                     />
                 ) : (
                     typeProduct.value === "sparkPlug" ? (
-                        <>
-
-                        </>
+                        <SparkPlugProducts 
+                            sparkplugs={products}
+                            openModal={openModal}
+                        />
                     ) : typeProduct.value === "wiresets" ? ( 
-                        <>
-        
-                        </>
+                        <WiresetsProducts 
+                            wiresets={products}
+                            openModal={openModal}
+                        />
                     ) : typeProduct.value === "filter" ? (
                         <>
                             <Select 
