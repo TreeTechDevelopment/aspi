@@ -24,7 +24,7 @@ function FormIS() {
         })
     }
 
-    const fetchLogin = async () => {
+    const fetchLogin = async () => { 
         const res = await axios({
             url: `${url}/users/login`,
             method: 'POST',
@@ -41,26 +41,29 @@ function FormIS() {
 
     return (
         <form 
-            id="login-form" 
-            //onSubmit={login}
+            id="login"
             method="POST"
             action="/users/login"
         >
             <input 
                 type="input" 
-                placeholder="Usuario" 
+                placeholder="USUARIO" 
                 name="username"
                 value={userName}
                 onChange={handleInputUserName}
             />
             <input 
                 type="password" 
-                placeholder="Contraseña"
+                placeholder="CONTRASEÑA"
                 name="password"
                 value={password}
                 onChange={handleInputPassword}
             />
-            <button className="btn btn-primary" type="submit">Entrar</button>
+            <div id="login-line"></div>
+            <button className="btn-aspi" type="submit">ENTRAR</button>
+            <div className="btn-aspi-gray">
+                <a href={`${url}/signup`}>CREAR CUENTA</a>
+            </div>
         </form>
         
     )

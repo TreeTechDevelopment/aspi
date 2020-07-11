@@ -14,10 +14,18 @@ const Service = () => {
   const [oilFilterSelect, setOilFilterSelect] = useState([]);
   const [fuelFilterSelect, setFuelFilterSelect] = useState([]);
   const [cabineFilterSelect, setCabineFilterSelect] = useState([]);
+  const [sparkplugSelect, setSparkplugSelect] = useState([]);
+  const [wiresetSelect, setWiresetSelect] = useState([]);
+  const [brakeshoeBackSelect, setBrakeshoeBackSelect] = useState([]);
+  const [brakeshoeFrontSelect, setBrakeshoeFrontSelect] = useState([]);
   const [airFilter, setAirFilter] = useState({});
   const [oilFilter, setOilFilter] = useState({});
   const [fuelFilter, setFuelFilter] = useState({});
   const [cabineFilter, setCabineFilter] = useState({});
+  const [sparkplug, setSparkplug] = useState({});
+  const [wireset, setWireset] = useState({});
+  const [brakeshoeBack, setBrakeshoeBack] = useState({});
+  const [brakeshoeFront, setBrakeshoeFront] = useState({});
 
   useEffect(() => {
     if (context.car.airFilter) {
@@ -59,6 +67,13 @@ const Service = () => {
                             ...cabineFilters[i].Wix, ...cabineFilters[i].Mann]
         }
 
+        let sparkplugSelect = []
+        let sparkplugsDB = context.sparkplugs.filter( sparkplugDB => context.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugNGK => sparkplug == sparkplugNGK ) )  )
+        for(let i = 0; i < sparkplugsDB.length; i++){
+          sparkplugSelect = [...sparkplugSelect, ...sparkplugsDB[i].NGK, ...cabineFilters[i].Champions, ...cabineFilters[i].ACD,
+                            ...cabineFilters[i].Bosh, ...cabineFilters[i].Motorcraft]
+        }
+
         airFiltersSelect = airFiltersSelect.map( filter => {
             return { value: filter, label: filter };
         });
@@ -71,6 +86,9 @@ const Service = () => {
         cabineFiltersSelect = cabineFiltersSelect.map( filter => {
           return { value: filter, label: filter };
         });
+        sparkplugSelect = sparkplugSelect.map( sparkplug => {
+          return { value: sparkplug, label: sparkplug };
+        });
         
         setAirFilterSelect(airFiltersSelect);
         setAirFilter(airFiltersSelect[0]);
@@ -80,6 +98,8 @@ const Service = () => {
         setFuelFilter(fuelFiltersSelect[0]);
         setCabineFilterSelect(cabineFiltersSelect);
         setCabineFilter(cabineFiltersSelect[0]);
+        setSparkplugSelect(sparkplugSelect);
+        setSparkplug(sparkplugSelect[0]);
 
     }
   }, [context.car]);
@@ -113,12 +133,18 @@ const Service = () => {
     coil: "No",
     antifreeze: "No",
     transmission: "No",
+    rectifyDisk: "No",
+    changeBrakeshoeBack: "No",
+    changeBrakeshoeFront: "No",
     note: '',
     totalFilters: 0,
     renderBTNPDF: false
   });
 
   const {
+    rectifyDisk,
+    changeBrakeshoeBack,
+    changeBrakeshoeFront,
     CleaningInj,
     CleaningAB,
     aceite,
@@ -185,6 +211,8 @@ const Service = () => {
   const handleSelectFuelFilter = newValue => setFuelFilter(newValue)
 
   const handleSelectCabineFilter = newValue => setCabineFilter(newValue)
+
+  const handleSelectSparkplug = newValue => setSparkplug(newValue)
 
   const fetchTotalFilters = async () => {
     const res = await axios({
@@ -425,6 +453,13 @@ const Service = () => {
         </div>
         <div>
           <h4>Bujias</h4>
+           <Select
+            options={sparkplugSelect}
+            placeholder="Bujías"
+            value={sparkplug}
+            onChange={handleSelectSparkplug}
+            isDisabled={plugs === "No"}
+          />
           <input
             /* className="form-check-input"  */ type="radio"
             name="plugs"
@@ -551,6 +586,72 @@ const Service = () => {
             name="transmission"
             value="No"
             checked={transmission === "No"}
+            onChange={obtenerInformacion}
+          />
+          No
+        </div>
+        <div>
+          <h4>Rectificación de Discos</h4>
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="rectifyDisk"
+            value="Si"
+            checked={rectifyDisk === "Si"}
+            onChange={obtenerInformacion}
+          />{" "}
+          Si
+          {/* <label className="form-check-label" htmlFor="AirFiltter1">Si</label> */}
+          {/*  </div>
+                     <div className="form-check form-check-inline"> */}
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="rectifyDisk"
+            value="No"
+            checked={rectifyDisk === "No"}
+            onChange={obtenerInformacion}
+          />
+          No
+        </div>
+        <div>
+          <h4>Cambio de Balatas Delanteras</h4>
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="changeBrakeshoeFront"
+            value="Si"
+            checked={changeBrakeshoeFront === "Si"}
+            onChange={obtenerInformacion}
+          />{" "}
+          Si
+          {/* <label className="form-check-label" htmlFor="AirFiltter1">Si</label> */}
+          {/*  </div>
+                     <div className="form-check form-check-inline"> */}
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="changeBrakeshoeFront"
+            value="No"
+            checked={changeBrakeshoeFront === "No"}
+            onChange={obtenerInformacion}
+          />
+          No
+        </div>
+        <div>
+          <h4>Cambio de Balatas Traseras</h4>
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="changeBrakeshoeBack"
+            value="Si"
+            checked={changeBrakeshoeBack === "Si"}
+            onChange={obtenerInformacion}
+          />{" "}
+          Si
+          {/* <label className="form-check-label" htmlFor="AirFiltter1">Si</label> */}
+          {/*  </div>
+                     <div className="form-check form-check-inline"> */}
+          <input
+            /* className="form-check-input"  */ type="radio"
+            name="changeBrakeshoeBack"
+            value="No"
+            checked={changeBrakeshoeBack === "No"}
             onChange={obtenerInformacion}
           />
           No

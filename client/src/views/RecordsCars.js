@@ -44,7 +44,7 @@ function RecordsCars() {
         const res = await axios({
             url: `${url}/cars?make=${make.value}`,
             method: 'GET',
-            timeout: 5000
+            timeout: 10000
         })
         return res.data
     }
@@ -53,7 +53,7 @@ function RecordsCars() {
         const res = await axios({
             url: `${url}/cars/info`,
             method: 'GET',
-            timeout: 5000
+            timeout: 10000
         })
         return res.data
     }

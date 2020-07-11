@@ -1,0 +1,37 @@
+
+@font-face {
+    font-family: SourceSansBold;
+    src: url('http://192.168.0.8:3000/fonts/SourceSansPro-Bold.ttf');
+}
+
+.navHome{
+    position: absolute;
+    bottom: 15%;
+    left: 0%;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.navHome ul{
+    list-style: none;
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15%;
+}
+
+.navHome ul li a{
+    color: white;
+    font-family: SourceSansBold;
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+    text-decoration: none;
+}
+
+.navHome ul li a:hover{
+    border-bottom: 5px solid rgb(254, 177, 0);
+}

@@ -172,8 +172,6 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         }else{ alert('El campo precio es necesario') }
     }
 
-    let a
-
     const createProduct = async (data) => {
         const res = await axios({ 
             url: `${url}/products/`,
@@ -198,7 +196,6 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
 
     useEffect(() => {
         if( JSON.stringify(context.product) !== "{}"){
-            console.log(context.product)
             if(context.product.interfil){ setInterfill(context.product.interfil) }
             if(context.product.OEM){ 
                 setOEM(context.product.OEM) 
@@ -289,7 +286,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         }
     }, [context.product])
 
-    const doBeforeCloseModal = () => {        
+    const doBeforeCloseModal = () => {
+        setPrice('')
         context.dispatchProduct({ type: 'SET', value: {} })
         closeModal()
     }

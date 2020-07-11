@@ -19,10 +19,18 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const [oilFilters, setOilFilter] = useState([])
     const [fuelFilters, setFuelFilter] = useState([])
     const [cabineFilters, setCabineFilter] = useState([])
+    const [sparkplugs, setSparkplugs] = useState([])
+    const [wiresets, setWiresets] = useState([])
+    const [brakeshoeFront, setBrakeshoeFront] = useState([])
+    const [brakeshoeBack, setBrakeshoeBack] = useState([])
     const [airFiltersRender, setAirFiltersRender] = useState([Math.random().toString()])
     const [oilFiltersRender, setOilFiltersRender] = useState([Math.random().toString()])
     const [fuelFiltersRender, setFuelFiltersRender] = useState([Math.random().toString()])
     const [cabineFiltersRender, setCabineFiltersRender] = useState([Math.random().toString()])
+    const [sparkplugRender, setSparkplugRender] = useState([Math.random().toString()])
+    const [wiresetsRender, setWiresetsRender] = useState([Math.random().toString()])
+    const [brakeshoeFrontRender, setBrakeshoeFrontRender] = useState([Math.random().toString()])
+    const [brakeshoeBackRender, setBrakeshoeBackRender] = useState([Math.random().toString()])
     const [model, setModel] = useState({})
     const [newModel, setNewModel] = useState('')
     const [yearFrom, setYearFrom] = useState('')
@@ -129,6 +137,30 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
         setCabineFilter(newCabineFilters)
     }
 
+    const setSparkPlug = (sparkplug, idx) => {
+        let newSparkplugs = [...sparkplugs]
+        newSparkplugs[idx] = sparkplug
+        setSparkplugs(newSparkplugs)
+    }
+
+    const setWireset = (wireset, idx) => {
+        let newWiresets = [...wiresets]
+        newWiresets[idx] = wireset
+        setWiresets(newWiresets)
+    }
+
+    const setBrakeshoesBack = (brakeshoe, idx) => {
+        let newBrakeshoes = [...brakeshoeBack]
+        newBrakeshoes[idx] = brakeshoe
+        setBrakeshoeBack(newBrakeshoes)
+    }
+
+    const setBrakeshoesFront = (brakeshoe, idx) => {
+        let newBrakeshoes = [...brakeshoeFront]
+        newBrakeshoes[idx] = brakeshoe
+        setBrakeshoeFront(newBrakeshoes)
+    }
+
     const addAirFilter = (e) => {
         e.preventDefault()
         let newAirFilters = [...airFiltersRender]
@@ -185,6 +217,62 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
         setCabineFiltersRender(newCabineFilters)
     }
 
+    const addSparkplug = (e) => {
+        e.preventDefault()
+        let newSparkplugs = [...sparkplugRender]
+        newSparkplugs.push(Math.random().toString())
+        setSparkplugRender(newSparkplugs)
+    }
+
+    const removeSparkplug = (e) => {
+        e.preventDefault()
+        let newSparkplugs = [...sparkplugRender]
+        newSparkplugs.splice(-1, 1)
+        setSparkplugRender(newSparkplugs)
+    }
+
+    const addWiresets = (e) => {
+        e.preventDefault()
+        let newWiresets = [...wiresetsRender]
+        newWiresets.push(Math.random().toString())
+        setWiresetsRender(newWiresets)
+    }
+
+    const removeWiresets = (e) => {
+        e.preventDefault()
+        let newWiresets = [...wiresetsRender]
+        newWiresets.splice(-1, 1)
+        setWiresetsRender(newWiresets)
+    }
+
+    const addBrakeshoeBack = (e) => {
+        e.preventDefault()
+        let newBrakeshoe = [...brakeshoeBackRender]
+        newBrakeshoe.push(Math.random().toString())
+        setBrakeshoeBackRender(newBrakeshoe)
+    }
+
+    const removeBrakeshoeBack = (e) => {
+        e.preventDefault()
+        let newBrakeshoe = [...brakeshoeBackRender]
+        newBrakeshoe.splice(-1, 1)
+        setBrakeshoeBackRender(newBrakeshoe)
+    }
+
+    const addBrakeshoeFront = (e) => {
+        e.preventDefault()
+        let newBrakeshoe = [...brakeshoeFrontRender]
+        newBrakeshoe.push(Math.random().toString())
+        setBrakeshoeBackRender(newBrakeshoe)
+    }
+
+    const removeBrakeshoeFront = (e) => {
+        e.preventDefault()
+        let newBrakeshoe = [...brakeshoeFrontRender]
+        newBrakeshoe.splice(-1, 1)
+        setBrakeshoeBackRender(newBrakeshoe)
+    }
+
     const saveCar = (e) => {
         e.preventDefault()
 
@@ -198,7 +286,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 airFilter: airFilters,
                 oilFilter: oilFilters,
                 fuelFilter: fuelFilters,  
-                cabineFilter: cabineFilters          
+                cabineFilter: cabineFilters,
+                sparkPlug: sparkplugs,
+                wiresets,
+                brakeShoeFront: brakeshoeFront,
+                brakeShoeBack: brakeshoeBack
             }
 
             if(newModel !== ""){ data.model = newModel }
@@ -220,6 +312,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     setLoading(false)
                 }).catch((e) => {
                     setLoading(false)
+                    if(e.response.status === 400){ return alert(e.response.data) }
                     alert(`${messageServerError}`)
                 })
             }else{
@@ -231,6 +324,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     setLoading(false)
                 }).catch((e) => {
                     setLoading(false)
+                    if(e.response.status === 400){ return alert(e.response.data) }
                     alert(`${messageServerError}`)
                 })
             }
@@ -272,6 +366,19 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
 
     const doBeforeCloseModal = () => {
         context.dispatchCarToEdit({ type: 'SET', value: {} })
+        setSelectDisable(false)
+        setYearFrom('')
+        setYearTo('')
+        setMotor('')
+        setCylinder('')
+        setAirFiltersRender([Math.random().toString()])
+        setOilFiltersRender([Math.random().toString()])
+        setFuelFiltersRender([Math.random().toString()])
+        setCabineFiltersRender([Math.random().toString()])
+        setAirFilter([])
+        setOilFilter([])
+        setFuelFilter([])
+        setCabineFilter([])
         closeModal()
     }
 
@@ -295,6 +402,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     placeholder="Nuevo Modelo"
                     value={newModel}
                     onChange={handleNewModel}
+                    disabled={selectDisable}
                 /> 
                 <label>Año { errYear && 'Este campo es requerido' } </label>
                 <div>                
@@ -380,6 +488,68 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                         <div className="btns-filter-container">
                             <button className="btn btn-primary" onClick={removeCabineFilter}>-</button>
                             <button className="btn btn-primary" onClick={addCabineFilter}>+</button>
+                        </div>
+                    </div>
+                </div>
+                 <div id="input-filters-container-group">
+                    <div className="input-filters-container">
+                        <span>Bujías</span>
+                        {sparkplugRender.map( (key, idx) => (
+                            <InputFilter
+                                idx={idx}
+                                setFilters={setSparkPlug}
+                                key={ key }
+                                type="sparkplug"
+                            />
+                        ))}
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeSparkplug}>-</button>
+                            <button className="btn btn-primary" onClick={addSparkplug}>+</button>
+                        </div>
+                    </div>
+                    <div className="input-filters-container">
+                        <span>Juego de Cables</span>
+                        {wiresetsRender.map( (key, idx) => (
+                            <InputFilter
+                                idx={idx}
+                                setFilters={setWireset}
+                                key={ key }
+                                type="wiresets"
+                            />
+                        ))}
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeWiresets}>-</button>
+                            <button className="btn btn-primary" onClick={addWiresets}>+</button>
+                        </div>
+                    </div>
+                     <div className="input-filters-container">
+                        <span>Balatas Traseras</span>
+                        {brakeshoeBackRender.map( (key, idx) => (
+                            <InputFilter
+                                idx={idx}
+                                setFilters={setBrakeshoesBack}
+                                key={ key }
+                                type="brakeshoeBack"
+                            />
+                        ))}
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeBrakeshoeBack}>-</button>
+                            <button className="btn btn-primary" onClick={addBrakeshoeBack}>+</button>
+                        </div>
+                    </div>
+                    <div className="input-filters-container">
+                        <span>Balatas Delanteras</span>
+                        {brakeshoeFrontRender.map( (key, idx) => (
+                            <InputFilter
+                                idx={idx}
+                                setFilters={setBrakeshoesFront}
+                                key={ key }
+                                type="brakeshoeFront"
+                            />
+                        ))}
+                        <div className="btns-filter-container">
+                            <button className="btn btn-primary" onClick={removeBrakeshoeFront}>-</button>
+                            <button className="btn btn-primary" onClick={addBrakeshoeFront}>+</button>
                         </div>
                     </div>
                 </div>

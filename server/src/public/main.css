@@ -18,29 +18,6 @@ nav, header, footer{
     display: block;
 }
 
-.navbar {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid red;
-    padding: 0 1rem;
-    width: 100%;
-    height: 15%;
-}
-
-ul.navbar li a{
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-}
-
-ul.navbar li a:hover{
-    background-color: blue;
-    color: whitesmoke;
-}
-
 form{
     display: flex;
     flex-direction: column;
@@ -137,4 +114,174 @@ form{
 
 .table-products{
     width: 80%;
+}
+
+@font-face {
+    font-family: SourceSansBold;
+    src: url('http://192.168.0.8:3000/fonts/SourceSansPro-Bold.ttf');
+}
+
+#home {
+    width: 100%;
+    height: 100%;
+    background-image: url('http://192.168.0.8:3000/images/background-color.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+#logo{
+    width: 20rem;
+    height: 20rem;
+}
+
+#logo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#home-label{
+    position: absolute;
+    width: 20%;
+    top: 10%;
+    left: 10%;
+    padding: 1rem;
+    border-left: 1rem solid rgb(254, 177, 0);
+}
+
+#home-label p{
+    font-family: SourceSansBold;
+    color: white;
+    font-size: 3rem;
+}
+
+@font-face {
+    font-family: SourceSansBold;
+    src: url('http://192.168.0.8:3000/fonts/SourceSansPro-Bold.ttf');
+}
+
+.navHome{
+    position: absolute;
+    bottom: 15%;
+    left: 0%;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.navHome ul{
+    list-style: none;
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15%;
+}
+
+.navHome ul li a{
+    color: white;
+    font-family: SourceSansBold;
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+    text-decoration: none;
+}
+
+.navHome ul li a:hover{
+    border-bottom: 5px solid rgb(254, 177, 0);
+}
+
+@font-face {
+    font-family: SourceSans;
+    src: url('http://192.168.0.8:3000/fonts/SourceSansPro-Regular.ttf');
+}
+
+
+#login-container{
+    width: 100%;
+    height: 100%;
+    background-image: url('http://192.168.0.8:3000/images/background-color.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-logo{
+    width: 15rem;
+    height: 15rem;
+}
+
+#login{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#login input{
+    width: 30%;
+    height: 10%;
+    background-color: rgba(110, 110, 110, 0.5);
+    border: 0;
+    padding-left: 1rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    font-family: SourceSans;
+}
+
+#login-line{
+    border: 1px solid rgb(254, 177, 0);
+    width: 20%;
+    height: 1px;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn-aspi{
+    background-color: rgb(254, 177, 0);
+    text-align: center;
+    border-radius: 0.5rem;
+    width: 10%;
+    height: 10%;
+    border: 0;
+    color: white;
+    font-family: SourceSans;
+    font-size: 1.5rem;
+}
+
+.btn-aspi:hover{
+    cursor: pointer;
+}
+
+.btn-aspi-gray{
+    background-color: rgba(110, 110, 110, 0.5);
+    width: 17%;
+    height: 10%;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.btn-aspi-gray a{
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.btn-aspi-gray a:hover{
+    text-decoration: none;
+    color: white;
 }

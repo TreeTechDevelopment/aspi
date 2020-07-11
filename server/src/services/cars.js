@@ -3,9 +3,6 @@ const Make = require('../db/models/marcas');
 const Model = require('../db/models/modelos');
 const Car = require('../db//models/cars');
 
-let string = ''
-string.toUpperCase()
-
 const createCarDB = async (car, models) => {
 
     let newCar = {

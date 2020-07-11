@@ -8,6 +8,7 @@ import Form from './Form';
 import FilterProducts from './FilterProducts';
 import SparkPlugProducts from './SparkPlugProducts';
 import WiresetsProducts from './WiresetsProducts';
+import BrakeshoeProducts from './BrakeshoeProducts';
 
 function Products({ typeProduct, loading, setLoading }) {
 
@@ -102,13 +103,14 @@ function Products({ typeProduct, loading, setLoading }) {
                             />
                         </>
                     ) : (
-                        <>
-        
-                        </>
+                        <BrakeshoeProducts 
+                            brakeshoes={products}
+                            openModal={openModal}
+                        />
                     )
                 )}
             </div>  
-            <button className="btn btn-primary" onClick={openModal}>AGREGAR {typeProduct.label.slice(0, -1).toUpperCase()}</button>       
+            <button className="btn btn-primary" onClick={openModal}>AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}</button>       
         </>
     )
 }

@@ -81,15 +81,26 @@ function Form(){
         let newIDOrDER = false
         let IDOrder = getIDORder()
         if(Number(IDOrder) === -1 || !IDOrder){ newIDOrDER = true }
-        fetchInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters }) => {
-            setData(models, makes)
-            context.dispatchServices({ type: 'SET', value: services })
-            context.dispatchFilters({ type: 'SET', value: filters })
-            if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
-        }).catch((e) => {
-            setInfoFetched(true)
-            alert(`${messageServerError}`)
-        })
+        if(context.filters.length === 0 || context.services.length === 0 || context.sparkplugs.length === 0){
+            fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs }) => {
+                setData(models, makes)
+                context.dispatchServices({ type: 'SET', value: services })
+                context.dispatchFilters({ type: 'SET', value: filters })
+                context.dispatchSparkplugs({ type: 'SET', value: sparkplugs })
+                if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
+            }).catch((e) => {
+                setInfoFetched(true)
+                alert(`${messageServerError}`)
+            })
+        }else{
+            fetchInfo(newIDOrDER).then(({ models, makes, idOrder }) => {
+                setData(models, makes)
+                if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
+            }).catch((e) => {
+                setInfoFetched(true)
+                alert(`${messageServerError}`)
+            })
+        }
     },[])
 
     const setIDORder = (idOrder) => window.localStorage.setItem('@IDOrder', idOrder )
@@ -97,7 +108,7 @@ function Form(){
     const getIDORder = () => window.localStorage.getItem('@IDOrder')
 
     useEffect(() => {
-        if(make.value && model.value){    
+        if( make && model && make.value && model.value){    
             fetchCar().then(({cars}) => {
                 setDataCars(cars)
             }).catch(e => alert(`${messageServerError}`))
@@ -120,7 +131,16 @@ function Form(){
         const res = await axios({
             method: 'GET',
             url : `${url}/cars/info?newIDOrder=${newIDOrDER}`,
-            timeout: 5000
+            timeout: 10000
+        })
+        return res.data
+    }
+
+    const fetchAllInfo = async (newIDOrDER) => {        
+        const res = await axios({
+            method: 'GET',
+            url : `${url}/cars/all-info?newIDOrder=${newIDOrDER}`,
+            timeout: 10000
         })
         return res.data
     }

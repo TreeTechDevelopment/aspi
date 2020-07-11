@@ -8,10 +8,12 @@ const {
     getCar,
     getCars,
     postNewCar,
-    updateCar
+    updateCar,
+    getInfoCars
 } = require('../controllers/cars')
 
-app.get('/info', getAllInfo)
+app.get('/all-info', getAllInfo)
+app.get('/info', getInfoCars)
 app.get('/all', getCars)
 app.get('/', getCar)
 

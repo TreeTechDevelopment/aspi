@@ -1,6 +1,7 @@
 const Filter = require('../db/models/filters')
 const Plug = require('../db/models/plugs')
 const Wireset = require('../db/models/wiresets')
+const Brakeshoe = require('../db/models/brakeshoe')
 
 const getFilters = async (req, res) => {
     try{
@@ -57,6 +58,18 @@ const getWireset = async (req, res) => {
     }
 }
 
+const getBrakeshoe = async (req, res) => {
+    try{
+        const brakeshoes = await Brakeshoe.find({ })
+
+        return res.json({ products: brakeshoes })
+
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
 const createProduct = async (req, res) => {
     try{
         const { interfil, OEM, ACD, Fram, Gonher, Motorcraft,
@@ -85,6 +98,27 @@ const createProduct = async (req, res) => {
                 sparkplug.save((err, newSparkplugDB) => {
                     if(err){ return res.sendStatus(500) }
                     res.json({ newProduct: newSparkplugDB })
+                })
+
+                break;
+            case 'wiresets':
+                let wireset = new Wireset({
+                    NGK, LS, Roadstar, Bosh, price
+                })
+
+                wireset.save((err, newWiresetDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newWiresetDB })
+                })
+
+                break;
+            case 'brakeShoe':
+
+                let brakeshoe = new Brakeshoe({ Wagner, price })
+
+                brakeshoe.save((err, newBrakeshoeDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newBrakeshoeDB })
                 })
 
                 break;
@@ -137,6 +171,36 @@ const updateProduct = async (req, res) => {
                 sparkPlug.save((err, newSparkplugDB) => {
                     if(err){ return res.sendStatus(500) }
                     res.json({ newProduct: newSparkplugDB })
+                })
+
+                break;
+            case 'wiresets':
+
+                let wireset = await Wireset.findById(id)
+
+                wireset.NGK = NGK
+                wireset.LS = LS
+                wireset.Roadstar = Roadstar
+                wireset.Bosh = Bosh
+                wireset.price = price
+
+                wireset.save((err, newWiresetDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newWiresetDB })
+                })
+
+                break;
+
+            case 'brakeShoe':
+
+                let brakeshoe = await Brakeshoe.findById(id)
+
+                brakeshoe.Wagner = Wagner
+                brakeshoe.price = price
+
+                brakeshoe.save((err, newBrakeshoeDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newBrakeshoeDB })
                 })
 
                 break;
@@ -239,5 +303,6 @@ module.exports = {
     createProduct,
     updateProduct,
     getTotal,
+    getBrakeshoe,
     getWireset
 }

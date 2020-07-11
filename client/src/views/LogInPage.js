@@ -1,17 +1,15 @@
 import React from 'react';
 
 import FormIS from '../components/login/FormIS';
-import Navbar from '../components/Navbar';
 import { url } from '../../app.json';
 
 
 function LogIn() {
     return (
-        <>
-            <Navbar />
+        <div id="login-container">
+            <img src={`${url}/images/logo-white.png`} id="login-logo"/>
             <FormIS />
-            <a href={`${url}/signup`} className="btn btn-primary">AGREGAR USUARIO</a>
-        </>
+        </div>
     )
 }
 export default LogIn

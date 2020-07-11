@@ -2,29 +2,31 @@ import React from 'react';
 
 import { url } from '../../app.json'
 
-function Navbar() {
+function Navbar({ isHome }) {
     return (
-        <nav>
+        <nav className={isHome ? 'navHome' : 'navDefault'}>
             <ul className="navbar">
-                <li>
-                    <a href={`${url}/`}>
-                        <img src={`${url}/images/logo.jpg`} id="imgLogo"/>
-                    </a>
+                {!isHome && (
+                    <li>
+                        <a href={`${url}/`}>
+                            <img src={`${url}/images/logo.jpg`} id="imgLogo"/>
+                        </a>
+                    </li>
+                )}
+                <li>                    
+                    <a href={`${url}/orders`}>ORDENES</a>
                 </li>
                 <li>                    
-                    <a href={`${url}/orders`}>Ordenes</a>
+                    <a href={`${url}/service-order`}>ORDEN DE SERVICO</a>
                 </li>
                 <li>                    
-                    <a href={`${url}/service-order`}>Orden de Servicio</a>
+                    <a href={`${url}/cross`}>REFERENCIAS CRUZADAS</a>
                 </li>
                 <li>                    
-                    <a href={`${url}/cross`}>Referencias Cruzadas</a>
+                    <a href={`${url}/records`}>REGISTROS</a>
                 </li>
                 <li>                    
-                    <a href={`${url}/records`}>Registros</a>
-                </li>
-                <li>                    
-                    <a href={`${url}/iniciar-sesion`}>Iniciar Sesión</a>        
+                    <a href={`${url}/iniciar-sesion`}>INICIAR SESIÓN</a>        
                 </li>
             </ul>
         </nav>

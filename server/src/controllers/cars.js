@@ -5,6 +5,10 @@ const Make = require('../db/models/marcas');
 const App = require('../db/models/aplication');
 const Service = require('../db/models/services');
 const Filter = require('../db/models/filters');
+const Plug = require('../db/models/plugs');
+
+
+const { checkFilterExist } = require('../services/products')
 
 const getAllInfo = async (req, res) => {
     try{
@@ -15,6 +19,7 @@ const getAllInfo = async (req, res) => {
         const makes = await Make.find({}) 
         const services = await Service.find({})
         const filters = await Filter.find({})
+        const sparkplugs = await Plug.find({})
 
         const idOrder = app.idOrder
 
@@ -24,7 +29,30 @@ const getAllInfo = async (req, res) => {
             app.save()
         }
         
-        res.json({ models, makes, idOrder, services, filters})
+        res.json({ models, makes, idOrder, services, filters, sparkplugs})
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const getInfoCars = async (req, res) => {
+    try{
+        const { newIDOrder } = req.query
+
+        let app = await App.findOne({})
+        const models = await Model.find({})
+        const makes = await Make.find({}) 
+
+        const idOrder = app.idOrder
+
+        if(newIDOrder === "true"){
+            if(idOrder + 1 === 10000){ app.idOrder = 1 }
+            else{ app.idOrder = idOrder + 1 }
+            app.save()
+        }
+        
+        res.json({ models, makes, idOrder })
     }catch(e){
         console.log(e)
         res.sendStatus(500)
@@ -61,6 +89,13 @@ const postNewCar = async (req, res) => {
     try{        
         const newCar = req.body
 
+        let existAirFilterDB = await checkFilterExist(newCar.airFilter, 'air')
+        let existOilFilterDB = await checkFilterExist(newCar.oilFilter, 'oil')
+        let existFuelFilterDB = await checkFilterExist(newCar.fuelFilter, 'fuel')
+        let existCabineFilterDB = await checkFilterExist(newCar.cabineFilter, 'cabine')
+
+        if(!existAirFilterDB || !existOilFilterDB || !existFuelFilterDB || !existCabineFilterDB){ return res.status(400).send('Alguno de los filtros introducidos no existen') }
+
         const make = await Make.findById(newCar.make)
         const model = await Model.findById(newCar.model)
 
@@ -81,6 +116,15 @@ const postNewCar = async (req, res) => {
 const updateCar = async (req, res) => {
     try{        
         const newCar = req.body
+
+        console.log(newCar)
+
+        let existAirFilterDB = await checkFilterExist(newCar.airFilter, 'air')
+        let existOilFilterDB = await checkFilterExist(newCar.oilFilter, 'oil')
+        let existFuelFilterDB = await checkFilterExist(newCar.fuelFilter, 'fuel')
+        let existCabineFilterDB = await checkFilterExist(newCar.cabineFilter, 'cabine')
+
+        if(!existAirFilterDB || !existOilFilterDB || !existFuelFilterDB || !existCabineFilterDB){ return res.status(400).send('Alguno de los filtros introducidos no existen') }
 
         let car = await Car.findById(newCar.id)
 
@@ -112,5 +156,6 @@ module.exports = {
     getCar,
     getCars,
     postNewCar,
-    updateCar
+    updateCar,
+    getInfoCars
 }

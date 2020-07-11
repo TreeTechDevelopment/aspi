@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 
-function WiresetItem({ wireset }) {
+import { appContext } from '../../context/Provider'
+
+function WiresetItem({ wireset, openModal }) {
 
     const context = useContext(appContext)
 
