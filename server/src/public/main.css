@@ -118,13 +118,13 @@ form{
 
 @font-face {
     font-family: SourceSansBold;
-    src: url('http://192.168.0.8:3000/fonts/SourceSansPro-Bold.ttf');
+    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Bold.ttf');
 }
 
 #home {
     width: 100%;
     height: 100%;
-    background-image: url('http://192.168.0.8:3000/images/background-color.jpg');
+    background-image: url('https://talleraspi.herokuapp.com/images/background-color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -161,7 +161,7 @@ form{
 
 @font-face {
     font-family: SourceSansBold;
-    src: url('http://192.168.0.8:3000/fonts/SourceSansPro-Bold.ttf');
+    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Bold.ttf');
 }
 
 .navHome{
@@ -198,14 +198,14 @@ form{
 
 @font-face {
     font-family: SourceSans;
-    src: url('http://192.168.0.8:3000/fonts/SourceSansPro-Regular.ttf');
+    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Regular.ttf');
 }
 
 
 #login-container{
     width: 100%;
     height: 100%;
-    background-image: url('http://192.168.0.8:3000/images/background-color.jpg');
+    background-image: url('https://talleraspi.herokuapp.com/images/background-color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
