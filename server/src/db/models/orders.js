@@ -42,14 +42,10 @@ const orderSchema = new Schema({
         required: true,
         type: String
     },
-    plugs: {
-        required: true,
-        type: String
-    },
-    brakeshoe: {
-        required: true,
-        type: String
-    },
+    sparkplugs: { type: String },
+    wiresets: { type: String },
+    brakeshoeBack: { type: String },
+    brakeshoeFront: { type: String },
     coil: {
         required: true,
         type: String

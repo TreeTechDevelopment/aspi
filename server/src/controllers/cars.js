@@ -6,6 +6,8 @@ const App = require('../db/models/aplication');
 const Service = require('../db/models/services');
 const Filter = require('../db/models/filters');
 const Plug = require('../db/models/plugs');
+const Wireset = require('../db/models/wiresets');
+const Brakeshoe = require('../db/models/brakeshoe');
 
 
 const { checkFilterExist } = require('../services/products')
@@ -20,6 +22,8 @@ const getAllInfo = async (req, res) => {
         const services = await Service.find({})
         const filters = await Filter.find({})
         const sparkplugs = await Plug.find({})
+        const wiresets = await Wireset.find({})
+        const brakeshoes = await Brakeshoe.find({})
 
         const idOrder = app.idOrder
 
@@ -29,7 +33,7 @@ const getAllInfo = async (req, res) => {
             app.save()
         }
         
-        res.json({ models, makes, idOrder, services, filters, sparkplugs})
+        res.json({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes})
     }catch(e){
         console.log(e)
         res.sendStatus(500)
@@ -38,21 +42,11 @@ const getAllInfo = async (req, res) => {
 
 const getInfoCars = async (req, res) => {
     try{
-        const { newIDOrder } = req.query
 
-        let app = await App.findOne({})
         const models = await Model.find({})
-        const makes = await Make.find({}) 
-
-        const idOrder = app.idOrder
-
-        if(newIDOrder === "true"){
-            if(idOrder + 1 === 10000){ app.idOrder = 1 }
-            else{ app.idOrder = idOrder + 1 }
-            app.save()
-        }
+        const makes = await Make.find({})
         
-        res.json({ models, makes, idOrder })
+        res.json({ models, makes })
     }catch(e){
         console.log(e)
         res.sendStatus(500)

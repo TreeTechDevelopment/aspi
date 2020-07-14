@@ -17,6 +17,8 @@ function Provider({ children }) {
     const [services, dispatchServices] = useReducer(defaultReducer, [])
     const [filters, dispatchFilters] = useReducer(defaultReducer, [])
     const [sparkplugs, dispatchSparkplugs] = useReducer(defaultReducer, [])
+    const [wiresets, dispatchWiresets] = useReducer(defaultReducer, [])
+    const [brakeshoes, dispatchBrakeshoes] = useReducer(defaultReducer, [])
 
     return (
         <appContext.Provider
@@ -31,7 +33,9 @@ function Provider({ children }) {
                 product,
                 services,
                 filters,
+                wiresets,
                 sparkplugs,
+                brakeshoes,
                 dispatchMake,
                 dispatchModel,
                 dispatchCar,
@@ -42,7 +46,9 @@ function Provider({ children }) {
                 dispatchServices,
                 dispatchProduct,
                 dispatchFilters,
-                dispatchSparkplugs
+                dispatchSparkplugs,
+                dispatchWiresets,
+                dispatchBrakeshoes
             }}
         >
             {children}

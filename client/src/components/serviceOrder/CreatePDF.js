@@ -12,14 +12,16 @@ function CreatePDF({
         oilFilter,
         fuelFilter,
         cabineFilter,
-        plugs,
+        sparkplug,
         wiresets,
-        brakeshoe,
+        brakeshoeBack,
+        brakeshoeFront,
         coil,
         transmission,
         antifreeze,
         cleanInj, 
-        totalFilters,
+        total,
+        rectifyDisk,
         aceite,
         Oil,
         aceiteLts,
@@ -43,10 +45,9 @@ function CreatePDF({
                         filters: {
                             airFilter, fuelFilter, oilFilter, cabineFilter
                         },
-                        note, cleanAB, cleanInj, brakeshoe,
-                        coil, transmission, antifreeze, plugs,
-                        idOrder: Number(getIDOrder()),
-                        total: getTotal()
+                        note, cleanAB, cleanInj, brakeshoeBack, brakeshoeFront,
+                        coil, transmission, antifreeze, sparkplugs: sparkplug,
+                        wiresets, idOrder: Number(getIDOrder()), total
                     }
                     createOrder(order).then(() => {
                         resetIDORder()
@@ -87,51 +88,7 @@ function CreatePDF({
         else{ minutes = `${new Date().getMinutes()}` }
 
         return `${hours}:${minutes}`
-    } 
-
-    const getTotal = () => {
-        let total = 0
-        const services = context.services
-        if(cleanAB === "Si"){
-            let idx = services.findIndex( service => service.name === "cleanAB" )
-            total += services[idx].price
-        }if(cleanInj === "Si"){
-            let idx = services.findIndex( service => service.name === "cleanInj" )
-            total += services[idx].price
-        }if(plugs === "Si"){
-            let idx = services.findIndex( service => service.name === "plugs" )
-            total += services[idx].price
-        }if(transmission === "Si"){
-            let idx = services.findIndex( service => service.name === "transmission" )
-            total += services[idx].price
-        }if(coil === "Si"){
-            let idx = services.findIndex( service => service.name === "coil" )
-            total += services[idx].price
-        }if(wiresets === "Si"){
-            let idx = services.findIndex( service => service.name === "wiresets" )
-            total += services[idx].price
-        }if(airFilter !== ""){
-            let idx = services.findIndex( service => service.name === "changeAirFilter" )
-            total += services[idx].price
-        }if(oilFilter !== ""){
-            let idx = services.findIndex( service => service.name === "changeOilFilter" )
-            total += services[idx].price
-        }if(fuelFilter !== ""){
-            let idx = services.findIndex( service => service.name === "changeFuelFilter" )
-            total += services[idx].price
-        }if(cabineFilter !== ""){
-            let idx = services.findIndex( service => service.name === "changeCabineFilter" )
-            total += services[idx].price
-        }if(brakeshoe === "Si"){
-            let idx = services.findIndex( service => service.name === "brakeshoe" )
-            total += services[idx].price
-        }if(antifreeze === "Si"){
-            let idx = services.findIndex( service => service.name === "antifreeze" )
-            total += services[idx].price
-        }
-        total += totalFilters
-        return total
-    } 
+    }
 
     const createOrder = async (data) => {
         const res = await axios({
@@ -169,12 +126,13 @@ function CreatePDF({
                     oilFilter={oilFilter}
                     fuelFilter={fuelFilter}
                     cabineFilter={cabineFilter}
-                    plugs={plugs}
+                    sparkplug={sparkplug}
                     coil={coil}
                     antifreeze={antifreeze}
                     transmission={transmission}
                     wiresets={wiresets}
-                    brakeshoe={brakeshoe}
+                    brakeshoeBack={brakeshoeBack}
+                    brakeshoeFront={brakeshoeFront}
                     date={returnDate()}
                     make={context.make}
                     model={context.model}
@@ -185,7 +143,8 @@ function CreatePDF({
                     aceiteLts={aceiteLts}
                     IDOrder={returnNumberIDOrder()}
                     note={note}
-                    total={getTotal()}
+                    total={total}
+                    rectifyDisk={rectifyDisk}
                 />
             }             
         >
@@ -199,19 +158,21 @@ function CreatePDF({
 
                         <BlobProvider 
                             document={
-                                <PDFClient                      
+                                <PDFClient 
+                                    rectifyDisk={rectifyDisk}                     
                                     cleanInj={cleanInj}
                                     cleanAB={cleanAB}
                                     airFilter={airFilter}
                                     oilFilter={oilFilter}
                                     fuelFilter={fuelFilter}
                                     cabineFilter={cabineFilter}
-                                    plugs={plugs}
+                                    sparkplug={sparkplug}
                                     coil={coil}
                                     antifreeze={antifreeze}
                                     transmission={transmission}
                                     wiresets={wiresets}
-                                    brakeshoe={brakeshoe}
+                                    brakeshoeBack={brakeshoeBack}
+                                    brakeshoeFront={brakeshoeFront}
                                     date={returnDate()}
                                     make={context.make}
                                     model={context.model}
@@ -222,7 +183,7 @@ function CreatePDF({
                                     aceiteLts={aceiteLts}
                                     IDOrder={returnNumberIDOrder()}
                                     note={note}
-                                    total={getTotal()}
+                                    total={total}
                                 />
                             }             
                         >

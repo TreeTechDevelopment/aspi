@@ -1,10 +1,16 @@
 const Order = require('../db/models/orders');
 const Service = require('../db/models/services');
+const Plug = require('../db/models/plugs');
+const Wireset = require('../db/models/wiresets');
+const Brakeshoe = require('../db/models/brakeshoe');
+const Filter = require('../db/models/filters');
 
 const createOrder = async (req, res) => {
     try{
         
         const order = req.body
+
+        console.log(order)
 
         let prevOrder = await Order.findOne({ 'idOrder': order.idOrder })
 
@@ -13,11 +19,13 @@ const createOrder = async (req, res) => {
             prevOrder.carYear = order.carYear
             prevOrder.cleanAB = order.cleanAB
             prevOrder.cleanInj = order.cleanInj
-            prevOrder.brakeshoe = order.brakeshoe
+            prevOrder.brakeshoeBack = order.brakeshoeBack
+            prevOrder.brakeshoeFront = order.brakeshoeFront
+            prevOrder.wiresets = order.wiresets
             prevOrder.coil = order.coil
             prevOrder.transmission = order.transmission
             prevOrder.antifreeze = order.antifreeze
-            prevOrder.plugs = order.plugs
+            prevOrder.sparkplugs = order.sparkplugs
             prevOrder.note = order.note
             prevOrder.oil = order.oil
             prevOrder.filters = order.filters
@@ -85,13 +93,21 @@ const getOrder = async (req, res) => {
 
         const order = await Order.findOne({ idOrder: Number(id) }).populate({ path: 'car', populate: { path: 'make' }})
         let services = []
+        let sparkplugs = []
+        let wiresets = []
+        let brakeshoes = []
+        let filters = []
 
         if(order){ 
             await order.car.populate('model').execPopulate(); 
             services = await Service.find({})
+            sparkplugs = await Plug.find({})
+            wiresets = await Wireset.find({})
+            brakeshoes = await Brakeshoe.find({})
+            filters = await Filter.find({})
         }
 
-        res.json({ order, services })
+        res.json({ order, services, sparkplugs, wiresets, brakeshoes, filters })
 
     }catch(e){
         console.log(e)

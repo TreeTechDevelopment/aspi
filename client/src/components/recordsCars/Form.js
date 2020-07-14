@@ -263,14 +263,14 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
         e.preventDefault()
         let newBrakeshoe = [...brakeshoeFrontRender]
         newBrakeshoe.push(Math.random().toString())
-        setBrakeshoeBackRender(newBrakeshoe)
+        setBrakeshoeFrontRender(newBrakeshoe)
     }
 
     const removeBrakeshoeFront = (e) => {
         e.preventDefault()
         let newBrakeshoe = [...brakeshoeFrontRender]
         newBrakeshoe.splice(-1, 1)
-        setBrakeshoeBackRender(newBrakeshoe)
+        setBrakeshoeFrontRender(newBrakeshoe)
     }
 
     const saveCar = (e) => {

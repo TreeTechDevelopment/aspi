@@ -49,12 +49,13 @@ function FormEq() {
     }
 
     return (
-        <form id="form-eq">
+        <form className="form">
             <input 
                 type="input" 
-                placeholder="Referencias Cruzadas"
+                placeholder="REFERENCIAS CRUZADAS"
                 value={filterToSearch}
                 onChange={handleInputFilter}
+                className="input input-center"
             />
             {filterFound && (
                 <>  
@@ -93,7 +94,8 @@ function FormEq() {
                     width={50}
                     />
             )}
-            <button className="btn btn-primary" onClick={getFilter}>Buscar</button>
+            <div className="form-line"></div>
+            <button className="btn-aspi" onClick={getFilter}>Buscar</button>
         </form>
         
     )

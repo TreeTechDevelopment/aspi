@@ -212,97 +212,11 @@ const updateProduct = async (req, res) => {
     }
 }
 
-const getTotal = async (req, res) => {
-    try{
-
-        const { airFilter, oilFilter, fuelFilter, cabineFilter } = req.query
-
-        let airFilterDB 
-        let oilFilterDB 
-        let fuelFilterDB
-        let ok = true
-        let total = 0
-
-        if(airFilter){ 
-            airFilterDB = await Filter.findOne({ filterType: 'air', $or: [
-                { 'interfil': { $regex : new RegExp(airFilter, "i") } },
-                { 'OEM': { $in: [new RegExp(airFilter, "i")] } },
-                { 'ACD': { $in: [new RegExp(airFilter, "i")] } },
-                { 'Fram': { $in: [new RegExp(airFilter, "i")] } },
-                { 'Gonher': { $in: [new RegExp(airFilter, "i")] } },
-                { 'Motorcraft': { $in: [new RegExp(airFilter, "i")] } },
-                { 'Purolator': { $in: [new RegExp(airFilter, "i")] } },
-                { 'Wix': { $in: [new RegExp(airFilter, "i")] } },
-                { 'Mann': { $in: [new RegExp(airFilter, "i")] } },
-                { 'MH': { $in: [new RegExp(airFilter, "i")] } }
-            ] })
-    
-            if(airFilterDB){ total += airFilterDB.price }
-            else{ ok = false }
-        }
-        if(oilFilter){ 
-            oilFilterDB = await Filter.findOne({ filterType: 'oil', $or: [
-                { 'interfil': { $regex : new RegExp(oilFilter, "i") } },
-                { 'OEM': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'ACD': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'Fram': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'Gonher': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'Motorcraft': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'Purolator': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'Wix': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'Mann': { $in: [new RegExp(oilFilter, "i")] } },
-                { 'MH': { $in: [new RegExp(oilFilter, "i")] } }
-            ] })
-            if(oilFilterDB){ total += oilFilterDB.price }
-            else{ ok = false }
-        }
-        if(fuelFilter){ 
-            fuelFilterDB = await Filter.findOne({ filterType: 'fuel', $or: [
-                { 'interfil': { $regex : new RegExp(fuelFilter, "i") } },
-                { 'OEM': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'ACD': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'Fram': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'Gonher': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'Motorcraft': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'Purolator': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'Wix': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'Mann': { $in: [new RegExp(fuelFilter, "i")] } },
-                { 'MH': { $in: [new RegExp(fuelFilter, "i")] } }
-            ] })
-            if(fuelFilterDB){ total += fuelFilterDB.price }
-            else{ ok = false }
-        }
-        if(cabineFilter){ 
-            cabineFilterDB = await Filter.findOne({ filterType: 'cabine', $or: [
-                { 'interfil': { $regex : new RegExp(cabineFilter, "i") } },
-                { 'OEM': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'ACD': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'Fram': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'Gonher': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'Motorcraft': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'Purolator': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'Wix': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'Mann': { $in: [new RegExp(cabineFilter, "i")] } },
-                { 'MH': { $in: [new RegExp(cabineFilter, "i")] } }
-            ] })
-            if(cabineFilterDB){ total += cabineFilterDB.price }
-            else{ ok = false }
-        }
-
-        res.json({ ok, total })
-
-    }catch(e){
-        console.log(e)
-        res.sendStatus(500)
-    }
-}
-
 module.exports = {
     getFilters,
     getSparkplug,
     createProduct,
     updateProduct,
-    getTotal,
     getBrakeshoe,
     getWireset
 }

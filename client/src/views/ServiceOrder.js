@@ -7,21 +7,16 @@ import Service from '../components/serviceOrder/Service';
 function ServiceOrd() {
 
     return (
-        <>
-        <Navbar />
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <Form />
-                        </div>
-                        <div className="col">
-                            <Service />
-                        </div>
-                    </div>
-                </div>
+        <div className="bg-white direction-row">
+            <Navbar />
+            <div className="half-window direction-column">
+                <Form />
             </div>
-        </>
+            <div className="line-separator"></div>
+            <div className="half-window">
+                <Service />
+            </div>
+        </div>
     )
 }
 

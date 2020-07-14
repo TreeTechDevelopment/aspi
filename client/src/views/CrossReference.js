@@ -6,10 +6,10 @@ import Navbar from '../components/Navbar';
 function CrossR() {
     
     return (
-        <>
+        <div className="bg-white">
             <Navbar />
             <FormEq />
-        </>
+        </div>
     )
 }
 

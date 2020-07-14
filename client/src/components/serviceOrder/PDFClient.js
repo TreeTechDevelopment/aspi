@@ -9,9 +9,10 @@ const PDFClient = ({
     oilFilter,
     fuelFilter,
     cabineFilter,
-    plugs,
+    sparkplug,
     wiresets,
-    brakeshoe,
+    brakeshoeBack,
+    brakeshoeFront,
     cleanInj, 
     cleanAB,
     coil,
@@ -26,6 +27,7 @@ const PDFClient = ({
     aceite,
     Oil,
     aceiteLts,
+    rectifyDisk,
     note,
     total
 }) => {
@@ -55,12 +57,14 @@ return(
             <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter !== "" ? 'Si' : 'No'}</Text>
             <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter !== "" ? 'Si' : 'No'}</Text>
             <Text style={styles.textBody}>FILTRO DE AIRE DE CABINA: {cabineFilter !== "" ? 'Si' : 'No'}</Text>
-            {plugs === "Si" && <Text style={styles.textBody}>BUJÍAS: {plugs}</Text>}
-            {wiresets === "Si" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
-            {brakeshoe === "Si" && <Text style={styles.textBody}>BALATAS: {brakeshoe}</Text>}
+            <Text style={styles.textBody}>BUJÍAS: {sparkplug !== "" ? 'Si' : 'No'}</Text>
+            <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets !== "" ? "Si" : "No"}</Text>
             {coil === "Si" && <Text style={styles.textBody}>BOBINA: {coil}</Text>}
             {antifreeze === "Si" && <Text style={styles.textBody}>ANTICONGELANTE: {antifreeze}</Text>}
             {transmission === "Si" && <Text style={styles.textBody}>CAMBIO DE ACEITE DE TRANSMISIÓN: {transmission}</Text>}
+            <Text style={styles.subTitle}>FRENOS</Text>
+            <Text style={styles.textBody}>BALATAS: {(brakeshoeBack !== "" || brakeshoeFront !== "") ? 'Si' : 'No'}</Text>
+            <Text style={styles.textBody}>RECTIFICADO DE DISCOS: {rectifyDisk}</Text>
             <Text style={styles.textBody}>NOTAS: {note}</Text>
             <Text style={styles.textBody}>TOTAL: ${total}</Text>
         </View>

@@ -44,6 +44,7 @@ function FormIS() {
             id="login"
             method="POST"
             action="/users/login"
+            className="form"
         >
             <input 
                 type="input" 
@@ -51,6 +52,7 @@ function FormIS() {
                 name="username"
                 value={userName}
                 onChange={handleInputUserName}
+                className="input"
             />
             <input 
                 type="password" 
@@ -58,8 +60,9 @@ function FormIS() {
                 name="password"
                 value={password}
                 onChange={handleInputPassword}
+                className="input"
             />
-            <div id="login-line"></div>
+            <div className="form-line"></div>
             <button className="btn-aspi" type="submit">ENTRAR</button>
             <div className="btn-aspi-gray">
                 <a href={`${url}/signup`}>CREAR CUENTA</a>

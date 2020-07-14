@@ -11,9 +11,10 @@ function CreatePDF({
         oilFilter,
         fuelFilter,
         cabineFilter,
-        plugs,
+        sparkplug,
         wiresets,
-        brakeshoe,
+        brakeshoeBack,
+        brakeshoeFront,
         coil,
         transmission,
         antifreeze,
@@ -25,6 +26,7 @@ function CreatePDF({
         order,
         services,
         totalFilters,
+        rectifyDisk,
         cleanAB }) {
 
     function useHookWithRefCallback() {
@@ -45,9 +47,9 @@ function CreatePDF({
                         filters: {
                             airFilter, fuelFilter, oilFilter, cabineFilter
                         },
-                        note, cleanAB, cleanInj, brakeshoe,
-                        coil, transmission, antifreeze, plugs,
-                        total: getTotal()                   
+                        note, cleanAB, cleanInj, brakeshoeBack, brakeshoeFront,
+                        coil, transmission, antifreeze, sparkplugs: sparkplug,
+                        wiresets, idOrder: Number(getIDOrder()), total: getTotal()                  
                     }
                     updateOrder(orderUpdated).then(() => {
                         window.location.reload()
@@ -109,15 +111,13 @@ function CreatePDF({
     }    
 
     const getTotal = () => {
-        let total = 0        
+        let total = 0
+        const services = context.services
         if(cleanAB === "Si"){
             let idx = services.findIndex( service => service.name === "cleanAB" )
             total += services[idx].price
         }if(cleanInj === "Si"){
             let idx = services.findIndex( service => service.name === "cleanInj" )
-            total += services[idx].price
-        }if(plugs === "Si"){
-            let idx = services.findIndex( service => service.name === "plugs" )
             total += services[idx].price
         }if(transmission === "Si"){
             let idx = services.findIndex( service => service.name === "transmission" )
@@ -125,7 +125,7 @@ function CreatePDF({
         }if(coil === "Si"){
             let idx = services.findIndex( service => service.name === "coil" )
             total += services[idx].price
-        }if(wiresets === "Si"){
+        }if(wiresets !== ""){
             let idx = services.findIndex( service => service.name === "wiresets" )
             total += services[idx].price
         }if(airFilter !== ""){
@@ -140,16 +140,25 @@ function CreatePDF({
         }if(cabineFilter !== ""){
             let idx = services.findIndex( service => service.name === "changeCabineFilter" )
             total += services[idx].price
-        }if(brakeshoe === "Si"){
-            let idx = services.findIndex( service => service.name === "brakeshoe" )
+        }if(sparkplug !== ""){
+            let idx = services.findIndex( service => service.name === "plugs" )
+            total += services[idx].price
+        }if(brakeshoeBack !== ""){
+            let idx = services.findIndex( service => service.name === "changeBrakeshoeBack" )
+            total += services[idx].price
+        }if(brakeshoeFront !== ""){
+            let idx = services.findIndex( service => service.name === "changeBrakeshoeFront" )
             total += services[idx].price
         }if(antifreeze === "Si"){
             let idx = services.findIndex( service => service.name === "antifreeze" )
             total += services[idx].price
+        }if(rectifyDisk === "Si"){
+            let idx = services.findIndex( service => service.name === "rectifyDisk" )
+            total += services[idx].price
         }
         total += totalFilters
         return total
-    } 
+    }  
 
     return(
         <>
@@ -162,23 +171,25 @@ function CreatePDF({
                     oilFilter={oilFilter}
                     fuelFilter={fuelFilter}
                     cabineFilter={cabineFilter}
-                    plugs={plugs}
+                    sparkplug={sparkplug}
                     coil={coil}
                     antifreeze={antifreeze}
                     transmission={transmission}
                     wiresets={wiresets}
-                    brakeshoe={brakeshoe}
+                    brakeshoeBack={brakeshoeBack}
+                    brakeshoeFront={brakeshoeFront}
                     date={returnDate()}
-                    make={order.car.make.name}
-                    model={order.car.model.name}
-                    year={order.carYear}
-                    car={order.car}
+                    make={context.make}
+                    model={context.model}
+                    year={context.year}
+                    car={context.car}
                     aceite={aceite}
                     Oil={Oil}
                     aceiteLts={aceiteLts}
                     IDOrder={returnNumberIDOrder()}
                     note={note}
                     total={getTotal()}
+                    rectifyDisk={rectifyDisk}
                 />
             }             
         >
@@ -199,23 +210,25 @@ function CreatePDF({
                                     oilFilter={oilFilter}
                                     fuelFilter={fuelFilter}
                                     cabineFilter={cabineFilter}
-                                    plugs={plugs}
+                                    sparkplug={sparkplug}
                                     coil={coil}
                                     antifreeze={antifreeze}
                                     transmission={transmission}
                                     wiresets={wiresets}
-                                    brakeshoe={brakeshoe}
+                                    brakeshoeBack={brakeshoeBack}
+                                    brakeshoeFront={brakeshoeFront}
                                     date={returnDate()}
-                                    make={order.car.make.name}
-                                    model={order.car.model.name}
-                                    year={order.carYear}
-                                    car={order.car}
+                                    make={context.make}
+                                    model={context.model}
+                                    year={context.year}
+                                    car={context.car}
                                     aceite={aceite}
                                     Oil={Oil}
                                     aceiteLts={aceiteLts}
                                     IDOrder={returnNumberIDOrder()}
                                     note={note}
                                     total={getTotal()}
+                                    rectifyDisk={rectifyDisk}
                                 />
                             }             
                         >

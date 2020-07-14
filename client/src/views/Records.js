@@ -18,14 +18,14 @@ function Records({  }) {
     if(redirectServices){ return <Redirect to="records/services"/> }
 
     return (
-        <>
+        <div className="bg-white">
             <Navbar />
             <div className="btn-container-records">
-                <button className="btn btn-primary btn-records" onClick={handleRedirectCars}>Carros</button>
-                <button className="btn btn-primary btn-records" onClick={handleRedirectFilters}>Productos</button>
-                <button className="btn btn-primary btn-records" onClick={handleRedirectServies}>Servicios</button>
+                <button className="btn-aspi" onClick={handleRedirectCars}>CARROS</button>
+                <button className="btn-aspi" onClick={handleRedirectFilters}>PRODUCTOS</button>
+                <button className="btn-aspi" onClick={handleRedirectServies}>SERVICIOS</button>
             </div>
-        </>        
+        </div>        
     )
 }
 

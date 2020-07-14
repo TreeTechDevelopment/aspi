@@ -7,7 +7,6 @@ const {
     getSparkplug,
     createProduct,
     updateProduct,
-    getTotal,
     getBrakeshoe,
     getWireset
 } = require('../controllers/products')
@@ -21,7 +20,6 @@ app.get('/filter', getFilters)
 app.get('/sparkPlug', getSparkplug)
 app.get('/wiresets', getWireset)
 app.get('/brakeShoe', getBrakeshoe)
-app.get('/total', getTotal)
 
 app.post('/', createProduct)
 

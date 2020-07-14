@@ -81,26 +81,18 @@ function Form(){
         let newIDOrDER = false
         let IDOrder = getIDORder()
         if(Number(IDOrder) === -1 || !IDOrder){ newIDOrDER = true }
-        if(context.filters.length === 0 || context.services.length === 0 || context.sparkplugs.length === 0){
-            fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs }) => {
-                setData(models, makes)
-                context.dispatchServices({ type: 'SET', value: services })
-                context.dispatchFilters({ type: 'SET', value: filters })
-                context.dispatchSparkplugs({ type: 'SET', value: sparkplugs })
-                if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
-            }).catch((e) => {
-                setInfoFetched(true)
-                alert(`${messageServerError}`)
-            })
-        }else{
-            fetchInfo(newIDOrDER).then(({ models, makes, idOrder }) => {
-                setData(models, makes)
-                if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
-            }).catch((e) => {
-                setInfoFetched(true)
-                alert(`${messageServerError}`)
-            })
-        }
+        fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes }) => {
+            setData(models, makes)
+            context.dispatchServices({ type: 'SET', value: services })
+            context.dispatchFilters({ type: 'SET', value: filters })
+            context.dispatchSparkplugs({ type: 'SET', value: sparkplugs })
+            context.dispatchWiresets({ type: 'SET', value: wiresets })
+            context.dispatchBrakeshoes({ type: 'SET', value: brakeshoes })
+            if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
+        }).catch((e) => {
+            setInfoFetched(true)
+            alert(`${messageServerError}`)
+        })
     },[])
 
     const setIDORder = (idOrder) => window.localStorage.setItem('@IDOrder', idOrder )
@@ -116,7 +108,7 @@ function Form(){
     },[model, make])
 
     useEffect(() => {
-        if(cars.length != 0){
+        if(cars.length != 0 ){
             let car = cars.find(car => car.year.indexOf(year.value) >= 0 && car.motor == motor.value && car.cylinder == cylinder.value  )
             if(car){                
                 context.dispatchCar({ type: 'SET', value: car })
@@ -127,20 +119,11 @@ function Form(){
         }
     },[make, model, year, motor, cylinder, cars])
 
-    const fetchInfo = async (newIDOrDER) => {        
-        const res = await axios({
-            method: 'GET',
-            url : `${url}/cars/info?newIDOrder=${newIDOrDER}`,
-            timeout: 10000
-        })
-        return res.data
-    }
-
     const fetchAllInfo = async (newIDOrDER) => {        
         const res = await axios({
             method: 'GET',
             url : `${url}/cars/all-info?newIDOrder=${newIDOrDER}`,
-            timeout: 10000
+            timeout: 20000
         })
         return res.data
     }
@@ -177,7 +160,7 @@ function Form(){
     const handleMotorSelect = newMotor => {
         setMotor(newMotor)
 
-        let cylindersSelect = cars.filter( car => car.motor == motorsSelect[0].value )
+        let cylindersSelect = cars.filter( car => car.motor == newMotor.value )
         cylindersSelect = cylindersSelect.map( car => car.cylinder )
         cylindersSelect = [...new Set(cylindersSelect)]
         cylindersSelect = cylindersSelect.map( cylinder => { return { value: cylinder, label: cylinder } } )
@@ -194,43 +177,63 @@ function Form(){
         <>
             {infoFetched && (
                 <>
-                     <h1>Orden de servicio</h1>
-                    <form id="form-service-order">
-                        <label>Marca</label>
-                        <Select 
-                            options={makesSelect}
-                            onChange={handleMakeSelect}
-                            value={make}
-                            className="select"
-                        />
-                        <label>Modelo</label>
-                        <Select 
-                            options={modelsSelect}
-                            onChange={handleModelSelect}
-                            value={model}
-                            className="select"
-                        />
-                        <label>Año</label>
-                        <Select 
-                            options={years}
-                            onChange={handleYearsSelect}
-                            value={year}
-                            className="select"
-                        />
-                        <label>Motor</label>
-                        <Select 
-                            options={motors}
-                            onChange={handleMotorSelect}
-                            value={motor}
-                            className="select"
-                        />
-                        <label>Cilindros</label>
-                        <Select 
-                            options={cylinders}
-                            onChange={handleCylinderSelect}
-                            value={cylinder}
-                            className="select"
-                        />
+                    <form className="form">
+                        <h1>CARACTERÍSTICAS</h1>
+                        <div className="select-container">
+                            <div className="label-container">
+                                <label>MARCA</label>
+                            </div>
+                            <Select 
+                                options={makesSelect}
+                                onChange={handleMakeSelect}
+                                value={make}
+                                className="select"
+                            />
+                        </div>
+                        <div className="select-container">
+                            <div className="label-container">
+                                <label>MODELO</label>
+                            </div>
+                            <Select 
+                                options={modelsSelect}
+                                onChange={handleModelSelect}
+                                value={model}
+                                className="select"
+                            />
+                        </div>
+                        <div className="select-container">
+                            <div className="label-container">
+                                <label>AÑO</label>
+                            </div>
+                            <Select 
+                                options={years}
+                                onChange={handleYearsSelect}
+                                value={year}
+                                className="select"
+                            />
+                        </div>
+                        <div className="select-container">
+                            <div className="label-container">
+                                <label>MOTOR</label>
+                            </div>
+                            <Select 
+                                options={motors}
+                                onChange={handleMotorSelect}
+                                value={motor}
+                                className="select"
+                            />
+                        </div>
+                        <div className="select-container">
+                            <div className="label-container">
+                                <label>CILINDROS</label>
+                            </div>
+                            <Select 
+                                options={cylinders}
+                                onChange={handleCylinderSelect}
+                                value={cylinder}
+                                className="select"
+                            />
+                        </div>
                     </form>
                 </>
             )}

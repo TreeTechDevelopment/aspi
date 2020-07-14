@@ -4,7 +4,7 @@ import Loader from 'react-loader-spinner';
 
 import { url, messageServerError } from '../../../app.json'
 
-function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices}) {
+function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices, setSparkplugs, setWiresets, setBrakeshoes, setFilters}) {
 
     const [idOrder, setIdOrder] = useState('')
     const [loading, setLoading] = useState(false)
@@ -14,16 +14,20 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices}) {
     const searchOrder = e => {
         setLoading(true)
         e.preventDefault()
-        getOrder().then(({ order, services }) => {
+        getOrder().then(({ order, services, sparkplugs, wiresets, brakeshoes, filters }) => {
             setLoading(false)
             setFound(true)
             if(order){
                 setFoundOrder(true)
                 setOrder(order)
                 setServices(services)
+                setSparkplugs(sparkplugs)
+                setWiresets(wiresets)
+                setBrakeshoes(brakeshoes)
+                setFilters(filters)
             }else{ setFoundOrder(false) }
         }).catch(() => {            
-            alert(`${messageServerError}`)
+            alert(`${messageServerError}`) 
             setLoading(false)
         })
     }
@@ -32,21 +36,22 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices}) {
         const res = await axios({
             url: `${url}/orders/find?id=${idOrder}`,
             method: 'GET',
-            timeout: 5000
+            timeout: 20000
         })
 
         return res.data
     }
 
     return (
-        <form>
+        <form className="form">
             <input
-                placeholder="Ingresa el ID de la Orden"
+                placeholder="INGRESA EL ID DE LA ORDEN"
                 value={idOrder}
                 onChange={handleInput}
-
+                className="input input-center"
             />
-            <button className="btn btn-primary" onClick={searchOrder}>BUSCAR</button>
+            <div className="form-line"></div>
+            <button className="btn-aspi" onClick={searchOrder}>BUSCAR</button>
             {loading && (
                 <Loader
                     type="Rings"

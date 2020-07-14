@@ -4,13 +4,17 @@
     src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Regular.ttf');
 }
 
+@font-face {
+    font-family: SourceSansBlack;
+    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Black.ttf');
+}
 
 #login-container{
-    width: 100%;
-    height: 100%;
     background-image: url('https://talleraspi.herokuapp.com/images/background-color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,21 +35,23 @@
     justify-content: center;
 }
 
-#login input{
-    width: 30%;
-    height: 10%;
+.input{
+    width: 30rem;
+    height: 2.5rem;
     background-color: rgba(110, 110, 110, 0.5);
     border: 0;
     padding-left: 1rem;
     color: white;
     margin-bottom: 1.5rem;
     border-radius: 0.5rem;
-    font-family: SourceSans;
+    font-family: SourceSansBlack;
 }
 
-#login-line{
+.input-center{ text-align: center; }
+
+.form-line{
     border: 1px solid rgb(254, 177, 0);
-    width: 20%;
+    width: 20rem;
     height: 1px;
     margin-top: 0.5rem;
     margin-bottom: 2rem;
@@ -55,12 +61,15 @@
     background-color: rgb(254, 177, 0);
     text-align: center;
     border-radius: 0.5rem;
-    width: 10%;
-    height: 10%;
+    width: 10rem;
+    height: 2.5rem;
     border: 0;
     color: white;
     font-family: SourceSans;
     font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-aspi:hover{

@@ -8,8 +8,8 @@ function Navbar({ isHome }) {
             <ul className="navbar">
                 {!isHome && (
                     <li>
-                        <a href={`${url}/`}>
-                            <img src={`${url}/images/logo.jpg`} id="imgLogo"/>
+                        <a href={`${url}/`} id="a-logo">
+                            <img src={`${url}/images/logo.png`} id="imgLogo"/> 
                         </a>
                     </li>
                 )}

@@ -19,6 +19,9 @@ export const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
+    subTitle: {
+        fontWeight: 'semibold'
+    },  
     title: {
         fontWeight: 'bold'
     },
@@ -53,9 +56,10 @@ const PDF = ({
     oilFilter,
     fuelFilter,
     cabineFilter,
-    plugs,
+    sparkplug,
     wiresets,
-    brakeshoe,
+    brakeshoeBack,
+    brakeshoeFront,
     cleanInj, 
     cleanAB,
     coil,
@@ -71,6 +75,7 @@ const PDF = ({
     car,
     note,
     IDOrder,
+    rectifyDisk,
     total
 }) => {
 
@@ -99,12 +104,19 @@ return(
             <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter}</Text>
             <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter}</Text>
             <Text style={styles.textBody}>FILTRO DE AIRE DE CABINA: {cabineFilter}</Text>
-            {plugs === "Si" && <Text style={styles.textBody}>BUJÍAS: {plugs}</Text>}
-            {wiresets === "Si" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
-            {brakeshoe === "Si" && <Text style={styles.textBody}>BALATAS: {brakeshoe}</Text>}
+            {sparkplug !== "" && <Text style={styles.textBody}>BUJÍAS: {sparkplug}</Text>}
+            {wiresets !== "" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
             {coil === "Si" && <Text style={styles.textBody}>BOBINA: {coil}</Text>}
             {antifreeze === "Si" && <Text style={styles.textBody}>ANTICONGELANTE: {antifreeze}</Text>}
             {transmission === "Si" && <Text style={styles.textBody}>CAMBIO DE ACEITE DE TRANSMISIÓN: {transmission}</Text>}
+            {(rectifyDisk === "Si" || brakeshoeFront !== "" || brakeshoeBack !== "") && (
+                <>
+                <Text style={styles.subTitle}>FRENOS</Text>
+                {brakeshoeFront !== "" && <Text style={styles.textBody}>BALATAS DELANTERAS: {brakeshoeFront}</Text>}
+                {brakeshoeBack !== "" && <Text style={styles.textBody}>BALATAS TRASERAS: {brakeshoeBack}</Text>}
+                {rectifyDisk === "Si" && <Text style={styles.textBody}>RECTIFICADO DE DISCOS: {rectifyDisk}</Text>}
+                </>
+            )}
             <Text style={styles.textBody}>NOTAS: {note}</Text>
             <Text style={styles.textBody}>TOTAL: ${total}</Text>
         </View>
