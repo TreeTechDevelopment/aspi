@@ -1,5 +1,8 @@
 
 const Filter = require('../db/models/filters');
+const Brakeshoe = require('../db/models/brakeshoe');
+const Plug = require('../db/models/plugs');
+const Wireset = require('../db/models/wiresets');
 
 const createFilterDB = async (filter) => {
 
@@ -38,7 +41,71 @@ const checkFilterExist = async (arrayFilters, filterType) => {
     return existFilterDB
 }
 
+const checkBrakeshoeExist = async (brakeshoes) => {
+    let existBrakeshoeDB = true
+    for(let i = 0; i < brakeshoes.length; i++){
+        let brakeshoeDB = await Brakeshoe.findOne({ 'Wagner': brakeshoes[i] })
+        if(!brakeshoeDB){ existBrakeshoeDB = false }
+    }
+    return existBrakeshoeDB
+}
+
+const checkSparkplugExist = async (sparkplugs) => {
+    let existSparkplugDB = true
+    for(let i = 0; i < sparkplugs.length; i++){
+        let sparkplugDB = await Plug.findOne({ $or: [
+            { 'NGK': { $in: [sparkplugs[i]] } },
+            { 'ACD': { $in: [sparkplugs[i]] } },
+            { 'Champions': { $in: [arrayFilters[i]] } },
+            { 'Bosh': { $in: [arrayFilters[i]] } },
+            { 'Motorcraft': { $in: [arrayFilters[i]] } }
+        ] })
+        if(!sparkplugDB){ existSparkplugDB = false }
+    }
+    return existSparkplugDB
+}
+
+const checkWiresetsExist = async (wiresets) => {
+    let existWiresetDB = true
+    for(let i = 0; i < wiresets.length; i++){
+        let wiresetDB = await Wireset.findOne({ $or: [
+            { 'NGK': { $in: [wiresets[i]] } },
+            { 'LS': { $in: [wiresets[i]] } },
+            { 'Roadstar': { $in: [wiresets[i]] } },
+            { 'Bosh': { $in: [wiresets[i]] } }
+        ] })
+        if(!wiresetDB){ existWiresetDB = false }
+    }
+    return existWiresetDB
+}
+
+const checkProductsExistMiddleware = async (req, res, next) => {
+    const newCar = req.body
+
+    let existAirFilterDB = await checkFilterExist(newCar.airFilter, 'air')
+    let existOilFilterDB = await checkFilterExist(newCar.oilFilter, 'oil')
+    let existFuelFilterDB = await checkFilterExist(newCar.fuelFilter, 'fuel')
+    let existCabineFilterDB = await checkFilterExist(newCar.cabineFilter, 'cabine')
+
+    if(!existAirFilterDB || !existOilFilterDB || !existFuelFilterDB || !existCabineFilterDB){ return res.status(400).send('Alguno de los filtros introducidos no existen') }
+
+    let existBrakeshoeFront = await checkBrakeshoeExist(newCar.brakeShoeFront)
+    let existBrakeshoeBack = await checkBrakeshoeExist(newCar.brakeShoeBack)
+
+    if(!existBrakeshoeFront || !existBrakeshoeBack){ return res.status(400).send('Alguna de las balatas introducidas no existen') }
+
+    let existSparkplugs = await checkSparkplugExist(newCar.sparkPlug)
+
+    if(!existSparkplugs){ return res.status(400).send('Alguna de las bujías introducidas no existen') }
+
+    let existWiresets = await checkWiresetsExist(newCar.wiresets)
+
+    if(!existWiresets){ return res.status(400).send('Alguna de las juegos de cables introducidos no existen') }
+
+    next()
+}
+
 module.exports = {
     createFilterDB,
-    checkFilterExist
+    checkProductsExistMiddleware
 }

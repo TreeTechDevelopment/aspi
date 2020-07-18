@@ -12,13 +12,15 @@ const {
     getInfoCars
 } = require('../controllers/cars')
 
+const { checkProductsExistMiddleware } = require('../services/products')
+
 app.get('/all-info', getAllInfo)
 app.get('/info', getInfoCars)
 app.get('/all', getCars)
 app.get('/', getCar)
 
-app.post('/', postNewCar)
+app.post('/', checkProductsExistMiddleware, postNewCar)
 
-app.put('/', updateCar)
+app.put('/', checkProductsExistMiddleware, updateCar)
 
 module.exports = app

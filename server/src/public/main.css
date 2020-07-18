@@ -102,6 +102,46 @@ nav, header, footer{
     align-items: center;
 }
 
+.justify-content-start{ justify-content: start; }
+.align-items-start{ align-items: flex-start; }
+
+.padding-horizontal{ padding: 0 1rem; }
+.padding-left{ padding-left: 2rem; }
+
+.checkbox-container{
+    background-color: rgb( 254, 177, 0 );
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    border-radius: 0.3rem;
+    margin-top: 0.7rem;
+    padding: 0.2rem;
+}
+
+.checkbox-container input{
+    width: 1.5rem;
+    height: 1.5rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0.2rem solid white;
+    background-color: white;
+    border-radius: 0.25rem;
+}
+
+.checkbox-container input:checked{ background-color: rgb( 254, 177, 0 ); }
+.checkbox-container input:focus{ outline: 0; }
+.checkbox-container input:hover{ cursor: pointer; }
+
+.checkbox-container label{
+    margin: 0; 
+    color: white;
+    font-family: SourceSans;
+    font-size: 1.2rem;
+    margin: 0 1rem;
+}
+
 .form{
     width: 100%;
     height: 100%;
@@ -111,16 +151,36 @@ nav, header, footer{
     justify-content: center;
 }
 
-.form h1{
-    font-family: SairaLight;
+.form h1{ font-family: SairaLight; }
+
+.form h2{ font-family: SairaLight; }
+
+.form textarea{
+    width: 90%;
+    height: 5rem;
+    background-color: rgba(110, 110, 110, 0.5);
+    border: 0;
+    padding-left: 1rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    font-family: SourceSansBlack;
 }
 
 .direction-row{ flex-direction: row; }
 
-.direction-column{ flex-direction: column; }
+.direction-column{ flex-direction: column; } 
 
 .half-window{
     width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.third-window{
+    width: 33%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -137,6 +197,9 @@ nav, header, footer{
     border-radius: 0.3rem;
     margin-top: 1rem;
 }
+
+.big{ width: 90%; }
+
 .select-container .label-container{
     width: 30%;
     display: flex;
@@ -150,8 +213,6 @@ nav, header, footer{
     font-family: SourceSans;
     font-size: 1.2rem;
 }
-
-.select{ width: 40%; }
 
 .select-container .select{
     border: 1px solid rgb( 254, 177, 0 );
@@ -359,9 +420,8 @@ nav, header, footer{
     align-items: center;
 }
 
-.btn-aspi:hover{
-    cursor: pointer;
-}
+.btn-aspi:hover{ cursor: pointer; }
+.btn-aspi:focus{ outline: 0; }
 
 .btn-aspi-gray{
     background-color: rgba(110, 110, 110, 0.5);

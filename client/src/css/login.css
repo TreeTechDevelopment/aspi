@@ -72,9 +72,8 @@
     align-items: center;
 }
 
-.btn-aspi:hover{
-    cursor: pointer;
-}
+.btn-aspi:hover{ cursor: pointer; }
+.btn-aspi:focus{ outline: 0; }
 
 .btn-aspi-gray{
     background-color: rgba(110, 110, 110, 0.5);

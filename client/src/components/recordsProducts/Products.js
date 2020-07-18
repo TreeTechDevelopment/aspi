@@ -9,13 +9,14 @@ import FilterProducts from './FilterProducts';
 import SparkPlugProducts from './SparkPlugProducts';
 import WiresetsProducts from './WiresetsProducts';
 import BrakeshoeProducts from './BrakeshoeProducts';
+import OilProducts from './OilProducts';
 
 function Products({ typeProduct, loading, setLoading }) {
 
     const optionsTypeFilter = [{ value: 'air', label: 'Filtro de Aire' },
                                 { value: 'oil', label: 'Filtro de Aceite' },
                                 { value: 'fuel', label: 'Filtro de Gasolina' },
-                                { value: 'cabine', label: 'Filtro de Cabina' }] 
+                                { value: 'cabine', label: 'Filtro de Cabina' }]  
 
     const [products, setProducts] = useState([])
     const [modalProduct, setModalProduct] = useState(false)
@@ -102,9 +103,14 @@ function Products({ typeProduct, loading, setLoading }) {
                                 typeFilter={typeFilter}
                             />
                         </>
-                    ) : (
+                    ) : typeProduct.value === "brakeShoe" ? (
                         <BrakeshoeProducts 
                             brakeshoes={products}
+                            openModal={openModal}
+                        />
+                    ) : (
+                        <OilProducts 
+                            oils={products}
                             openModal={openModal}
                         />
                     )

@@ -2,6 +2,7 @@ const Filter = require('../db/models/filters')
 const Plug = require('../db/models/plugs')
 const Wireset = require('../db/models/wiresets')
 const Brakeshoe = require('../db/models/brakeshoe')
+const Oil = require('../db/models/oil')
 
 const getFilters = async (req, res) => {
     try{
@@ -39,6 +40,18 @@ const getSparkplug = async (req, res) => {
         const plugs = await Plug.find({ })
 
         return res.json({ products: plugs })
+
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const getOil = async (req, res) => {
+    try{
+        const oils = await Oil.find({ })
+
+        return res.json({ products: oils })
 
     }catch(e){
         console.log(e)
@@ -218,5 +231,6 @@ module.exports = {
     createProduct,
     updateProduct,
     getBrakeshoe,
-    getWireset
+    getWireset,
+    getOil
 }

@@ -9,9 +9,6 @@ const Plug = require('../db/models/plugs');
 const Wireset = require('../db/models/wiresets');
 const Brakeshoe = require('../db/models/brakeshoe');
 
-
-const { checkFilterExist } = require('../services/products')
-
 const getAllInfo = async (req, res) => {
     try{
         const { newIDOrder } = req.query
@@ -82,13 +79,6 @@ const getCars = async (req, res) => {
 const postNewCar = async (req, res) => {
     try{        
         const newCar = req.body
-
-        let existAirFilterDB = await checkFilterExist(newCar.airFilter, 'air')
-        let existOilFilterDB = await checkFilterExist(newCar.oilFilter, 'oil')
-        let existFuelFilterDB = await checkFilterExist(newCar.fuelFilter, 'fuel')
-        let existCabineFilterDB = await checkFilterExist(newCar.cabineFilter, 'cabine')
-
-        if(!existAirFilterDB || !existOilFilterDB || !existFuelFilterDB || !existCabineFilterDB){ return res.status(400).send('Alguno de los filtros introducidos no existen') }
 
         const make = await Make.findById(newCar.make)
         const model = await Model.findById(newCar.model)

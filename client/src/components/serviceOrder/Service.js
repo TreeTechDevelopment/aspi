@@ -23,7 +23,7 @@ const Service = () => {
   const [sparkplug, setSparkplug] = useState({});
   const [wireset, setWireset] = useState({});
   const [brakeshoeBack, setBrakeshoeBack] = useState({});
-  const [brakeshoeFront, setBrakeshoeFront] = useState({});
+  const [brakeshoeFront, setBrakeshoeFront] = useState({})
 
   useEffect(() => {
     if (context.car.airFilter) {
@@ -121,6 +121,15 @@ const Service = () => {
             return { value: `${brakeshoesFrontDB[i].price}-${Math.random().toString()}`, label: brakeshoe };
           });
         }
+
+        airFiltersSelect.push({ value: 'none', label: 'SIN FILTRO' })
+        oilFiltersSelect.push({ value: 'none', label: 'SIN FILTRO' })
+        fuelFiltersSelect.push({ value: 'none', label: 'SIN FILTRO' })
+        cabineFiltersSelect.push({ value: 'none', label: 'SIN FILTRO' })
+        sparkplugSelect.push({ value: 'none', label: 'SIN BUJÍA' })
+        wiresetSelect.push({ value: 'none', label: 'SIN CABLES' })
+        brakeshoeBackSelect.push({ value: 'none', label: 'SIN BALATA' })
+        brakeshoeFrontSelect.push({ value: 'none', label: 'SIN BALATA' })
         
         setAirFilterSelect(airFiltersSelect);
         setAirFilter(airFiltersSelect[0]);
@@ -142,12 +151,23 @@ const Service = () => {
     }
   }, [context.car]);
 
-  const optionOil = [
-    { value: "Quacker", label: "Quacker" },
-    { value: "Motorcracft", label: "Motorcracft" },
-    { value: "Penzoil", label: "Penzoil" },
-    { value: "Mobil", label: "Mobil" },
-  ];
+  const viscositySelect = [{ value: '5W30', label: '5W30' }, { value: '5W20', label: '5W20' }, { value: '5W40', label: '5W40' }, 
+                            { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
+                            { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
+                            { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
+                            { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' },
+                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
+
+    const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
+
+    const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' },
+                                { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }]
+    
+    const oilMakeSelect = [{ value: 'Shell', label: 'Shell' }, { value: 'Quaker State', label: 'Quaker State' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'LTH', label: 'LTH' },
+                        { value: 'ACDelco', label: 'ACDelco' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Castrol', label: 'Castrol' }, { value: 'Nissan', label: 'Nissan' }, 
+                        { value: 'Phillips 66', label: 'Phillips 66' }, { value: 'Repsol', label: 'Repsol' }, { value: 'Mexlub', label: 'Mexlub' }, { value: 'Pemex', label: 'Pemex' }, 
+                        { value: 'HM9', label: 'HM9' }, { value: 'Chevron', label: 'Chevron' }, { value: 'Presson', label: 'Presson' }, { value: 'Akron', label: 'Akron' },
+                        { value: 'Bardahl', label: 'Bardahl' }]
   const optionOillts = [
     { value: "1 lts", label: "1 lts" },
     { value: "2 lts", label: "2 lts" },
@@ -155,10 +175,14 @@ const Service = () => {
     { value: "4 lts", label: "4 lts" },
   ];
 
+  const [viscosity, setViscosity] = useState(viscositySelect[0])
+  const [presentation, setPresentation] = useState(oilPresentationSelect[0])
+  const [oilMake, setOilMake] = useState(oilMakeSelect[0])
+  const [oilType, setOilType] = useState(oilTypeSelect[0])
+
   const [datos, guardarDatos] = useState({
     CleaningInj: "No",
     CleaningAB: "No",
-    aceite: optionOil[0],
     ChangeAirFiltter: "No",
     ChangeCabinAirFiltter: "No",
     Oil: "No",
@@ -212,11 +236,41 @@ const Service = () => {
     CleaningAB, CleaningInj, antifreeze, rectifyDisk, transmission, coil])
 
   const obtenerInformacion = (e) => {
+    if(context.services.length !== 0){
+      let value = getValueOfCheckbox(e.target.name)
+      guardarDatos({
+        ...datos,
+        [e.target.name]: value === "Si" ? 'No' : 'Si',
+      });
+    }
+  };
+
+  const handleTextArea = e => {
     guardarDatos({
       ...datos,
-      [e.target.name]: e.target.value,
+      note: e.target.value,
     });
-  };
+  }
+
+  const getValueOfCheckbox = name => {
+    switch(name){
+      case "CleaningInj": return CleaningInj
+      case "CleaningAB": return CleaningAB
+      case "Oil": return Oil
+      case "ChangeAirFiltter": return ChangeAirFiltter
+      case "ChangeCabinAirFiltter": return ChangeCabinAirFiltter
+      case "ChangeOilFiltter": return ChangeOilFiltter
+      case "ChangeFuelFiltter": return ChangeFuelFiltter
+      case "wiresets": return wiresets
+      case "plugs": return plugs
+      case "coil": return coil
+      case "antifreeze": return antifreeze
+      case "transmission": return transmission
+      case "rectifyDisk": return rectifyDisk
+      case "changeBrakeshoeFront": return changeBrakeshoeFront
+      case "changeBrakeshoeBack": return changeBrakeshoeBack
+    }
+  }
 
   const handleSelectOil = (newOil) => {
     guardarDatos({
@@ -234,14 +288,23 @@ const Service = () => {
 
   const getTotalProducts  =() => {
     let total = 0
-    if(plugs === "Si"){ total += Number(sparkplug?.value.split('-')[0]) }
-    if(ChangeAirFiltter === "Si"){ total += Number(airFilter.value.split('-')[0]) }
-    if(ChangeOilFiltter === "Si"){ total += Number(oilFilter.value.split('-')[0]) }
-    if(ChangeFuelFiltter === "Si"){ total += Number(fuelFilter.value.split('-')[0]) }
-    if(ChangeCabinAirFiltter === "Si"){ total += Number(cabineFilter.value.split('-')[0]) }
-    if(wiresets === "Si"){ total += Number(wireset?.value?.split('-')[0]) }
-    if(changeBrakeshoeBack === "Si"){ total += Number(brakeshoeBack?.value.split('-')[0]) }
-    if(changeBrakeshoeFront === "Si"){ total += Number(brakeshoeFront?.value.split('-')[0]) }
+    if(plugs === "Si"){ 
+      if(sparkplug?.value !== "none"){ total += Number(sparkplug?.value.split('-')[0]) }
+    }if(ChangeAirFiltter === "Si"){ 
+      if(airFilter?.value !== "none"){ total += Number(airFilter?.value.split('-')[0]) }
+    }if(ChangeOilFiltter === "Si"){ 
+      if(oilFilter?.value !== "none"){ total += Number(oilFilter?.value.split('-')[0]) }
+    }if(ChangeFuelFiltter === "Si"){ 
+      if(fuelFilter?.value !== "none"){ total += Number(fuelFilter?.value.split('-')[0]) }
+    }if(ChangeCabinAirFiltter === "Si"){ 
+      if(cabineFilter?.value !== "none"){ total += Number(cabineFilter?.value.split('-')[0]) }
+    }if(wiresets === "Si"){ 
+      if(wireset?.value !== "none"){ total += Number(wireset?.value.split('-')[0]) }
+    }if(changeBrakeshoeBack === "Si"){ 
+      if(brakeshoeBack?.value !== "none"){ total += Number(brakeshoeBack?.value.split('-')[0]) }
+    }if(changeBrakeshoeFront === "Si"){ 
+      if(brakeshoeFront?.value !== "none"){ total += Number(brakeshoeFront?.value.split('-')[0]) }
+    }
     return total
   }
 
@@ -318,40 +381,48 @@ const Service = () => {
 
   const handleSelectBrakeshoeBack = newValue => setBrakeshoeBack(newValue)
 
+  const handleSelectViscosity = newValue => setViscosity(newValue)
+
+  const handleSelectMakeOil = newValue => setOilMake(newValue)
+
+  const handleSelectPresentation = newValue => setPresentation(newValue)
+
+  const handleSelectOilType = newValue => setOilType(newValue)
+
   const renderTotalProducts = product => {
     let total = 0
     switch(product){
       case "wireset":
         total += context.services.find( service => service.name === "wiresets" ).price
-        if(wireset && wireset.value){ total += Number(wireset.value.split('-')[0]) }
+        if(wireset && wireset.value !== "none"){ total += Number(wireset.value.split('-')[0]) }
         break;
       case "brakeshoeBack":
         total += context.services.find( service => service.name === "changeBrakeshoeBack" ).price
-        if(brakeshoeBack && brakeshoeBack.value){ total += Number(brakeshoeBack.value.split('-')[0]) }
+        if(brakeshoeBack && brakeshoeBack.value !== "none"){ total += Number(brakeshoeBack.value.split('-')[0]) }
         break;
       case "brakeshoeFront":
         total += context.services.find( service => service.name === "changeBrakeshoeFront" ).price
-        if(brakeshoeFront && brakeshoeFront.value){ total += Number(brakeshoeFront.value.split('-')[0]) }
+        if(brakeshoeFront && brakeshoeFront.value !== "none"){ total += Number(brakeshoeFront.value.split('-')[0]) }
         break;
       case "sparkplug":
         total += context.services.find( service => service.name === "plugs" ).price
-        if(sparkplug && sparkplug.value){ total += Number(sparkplug.value.split('-')[0]) }
+        if(sparkplug && sparkplug.value !== "none"){ total += Number(sparkplug.value.split('-')[0]) }
         break;
       case "fuelFilter":
         total += context.services.find( service => service.name === "changeFuelFilter" ).price
-        if(fuelFilter && fuelFilter.value){ total += Number(fuelFilter.value.split('-')[0]) }
+        if(fuelFilter && fuelFilter.value !== "none"){ total += Number(fuelFilter.value.split('-')[0]) }
         break;
       case "airFilter":
         total += context.services.find( service => service.name === "changeAirFilter" ).price
-        if(airFilter && airFilter.value){ total += Number(airFilter.value.split('-')[0]) }
+        if(airFilter && airFilter.value !== "none"){ total += Number(airFilter.value.split('-')[0]) }
         break;
       case "oilFilter":
         total += context.services.find( service => service.name === "changeOilFilter" ).price
-        if(oilFilter && oilFilter.value){ total += Number(oilFilter.value.split('-')[0]) }
+        if(oilFilter && oilFilter.value !== "none"){ total += Number(oilFilter.value.split('-')[0]) }
         break;
       case "cabineFilter":
         total += context.services.find( service => service.name === "changeCabineFilter" ).price
-        if(cabineFilter && cabineFilter.value){ total += Number(cabineFilter.value.split('-')[0]) }
+        if(cabineFilter && cabineFilter.value !== "none"){ total += Number(cabineFilter.value.split('-')[0]) }
         break;
 
     }
@@ -360,413 +431,348 @@ const Service = () => {
 
   return (
     <>
-      <h3>Servicio</h3>
-      <form>
-        <div>
-          <h4>Limpieza de inyectores {CleaningInj === "Si" &&  `$${services.findIndex( service => service.name === "cleanInj" ).price}` }</h4>
-          <div >
+      <div className="third-window">
+        <form className="form align-items-start padding-left">
+          <h1>SERVICIOS</h1>
+          <div className="checkbox-container">
             <input
-              type="radio"
+              type="checkbox"
               name="CleaningInj"
-              value="Si"
               checked={CleaningInj === "Si"}
-              onChange={obtenerInformacion}
+              onClick={obtenerInformacion}
+              id="cleanInj"
             />
-            Si
-            <input
-              type="radio"
-              name="CleaningInj"
-              value="No"
-              checked={CleaningInj === "No"}
-              onChange={obtenerInformacion}
-            />
-            No
+            <label htmlFor="cleanInj">LIMPIEZA DE INYECTORES {CleaningInj === "Si" &&  `$${context.services.find( service => service.name == "cleanInj" ).price}` }</label>
           </div>
-        </div>
-        <div>
-          <h4>Limpieza de cuerpo de aceleracion {CleaningAB === "Si" &&  `$${services.findIndex( service => service.name === "cleanAB" ).price}` }</h4>
-          <div>
+          <div className="checkbox-container">
             <input
-              type="radio"
+              type="checkbox"
               name="CleaningAB"
-              value="Si"
               checked={CleaningAB === "Si"}
-              onChange={obtenerInformacion}
+              onClick={obtenerInformacion}
+              id="cleanAB"
             />
-            Si
-            <input
-              type="radio"
-              name="CleaningAB"
-              value="No"
-              checked={CleaningAB === "No"}
-              onChange={obtenerInformacion}
-            />
-            No
+            <label htmlFor="cleanAB">LIMPIEZA DE CUERPO DE ACELERACIÓN {CleaningAB === "Si" &&  `$${context.services.find( service => service.name == "cleanAB" ).price}` }</label>
           </div>
-          <div>
-            <label>Aceite</label>
-            <Select
-              placeholder="Aceite"          
-              value={aceite}
-              options={optionOil}
-              onChange={handleSelectOil}
-              isDisabled={Oil === "No"}
-            />
-          </div>
-          <div>
+          <div className="checkbox-container">
             <input
-              type="radio"
+              type="checkbox"
               name="Oil"
-              value="Si"
               checked={Oil === "Si"}
-              onChange={obtenerInformacion}
+              onClick={obtenerInformacion}
+              id="changeOil"
             />
-            Si
-            <input
-              type="radio"
-              name="Oil"
-              value="No"
-              checked={Oil === "No"}
-              onChange={obtenerInformacion}
-            />
-            No
+            <label htmlFor="changeOil">CAMBIO DE ACEITE {Oil === "Si" &&  `$${context.services.find( service => service.name == "changeOil" ).price}` }</label>
           </div>
-          <Select 
-            options={optionOillts} 
-            placeholder="Litros"             
-            value={aceiteLts}
-            onChange={handleSelectOilLts}
-            isDisabled={Oil === "No"}
-          />
-        </div>
-        <div>
-          <h4>Filtro de Aire {ChangeAirFiltter === "Si" &&  `$${renderTotalProducts('airFilter')}` }</h4>
-          <Select
-            options={airFilterSelect}
-            placeholder="Filtro de Aire"
-            value={airFilter}
-            onChange={handleSelectAirFilter}
-            isDisabled={ChangeAirFiltter === "No"}
-          />
-        </div>
-        <div>
-          <input
-            type="radio"
-            name="ChangeAirFiltter"
-            value="Si"
-            checked={ChangeAirFiltter === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="ChangeAirFiltter"
-            value="No"
-            checked={ChangeAirFiltter === "No"} 
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Filtro de Aire Cabina {ChangeCabinAirFiltter === "Si" &&  `$${renderTotalProducts('cabineFilter')}` }</h4>
-          <Select 
-            options={cabineFilterSelect} 
-            value={cabineFilter}
-            placeholder="Filtro de Aire" 
-            isDisabled={ChangeCabinAirFiltter === "No"}
-            onChange={handleSelectCabineFilter}
-          />
-        </div>
-        <div>
-          <input
-            type="radio"
-            name="ChangeCabinAirFiltter"
-            value="Si"
-            checked={ChangeCabinAirFiltter === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="ChangeCabinAirFiltter"
-            value="No"
-            checked={ChangeCabinAirFiltter === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Filtro de Aceite {ChangeOilFiltter === "Si" &&  `$${renderTotalProducts('oilFilter')}` }</h4>
-          <Select 
-            options={oilFilterSelect} 
-            value={oilFilter}
-            placeholder="Filtro de Aceite" 
-            isDisabled={ChangeOilFiltter === "No"}
-            onChange={handleSelectOilFilter}
-          />
-        </div>
-        <div>
-          <input
-            type="radio"
-            name="ChangeOilFiltter"
-            value="Si"
-            checked={ChangeOilFiltter === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="ChangeOilFiltter"
-            value="No"
-            checked={ChangeOilFiltter === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-       <div>
-          <h4>Filtro de Gasolina {ChangeFuelFiltter === "Si" &&  `$${renderTotalProducts('fuelFilter')}` }</h4>
-          <Select
-            options={fuelFilterSelect}
-            placeholder="Filtro de Aceite"
-            value={fuelFilter}
-            onChange={handleSelectFuelFilter}
-            isDisabled={ChangeFuelFiltter === "No"}
-          />
-        </div>
-       <div>
-          <input
-            type="radio"
-            name="ChangeFuelFiltter"
-            value="Si"
-            checked={ChangeFuelFiltter === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="ChangeFuelFiltter"
-            value="No"
-            checked={ChangeFuelFiltter === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Bujias {plugs === "Si" &&  `$${renderTotalProducts('sparkplug')}` }</h4>
-           <Select
-            options={sparkplugSelect}
-            placeholder="Bujías"
-            value={sparkplug}
-            onChange={handleSelectSparkplug}
-            isDisabled={plugs === "No"}
-          />
-          <input
-            type="radio"
-            name="plugs"
-            value="Si"
-            checked={plugs === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="plugs"
-            value="No"
-            checked={plugs === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>
-            Juego de cables {wiresets === "Si" &&  `$${renderTotalProducts('wireset')}` }
-          </h4>
-          <Select
-            options={wiresetSelect}
-            placeholder="Juego de Cables"
-            value={wireset}
-            onChange={handleSelectWireset}
-            isDisabled={wiresets === "No"}
-          />
-          <input
-            type="radio"
-            name="wiresets"
-            value="Si"
-            checked={wiresets === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="wiresets"
-            value="No"
-            checked={wiresets === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Bobinas {coil === "Si" &&  `$${context.services.find( service => service.name === "coil" ).price}` }</h4>
-          <input
-            type="radio"
-            name="coil"
-            value="Si"
-            checked={coil === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="coil"
-            value="No"
-            checked={coil === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Anticongelante {antifreeze === "Si" &&  `$${context.services.find( service => service.name === "antifreeze" ).price}` }</h4>
-          <input
-            type="radio"
-            name="antifreeze"
-            value="Si"
-            checked={antifreeze === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="antifreeze"
-            value="No"
-            checked={antifreeze === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Cambio de Aceite de Transmisión {transmission === "Si" &&  `$${context.services.find( service => service.name === "transmission" ).price}` }</h4>
-          <input
-            type="radio"
-            name="transmission"
-            value="Si"
-            checked={transmission === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="transmission"
-            value="No"
-            checked={transmission === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Rectificación de Discos {rectifyDisk === "Si" &&  `$${context.services.find( service => service.name === "rectifyDisk" ).price}` }</h4>
-          <input
-            type="radio"
-            name="rectifyDisk"
-            value="Si"
-            checked={rectifyDisk === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="rectifyDisk"
-            value="No"
-            checked={rectifyDisk === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Cambio de Balatas Delanteras {changeBrakeshoeFront === "Si" &&  `$${renderTotalProducts('brakeshoeFront')}` }</h4>
-          <Select
-            options={brakeshoeFrontSelect}
-            placeholder="Juego de Cables"
-            value={brakeshoeFront}
-            onChange={handleSelectBrakeshoeFront}
-            isDisabled={changeBrakeshoeFront === "No"}
-          />
-          <input
-            type="radio"
-            name="changeBrakeshoeFront"
-            value="Si"
-            checked={changeBrakeshoeFront === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="changeBrakeshoeFront"
-            value="No"
-            checked={changeBrakeshoeFront === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Cambio de Balatas Traseras {changeBrakeshoeBack === "Si" &&  `$${renderTotalProducts('brakeshoeBack')}` }</h4>
-          <Select
-            options={brakeshoeBackSelect}
-            placeholder="Juego de Cables"
-            value={brakeshoeBack}
-            onChange={handleSelectBrakeshoeBack}
-            isDisabled={changeBrakeshoeBack === "No"}
-          />
-          <input
-            type="radio"
-            name="changeBrakeshoeBack"
-            value="Si"
-            checked={changeBrakeshoeBack === "Si"}
-            onChange={obtenerInformacion}
-          />
-          Si
-          <input
-            type="radio"
-            name="changeBrakeshoeBack"
-            value="No"
-            checked={changeBrakeshoeBack === "No"}
-            onChange={obtenerInformacion}
-          />
-          No
-        </div>
-        <div>
-          <h4>Notas</h4>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="ChangeAirFiltter"
+              checked={ChangeAirFiltter === "Si"}
+              onClick={obtenerInformacion}
+              id="changeAirFilter"
+            />
+            <label htmlFor="changeAirFilter">CAMBIO DE FILTRO DE AIRE {ChangeAirFiltter === "Si" && `$${renderTotalProducts('airFilter')}`}</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="ChangeCabinAirFiltter"
+              checked={ChangeCabinAirFiltter === "Si"}
+              onClick={obtenerInformacion}
+              id="changeCabineFilter"
+            />
+            <label htmlFor="changeCabineFilter">CAMBIO DE FILTRO DE AIRE DE CABINA {ChangeCabinAirFiltter === "Si" && `$${renderTotalProducts('cabineFilter')}`}</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="ChangeOilFiltter"
+              checked={ChangeOilFiltter === "Si"}
+              onClick={obtenerInformacion}
+              id="changeOilFilter"
+            />
+            <label htmlFor="changeOilFilter">CAMBIO DE FILTRO DE ACEITE {ChangeOilFiltter === "Si" && `$${renderTotalProducts('oilFilter')}`}</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="ChangeFuelFiltter"
+              checked={ChangeFuelFiltter === "Si"}
+              onClick={obtenerInformacion}
+              id="changeFuelFilter"
+            />
+            <label htmlFor="changeFuelFilter">CAMBIO DE FILTRO DE GASOLINA {ChangeFuelFiltter === "Si" && `$${renderTotalProducts('fuelFilter')}`}</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="plugs"
+              checked={plugs === "Si"}
+              onClick={obtenerInformacion}
+              id="sparkPlugs"
+            />
+            <label htmlFor="sparkPlugs">BUJÍAS {plugs === "Si" && `$${renderTotalProducts('sparkplug')}`}</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="wiresets"
+              checked={wiresets === "Si"}
+              onClick={obtenerInformacion}
+              id="wireset"
+            />
+            <label htmlFor="wireset">JUEGO DE CABLES {wiresets === "Si" && `$${renderTotalProducts('wireset')}`}</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="coil"
+              checked={coil === "Si"}
+              onClick={obtenerInformacion}
+              id="coils"
+            />
+            <label htmlFor="coils">BOBINAS {coil === "Si" &&  `$${context.services.find( service => service.name == "coil" ).price}` }</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="antifreeze"
+              checked={antifreeze === "Si"}
+              onClick={obtenerInformacion}
+              id="antifreeze-id"
+            />
+            <label htmlFor="antifreeze-id">ANTICONGELANTE {antifreeze === "Si" &&  `$${context.services.find( service => service.name == "antifreeze" ).price}` }</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="transmission"
+              checked={transmission === "Si"}
+              onClick={obtenerInformacion}
+              id="transmission-id"
+            />
+            <label htmlFor="transmission-id">CAMBIO DE ACEITE DE TRANSMISIÓN {transmission === "Si" &&  `$${context.services.find( service => service.name == "transmission" ).price}` }</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="rectifyDisk"
+              checked={rectifyDisk === "Si"}
+              onClick={obtenerInformacion}
+              id="rectifyDisk-id"
+            />
+            <label htmlFor="rectifyDisk-id">RECTIFICACIÓN DE DISCOS {rectifyDisk === "Si" &&  `$${context.services.find( service => service.name == "rectifyDisk" ).price}` }</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="changeBrakeshoeFront"
+              checked={changeBrakeshoeFront === "Si"}
+              onClick={obtenerInformacion}
+              id="changeBrakeshoeFront-id"
+            />
+            <label htmlFor="changeBrakeshoeFront-id">CAMBIO DE BALATAS DELANTERAS {changeBrakeshoeFront === "Si" &&  `$${renderTotalProducts('brakeshoeFront')}` }</label>
+          </div>
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              name="changeBrakeshoeBack"
+              checked={changeBrakeshoeBack === "Si"}
+              onClick={obtenerInformacion}
+              id="changeBrakeshoeBack-id"
+            />
+            <label htmlFor="changeBrakeshoeBack-id">CAMBIO DE BALATAS TRASERAS {changeBrakeshoeBack === "Si" &&  `$${renderTotalProducts('brakeshoeBack')}` }</label>
+          </div>
+        </form>
+      </div>
+      <div className="third-window">
+        <form className="form">
+        {Oil === "Si" && (
+          <>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>ACEITE</label>
+              </div>
+              <Select        
+                value={oilMake}
+                options={oilMakeSelect}
+                onChange={handleSelectMakeOil}
+                className="select"
+              />
+            </div>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>VISCOSIDAD</label>
+              </div>
+              <Select        
+                value={viscosity}
+                options={viscositySelect}
+                onChange={handleSelectViscosity}
+                className="select"
+              />
+            </div>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>PRESENTACIÓN</label>
+              </div>
+              <Select        
+                value={presentation}
+                options={oilPresentationSelect}
+                onChange={handleSelectPresentation}
+                className="select"
+              />
+            </div>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>TIPO</label>
+              </div>
+              <Select        
+                value={oilType}
+                options={oilTypeSelect}
+                onChange={handleSelectOilType}
+                className="select"
+              />
+            </div>
+          </>
+          )}
+          {ChangeAirFiltter === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>F. DE AIRE</label>
+              </div>
+              <Select
+                options={airFilterSelect}
+                value={airFilter}
+                onChange={handleSelectAirFilter}
+                className="select"
+              />
+          </div>
+          )}
+          {ChangeCabinAirFiltter === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>F. DE CABINA</label>
+              </div>
+              <Select
+                options={cabineFilterSelect} 
+                value={cabineFilter}
+                className="select"
+                onChange={handleSelectCabineFilter}
+              />
+            </div>
+          )}
+          {ChangeOilFiltter === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>F. DE ACEITE</label>
+              </div>
+              <Select
+                options={oilFilterSelect} 
+                value={oilFilter}
+                className="select"
+                onChange={handleSelectOilFilter}
+              />
+            </div>
+          )}
+          {ChangeFuelFiltter === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>F. DE GASOLINA</label>
+              </div>
+              <Select
+                options={fuelFilterSelect}
+                value={fuelFilter}
+                onChange={handleSelectFuelFilter}
+                isDisabled={ChangeFuelFiltter === "No"}
+                className="select" />
+            </div>
+          )}
+          {plugs === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>BUJÍAS</label>
+              </div>
+              <Select
+                options={sparkplugSelect}
+                className="select"
+                value={sparkplug}
+                onChange={handleSelectSparkplug}
+              />
+            </div>
+          )}
+          {wiresets === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>CABLES</label>
+              </div>
+              <Select
+                options={wiresetSelect}
+                value={wireset}
+                onChange={handleSelectWireset}
+                className="select"
+              />
+            </div>
+          )}
+          {changeBrakeshoeFront === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>BALATAS D.</label>
+              </div>
+              <Select
+                options={brakeshoeFrontSelect}
+                className="select"
+                value={brakeshoeFront}
+                onChange={handleSelectBrakeshoeFront}
+              />
+            </div>
+          )}
+          {changeBrakeshoeBack === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>BALATAS T.</label>
+              </div>
+              <Select
+                options={brakeshoeBackSelect}
+                className="select"
+                value={brakeshoeBack}
+                onChange={handleSelectBrakeshoeBack}
+              />
+            </div>
+          )}
+          <h2>NOTAS</h2>
           <textarea
             name="note"
             value={note}
-            onChange={obtenerInformacion}
+            onChange={handleTextArea}
           />
-        </div> 
-        <button onClick={createPDF} className="btn btn-primary">CREAR PDF</button>
-        { renderBTNPDF && (
-          <CreatePDF 
-            aceite={aceite.value}
-            Oil={Oil}
-            aceiteLts={aceiteLts.value}
-            airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.label : ''}
-            oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.label : ''}
-            fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.label : ''}
-            cabineFilter={ (ChangeCabinAirFiltter === "Si" && cabineFilter) ? cabineFilter.label : ''}
-            cleanInj={CleaningInj}
-            cleanAB={CleaningAB}
-            sparkplug={(plugs === "Si" && sparkplug) ? sparkplug.label : ''}
-            wiresets={(wiresets === "Si" && wireset) ? wireset.label : ''}
-            brakeshoeBack={(changeBrakeshoeBack === "Si" && brakeshoeBack) ? brakeshoeBack.label : ''}
-            brakeshoeFront={(changeBrakeshoeFront === "Si" && brakeshoeFront) ? brakeshoeFront.label : ''}
-            coil={coil}
-            antifreeze={antifreeze}
-            transmission={transmission}
-            note={note}
-            total={total}
-            rectifyDisk={rectifyDisk}
-          />
-        ) }
-        
-      </form>
+          <button onClick={createPDF} className="btn-aspi">CREAR PDF</button>
+          { renderBTNPDF && (
+            <CreatePDF 
+              aceite={aceite.value}
+              Oil={Oil}
+              aceiteLts={aceiteLts.value}
+              airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.label : ''}
+              oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.label : ''}
+              fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.label : ''}
+              cabineFilter={ (ChangeCabinAirFiltter === "Si" && cabineFilter) ? cabineFilter.label : ''}
+              cleanInj={CleaningInj}
+              cleanAB={CleaningAB}
+              sparkplug={(plugs === "Si" && sparkplug) ? sparkplug.label : ''}
+              wiresets={(wiresets === "Si" && wireset) ? wireset.label : ''}
+              brakeshoeBack={(changeBrakeshoeBack === "Si" && brakeshoeBack) ? brakeshoeBack.label : ''}
+              brakeshoeFront={(changeBrakeshoeFront === "Si" && brakeshoeFront) ? brakeshoeFront.label : ''}
+              coil={coil}
+              antifreeze={antifreeze}
+              transmission={transmission}
+              note={note}
+              total={total}
+              rectifyDisk={rectifyDisk}
+            />
+          ) }
+          
+        </form>
+      </div>
     </>
   );
 };

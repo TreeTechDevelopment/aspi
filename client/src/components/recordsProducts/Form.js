@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 import Loader from 'react-loader-spinner';
+import Select from 'react-select';
 
 import { appContext } from '../../context/Provider'
 import { url, messageServerError } from '../../../app.json'
@@ -9,6 +10,24 @@ import InputFilter from './InputProduct'
 import BtnProduct from './BtnProduct'
 
 function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, typeProduct }) {
+
+    const viscositySelect = [{ value: '5W30', label: '5W30' }, { value: '5W20', label: '5W20' }, { value: '5W40', label: '5W40' }, 
+                            { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
+                            { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
+                            { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
+                            { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' },
+                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
+
+    const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
+
+    const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' },
+                                { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }]
+    
+    const oilMakeSelect = [{ value: 'Shell', label: 'Shell' }, { value: 'Quaker State', label: 'Quaker State' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'LTH', label: 'LTH' },
+                        { value: 'ACDelco', label: 'ACDelco' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Castrol', label: 'Castrol' }, { value: 'Nissan', label: 'Nissan' }, 
+                        { value: 'Phillips 66', label: 'Phillips 66' }, { value: 'Repsol', label: 'Repsol' }, { value: 'Mexlub', label: 'Mexlub' }, { value: 'Pemex', label: 'Pemex' }, 
+                        { value: 'HM9', label: 'HM9' }, { value: 'Chevron', label: 'Chevron' }, { value: 'Presson', label: 'Presson' }, { value: 'Akron', label: 'Akron' },
+                        { value: 'Bardahl', label: 'Bardahl' }]
 
     const context = useContext(appContext)
     
@@ -45,6 +64,12 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const [loading, setLoading] = useState(false)
     const [interfil, setInterfill] = useState('')
     const [price, setPrice] = useState('')
+    const [lts, setLts] = useState('')
+    
+    const [viscosity, setViscosity] = useState(viscositySelect[0])
+    const [presentation, setPresentation] = useState(oilPresentationSelect[0])
+    const [oilMake, setOilMake] = useState(oilMakeSelect[0])
+    const [oilType, setOilType] = useState(oilTypeSelect[0])
 
     const getArrayProductsRender = product => {
 
@@ -293,6 +318,16 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     }
 
     const handleInputPrice = e => setPrice(e.target.value.replace(/[^0-9]/g, ''))
+
+    const handleInputLts = e => setLts(e.target.value.replace(/[^0-9]/g, ''))
+
+    const handleSelectViscosity = newValue => setViscosity(newValue)
+
+    const handleSelectMakeOil = newValue => setOilMake(newValue)
+
+    const handleSelectPresentation = newValue => setPresentation(newValue)
+
+    const handleSelectOilType = newValue => setOilType(newValue)
     
 
     return (
@@ -397,7 +432,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                             <BtnProduct product="Wagner" addProduct={addProducts} removeProduct={removeProducts}/>
                         </div>
                         </>
-                    ): (
+                    ): typeProduct.value === "wiresets" ? (
                         <>
                         <div className="input-filters-container">
                             <span>Bosh</span>
@@ -434,6 +469,33 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                                 />
                             ))}
                             <BtnProduct product="NGK" addProduct={addProducts} removeProduct={removeProducts}/>
+                        </div>
+                        </>
+                    ): (
+                        <>  
+                        <div className="input-filters-container">
+                            <span>Marca</span>
+                            <Select 
+                                options={oilMakeSelect}
+                                value={oilMake}
+                                onChange={handleSelectMakeOil}
+                            />
+                        </div>
+                        <div className="input-filters-container">
+                            <span>Viscosidad</span>
+                            <Select 
+                                options={viscositySelect}
+                                value={viscosity}
+                                onChange={handleSelectViscosity}
+                            />
+                        </div>
+                        <div className="input-filters-container">
+                            <span>Presentación</span>
+                            <Select 
+                                options={oilPresentationSelect}
+                                value={presentation}
+                                onChange={handleSelectPresentation}
+                            />
                         </div>
                         </>
                     )}
@@ -524,7 +586,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                     )}
                 </div>
                 <div id="input-filters-container-group">
-                { typeProduct.value === 'filter' && (
+                { typeProduct.value === 'filter' ? (
                         <>
                         <div className="input-filters-container">
                             <span>Purolator</span>
@@ -561,6 +623,24 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                                 />
                             ))}
                            <BtnProduct product="Mann" addProduct={addProducts} removeProduct={removeProducts}/>
+                        </div>
+                        </>
+                    ): typeProduct.value === "oil" && (
+                        <>
+                        <div className="input-filters-container">
+                            <span>Tipo de aceite</span>
+                            <Select 
+                                options={oilTypeSelect}
+                                value={oilType}
+                                onChange={handleSelectOilType}
+                            />
+                        </div>
+                        <div className="input-filters-container">
+                            <span>Litros/Galon</span>
+                            <input 
+                                value={lts}
+                                onChange={handleInputLts}
+                            />
                         </div>
                         </>
                     )}

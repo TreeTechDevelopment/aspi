@@ -9,7 +9,8 @@ function RecordsProduts() {
     const optionsTypeProducts = [{ value: 'sparkPlug', label: 'Bujías' },
                                 { value: 'brakeShoe', label: 'Balatas' },
                                 { value: 'filter', label: 'Filtros' },
-                                { value: 'wiresets', label: 'Juego de Cables' }]
+                                { value: 'wiresets', label: 'Juego de Cables' },
+                                { value: 'oil', label: 'Aceites' }]
         
     const [typeProduct, setTypeProduct] = useState(optionsTypeProducts[2])
     const [loading, setLoading] = useState(true)
