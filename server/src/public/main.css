@@ -1,11 +1,11 @@
 @font-face{
     font-family: SairaLight;
-    src: url('https://talleraspi.herokuapp.com/fonts/Saira-Light.otf');
+    src: url('http://192.168.0.6:3000/fonts/Saira-Light.otf');
 }
 
 @font-face {
     font-family: SourceSans;
-    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Regular.ttf');
+    src: url('http://192.168.0.6:3000/fonts/SourceSansPro-Regular.ttf');
 }
 
 html, body, #app{
@@ -22,34 +22,6 @@ html, body, #app{
 
 nav, header, footer{
     display: block;
-}
-
-.btn-container-records {
-    width: 100%;
-    height: 100%;
-    display: flex;    
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 0 20%;
-}
-
-.btn-records{
-    width: 40%;
-    margin-bottom: 1%;
-}
-
-.body{
-    width: 100%;    
-    display: flex;
-    flex-direction: column;    
-    align-items: center;  
-}
-
-.download-pdf-btn{
-    color: white;
-    padding: 2rem 1rem;
-    background-color: cyan;
-    text-align: center;
 }
 
 .table-records-container{    
@@ -81,9 +53,7 @@ nav, header, footer{
     flex-direction: column;
 }
 
-.hidden-atag{
-    display: none;
-}
+.hidden-atag{ display: none; }
 
 .table-products{
     width: 80%;
@@ -91,10 +61,13 @@ nav, header, footer{
 
 /* =======================NUEVOS ESTILOS ======================*/
 
+.full-width{ width: 100%; }
+.full-height{ height: 100%; }
+
 .bg-white{
     width: 100%;
     height: 100%;
-    background-image: url('https://talleraspi.herokuapp.com/images/background.jpg');
+    background-image: url('http://192.168.0.6:3000/images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -107,6 +80,7 @@ nav, header, footer{
 
 .padding-horizontal{ padding: 0 1rem; }
 .padding-left{ padding-left: 2rem; }
+.margin-top{ margin-top: 1rem; }
 
 .checkbox-container{
     background-color: rgb( 254, 177, 0 );
@@ -136,7 +110,7 @@ nav, header, footer{
 
 .checkbox-container label{
     margin: 0; 
-    color: white;
+    color: black;
     font-family: SourceSans;
     font-size: 1.2rem;
     margin: 0 1rem;
@@ -150,6 +124,8 @@ nav, header, footer{
     align-items: center;
     justify-content: center;
 }
+
+.height-content{ height: fit-content; }
 
 .form h1{ font-family: SairaLight; }
 
@@ -209,7 +185,7 @@ nav, header, footer{
 
 .select-container .label-container label{ 
     margin: 0; 
-    color: white;
+    color: black;
     font-family: SourceSans;
     font-size: 1.2rem;
 }
@@ -231,22 +207,46 @@ nav, header, footer{
     width: 1px;
 }
 
+.order-searcher{
+    position: absolute;
+    top: 20%;
+    left: 0;
+    align-items: flex-start;
+    padding-left: 11%;
+}
+
+.label-dont-found{ 
+    font-family: SourceSans; 
+    position: absolute;
+    bottom: 35%;
+    margin: auto;
+}
+
+.btn-container-records{
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 20%;
+    display: flex;
+}
 
 
 @font-face {
     font-family: SourceSansBold;
-    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Bold.ttf');
+    src: url('http://192.168.0.6:3000/fonts/SourceSansPro-Bold.ttf');
 }
 
 @font-face {
     font-family: BlueHighWay;
-    src: url('https://talleraspi.herokuapp.com/fonts/blue-highway-rg.ttf');
+    src: url('http://192.168.0.6:3000/fonts/blue-highway-rg.ttf');
 }
 
 #home {
     width: 100%;
     height: 100%;
-    background-image: url('https://talleraspi.herokuapp.com/images/background-color.jpg');
+    background-image: url('http://192.168.0.6:3000/images/background-color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -283,7 +283,7 @@ nav, header, footer{
 
 @font-face {
     font-family: SourceSansBold;
-    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Bold.ttf');
+    src: url('http://192.168.0.6:3000/fonts/SourceSansPro-Bold.ttf');
 }
 
 .navHome{
@@ -349,16 +349,16 @@ nav, header, footer{
 
 @font-face {
     font-family: SourceSans;
-    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Regular.ttf');
+    src: url('http://192.168.0.6:3000/fonts/SourceSansPro-Regular.ttf');
 }
 
 @font-face {
     font-family: SourceSansBlack;
-    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Black.ttf');
+    src: url('http://192.168.0.6:3000/fonts/SourceSansPro-Black.ttf');
 }
 
 #login-container{
-    background-image: url('https://talleraspi.herokuapp.com/images/background-color.jpg');
+    background-image: url('http://192.168.0.6:3000/images/background-color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;

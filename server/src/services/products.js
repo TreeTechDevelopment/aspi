@@ -56,9 +56,9 @@ const checkSparkplugExist = async (sparkplugs) => {
         let sparkplugDB = await Plug.findOne({ $or: [
             { 'NGK': { $in: [sparkplugs[i]] } },
             { 'ACD': { $in: [sparkplugs[i]] } },
-            { 'Champions': { $in: [arrayFilters[i]] } },
-            { 'Bosh': { $in: [arrayFilters[i]] } },
-            { 'Motorcraft': { $in: [arrayFilters[i]] } }
+            { 'Champions': { $in: [sparkplugs[i]] } },
+            { 'Bosh': { $in: [sparkplugs[i]] } },
+            { 'Motorcraft': { $in: [sparkplugs[i]] } }
         ] })
         if(!sparkplugDB){ existSparkplugDB = false }
     }
@@ -81,6 +81,8 @@ const checkWiresetsExist = async (wiresets) => {
 
 const checkProductsExistMiddleware = async (req, res, next) => {
     const newCar = req.body
+
+    console.log(newCar)
 
     let existAirFilterDB = await checkFilterExist(newCar.airFilter, 'air')
     let existOilFilterDB = await checkFilterExist(newCar.oilFilter, 'oil')

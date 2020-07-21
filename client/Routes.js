@@ -29,7 +29,7 @@ function Routes() {
             <CrossR />
           </Route>
           <Route exact path="/orders">
-            <Orders />
+            <Provider> <Orders /> </Provider>
           </Route>
           <Route exact path="/service-order">
             <Provider> <ServiceOrd /> </Provider>

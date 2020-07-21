@@ -5,7 +5,7 @@ import Select from 'react-select';
 import { url, messageServerError } from '../../../app.json'
 import { appContext } from '../../context/Provider'
 
-function Form(){
+function Form({ order }){
 
     const context = useContext(appContext)
 
@@ -80,14 +80,23 @@ function Form(){
     useEffect(() => {
         let newIDOrDER = false
         let IDOrder = getIDORder()
-        if(Number(IDOrder) === -1 || !IDOrder){ newIDOrDER = true }
-        fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes }) => {
-            setData(models, makes)
+        if((Number(IDOrder) === -1 || !IDOrder) && !order){ newIDOrDER = true }
+        fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes, oils }) => {
+            if(order){
+                console.log('Con orden')
+                setYear({ value: order.carYear, label: order.carYear })
+                setMake({ value: order.car.make.name, label: order.car.make.name })
+                setModel({ value: order.car.model.name, label: order.car.model.name })
+                setCylinder({ value: order.car.cylinder, label: order.car.cylinder })
+                setMotor({ value: order.car.motor, label: order.car.motor })
+                setInfoFetched(true)
+            }else{ setData(models, makes) }
             context.dispatchServices({ type: 'SET', value: services })
             context.dispatchFilters({ type: 'SET', value: filters })
             context.dispatchSparkplugs({ type: 'SET', value: sparkplugs })
             context.dispatchWiresets({ type: 'SET', value: wiresets })
             context.dispatchBrakeshoes({ type: 'SET', value: brakeshoes })
+            context.dispatchOils({ type: 'SET', value: oils })
             if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
         }).catch((e) => {
             setInfoFetched(true)
@@ -100,7 +109,7 @@ function Form(){
     const getIDORder = () => window.localStorage.getItem('@IDOrder')
 
     useEffect(() => {
-        if( make && model && make.value && model.value){    
+        if( make && model && make.value && model.value && !order){    
             fetchCar().then(({cars}) => {
                 setDataCars(cars)
             }).catch(e => alert(`${messageServerError}`))
@@ -188,6 +197,7 @@ function Form(){
                                 onChange={handleMakeSelect}
                                 value={make}
                                 className="select"
+                                isDisabled={order}
                             />
                         </div>
                         <div className="select-container">
@@ -199,6 +209,7 @@ function Form(){
                                 onChange={handleModelSelect}
                                 value={model}
                                 className="select"
+                                isDisabled={order}
                             />
                         </div>
                         <div className="select-container">
@@ -210,6 +221,7 @@ function Form(){
                                 onChange={handleYearsSelect}
                                 value={year}
                                 className="select"
+                                isDisabled={order}
                             />
                         </div>
                         <div className="select-container">
@@ -221,6 +233,7 @@ function Form(){
                                 onChange={handleMotorSelect}
                                 value={motor}
                                 className="select"
+                                isDisabled={order}
                             />
                         </div>
                         <div className="select-container">
@@ -232,6 +245,7 @@ function Form(){
                                 onChange={handleCylinderSelect}
                                 value={cylinder}
                                 className="select"
+                                isDisabled={order}
                             />
                         </div>
                     </form>

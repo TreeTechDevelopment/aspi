@@ -4,7 +4,26 @@ import Select from "react-select";
 import CreatePDF from './CreatePDF'
 import { appContext } from '../../context/Provider'
 
-const Service = () => { 
+const Service = ({order}) => { 
+
+  const viscositySelect = [{ value: '5W30', label: '5W30' }, { value: '5W20', label: '5W20' }, { value: '5W40', label: '5W40' }, 
+                            { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
+                            { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
+                            { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
+                            { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' },
+                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
+
+  const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
+
+  const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' },
+                                { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }, { value: "Suelto", label: 'Suelto' },
+                                { value: 'none', label: 'SIN ACEITE' }]
+    
+  const oilMakeSelect = [{ value: 'Shell', label: 'Shell' }, { value: 'Quaker State', label: 'Quaker State' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'LTH', label: 'LTH' },
+                        { value: 'ACDelco', label: 'ACDelco' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Castrol', label: 'Castrol' }, { value: 'Nissan', label: 'Nissan' }, 
+                        { value: 'Phillips 66', label: 'Phillips 66' }, { value: 'Repsol', label: 'Repsol' }, { value: 'Mexlub', label: 'Mexlub' }, { value: 'Pemex', label: 'Pemex' }, 
+                        { value: 'HM9', label: 'HM9' }, { value: 'Chevron', label: 'Chevron' }, { value: 'Presson', label: 'Presson' }, { value: 'Akron', label: 'Akron' },
+                        { value: 'Bardahl', label: 'Bardahl' }]
 
   const context = useContext(appContext)
 
@@ -24,9 +43,58 @@ const Service = () => {
   const [wireset, setWireset] = useState({});
   const [brakeshoeBack, setBrakeshoeBack] = useState({});
   const [brakeshoeFront, setBrakeshoeFront] = useState({})
+  const [lts, setLts] = useState('')
+  const [viscosity, setViscosity] = useState(viscositySelect[0])
+  const [presentation, setPresentation] = useState(oilPresentationSelect[0])
+  const [oilMake, setOilMake] = useState(oilMakeSelect[0])
+  const [oilType, setOilType] = useState(oilTypeSelect[0])
+
+  const [datos, guardarDatos] = useState({
+    CleaningInj: "No",
+    CleaningAB: "No",
+    ChangeAirFiltter: "No",
+    ChangeCabinAirFiltter: "No",
+    Oil: "No",
+    ChangeOilFiltter: "No",
+    ChangeFuelFiltter: "No",
+    plugs: "No",
+    wiresets: "No",
+    coil: "No",
+    antifreeze: "No",
+    transmission: "No",
+    rectifyDisk: "No",
+    changeBrakeshoeBack: "No",
+    changeBrakeshoeFront: "No",
+    note: '',
+    total: 0,
+    renderBTNPDF: false
+  });
+
+  const {
+    rectifyDisk,
+    changeBrakeshoeBack,
+    changeBrakeshoeFront,
+    CleaningInj,
+    CleaningAB,
+    ChangeAirFiltter,
+    Oil,
+    ChangeOilFiltter,
+    ChangeCabinAirFiltter,
+    ChangeFuelFiltter,
+    plugs,
+    wiresets,
+    coil,
+    antifreeze,
+    transmission,
+    note,
+    renderBTNPDF,
+    total
+  } = datos;
 
   useEffect(() => {
-    if (context.car.airFilter) {
+    if (JSON.stringify(context.car) !== "{}" || order) {
+
+        console.log(order)
 
         let airFilters = context.filters.filter( filterDB => filterDB.filterType === "air" )
         let oilFilters = context.filters.filter( filterDB => filterDB.filterType === "oil" )
@@ -34,7 +102,8 @@ const Service = () => {
         let cabineFilters = context.filters.filter( filterDB => filterDB.filterType === "cabine" )
 
         let airFiltersSelect = []
-        airFilters = airFilters.filter( filter => context.car.airFilter.some( airFilter => airFilter == filter.interfil )  )
+        if(order){ airFilters = airFilters.filter( filter => order.car.airFilter.some( airFilter => airFilter === filter.interfil ) ) }
+        else{ airFilters = airFilters.filter( filter => context.car.airFilter.some( airFilter => airFilter == filter.interfil )  ) }
         for(let i = 0; i < airFilters.length; i++){
           airFiltersSelect = [...airFiltersSelect, airFilters[i].interfil, ...airFilters[i].OEM, ...airFilters[i].ACD,
                             ...airFilters[i].Fram, ...airFilters[i].Gonher, ...airFilters[i].Motorcraft, ...airFilters[i].Purolator,
@@ -46,7 +115,8 @@ const Service = () => {
         }
 
         let oilFiltersSelect = []
-        oilFilters = oilFilters.filter( filter => context.car.oilFilter.some( oilFilter => oilFilter == filter.interfil )  )
+        if(order){ oilFilters = oilFilters.filter( filter => order.car.oilFilter.some( oilFilter => oilFilter == filter.interfil )  ) }
+        else{ oilFilters = oilFilters.filter( filter => context.car.oilFilter.some( oilFilter => oilFilter == filter.interfil )  ) }
         for(let i = 0; i < oilFilters.length; i++){
           oilFiltersSelect = [...oilFiltersSelect, oilFilters[i].interfil, ...oilFilters[i].OEM, ...oilFilters[i].ACD,
                             ...oilFilters[i].Fram, ...oilFilters[i].Gonher, ...oilFilters[i].Motorcraft, ...oilFilters[i].Purolator,
@@ -58,7 +128,8 @@ const Service = () => {
         }
 
         let fuelFiltersSelect = []
-        fuelFilters = fuelFilters.filter( filter => context.car.fuelFilter.some( fuelFilter => fuelFilter == filter.interfil )  )
+        if(order){ fuelFilters = fuelFilters.filter( filter => order.car.fuelFilter.some( fuelFilter => fuelFilter == filter.interfil )  ) }
+        else{ fuelFilters = fuelFilters.filter( filter => context.car.fuelFilter.some( fuelFilter => fuelFilter == filter.interfil )  ) }
         for(let i = 0; i < fuelFilters.length; i++){
           fuelFiltersSelect = [...fuelFiltersSelect, fuelFilters[i].interfil, ...fuelFilters[i].OEM, ...fuelFilters[i].ACD,
                             ...fuelFilters[i].Fram, ...fuelFilters[i].Gonher, ...fuelFilters[i].Motorcraft, ...fuelFilters[i].Purolator,
@@ -70,7 +141,8 @@ const Service = () => {
         }
 
         let cabineFiltersSelect = []
-        cabineFilters = cabineFilters.filter( filter => context.car.cabineFilter.some( cabineFilter => cabineFilter == filter.interfil )  )
+        if(order){ cabineFilters = cabineFilters.filter( filter => order.car.cabineFilter.some( cabineFilter => cabineFilter == filter.interfil )  ) }
+        else{ cabineFilters = cabineFilters.filter( filter => context.car.cabineFilter.some( cabineFilter => cabineFilter == filter.interfil )  ) }
         for(let i = 0; i < cabineFilters.length; i++){
           cabineFiltersSelect = [...cabineFiltersSelect, cabineFilters[i].interfil, ...cabineFilters[i].OEM, ...cabineFilters[i].ACD,
                             ...cabineFilters[i].Fram, ...cabineFilters[i].Gonher, ...cabineFilters[i].Motorcraft, ...cabineFilters[i].Purolator,
@@ -82,7 +154,9 @@ const Service = () => {
         }
 
         let sparkplugSelect = []
-        let sparkplugsDB = context.sparkplugs.filter( sparkplugDB => context.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugNGK => sparkplug == sparkplugNGK ) )  )
+        let sparkplugsDB = []
+        if(order){ sparkplugsDB = context.sparkplugs.filter( sparkplugDB => order.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugNGK => sparkplug == sparkplugNGK ) )  ) }
+        else{ sparkplugsDB = context.sparkplugs.filter( sparkplugDB => context.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugNGK => sparkplug == sparkplugNGK ) )  ) }
         for(let i = 0; i < sparkplugsDB.length; i++){
           sparkplugSelect = [...sparkplugSelect, ...sparkplugsDB[i].NGK, ...sparkplugsDB[i].Champions, ...sparkplugsDB[i].ACD,
                             ...sparkplugsDB[i].Bosh, ...sparkplugsDB[i].Motorcraft]
@@ -93,7 +167,9 @@ const Service = () => {
         }
 
         let wiresetSelect = []
-        let wiresetsDB = context.wiresets.filter( wiresetDB => context.car.wiresets.some( wireset => wiresetDB.Roadstar.some( wiresetRoadstar => wireset == wiresetRoadstar ) )  )
+        let wiresetsDB = []
+        if(order){ wiresetsDB = context.wiresets.filter( wiresetDB => order.car.wiresets.some( wireset => wiresetDB.Roadstar.some( wiresetRoadstar => wireset == wiresetRoadstar ) )  ) }
+        else{ wiresetsDB = context.wiresets.filter( wiresetDB => context.car.wiresets.some( wireset => wiresetDB.Roadstar.some( wiresetRoadstar => wireset == wiresetRoadstar ) )  ) }
         for(let i = 0; i < wiresetsDB.length; i++){
           wiresetSelect = [...wiresetSelect, ...wiresetsDB[i].NGK, ...wiresetsDB[i].LS, ...wiresetsDB[i].Roadstar, ...wiresetsDB[i].Bosh]
           wiresetSelect = wiresetSelect.map( wireset => {
@@ -103,7 +179,9 @@ const Service = () => {
         }
 
         let brakeshoeBackSelect = []
-        let brakeshoesBackDB = context.brakeshoes.filter( brakeshoeDB => context.car.brakeShoeBack.some( brakeshoe => brakeshoeDB.Wagner.some( brakeshoeWagner => brakeshoe == brakeshoeWagner ) )  )
+        let brakeshoesBackDB = []
+        if(order){ brakeshoesBackDB = context.brakeshoes.filter( brakeshoeDB => order.car.brakeShoeBack.some( brakeshoe => brakeshoeDB.Wagner.some( brakeshoeWagner => brakeshoe == brakeshoeWagner ) )  ) }
+        else{ brakeshoesBackDB = context.brakeshoes.filter( brakeshoeDB => context.car.brakeShoeBack.some( brakeshoe => brakeshoeDB.Wagner.some( brakeshoeWagner => brakeshoe == brakeshoeWagner ) )  ) }
         for(let i = 0; i < brakeshoesBackDB.length; i++){
           brakeshoeBackSelect = [...brakeshoeBackSelect, ...brakeshoesBackDB[i].Wagner ]
           brakeshoeBackSelect = brakeshoeBackSelect.map( brakeshoe => {
@@ -113,7 +191,9 @@ const Service = () => {
         }
 
         let brakeshoeFrontSelect = []
-        let brakeshoesFrontDB = context.brakeshoes.filter( brakeshoeDB => context.car.brakeShoeFront.some( brakeshoe => brakeshoeDB.Wagner.some( brakeshoeWagner => brakeshoe == brakeshoeWagner ) )  )
+        let brakeshoesFrontDB = []
+        if(order){ brakeshoesFrontDB = context.brakeshoes.filter( brakeshoeDB => order.car.brakeShoeFront.some( brakeshoe => brakeshoeDB.Wagner.some( brakeshoeWagner => brakeshoe == brakeshoeWagner ) )  ) }
+        else{ brakeshoesFrontDB = context.brakeshoes.filter( brakeshoeDB => context.car.brakeShoeFront.some( brakeshoe => brakeshoeDB.Wagner.some( brakeshoeWagner => brakeshoe == brakeshoeWagner ) )  ) }
         for(let i = 0; i < brakeshoesFrontDB.length; i++){
           brakeshoeFrontSelect = [...brakeshoeFrontSelect, ...brakeshoesFrontDB[i].Wagner ]
           brakeshoeFrontSelect = brakeshoeFrontSelect.map( brakeshoe => {
@@ -148,92 +228,72 @@ const Service = () => {
         setBrakeshoeFrontSelect(brakeshoeFrontSelect)
         setBrakeshoeFront(brakeshoeFrontSelect[0])
 
+        if(order && context.services.length !== 0){
+          let newDatos = { note: order.note }
+          if(order.antifreeze === "Si"){ newDatos.antifreeze = "Si" }
+          if(order.cleanAB === "Si"){ newDatos.CleaningAB = "Si" }
+          if(order.cleanInj === "Si"){ newDatos.CleaningInj = "Si" }
+          if(order.coil === "Si"){ newDatos.coil = "Si" }
+          if(order.transmission === "Si"){ newDatos.transmission = "Si" }
+          if(order.brakeshoeBack !== ""){
+            newDatos.changeBrakeshoeBack = "Si"
+            let idx = brakeshoeBackSelect.findIndex( brakeshoe => brakeshoe.label == order.brakeshoeBack )
+            setBrakeshoeBack(brakeshoeBackSelect[idx]);
+          }
+          if(order.brakeshoeFront !== ""){
+            newDatos.changeBrakeshoeFront = "Si"
+            let idx = brakeshoeFrontSelect.findIndex( brakeshoe => brakeshoe.label == order.brakeshoeFront )
+            setBrakeshoeFront(brakeshoeFrontSelect[idx]);
+          }
+          if(order.filters.airFilter !== ""){
+            newDatos.ChangeAirFiltter = "Si"
+            let idx = airFiltersSelect.findIndex( filter => filter.label == order.filters.airFilter )
+            setAirFilter(airFiltersSelect[idx]);
+          }
+          if(order.filters.oilFilter !== ""){
+            newDatos.ChangeOilFiltter = "Si"
+            let idx = oilFiltersSelect.findIndex( filter => filter.label == order.filters.oilFilter )
+            setOilFilter(oilFiltersSelect[idx]);
+          }
+          if(order.filters.fuelFilter !== ""){
+            newDatos.ChangeFuelFiltter = "Si"
+            let idx = fuelFiltersSelect.findIndex( filter => filter.label == order.filters.fuelFilter )
+            setFuelFilter(fuelFiltersSelect[idx]);
+          }
+          if(order.filters.cabineFilter !== ""){
+            newDatos.ChangeCabinAirFiltter = "Si"
+            let idx = cabineFiltersSelect.findIndex( filter => filter.label == order.filters.cabineFilter )
+            setCabineFilter(cabineFiltersSelect[idx]);
+          }
+          if(order.sparkplugs !== ""){
+            newDatos.plugs = "Si"
+            let idx = sparkplugSelect.findIndex( sparkplug => sparkplug.label == order.sparkplugs )
+            setSparkplug(sparkplugSelect[idx]);
+          }
+          if(order.wiresets !== ""){
+            newDatos.wiresets = "Si"
+            let idx = wiresetSelect.findIndex( wireset => wireset.label == order.wiresets )
+            setWireset(wiresetSelect[idx]);
+          }
+          if(order.oil.oilRequired === "Si"){
+            newDatos.Oil = "Si"
+            let idxMake = oilMakeSelect.findIndex( make => make.label == order.oil.make )
+            let idxPresentation = oilPresentationSelect.findIndex( presentation => presentation.label == order.oil.presentation )
+            let idxType = oilTypeSelect.findIndex( type => type.label == order.oil.oilType )
+            let idxViscosity = viscositySelect.findIndex( viscosity => viscosity.label == order.oil.viscosity )
+            setOilMake(oilMakeSelect[idxMake])
+            setPresentation(oilPresentationSelect[idxPresentation])
+            setOilType(oilTypeSelect[idxType])
+            setViscosity(viscositySelect[idxViscosity])
+          }
+          guardarDatos({
+            ...datos,
+            ...newDatos
+          })
+        }
+
     }
-  }, [context.car]);
-
-  const viscositySelect = [{ value: '5W30', label: '5W30' }, { value: '5W20', label: '5W20' }, { value: '5W40', label: '5W40' }, 
-                            { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
-                            { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
-                            { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
-                            { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' },
-                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
-
-    const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
-
-    const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' },
-                                { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }]
-    
-    const oilMakeSelect = [{ value: 'Shell', label: 'Shell' }, { value: 'Quaker State', label: 'Quaker State' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'LTH', label: 'LTH' },
-                        { value: 'ACDelco', label: 'ACDelco' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Castrol', label: 'Castrol' }, { value: 'Nissan', label: 'Nissan' }, 
-                        { value: 'Phillips 66', label: 'Phillips 66' }, { value: 'Repsol', label: 'Repsol' }, { value: 'Mexlub', label: 'Mexlub' }, { value: 'Pemex', label: 'Pemex' }, 
-                        { value: 'HM9', label: 'HM9' }, { value: 'Chevron', label: 'Chevron' }, { value: 'Presson', label: 'Presson' }, { value: 'Akron', label: 'Akron' },
-                        { value: 'Bardahl', label: 'Bardahl' }]
-  const optionOillts = [
-    { value: "1 lts", label: "1 lts" },
-    { value: "2 lts", label: "2 lts" },
-    { value: "3 lts", label: "3 lts" },
-    { value: "4 lts", label: "4 lts" },
-  ];
-
-  const [viscosity, setViscosity] = useState(viscositySelect[0])
-  const [presentation, setPresentation] = useState(oilPresentationSelect[0])
-  const [oilMake, setOilMake] = useState(oilMakeSelect[0])
-  const [oilType, setOilType] = useState(oilTypeSelect[0])
-
-  const [datos, guardarDatos] = useState({
-    CleaningInj: "No",
-    CleaningAB: "No",
-    ChangeAirFiltter: "No",
-    ChangeCabinAirFiltter: "No",
-    Oil: "No",
-    aceiteLts: optionOillts[0],
-    ChangeOilFiltter: "No",
-    ChangeFuelFiltter: "No",
-    plugs: "No",
-    wiresets: "No",
-    coil: "No",
-    antifreeze: "No",
-    transmission: "No",
-    rectifyDisk: "No",
-    changeBrakeshoeBack: "No",
-    changeBrakeshoeFront: "No",
-    note: '',
-    total: 0,
-    renderBTNPDF: false
-  });
-
-  const {
-    rectifyDisk,
-    changeBrakeshoeBack,
-    changeBrakeshoeFront,
-    CleaningInj,
-    CleaningAB,
-    aceite,
-    aceiteLts,
-    ChangeAirFiltter,
-    Oil,
-    ChangeOilFiltter,
-    ChangeCabinAirFiltter,
-    ChangeFuelFiltter,
-    plugs,
-    wiresets,
-    coil,
-    antifreeze,
-    transmission,
-    note,
-    renderBTNPDF,
-    total
-  } = datos;
-
-  useEffect(() => {
-    let total = getTotal()
-    guardarDatos({
-      ...datos,
-      total
-    })
-  }, [plugs, changeBrakeshoeBack, changeBrakeshoeFront, wiresets, ChangeAirFiltter,
-    ChangeCabinAirFiltter, ChangeFuelFiltter, ChangeFuelFiltter, ChangeOilFiltter,
-    CleaningAB, CleaningInj, antifreeze, rectifyDisk, transmission, coil])
+  }, [context.car, context.services, context.filters]);
 
   const obtenerInformacion = (e) => {
     if(context.services.length !== 0){
@@ -272,20 +332,6 @@ const Service = () => {
     }
   }
 
-  const handleSelectOil = (newOil) => {
-    guardarDatos({
-      ...datos,
-      aceite: newOil,
-    });
-  }
-
-  const handleSelectOilLts = (newOilLts) => {
-    guardarDatos({
-      ...datos,
-      aceiteLts: newOilLts,
-    });
-  }
-
   const getTotalProducts  =() => {
     let total = 0
     if(plugs === "Si"){ 
@@ -304,15 +350,24 @@ const Service = () => {
       if(brakeshoeBack?.value !== "none"){ total += Number(brakeshoeBack?.value.split('-')[0]) }
     }if(changeBrakeshoeFront === "Si"){ 
       if(brakeshoeFront?.value !== "none"){ total += Number(brakeshoeFront?.value.split('-')[0]) }
+    }if( Oil === "Si" ){
+      if(presentation.value !== "none"){
+        let oil = context.oils.find( oilDB => oilDB.make == oilMake.value && oilDB.oilType == oilType.value && oilDB.presentation == presentation.value && oilDB.viscosity == viscosity.value)
+        if(presentation.value === "Suelto"){ total += oil ? oil.price * Number(lts) : 0}
+          else{ total += oil ? oil.price : 0 }  
+      }
     }
     return total
   }
 
   const createPDF = (e) => {
     e.preventDefault()
+    let total = getTotal()
+    console.log(total)
     guardarDatos({
       ...datos,
-      renderBTNPDF: true
+      total,
+      renderBTNPDF: true,
     });
   }
 
@@ -361,7 +416,10 @@ const Service = () => {
     }if(rectifyDisk === "Si"){
         let idx = services.findIndex( service => service.name === "rectifyDisk" )
         total += services[idx].price
-    }
+    }if(Oil === "Si"){
+      let idx = services.findIndex( service => service.name === "changeOil" )
+      total += services[idx].price
+  }
     return total
 } 
 
@@ -388,6 +446,8 @@ const Service = () => {
   const handleSelectPresentation = newValue => setPresentation(newValue)
 
   const handleSelectOilType = newValue => setOilType(newValue)
+
+  const handleinputLts = e => setLts(e.target.value.replace( /[^0-9]/g, ''))
 
   const renderTotalProducts = product => {
     let total = 0
@@ -424,7 +484,15 @@ const Service = () => {
         total += context.services.find( service => service.name === "changeCabineFilter" ).price
         if(cabineFilter && cabineFilter.value !== "none"){ total += Number(cabineFilter.value.split('-')[0]) }
         break;
-
+      case "oil":
+        total += context.services.find( service => service.name === "changeOil" ).price
+        if(presentation.value !== "none"){
+          let oil = context.oils.find( oilDB => oilDB.make == oilMake.value && oilDB.oilType == oilType.value && oilDB.presentation == presentation.value && oilDB.viscosity == viscosity.value)
+          if(presentation.value === "Suelto"){ total += oil ? oil.price * Number(lts) : 0}
+          else{ total += oil ? oil.price : 0 }  
+        }
+        
+        break;
     }
     return total
   }
@@ -462,7 +530,7 @@ const Service = () => {
               onClick={obtenerInformacion}
               id="changeOil"
             />
-            <label htmlFor="changeOil">CAMBIO DE ACEITE {Oil === "Si" &&  `$${context.services.find( service => service.name == "changeOil" ).price}` }</label>
+            <label htmlFor="changeOil">CAMBIO DE ACEITE {Oil === "Si" && `$${renderTotalProducts('oil')}` }</label>
           </div>
           <div className="checkbox-container">
             <input
@@ -634,6 +702,15 @@ const Service = () => {
                 className="select"
               />
             </div>
+            {presentation.value === "Suelto" && (
+              <>
+                <input 
+                  value={lts}
+                  onChange={handleinputLts}
+                  className="input big margin-top"
+                />
+              </>
+            )}
           </>
           )}
           {ChangeAirFiltter === "Si" && (
@@ -749,9 +826,9 @@ const Service = () => {
           <button onClick={createPDF} className="btn-aspi">CREAR PDF</button>
           { renderBTNPDF && (
             <CreatePDF 
-              aceite={aceite.value}
+              aceite={{make: oilMake.value, type: oilType.value, viscosity: viscosity.value, presentation: presentation.value}}
               Oil={Oil}
-              aceiteLts={aceiteLts.value}
+              lts={lts}
               airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.label : ''}
               oilFilter={ (ChangeOilFiltter === "Si" && oilFilter)? oilFilter.label : ''}
               fuelFilter={ (ChangeFuelFiltter === "Si" && fuelFilter) ? fuelFilter.label : ''}
@@ -768,6 +845,7 @@ const Service = () => {
               note={note}
               total={total}
               rectifyDisk={rectifyDisk}
+              orderToUpdate={order}
             />
           ) }
           

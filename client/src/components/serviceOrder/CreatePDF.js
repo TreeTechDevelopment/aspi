@@ -20,12 +20,13 @@ function CreatePDF({
         transmission,
         antifreeze,
         cleanInj, 
-        total,
+        total, 
         rectifyDisk,
         aceite,
         Oil,
-        aceiteLts,
+        lts,
         note,
+        orderToUpdate,
         cleanAB }) {
 
     function useHookWithRefCallback() {
@@ -37,11 +38,7 @@ function CreatePDF({
                     let order = {
                         car: context.car._id,
                         carYear: context.year,
-                        oil:{
-                            oilRequired: Oil, 
-                            oilType: aceite,
-                            oilLts: aceiteLts
-                        },
+                        oil:{ oilRequired: Oil },
                         filters: {
                             airFilter, fuelFilter, oilFilter, cabineFilter
                         },
@@ -49,14 +46,30 @@ function CreatePDF({
                         coil, transmission, antifreeze, sparkplugs: sparkplug,
                         wiresets, idOrder: Number(getIDOrder()), total
                     }
-                    createOrder(order).then(() => {
-                        resetIDORder()
-                        window.location.reload()
-                    }).catch((e) => {
-                        console.log(e)
-                        alert(`${messageServerError}`)
-                    })
-                    
+                    if(Oil === "Si"){ 
+                        order.oil.make = aceite.make 
+                        order.oil.presentation = aceite.presentation
+                        order.oil.viscosity = aceite.viscosity
+                        order.oil.oilType = aceite.type
+                        if(aceite.presentation === "Suelto"){ order.oil.lts = Number(lts) }
+                    }
+                    if(orderToUpdate){
+                        order.id = orderToUpdate._id
+                        updateOrder(order).then(() => {
+                            window.location.reload()
+                        }).catch((e) => {
+                            alert(`${messageServerError}`)
+                            window.location.reload()
+                        })
+                    }else{
+                        createOrder(order).then(() => {
+                            resetIDORder()
+                            window.location.reload()
+                        }).catch((e) => {
+                            console.log(e)
+                            alert(`${messageServerError}`)
+                        })
+                    }
                 }else{ node.click() }
             }            
             ref.current = node
@@ -101,6 +114,17 @@ function CreatePDF({
         return res.data
     }
 
+    const updateOrder = async (data) => {
+        const res = await axios({
+            url: `${url}/orders`,
+            method: 'PUT',
+            timeout: 5000,
+            data
+        })
+
+        return res.data
+    }   
+
     const returnNumberIDOrder = () => {
         let IDOrder = Number(getIDOrder())
         let IDOrderString = ''
@@ -139,8 +163,8 @@ function CreatePDF({
                     year={context.year}
                     car={context.car}
                     aceite={aceite}
+                    lts={lts}
                     Oil={Oil}
-                    aceiteLts={aceiteLts}
                     IDOrder={returnNumberIDOrder()}
                     note={note}
                     total={total}
@@ -177,10 +201,10 @@ function CreatePDF({
                                     make={context.make}
                                     model={context.model}
                                     year={context.year}
+                                    lts={lts}
                                     car={context.car}
                                     aceite={aceite}
                                     Oil={Oil}
-                                    aceiteLts={aceiteLts}
                                     IDOrder={returnNumberIDOrder()}
                                     note={note}
                                     total={total}

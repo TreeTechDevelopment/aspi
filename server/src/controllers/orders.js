@@ -10,8 +10,6 @@ const createOrder = async (req, res) => {
         
         const order = req.body
 
-        console.log(order)
-
         let prevOrder = await Order.findOne({ 'idOrder': order.idOrder })
 
         if(prevOrder){
@@ -62,18 +60,20 @@ const updateOrder = async (req, res) => {
 
         orderDB.cleanAB = order.cleanAB
         orderDB.cleanInj = order.cleanInj
-        orderDB.brakeshoe = order.brakeshoe
         orderDB.coil = order.coil
         orderDB.transmission = order.transmission
         orderDB.antifreeze = order.antifreeze
-        orderDB.plugs = order.plugs
+        orderDB.sparkplugs = order.sparkplugs
         orderDB.note = order.note
         orderDB.oil = order.oil
         orderDB.filters = order.filters
         orderDB.total = order.total
+        orderDB.brakeshoeBack = order.brakeshoeBack
+        orderDB.brakeshoeFront = order.brakeshoeFront
+        orderDB.wiresets = order.wiresets
+        orderDB.total = order.total
                 
         orderDB.save((err, orerDB) => {
-            console.log(err)
             if(err){ return res.sendStatus(500) }
 
             res.sendStatus(200)
@@ -82,7 +82,7 @@ const updateOrder = async (req, res) => {
 
     }catch(e){
         console.log(e)
-        res.sendStatus(500)
+        res.sendStatus(500) 
     }
 }
 
@@ -92,22 +92,10 @@ const getOrder = async (req, res) => {
         const { id } = req.query
 
         const order = await Order.findOne({ idOrder: Number(id) }).populate({ path: 'car', populate: { path: 'make' }})
-        let services = []
-        let sparkplugs = []
-        let wiresets = []
-        let brakeshoes = []
-        let filters = []
 
-        if(order){ 
-            await order.car.populate('model').execPopulate(); 
-            services = await Service.find({})
-            sparkplugs = await Plug.find({})
-            wiresets = await Wireset.find({})
-            brakeshoes = await Brakeshoe.find({})
-            filters = await Filter.find({})
-        }
+        if(order){ await order.car.populate('model').execPopulate();  }
 
-        res.json({ order, services, sparkplugs, wiresets, brakeshoes, filters })
+        res.json({ order })
 
     }catch(e){
         console.log(e)

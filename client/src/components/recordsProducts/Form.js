@@ -21,7 +21,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
 
     const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' },
-                                { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }]
+                                { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }, { value: 'Suelto', label: 'Suelto' }]
     
     const oilMakeSelect = [{ value: 'Shell', label: 'Shell' }, { value: 'Quaker State', label: 'Quaker State' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'LTH', label: 'LTH' },
                         { value: 'ACDelco', label: 'ACDelco' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Castrol', label: 'Castrol' }, { value: 'Nissan', label: 'Nissan' }, 
@@ -64,7 +64,6 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const [loading, setLoading] = useState(false)
     const [interfil, setInterfill] = useState('')
     const [price, setPrice] = useState('')
-    const [lts, setLts] = useState('')
     
     const [viscosity, setViscosity] = useState(viscositySelect[0])
     const [presentation, setPresentation] = useState(oilPresentationSelect[0])
@@ -73,52 +72,82 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
 
     const getArrayProductsRender = product => {
 
-        let newProducts = []
-        if(product === "OEM"){ newProducts = [...OEMToRender]} 
-        else if( product === "ACD" ){ newProducts = [...ACDToRender] }
-        else if( product === "Fram" ){ newProducts = [...FramToRender] }
-        else if( product === "Gonher" ){ newProducts = [...GonherToRender] }
-        else if( product === "Motorcraft" ){ newProducts = [...MotorcraftToRender] }
-        else if( product === "Purolator" ){ newProducts = [...PurolatorToRender] }
-        else if( product === "Wix" ){ newProducts = [...WixToRender] }
-        else if( product === "Mann" ){ newProducts = [...MannToRender] }
-        else if( product === "NGK" ){ newProducts = [...NGKToRender] }
-        else if( product === "Champions" ){ newProducts = [...ChampionsToRender] }
-        else if( product === "Bosh" ){ newProducts = [...BoshToRender] }
-        else if( product === "LS" ){ newProducts = [...LSToRender] }
-        else if( product === "Roadstar" ){ newProducts = [...RoadstarToRender] }
-        else if( product === "Wagner" ){ newProducts = [...WagnerToRender] }
+        let newProducts = {}
+        if(product === "OEM"){ newProducts = {productsRender: [...OEMToRender], products: [...OEM]} } 
+        else if( product === "ACD" ){ newProducts = {productsRender: [...ACDToRender], products: [...ACD]} }
+        else if( product === "Fram" ){ newProducts = {productsRender: [...FramToRender], products: [...Fram]} }
+        else if( product === "Gonher" ){ newProducts = {productsRender: [...GonherToRender], products: [...Gonher]} }
+        else if( product === "Motorcraft" ){ newProducts = {productsRender: [...MotorcraftToRender], products: [...Motorcraft]} }
+        else if( product === "Purolator" ){ newProducts = {productsRender: [...PurolatorToRender], products: [...Purolator]} }
+        else if( product === "Wix" ){ newProducts = {productsRender: [...WixToRender], products: [...Wix]} }
+        else if( product === "Mann" ){ newProducts = {productsRender: [...MannToRender], products: [...Mann]} }
+        else if( product === "NGK" ){ newProducts = {productsRender: [...NGKToRender], products: [...NGK]} }
+        else if( product === "Champions" ){ newProducts = {productsRender: [...ChampionsToRender], products: [...Champions]} }
+        else if( product === "Bosh" ){ newProducts = {productsRender: [...BoshToRender], products: [...Bosh]} }
+        else if( product === "LS" ){ newProducts = {productsRender: [...LSToRender], products: [...LS]} }
+        else if( product === "Roadstar" ){ newProducts = {productsRender: [...RoadstarToRender], products: [...Roadstar]}}
+        else if( product === "Wagner" ){ newProducts = {productsRender: [...WagnerToRender], products: [...Wagner]}}
         return newProducts
 
     }
 
-    const setArrayProductsRender = (product, newProducts) => {
-        if(product === "OEM"){ setOEMToRender(newProducts) } 
-        else if( product === "ACD" ){ setACDToRender(newProducts) }
-        else if( product === "Fram" ){ setFramToRender(newProducts) }
-        else if( product === "Gonher" ){ setGonherToRender(newProducts) }
-        else if( product === "Motorcraft" ){ setMotorcraftToRender(newProducts) }
-        else if( product === "Purolator" ){ setPurolatorToRender(newProducts) }
-        else if( product === "Wix" ){ setWixToRender(newProducts) }
-        else if( product === "Mann" ){ setMannToRender(newProducts) }
-        else if( product === "NGK" ){ setNGKToRender(newProducts) }
-        else if( product === "Champions" ){ setChampionsToRender(newProducts) }
-        else if( product === "Bosh" ){ setBoshToRender(newProducts) }
-        else if( product === "LS" ){ setLSToRender(newProducts) }
-        else if( product === "Roadstar" ){ setRoadstarToRender(newProducts) }
-        else if( product === "Wagner" ){ setWagnerToRender(newProducts) }
+    const setArrayProductsRender = (product, newProducts, products) => {
+        if(product === "OEM"){ 
+            setOEMToRender(newProducts) 
+            if(products){ setOEM(products) }
+        }else if( product === "ACD" ){ 
+            setACDToRender(newProducts) 
+            if(products){ setACD(products) }
+        }else if( product === "Fram" ){ 
+            setFramToRender(newProducts) 
+            if(products){ setFram(products) }
+        }else if( product === "Gonher" ){ 
+            setGonherToRender(newProducts) 
+            if(products){ setGonher(products) }
+        }else if( product === "Motorcraft" ){ 
+            setMotorcraftToRender(newProducts) 
+            if(products){ setMotorcraft(products) }
+        }else if( product === "Purolator" ){ 
+            setPurolatorToRender(newProducts) 
+            if(products){ setPurolator(products) }
+        }else if( product === "Wix" ){ 
+            setWixToRender(newProducts) 
+            if(products){ setWix(products) }
+        }else if( product === "Mann" ){ 
+            setMannToRender(newProducts) 
+            if(products){ setMann(products) }
+        }else if( product === "NGK" ){ 
+            setNGKToRender(newProducts) 
+            if(products){ setNGK(products) }
+        }else if( product === "Champions" ){ 
+            setChampionsToRender(newProducts) 
+            if(products){ setChampions(products) }
+        }else if( product === "Bosh" ){ 
+            setBoshToRender(newProducts) 
+            if(products){ setBosh(products) }
+        }else if( product === "LS" ){ 
+            setLSToRender(newProducts) 
+            if(products){ setLS(products) }
+        }else if( product === "Roadstar" ){ 
+            setRoadstarToRender(newProducts) 
+            if(products){ setRoadstar(products) }
+        }else if( product === "Wagner" ){ 
+            setWagnerToRender(newProducts) 
+            if(products){ setWagner(products) }
+        }
     }
 
     const addProducts = product => {
-        let newProducts = getArrayProductsRender(product)
-        newProducts.push(Math.random().toString())
-        setArrayProductsRender(product, newProducts)        
+        let { productsRender } = getArrayProductsRender(product)
+        productsRender.push(Math.random().toString())
+        setArrayProductsRender(product, productsRender)        
     }
 
     const removeProducts = product => {
-        let newProducts = getArrayProductsRender(product)
-        newProducts.splice(-1, 1)
-        setArrayProductsRender(product, newProducts)
+        let { productsRender, products } = getArrayProductsRender(product)
+        productsRender.splice(-1, 1)
+        products.splice(-1, 1)
+        setArrayProductsRender(product, productsRender, products)
     }
 
     const getArrayProducts = (product) => {
@@ -171,7 +200,9 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
             let data = {
                 interfil, OEM, ACD, Fram, Gonher, Motorcraft,
                 Purolator, Wix, Mann, price, product: typeProduct.value,
-                NGK, Champions, Bosh, LS, Roadstar, Wagner
+                NGK, Champions, Bosh, LS, Roadstar, Wagner, oilMake: oilMake.value,
+                presentation: presentation.value, viscosity: viscosity.value,
+                oilType: oilType.value
             }
             if(JSON.stringify(context.product) !== "{}") {
                 data.id = context.product._id
@@ -306,6 +337,10 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                 for(let i = 0; i < context.product.Wagner.length; i++){ newWagnerFilters.push(Math.random().toString()) }
                 setWagnerToRender(newWagnerFilters)
             }
+            if(context.product.viscosity){ setViscosity({ value: context.product.viscosity, label: context.product.viscosity }) }
+            if(context.product.oilMake){ setOilMake({ value: context.product.oilMake, label: context.product.oilMake }) }
+            if(context.product.oilType){ setOilType({ value: context.product.oilType, label: context.product.oilType }) }
+            if(context.product.presentation){ setOilType({ value: context.product.presentation, label: context.product.presentation }) }
             if(context.product.price){ setPrice(context.product.price.toString()) }
 
         }
@@ -318,8 +353,6 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     }
 
     const handleInputPrice = e => setPrice(e.target.value.replace(/[^0-9]/g, ''))
-
-    const handleInputLts = e => setLts(e.target.value.replace(/[^0-9]/g, ''))
 
     const handleSelectViscosity = newValue => setViscosity(newValue)
 
@@ -338,7 +371,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
             <div className="form-car">
                 <span>{ filterType.label }</span>
                 <div className="input-filters-container">
-                    <span>Precio</span>
+                    <span>{ presentation.value === "Suelto" ? 'Precio por litro' : 'Precio' }</span>
                     <input 
                         value={price}
                         onChange={handleInputPrice}
@@ -633,13 +666,6 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                                 options={oilTypeSelect}
                                 value={oilType}
                                 onChange={handleSelectOilType}
-                            />
-                        </div>
-                        <div className="input-filters-container">
-                            <span>Litros/Galon</span>
-                            <input 
-                                value={lts}
-                                onChange={handleInputLts}
                             />
                         </div>
                         </>

@@ -26,7 +26,7 @@ const PDFClient = ({
     IDOrder,
     aceite,
     Oil,
-    aceiteLts,
+    lts,
     rectifyDisk,
     note,
     total
@@ -36,7 +36,7 @@ return(
     <Document>
     <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-            <Image source={{ uri: `${url}/images/logo.jpg`, method: 'GET', headers: {}, body: '' }} style={styles.logo}/>
+            <Image source={{ uri: `${url}/images/logo.png`, method: 'GET', headers: {}, body: '' }} style={styles.logo}/>
             <View style={styles.textHeaderContainer}>
                 <Text style={styles.title}>Tornillos y Lubricantes</Text>
                 <Text style={styles.textHeader}>JULIO AZPIZU RUIZ</Text>
@@ -52,7 +52,14 @@ return(
             <Text style={styles.textBody}>VEHÍCULO: {make} {model} {year} {car.motor} {car.cylinder}</Text>
             <Text style={styles.textBody}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>
             <Text style={styles.textBody}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>
-            {Oil === "Si" && <Text style={styles.textBody}>ACEITE: {aceite} {aceiteLts}</Text>}
+            {Oil === "Si" ? (
+                <Text style={styles.textBody}>
+                    ACEITE: {aceite.presentation === "Suelto" ? `${aceite.presentation} ${lts} ${aceite.make} ${aceite.viscosity} ${aceite.type}` : 
+                    `${aceite.presentation} ${aceite.make} ${aceite.viscosity} ${aceite.type}` }
+                </Text>
+            ):(
+                <Text style={styles.textBody}> ACEITE: No</Text>
+            )}
             <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter !== "" ? 'Si' : 'No'}</Text>
             <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter !== "" ? 'Si' : 'No'}</Text>
             <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter !== "" ? 'Si' : 'No'}</Text>

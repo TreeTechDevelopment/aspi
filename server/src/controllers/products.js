@@ -87,7 +87,8 @@ const createProduct = async (req, res) => {
     try{
         const { interfil, OEM, ACD, Fram, Gonher, Motorcraft,
             Purolator, Wix, Mann, price, product,
-            NGK, Champions, Bosh, LS, Roadstar, Wagner } = req.body
+            NGK, Champions, Bosh, LS, Roadstar, Wagner, viscosity, presentation,
+            oilMake, oilType } = req.body
 
         switch(product){
             case 'filter':
@@ -135,6 +136,17 @@ const createProduct = async (req, res) => {
                 })
 
                 break;
+
+            case 'oil':
+
+                let oil = new Oil({ make: oilMake, presentation, viscosity, oilType, price })
+
+                oil.save((err, oilDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: oilDB })
+                })
+
+                break;
         }
 
     }catch(e){
@@ -147,7 +159,8 @@ const updateProduct = async (req, res) => {
     try{
         const { interfil, OEM, ACD, Fram, Gonher, Motorcraft,
             Purolator, Wix, Mann, price, product,
-            NGK, Champions, Bosh, LS, Roadstar, Wagner, id } = req.body
+            NGK, Champions, Bosh, LS, Roadstar, Wagner, id,
+            oilMake, oilType, presentation, viscosity } = req.body
 
         switch(product){
             case 'filter':
@@ -214,6 +227,22 @@ const updateProduct = async (req, res) => {
                 brakeshoe.save((err, newBrakeshoeDB) => {
                     if(err){ return res.sendStatus(500) }
                     res.json({ newProduct: newBrakeshoeDB })
+                })
+
+                break;
+            
+            case "oil":
+                let oil = await Oil.findById(id)
+
+                oil.make = oilMake
+                oil.oilType = oilType
+                oil.viscosity = viscosity
+                oil.presentation = presentation
+                oil.price = price
+
+                oil.save((err, newOilDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newOilDB })
                 })
 
                 break;

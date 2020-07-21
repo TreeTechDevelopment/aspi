@@ -8,6 +8,7 @@ const Filter = require('../db/models/filters');
 const Plug = require('../db/models/plugs');
 const Wireset = require('../db/models/wiresets');
 const Brakeshoe = require('../db/models/brakeshoe');
+const Oil = require('../db/models/oil');
 
 const getAllInfo = async (req, res) => {
     try{
@@ -21,6 +22,7 @@ const getAllInfo = async (req, res) => {
         const sparkplugs = await Plug.find({})
         const wiresets = await Wireset.find({})
         const brakeshoes = await Brakeshoe.find({})
+        const oils = await Oil.find({})
 
         const idOrder = app.idOrder
 
@@ -30,7 +32,7 @@ const getAllInfo = async (req, res) => {
             app.save()
         }
         
-        res.json({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes})
+        res.json({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes, oils})
     }catch(e){
         console.log(e)
         res.sendStatus(500)
@@ -101,7 +103,7 @@ const updateCar = async (req, res) => {
     try{        
         const newCar = req.body
 
-        console.log(newCar)
+        console.log(newCar) 
 
         let existAirFilterDB = await checkFilterExist(newCar.airFilter, 'air')
         let existOilFilterDB = await checkFilterExist(newCar.oilFilter, 'oil')

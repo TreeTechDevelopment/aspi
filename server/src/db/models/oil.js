@@ -18,10 +18,6 @@ const oilSchema = new Schema({
         required: true,
         type: String
     },
-    lts:{
-        required: true,
-        required: Number
-    },
     price:{
         required: true,
         type: Number

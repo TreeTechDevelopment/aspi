@@ -70,7 +70,7 @@ const PDF = ({
     model,
     aceite,
     Oil,
-    aceiteLts,
+    lts,
     year,
     car,
     note,
@@ -83,7 +83,7 @@ return(
     <Document>
     <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-            <Image source={{ uri: `${url}/images/logo.jpg`, method: 'GET', headers: {}, body: '' }} style={styles.logo}/>
+            <Image source={{ uri: `${url}/images/logo.png`, method: 'GET', headers: {}, body: '' }} style={styles.logo}/>
             <View style={styles.textHeaderContainer}>
                 <Text style={styles.title}>Tornillos y Lubricantes</Text>
                 <Text style={styles.textHeader}>JULIO AZPIZU RUIZ</Text>
@@ -99,11 +99,16 @@ return(
             <Text style={styles.textBody}>VEHÍCULO: {make} {model} {year} {car.motor} {car.cylinder}</Text>
             {cleanInj === "Si" && <Text style={styles.textBody}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>}
             {cleanAB === "Si" && <Text style={styles.textBody}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>}
-            {Oil === "Si" && <Text style={styles.textBody}>ACEITE: {aceite} {aceiteLts}</Text>}
-            <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter}</Text>
-            <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter}</Text>
-            <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter}</Text>
-            <Text style={styles.textBody}>FILTRO DE AIRE DE CABINA: {cabineFilter}</Text>
+            {Oil === "Si" && (
+                <Text style={styles.textBody}>
+                    ACEITE: {aceite.presentation === "Suelto" ? `${aceite.presentation} ${lts} ${aceite.make} ${aceite.viscosity} ${aceite.type}` : 
+                    `${aceite.presentation} ${aceite.make} ${aceite.viscosity} ${aceite.type}` }
+                </Text>
+            )}
+            { oilFilter !== "" && <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter}</Text>}
+            { fuelFilter !== "" && <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter}</Text>}
+            { airFilter !== "" && <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter}</Text>}
+            { cabineFilter !== "" && <Text style={styles.textBody}>FILTRO DE AIRE DE CABINA: {cabineFilter}</Text>}
             {sparkplug !== "" && <Text style={styles.textBody}>BUJÍAS: {sparkplug}</Text>}
             {wiresets !== "" && <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets}</Text>}
             {coil === "Si" && <Text style={styles.textBody}>BOBINA: {coil}</Text>}

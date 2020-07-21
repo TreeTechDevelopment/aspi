@@ -171,8 +171,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeAirFilter = (e) => {
         e.preventDefault()
         let newAirFilters = [...airFiltersRender]
+        let newAirFiltersValue = [...airFilters]
         newAirFilters.splice(-1, 1)
+        newAirFiltersValue.splice(-1, 1)
         setAirFiltersRender(newAirFilters)
+        setAirFilter(newAirFiltersValue)
     }
 
     const addOilFilter = (e) => {
@@ -185,8 +188,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeOilFilter = (e) => {
         e.preventDefault()
         let newOilFilters = [...oilFiltersRender]
+        let newOilFiltersValue = [...oilFilters]
         newOilFilters.splice(-1, 1)
+        newOilFiltersValue.splice(-1, 1)
         setOilFiltersRender(newOilFilters)
+        setOilFilter(newOilFiltersValue)
     }
 
     const addFuelFilter = (e) => {
@@ -199,8 +205,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeFuelFilter = (e) => {
         e.preventDefault()
         let newFuelFilters = [...fuelFiltersRender]
+        let newFuelFiltersValue = [...fuelFilters]
         newFuelFilters.splice(-1, 1)
+        newFuelFiltersValue.splice(-1, 1)
         setFuelFiltersRender(newFuelFilters)
+        setFuelFilter(newFuelFiltersValue)
     }
 
     const addCabineFilter = (e) => {
@@ -213,8 +222,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeCabineFilter = (e) => {
         e.preventDefault()
         let newCabineFilters = [...cabineFiltersRender]
+        let newCabineFiltersValue = [...cabineFilters]
         newCabineFilters.splice(-1, 1)
+        newCabineFiltersValue.splice(-1, 1)
         setCabineFiltersRender(newCabineFilters)
+        setCabineFilter(newCabineFiltersValue)
     }
 
     const addSparkplug = (e) => {
@@ -227,8 +239,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeSparkplug = (e) => {
         e.preventDefault()
         let newSparkplugs = [...sparkplugRender]
+        let newSparkplugsValue = [...sparkplugs]
         newSparkplugs.splice(-1, 1)
+        newSparkplugsValue.splice(-1, 1)
         setSparkplugRender(newSparkplugs)
+        setSparkplugs(newSparkplugsValue)
     }
 
     const addWiresets = (e) => {
@@ -241,8 +256,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeWiresets = (e) => {
         e.preventDefault()
         let newWiresets = [...wiresetsRender]
+        let newWiresetsValue = [...wiresets]
         newWiresets.splice(-1, 1)
+        newWiresetsValue.splice(-1, 1)
         setWiresetsRender(newWiresets)
+        setWiresets(newWiresetsValue)
     }
 
     const addBrakeshoeBack = (e) => {
@@ -255,8 +273,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeBrakeshoeBack = (e) => {
         e.preventDefault()
         let newBrakeshoe = [...brakeshoeBackRender]
+        let newBrakeshoeValue = [...brakeshoeBack]
         newBrakeshoe.splice(-1, 1)
+        newBrakeshoeValue.splice(-1, 1)
         setBrakeshoeBackRender(newBrakeshoe)
+        setBrakeshoeBack(newBrakeshoeValue)
     }
 
     const addBrakeshoeFront = (e) => {
@@ -269,8 +290,11 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     const removeBrakeshoeFront = (e) => {
         e.preventDefault()
         let newBrakeshoe = [...brakeshoeFrontRender]
+        let newBrakeshoeValue = [...brakeshoeFront]
         newBrakeshoe.splice(-1, 1)
+        newBrakeshoeValue.splice(-1, 1)
         setBrakeshoeFrontRender(newBrakeshoe)
+        setBrakeshoeFront(newBrakeshoeValue)
     }
 
     const saveCar = (e) => {

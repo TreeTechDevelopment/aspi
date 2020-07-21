@@ -4,7 +4,7 @@ import Loader from 'react-loader-spinner';
 
 import { url, messageServerError } from '../../../app.json'
 
-function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices, setSparkplugs, setWiresets, setBrakeshoes, setFilters}) {
+function OrderSearcher({ setOrder,  setFoundOrder, setFound, order }) {
 
     const [idOrder, setIdOrder] = useState('')
     const [loading, setLoading] = useState(false)
@@ -12,19 +12,15 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices, setSpa
     const handleInput = e => setIdOrder(e.target.value.replace(/[^0-9]/g,''))
 
     const searchOrder = e => {
-        setLoading(true)
         e.preventDefault()
-        getOrder().then(({ order, services, sparkplugs, wiresets, brakeshoes, filters }) => {
+        if(order){ return setOrder({}) }
+        setLoading(true)
+        getOrder().then(({ order }) => {
             setLoading(false)
             setFound(true)
             if(order){
                 setFoundOrder(true)
                 setOrder(order)
-                setServices(services)
-                setSparkplugs(sparkplugs)
-                setWiresets(wiresets)
-                setBrakeshoes(brakeshoes)
-                setFilters(filters)
             }else{ setFoundOrder(false) }
         }).catch(() => {            
             alert(`${messageServerError}`) 
@@ -34,7 +30,7 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices, setSpa
 
     const getOrder = async () => {
         const res = await axios({
-            url: `${url}/orders/find?id=${idOrder}`,
+            url: `${url}/orders/find?id=${idOrder}`, 
             method: 'GET',
             timeout: 20000
         })
@@ -43,14 +39,18 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, setServices, setSpa
     }
 
     return (
-        <form className="form">
-            <input
-                placeholder="INGRESA EL ID DE LA ORDEN"
-                value={idOrder}
-                onChange={handleInput}
-                className="input input-center"
-            />
-            <div className="form-line"></div>
+        <form className={`form ${order ? 'order-searcher height-content' : ''}`}>
+            {!order && (
+                <>
+                     <input
+                        placeholder="INGRESA EL ID DE LA ORDEN"
+                        value={idOrder}
+                        onChange={handleInput}
+                        className="input input-center"
+                    />
+                    <div className="form-line"></div>
+                </>
+            )}
             <button className="btn-aspi" onClick={searchOrder}>BUSCAR</button>
             {loading && (
                 <Loader

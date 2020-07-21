@@ -2,44 +2,37 @@ import React, { useState } from 'react'
 
 import Navbar from '../components/Navbar'
 import OrderSearcher from '../components/orders/OrderSearcher'
-import Order from '../components/orders/Order'
+import Form from '../components/serviceOrder/Form'
+import Service from '../components/serviceOrder/Service'
 
 function Orders() {
 
     const [order, setOrder] = useState({})
     const [foundOrder, setFoundOrder] = useState(false)
     const [found, setFound] = useState(false)
-    const [services, setServices] = useState([])
-    const [sparkplugs, setSparkplugs] = useState([])
-    const [wiresets, setWiresets] = useState([])
-    const [brakeshoes, setBrakeshoes] = useState([])
-    const [filters, setFilters] = useState([])
 
     return (
-        <div className="bg-white">
+        <div className={`bg-white ${JSON.stringify(order) !== "{}" ? ' direction-row justify-content-start' : ''}`}>
             <Navbar />
             <OrderSearcher 
                 setOrder={setOrder}
                 setFoundOrder={setFoundOrder}
                 setFound={setFound}
-                setServices={setServices}
-                setSparkplugs={setSparkplugs}
-                setWiresets={setWiresets}
-                setBrakeshoes={setBrakeshoes}
-                setFilters={setFilters}
+                order={JSON.stringify(order) !== "{}"}
             />
             {found && !foundOrder && (
-                <p>No se ha encontrado ninguna orden con es ID</p>
+                <p className="label-dont-found">No se ha encontrado ninguna orden con ese ID</p>
             )}
             {JSON.stringify(order) !== "{}" && (
-                <Order 
-                    order={order}
-                    services={services}
-                    sparkplugs={sparkplugs}
-                    wiresets={wiresets}
-                    brakeshoes={brakeshoes}
-                    filters={filters}
-                />
+                <>
+                    <div className="third-window direction-column">
+                        <Form order={order}/>
+                    </div>
+                    <div className="line-separator"></div> 
+                    <Service 
+                        order={order}
+                    />
+                </>
             )}
         </div>
     )

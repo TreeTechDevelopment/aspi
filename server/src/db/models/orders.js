@@ -25,14 +25,11 @@ const orderSchema = new Schema({
             required: true,
             type: String
         },
-        oilType: {
-            required: true,
-            type: String
-        },
-        oilLts: {
-            required: true,
-            type: String
-        }
+        oilType: { type: String },
+        make: { type: String },
+        viscosity:{ type: String },
+        presentation: { type: String },
+        lts: { type: Number }
     },
     cleanInj: {
         required: true,

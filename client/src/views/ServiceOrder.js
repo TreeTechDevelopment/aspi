@@ -12,7 +12,7 @@ function ServiceOrd() {
             <div className="third-window direction-column">
                 <Form />
             </div>
-            <div className="line-separator"></div>
+            <div className="line-separator"></div> 
             <Service />
         </div>
     )
