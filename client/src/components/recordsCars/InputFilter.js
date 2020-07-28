@@ -45,7 +45,8 @@ function InputFilter({ idx, setFilters, type }) {
     }, [context.carToEdit])
 
     return (
-        <input 
+        <input
+            className="input-records"
             value={filter}
             onChange={handleInput}
         />

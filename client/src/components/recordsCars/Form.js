@@ -412,180 +412,241 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
           onRequestClose={doBeforeCloseModal}          
         >
             <form className="form-car">
-                <span>Marca {makeEdit.label}</span>
-                <label>Modelo</label>     
+            <div className="input-filters-container-group">
+
+                <div className="input-container">
+
+                <span className="span-filter">Marca <div className="marca"> {makeEdit.label} </div></span>
+                <span className="span-filter">Modelo</span>     
                 <Select 
                     options={modelsSelect}
                     value={model}
                     onChange={handleModelSelect}
-                    className="select"
+                    className="select-car-records"
                     isDisabled={ newModel !== "" || selectDisable}
-                /> 
-                <label>Nuevo Modelo (Opcional)</label>     
+                    /> 
+                </div>
+                <div className="input-container">
+                <span className="span-filter">Año { errYear && 'Este campo es requerido' } </span>
+                <div>
+                    <input
+                        placeholder="Desde"
+                        value={yearFrom}
+                        onChange={handleYearFrom}
+                        className="input-year-left"
+                        /> 
+                    <input
+                        placeholder="Hasta (opcional)"
+                        value={yearTo}
+                        onChange={handleYearTo}
+                        className="input-year-right"
+                        />
+                        </div>                
+                {/* <span className="span-filter">Nuevo Modelo (Opcional)</span>     
                 <input
                     placeholder="Nuevo Modelo"
                     value={newModel}
                     onChange={handleNewModel}
                     disabled={selectDisable}
-                /> 
-                <label>Año { errYear && 'Este campo es requerido' } </label>
-                <div>                
-                    <input
-                        placeholder="Desde"
-                        value={yearFrom}
-                        onChange={handleYearFrom}
-                    /> 
-                    <input
-                        placeholder="Hasta (opcional)"
-                        value={yearTo}
-                        onChange={handleYearTo}
-                    />
+                    />  */}
                 </div>
-                <label>Cilindros { errCylinder && 'Este campo es requerido' }</label>     
+                <div className="input-container">
+
+                <span className="span-filter">Cilindros { errCylinder && 'Este campo es requerido' }</span>  
+                <div>
                 <input
                     placeholder="Cilindros"
                     value={cylinder}
                     onChange={handleCylinder}
-                /> 
-                <label>Motor { errMotor && 'Este campo es requerido' }</label>                  
+                    className="input-records-car"
+                    /> 
+                    </div>   
+                </div>
+                <div className="input-container">
+
+                <span className="span-filter">Motor { errMotor && 'Este campo es requerido' }</span>        
+                <div>
                 <input
                     placeholder="Motor"
                     value={motor}
                     onChange={handleMotor}
-                />
-                <div id="input-filters-container-group">
-                    <div className="input-filters-container">
-                        <span>Filtro de Aire</span>
+                    className="input-records-car"
+                    />
+                    </div>          
+                    </div>
+                </div>
+            <div className="input-filters-container-group"> 
+                <div id="input-filters-container">
+                    <div className="input-container">
+
+                <span className="span-filter">Filtro de Aire</span>
+                <div className="si-filter">
+                        
                         {airFiltersRender.map( (key, idx) => (
                             <InputFilter
-                                idx={idx}
+                            idx={idx}
                                 setFilters={setAirFilters}
                                 key={ key }
                                 type="airFilter"
-                            />
-                        ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeAirFilter}>-</button>
-                            <button className="btn btn-primary" onClick={addAirFilter}>+</button>
+                                className=""
+                                
+                                />
+                                ))}
+                        <button className="btns-records" onClick={removeAirFilter}>-</button>
+                            <button className="btns-records-left" onClick={addAirFilter}>+</button>
                         </div>
-                    </div>
-                    <div className="input-filters-container">
-                        <span>Filtro de Aceite</span>
+                        </div>
+                        
+                            
+                        <div className="input-container">
+
+                        <span className="span-filter">Filtro de Aceite</span>
+                    <div className="si-filter">
+                        
                         {oilFiltersRender.map( (key, idx) => (
                             <InputFilter
                                 idx={idx}
                                 setFilters={setOilFilters}
                                 key={ key }
                                 type="oilFilter"
+                                className=""
                             />
                         ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeOilFilter}>-</button>
-                            <button className="btn btn-primary" onClick={addOilFilter}>+</button>
-                        </div>
+                        
+                            <button className="btns-records" onClick={removeOilFilter}>-</button>
+                            <button className="btns-records-left" onClick={addOilFilter}>+</button>
+                        
                     </div>
-                     <div className="input-filters-container">
-                        <span>Filtro de Gasolina</span>
+                        </div>
+                        <div className="input-container">
+
+                    <span className="span-filter">Filtro de Aceite</span>
+                     <div className="si-filter">
+                        
                         {fuelFiltersRender.map( (key, idx) => (
                             <InputFilter
-                                idx={idx}
-                                setFilters={setFuelFilters}
-                                key={ key }
-                                type="fuelFilter"
+                            idx={idx}
+                            setFilters={setFuelFilters}
+                            key={ key }
+                            type="fuelFilter"
                             />
-                        ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeFuelFilter}>-</button>
-                            <button className="btn btn-primary" onClick={addFuelFilter}>+</button>
-                        </div>
+                            ))}
+                        
+                            <button className="btns-records" onClick={removeFuelFilter}>-</button>
+                            <button className="btns-records-left" onClick={addFuelFilter}>+</button>
+                        
                     </div>
-                    <div className="input-filters-container">
-                        <span>Filtro de Aire de Cabina</span>
+                            </div>
+                        <div className="input-container">
+
+                    <span className="span-filter">Filtro de Aire de Cabina</span>
+                    <div className="si-filter">
+                        
                         {cabineFiltersRender.map( (key, idx) => (
                             <InputFilter
-                                idx={idx}
-                                setFilters={setCabineFilters}
-                                key={ key }
-                                type="cabineFilter"
+                            idx={idx}
+                            setFilters={setCabineFilters}
+                            key={ key }
+                            type="cabineFilter"
                             />
-                        ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeCabineFilter}>-</button>
-                            <button className="btn btn-primary" onClick={addCabineFilter}>+</button>
-                        </div>
+                            ))}
+                       
+                            <button className="btns-records" onClick={removeCabineFilter}>-</button>
+                            <button className="btns-records-left" onClick={addCabineFilter}>+</button>
+                        
                     </div>
+                            </div>
                 </div>
-                 <div id="input-filters-container-group">
-                    <div className="input-filters-container">
-                        <span>Bujías</span>
+            </div>
+            <div className="input-filters-container-group">
+
+             <div id="input-filters-container">
+            <div className="input-container">
+                 
+
+                        <span className="span-filter">Bujías</span>
+                    <div className="si-filter">
                         {sparkplugRender.map( (key, idx) => (
                             <InputFilter
-                                idx={idx}
-                                setFilters={setSparkPlug}
-                                key={ key }
-                                type="sparkplug"
+                            idx={idx}
+                            setFilters={setSparkPlug}
+                            key={ key }
+                            type="sparkplug"
                             />
-                        ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeSparkplug}>-</button>
-                            <button className="btn btn-primary" onClick={addSparkplug}>+</button>
-                        </div>
+                            ))}
+                        
+                            <button className="btns-records" onClick={removeSparkplug}>-</button>
+                            <button className="btns-records-left" onClick={addSparkplug}>+</button>
+                        
                     </div>
-                    <div className="input-filters-container">
-                        <span>Juego de Cables</span>
+                        </div>
+                           
+                        <div className="input-container">
+                        <span className="span-filter">Juego de Cables</span>
+                    <div className="si-filter">
                         {wiresetsRender.map( (key, idx) => (
                             <InputFilter
                                 idx={idx}
                                 setFilters={setWireset}
                                 key={ key }
                                 type="wiresets"
-                            />
+                                />
                         ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeWiresets}>-</button>
-                            <button className="btn btn-primary" onClick={addWiresets}>+</button>
-                        </div>
+                        
+                            <button className="btns-records" onClick={removeWiresets}>-</button>
+                            <button className="btns-records-left" onClick={addWiresets}>+</button>
+                        
                     </div>
-                     <div className="input-filters-container">
-                        <span>Balatas Traseras</span>
+                                </div>  
+                         <div className="input-container">
+                        <span className="span-filter">Balatas Traseras</span>
+                     <div className="si-filter">
                         {brakeshoeBackRender.map( (key, idx) => (
                             <InputFilter
-                                idx={idx}
-                                setFilters={setBrakeshoesBack}
-                                key={ key }
-                                type="brakeshoeBack"
+                            idx={idx}
+                            setFilters={setBrakeshoesBack}
+                            key={ key }
+                            type="brakeshoeBack"
                             />
-                        ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeBrakeshoeBack}>-</button>
-                            <button className="btn btn-primary" onClick={addBrakeshoeBack}>+</button>
-                        </div>
+                            ))}
+                        
+                            <button className="btns-records" onClick={removeBrakeshoeBack}>-</button>
+                            <button className="btns-records-left" onClick={addBrakeshoeBack}>+</button>
+                        
                     </div>
-                    <div className="input-filters-container">
-                        <span>Balatas Delanteras</span>
+                            </div>  
+                            <div className="input-container">
+
+                        <span className="span-filter">Balatas Delanteras</span>
+                    <div className="si-filter">
                         {brakeshoeFrontRender.map( (key, idx) => (
                             <InputFilter
-                                idx={idx}
-                                setFilters={setBrakeshoesFront}
-                                key={ key }
-                                type="brakeshoeFront"
+                            idx={idx}
+                            setFilters={setBrakeshoesFront}
+                            key={ key }
+                            type="brakeshoeFront"
                             />
-                        ))}
-                        <div className="btns-filter-container">
-                            <button className="btn btn-primary" onClick={removeBrakeshoeFront}>-</button>
-                            <button className="btn btn-primary" onClick={addBrakeshoeFront}>+</button>
-                        </div>
+                            ))}
+                        
+                            <button className="btns-records" onClick={removeBrakeshoeFront}>-</button>
+                            <button className="btns-records-left" onClick={addBrakeshoeFront}>+</button>
+                        
                     </div>
+                            </div>
                 </div>
-                <button className="btn btn-primary" onClick={saveCar}>GUARDAR</button>
+                </div>
+                <div className="btn-guardar">
+
+                <button className="btn-aspi" onClick={saveCar}>GUARDAR</button>
+                </div>
                 {loading && (
                     <Loader
-                        type="Rings"
+                    type="Rings"
                         color="#00BFFF"
                         height={50}
                         width={50}
-                    />
-                )}
+                        />
+                        )}
             </form>
         </Modal> 
     )
