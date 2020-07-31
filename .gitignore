@@ -1,0 +1,9 @@
+node_modules/
+
+server/.env
+
+users.txt
+
+OSCAR.xlsx
+
+design/
