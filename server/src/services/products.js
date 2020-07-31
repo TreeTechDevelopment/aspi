@@ -7,7 +7,7 @@ const Wireset = require('../db/models/wiresets');
 const createFilterDB = async (filter) => {
 
     let newFilter = {
-        filterType: 'cabine',
+        filterType: 'cabine', 
         price: 100
     }
     

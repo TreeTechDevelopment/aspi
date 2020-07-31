@@ -128,8 +128,8 @@ function FilterItem({ filter, openModal, edit, updateFilters, idx }) {
             {edit && (
                 <>
                 <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                        <button className="btn-edit" onClick={editFilter}>
-                    <img src={`${url}/images/edit.png`}/>
+                    <button className="btn-edit" onClick={editFilter}>
+                        <img src={`${url}/images/edit.png`}/>
                     </button>
                 </td>
                 <td className={idx % 2 === 0 ? 'odd' : 'even'}>

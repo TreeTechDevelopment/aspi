@@ -558,3 +558,152 @@ nav, header, footer{
     padding: 0 1rem; 
     width: fit-content;
 }
+
+/*=============== CHAVA ====================== */
+
+.select-container-filter {
+    border: 1px solid rgb( 254, 177, 0 );
+}
+.btns-records .input-records .select-car-records{
+    
+    text-align: center;
+    
+    /* width: 1.9rem;
+    height: 1.99rem; */
+    
+    
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* padding: .5rem .5rem; */
+   
+}
+.span-filter{
+    text-align: center;
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    display: inline-table;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    /* flex-direction: column; */
+}
+.input-records {
+    border: 2px solid rgb(254, 177, 0);
+    background-color: gainsboro;
+    display: table-column;
+    border-radius: 0.5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.input-records-car{
+    border: 2px solid rgb(254, 177, 0);
+    background-color: gainsboro;
+    display: table-column;
+    border-radius: 0.5rem;
+}
+.input-year-right{
+    border: 2px solid rgb(254, 177, 0);
+    background-color: gainsboro;
+    display: table-column;
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+}
+.input-year-left{
+    border: 2px solid rgb(254, 177, 0);
+    background-color: gainsboro;
+    display: table-column;
+    border-radius: 0.5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+.btns-records-left{
+    background-color: rgb(254, 177, 0);
+    /* border-radius: 0.5rem; */
+    border: 0;
+    color: white;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius:  0.5rem;
+    border-color: rgb(254, 177, 0);
+    border-top: 10px;
+    border-bottom: 10px;
+    /* max-height: fit-content; */
+    
+}
+.btns-records{
+    background-color: rgb(254, 177, 0);
+    /* border-radius: 0.5rem; */
+    border: 0;
+    color: white;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border-top: 4px;
+    border-bottom: 4px;
+    /* border-color: rgb(254, 177, 0); */
+
+    
+}
+.si-filter{
+    display: table-row;
+    width: max-content;
+}
+
+.input-container{
+    display: inline-block;
+    margin-right: 4rem;
+    margin-left: 4rem;
+    margin-bottom: 5rem;
+    
+
+}
+.btn-guardar{
+    margin-top: 10rem;
+    justify-content: center;
+    display: flex;
+}
+ .select-car-records{
+    border: 2px solid rgb(254, 177, 0);
+    /*background-color: gainsboro;
+    display: table-column; */
+  /* border-bottom: 2px solid #962d22; */
+  color: white;
+  border-radius: 0.5rem;
+  width: auto;
+} 
+.marca{
+    text-align: center;
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    display: inline-table;
+    justify-content: center;
+    align-items: center;
+    color: rgb( 254, 177, 0 );
+}
+.input-car-group{
+    display: inline-block;
+    flex-direction: row;
+    align-content: center;
+    margin-bottom: 50px;
+}
+
+.si-filter-container{
+    display: flex;
+    flex: row;
+}
+
+.si-filter:first-child{
+    display: flex;
+    flex-direction: column;
+}
