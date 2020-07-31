@@ -1,5 +1,5 @@
 {
-    "url": "http://192.168.0.5:3000",
+    "url": "https://talleraspi.herokuapp.com",
     "messageServerError": "Ha ocurrido un error en el servidor. Intentalo más tarde.",
     "messageLoginError": "Usuario o contraseña incorrectos."
 }

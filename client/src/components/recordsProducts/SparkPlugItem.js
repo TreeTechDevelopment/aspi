@@ -83,7 +83,9 @@ function SparkPlugItem({ sparkplug, openModal, updateSparkplugs, idx }) {
                 </button>
             </td>
             <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                <button className="btn-edit" onClick={handleDeleteBtn}>ELIMINAR</button>
+                <button className="btn-edit" onClick={handleDeleteBtn}>
+                    <img src={`${url}/images/delete.png`}/>
+                </button>
             </td>
         </tr>
     )

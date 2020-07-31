@@ -14,12 +14,13 @@ function WiresetsProducts({ wiresets, openModal, removeWireset }) {
                 </tr>
             </thead>
             <tbody>
-                {wiresets.map(wireset => (
+                {wiresets.map((wireset, idx) => (
                     <WiresetItem 
                         wireset={wireset}
                         key={ wireset._id }
                         openModal={openModal}
                         updateWireset={removeWireset}
+                        idx={idx}
                     />
                 ))}
             </tbody>
