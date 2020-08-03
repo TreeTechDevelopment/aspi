@@ -5,7 +5,7 @@ import { appContext } from '../../context/Provider'
 import { url, messageServerError } from '../../../app.json'
 import Modal from '../Modal'
 
-function WiresetItem({ wireset, openModal, updateWireset }) {
+function WiresetItem({ wireset, openModal, updateWireset, idx }) {
 
     const context = useContext(appContext)
 
@@ -13,7 +13,7 @@ function WiresetItem({ wireset, openModal, updateWireset }) {
 
     const closeModal = () => setOpenModalRemoveProduct(false)
 
-    const editSparkplug = () => {        
+    const editSparkplug = () => {         
         context.dispatchProduct({ type: 'SET', value: wireset }) 
         openModal()
     }
@@ -52,31 +52,35 @@ function WiresetItem({ wireset, openModal, updateWireset }) {
                 onSuccess={removeWireset}
                 onCancel={closeModal}
             />
-            <td >
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { wireset.NGK.map( NGK => (
                     <p key={NGK + Math.random().toString()}>{NGK}</p>
                 ) ) }
             </td>
-            <td>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { wireset.Bosh.map( Bosh => (
                     <p key={Bosh + Math.random().toString()}>{Bosh}</p>
                 ) ) }
             </td>
-            <td>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { wireset.LS.map( LS => (
                     <p key={LS + Math.random().toString()}>{LS}</p>
                 ) ) }
             </td>
-            <td>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { wireset.Roadstar.map( Roadstar => (
                     <p key={Roadstar + Math.random().toString()}>{Roadstar}</p>
                 ) ) }
             </td>
-            <td>
-                <button className="bnt btn-primary" onClick={editSparkplug}>EDITAR</button>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
+                <button className="btn-edit" onClick={editSparkplug}>
+                    <img src={`${url}/images/edit.png`}/>
+                </button>
             </td>
-            <td>
-                <button className="bnt btn-primary" onClick={handleDeleteBtn}>ELIMINAR</button>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
+                <button className="btn-edit" onClick={handleDeleteBtn}>
+                    <img src={`${url}/images/delete.png`}/>
+                </button>
             </td>
         </tr>
     )

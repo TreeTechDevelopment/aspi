@@ -21,7 +21,8 @@ const oilSchema = new Schema({
     price:{
         required: true,
         type: Number
-    }
+    },
+    name:{ type: String }
 
 })
 

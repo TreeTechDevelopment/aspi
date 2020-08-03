@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner';
 import { url, messageServerError } from '../../../app.json'
 import FilterItem from '../recordsProducts/FilterItem'
 
-function FormEq() {
+function FormEq({ searchFailure, searchSuccess }) {
 
     const [filters, setFilters] = useState([])
     const [filterToSearch, setFilterToSearch] = useState('')
@@ -23,11 +23,13 @@ function FormEq() {
                 setFilters(filters) 
                 setFilterFound(true)
                 setFilterNotFound(false) 
+                searchSuccess()
             }
             else{ 
                 setFilterNotFound(true) 
                 setFilterFound(false)
                 setFilters([])
+                searchFailure()
             }
         }).catch(() => {
             setLoading(false)
@@ -49,7 +51,7 @@ function FormEq() {
     }
 
     return (
-        <form className="form">
+        <form className="form"> 
             <input 
                 type="input" 
                 placeholder="REFERENCIAS CRUZADAS"
@@ -57,45 +59,53 @@ function FormEq() {
                 onChange={handleInputFilter}
                 className="input input-center"
             />
+            <div className="form-line"></div>
+            <button className="btn-aspi" onClick={getFilter}>Buscar</button>
             {filterFound && (
-                <>  
+                <div className="table-container table-products ">  
 
-                    <table>
+                    <table className="table-filters">
                         <thead>
                             <tr>
-                                <th>Interfill</th>
+                                <th>INTERFIL</th>
                                 <th>OEM</th>
-                                <th>ACDelco</th>
-                                <th>Fram</th>
-                                <th>Gonher</th>
-                                <th>Motorcraft</th>
-                                <th>Purolator</th>
-                                <th>Wix</th>
-                                <th>Mann</th>
+                                <th>ACDELCO</th>
+                                <th>FRAM</th>
+                                <th>GONHER</th>
+                                <th>MOTORCARFT</th> 
+                                <th>PUROLATOR</th>
+                                <th>WIX</th>
+                                <th>MANN</th>
+                                <th>SKY</th>
+                                <th>SEINECA</th>
+                                <th>WALMI</th>
+                                <th>JOE</th>
+                                <th>ROADSTAR</th>
+                                <th>ECA</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {filters.map( filter => (
+                            {filters.map((filter, idx) => (
                                 <FilterItem 
                                     filter={filter}
-                                    key={filter._id}
+                                    key={ filter._id }
+                                    idx={idx}
                                 />
                             ))}
                         </tbody>
                     </table>
-                </>
+                </div>
             )}
             {filterNotFound && ( <p>No se ha encontrado el filtro solicitado.</p> )}
             {loading && (
                 <Loader
-                    type="Rings"
-                    color="#00BFFF"
+                    type="TailSpin" 
+                    color="#feb200"
                     height={50}
                     width={50}
                     />
             )}
-            <div className="form-line"></div>
-            <button className="btn-aspi" onClick={getFilter}>Buscar</button>
+            
         </form>
         
     )

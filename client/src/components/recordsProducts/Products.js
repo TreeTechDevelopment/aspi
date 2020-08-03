@@ -10,6 +10,7 @@ import SparkPlugProducts from './SparkPlugProducts';
 import WiresetsProducts from './WiresetsProducts';
 import BrakeshoeProducts from './BrakeshoeProducts';
 import OilProducts from './OilProducts';
+import FilterOils from './FilterOils';
 
 function Products({ typeProduct, loading, setLoading }) {
 
@@ -19,6 +20,7 @@ function Products({ typeProduct, loading, setLoading }) {
                                 { value: 'cabine', label: 'FILTRO DE CABINA' }]  
 
     const [products, setProducts] = useState([])
+    const [allProducts, setAllProducts] = useState([])
     const [modalProduct, setModalProduct] = useState(false)
     const [typeFilter, setTypeFilter] = useState(optionsTypeFilter[0])
 
@@ -30,6 +32,7 @@ function Products({ typeProduct, loading, setLoading }) {
         fetchProducts().then(({ products }) => {
             setProducts(products)
             setLoading(false)
+            if(typeProduct.value === "oil"){ setAllProducts(products) }
         }).catch((e) => {
             console.log(e)
             alert(`${messageServerError}`)
@@ -76,7 +79,7 @@ function Products({ typeProduct, loading, setLoading }) {
                 filterType={typeFilter}
                 typeProduct={typeProduct}
                 setProduct={setProduct}
-                addNewProduct={addNewProduct}
+                addNewProduct={addNewProduct} 
             />
             {typeProduct.value === "filter" && (
                 <div className="select-container">
@@ -90,6 +93,12 @@ function Products({ typeProduct, loading, setLoading }) {
                         onChange={handleSelectTypeFilter}
                     />
                 </div>
+            )}
+            {typeProduct.value === "oil" && (
+                <FilterOils 
+                    setProducts={setProducts}
+                    allProducts={allProducts}
+                />
             )}
             <div className="table-container table-products">
                 {loading ? (

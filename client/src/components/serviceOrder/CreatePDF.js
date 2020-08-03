@@ -26,6 +26,7 @@ function CreatePDF({
         Oil,
         lts,
         note,
+        phone,
         orderToUpdate,
         cleanAB }) {
 
@@ -44,7 +45,7 @@ function CreatePDF({
                         },
                         note, cleanAB, cleanInj, brakeshoeBack, brakeshoeFront,
                         coil, transmission, antifreeze, sparkplugs: sparkplug,
-                        wiresets, idOrder: Number(getIDOrder()), total
+                        wiresets, idOrder: Number(getIDOrder()), total, phone
                     }
                     if(Oil === "Si"){ 
                         order.oil.make = aceite.make 
@@ -169,6 +170,7 @@ function CreatePDF({
                     note={note}
                     total={total}
                     rectifyDisk={rectifyDisk}
+                    phone={phone}
                 />
             }             
         >
@@ -183,6 +185,7 @@ function CreatePDF({
                         <BlobProvider 
                             document={
                                 <PDFClient 
+                                    phone={phone}
                                     rectifyDisk={rectifyDisk}                     
                                     cleanInj={cleanInj}
                                     cleanAB={cleanAB}

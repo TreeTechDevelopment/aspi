@@ -43,6 +43,7 @@ const orderSchema = new Schema({
     wiresets: { type: String },
     brakeshoeBack: { type: String },
     brakeshoeFront: { type: String },
+    phone: { type: String },
     coil: {
         required: true,
         type: String

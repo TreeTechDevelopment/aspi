@@ -14,7 +14,7 @@ function Navbar({ isHome }) {
                     </li>
                 )}
                 <li>                    
-                    <a href={`${url}/orders`}>ORDENES</a>
+                    <a href={`${url}/search`}>BUSCAR</a>
                 </li>
                 <li>                    
                     <a href={`${url}/service-order`}>ORDEN DE SERVICO</a>

@@ -83,7 +83,6 @@ function Form({ order }){
         if((Number(IDOrder) === -1 || !IDOrder) && !order){ newIDOrDER = true }
         fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes, oils }) => {
             if(order){
-                console.log('Con orden')
                 setYear({ value: order.carYear, label: order.carYear })
                 setMake({ value: order.car.make.name, label: order.car.make.name })
                 setModel({ value: order.car.model.name, label: order.car.model.name })

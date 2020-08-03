@@ -1,11 +1,11 @@
 @font-face{
     font-family: SairaLight;
-    src: url('https://talleraspi.herokuapp.com/fonts/Saira-Light.otf');
+    src: url('http://192.168.0.7:3000/fonts/Saira-Light.otf');
 }
 
 @font-face {
     font-family: SourceSans;
-    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Regular.ttf');
+    src: url('http://192.168.0.7:3000/fonts/SourceSansPro-Regular.ttf');
 }
 
 html, body, #app{
@@ -61,6 +61,8 @@ nav, header, footer{
 
 /* =======================NUEVOS ESTILOS ======================*/
 
+.btn-edit-service{ margin: 0 auto }
+
 .full-width{ width: 100%; }
 .full-height{ height: 100%; }
 
@@ -69,7 +71,7 @@ nav, header, footer{
 .bg-white{
     width: 100%;
     min-height: 100%;
-    background-image: url('https://talleraspi.herokuapp.com/images/background.jpg');
+    background-image: url('http://192.168.0.7:3000/images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -79,7 +81,8 @@ nav, header, footer{
 
 .bg-repeat{
     background-repeat: repeat-y;
-    background-size: contain;
+    background-size: 100% auto;
+    
 }
 
 .justify-content-start{ justify-content: start; }
@@ -88,6 +91,8 @@ nav, header, footer{
 .padding-horizontal{ padding: 0 1rem; }
 .padding-left{ padding-left: 2rem; }
 .margin-top{ margin-top: 1rem; }
+.margin-bottom{ margin-bottom: 1rem; }
+.margin-right{ margin-right: 1rem; }
 
 .checkbox-container{
     background-color: rgb( 254, 177, 0 );
@@ -265,7 +270,8 @@ nav, header, footer{
     background-color: white;
     padding: 1rem;
     margin-top: 2rem;
-    width: 80%;
+    min-width: 80%;
+    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -346,6 +352,16 @@ nav, header, footer{
     padding: 0 1rem; 
     width: fit-content;
 }
+
+.filter-table-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10%;
+}
+
+.small{ width: 30%; }
 
 /*=============== CHAVA ====================== */
 

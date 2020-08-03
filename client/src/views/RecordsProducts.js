@@ -34,6 +34,9 @@ function RecordsProduts() {
                     onChange={handleSelectTypeProduct}
                 />
             </div>
+            <div className="full-width">
+
+            </div>
             <Products 
                 typeProduct={typeProduct}
                 loading={loading}

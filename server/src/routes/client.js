@@ -15,8 +15,10 @@ app.get('/iniciar-sesion', handleClient)
 app.get('/records', handleClient)
 app.get('/records/cars', handleClient)
 app.get('/records/products', handleClient)
-app.get('/records/services', isAuthenticatedAdmin, handleClient)
-app.get('/signup', isAuthenticatedAdmin, handleClient)
-app.get('/orders', handleClient)
+app.get('/records/services', handleClient)
+app.get('/signup', handleClient)
+app.get('/search/orders', handleClient)
+app.get('/search', handleClient)
+app.get('/search/cars', handleClient)
 
 module.exports = app

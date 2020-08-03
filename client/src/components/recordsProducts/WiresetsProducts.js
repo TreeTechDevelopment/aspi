@@ -8,9 +8,11 @@ function WiresetsProducts({ wiresets, openModal, removeWireset }) {
             <thead>
                 <tr>
                     <th>NGK</th>
-                    <th>Bosh</th>
-                    <th>Lancer & Silverine</th> 
-                    <th>Roadstar</th>
+                    <th>BOSH</th>
+                    <th>LANCER & SILVERINE</th> 
+                    <th>ROADSTAR</th>
+                    <th>EDITAR</th>
+                    <th>ELIMINAR</th>
                 </tr>
             </thead>
             <tbody>

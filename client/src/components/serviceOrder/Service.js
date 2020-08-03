@@ -10,12 +10,11 @@ const Service = ({order}) => {
                             { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
                             { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
                             { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
-                            { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' },
                             { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
 
   const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
 
-  const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' },
+  const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' }, { value: 'Garrafas 4 litros', label: 'Garrafas 4 litros' },
                                 { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }, { value: "Suelto", label: 'Suelto' },
                                 { value: 'none', label: 'SIN ACEITE' }]
     
@@ -35,6 +34,8 @@ const Service = ({order}) => {
   const [wiresetSelect, setWiresetSelect] = useState([]);
   const [brakeshoeBackSelect, setBrakeshoeBackSelect] = useState([]);
   const [brakeshoeFrontSelect, setBrakeshoeFrontSelect] = useState([]);
+  const [oilNames, setOilNames] = useState([]);
+  const [oilName, setOilName] = useState({});
   const [airFilter, setAirFilter] = useState({});
   const [oilFilter, setOilFilter] = useState({});
   const [fuelFilter, setFuelFilter] = useState({});
@@ -48,6 +49,7 @@ const Service = ({order}) => {
   const [presentation, setPresentation] = useState(oilPresentationSelect[0])
   const [oilMake, setOilMake] = useState(oilMakeSelect[0])
   const [oilType, setOilType] = useState(oilTypeSelect[0])
+  const [phone, setPhone] = useState('')
 
   const [datos, guardarDatos] = useState({
     CleaningInj: "No",
@@ -93,8 +95,6 @@ const Service = ({order}) => {
 
   useEffect(() => {
     if (JSON.stringify(context.car) !== "{}" || order) {
-
-        console.log(order)
 
         let airFilters = context.filters.filter( filterDB => filterDB.filterType === "air" )
         let oilFilters = context.filters.filter( filterDB => filterDB.filterType === "oil" )
@@ -230,6 +230,7 @@ const Service = ({order}) => {
 
         if(order && context.services.length !== 0){
           let newDatos = { note: order.note }
+          setPhone(order.phone)
           if(order.antifreeze === "Si"){ newDatos.antifreeze = "Si" }
           if(order.cleanAB === "Si"){ newDatos.CleaningAB = "Si" }
           if(order.cleanInj === "Si"){ newDatos.CleaningInj = "Si" }
@@ -363,7 +364,6 @@ const Service = ({order}) => {
   const createPDF = (e) => {
     e.preventDefault()
     let total = getTotal()
-    console.log(total)
     guardarDatos({
       ...datos,
       total,
@@ -447,7 +447,11 @@ const Service = ({order}) => {
 
   const handleSelectOilType = newValue => setOilType(newValue)
 
+  const handleSelectOilName = newValue => setOilName(newValue)
+
   const handleinputLts = e => setLts(e.target.value.replace( /[^0-9]/g, ''))
+
+  const handlePhone = e => setPhone(e.target.value.replace( /[^0-9]/g, ''))
 
   const renderTotalProducts = product => {
     let total = 0
@@ -496,6 +500,17 @@ const Service = ({order}) => {
     }
     return total
   }
+
+  useEffect(() => {
+    if(Oil === "Si"){
+      let oils = context.oils.filter( oilDB => oilDB.make == oilMake.value && oilDB.oilType == oilType.value && oilDB.presentation == presentation.value && oilDB.viscosity == viscosity.value)
+      oils = oils.map( oil => {
+        return { value: oil.name ? oil.name : 'none', label: oil.name ? oil.name : 'SIN NOMBRE' }
+      }) 
+      console.log(oils)
+      setOilNames(oils)
+    }
+  }, [oilMake, oilType, presentation, viscosity, Oil])
 
   return (
     <>
@@ -702,6 +717,17 @@ const Service = ({order}) => {
                 className="select"
               />
             </div>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>NOMBRE</label>
+              </div>
+              <Select        
+                value={oilName}
+                options={oilNames}
+                onChange={handleSelectOilName}
+                className="select"
+              />
+            </div>
             {presentation.value === "Suelto" && (
               <>
                 <input 
@@ -817,6 +843,12 @@ const Service = ({order}) => {
               />
             </div>
           )}
+          <label>TELÉFONO</label>
+          <input 
+              className="input"
+              value={phone}
+              onChange={handlePhone}
+            />
           <h2>NOTAS</h2>
           <textarea
             name="note"
@@ -826,7 +858,7 @@ const Service = ({order}) => {
           <button onClick={createPDF} className="btn-aspi">CREAR PDF</button>
           { renderBTNPDF && (
             <CreatePDF 
-              aceite={{make: oilMake.value, type: oilType.value, viscosity: viscosity.value, presentation: presentation.value}}
+              aceite={{make: oilMake.value, type: oilType.value, viscosity: viscosity.value, presentation: presentation.value, name: oilName.value}}
               Oil={Oil}
               lts={lts}
               airFilter={ (ChangeAirFiltter === "Si" && airFilter )? airFilter.label : ''}
@@ -846,6 +878,7 @@ const Service = ({order}) => {
               total={total}
               rectifyDisk={rectifyDisk}
               orderToUpdate={order}
+              phone={phone}
             />
           ) }
           

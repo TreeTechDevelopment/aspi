@@ -30,4 +30,6 @@ const DBconfig = {
 mongoose.connect( process.env.DB, DBconfig ,async (db) => {
     console.log("DB connected")
 
+    //await Model.findByIdAndRemove('5ee6c972b79c46273c2a179c')
+
 } )

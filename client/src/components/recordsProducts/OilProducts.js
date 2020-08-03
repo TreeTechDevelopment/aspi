@@ -3,25 +3,28 @@ import React from 'react'
 import OilItem from './OilItem';
 
 function OilProducts({ oils, openModal, removeOil }) {
-    console.log(oils)
 
-    return (
-        <table className="table-products">
+    return ( 
+        <table className="table-products"> 
             <thead>
                 <tr>
-                    <th>Marca</th>
-                    <th>Viscosidad</th>
-                    <th>Presentación</th>
-                    <th>Tipo</th>
+                    <th>MARCA</th>
+                    <th>VISCOSIDAD</th>
+                    <th>PRESENTACIÓN</th>
+                    <th>TIPO</th>
+                    <th>NOMBRE</th>
+                    <th>EDITAR</th>
+                    <th>ELIMINAR</th>
                 </tr>
             </thead>
             <tbody>
-                {oils.map(oil => (
+                {oils.map((oil, idx) => (
                     <OilItem 
                         oil={oil}
                         key={ oil._id }
                         openModal={openModal}
                         updateOil={removeOil}
+                        idx={idx}
                     />
                 ))}
             </tbody>

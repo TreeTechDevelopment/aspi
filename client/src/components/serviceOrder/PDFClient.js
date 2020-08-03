@@ -29,51 +29,61 @@ const PDFClient = ({
     lts,
     rectifyDisk,
     note,
-    total
+    total,
+    phone
 }) => {
 
 return(
     <Document>
-    <Page size="A4" style={styles.page}>
+    <Page size={226.77} style={styles.page}>
         <View style={styles.header}>
             <Image source={{ uri: `${url}/images/logo.png`, method: 'GET', headers: {}, body: '' }} style={styles.logo}/>
-            <View style={styles.textHeaderContainer}>
-                <Text style={styles.title}>Tornillos y Lubricantes</Text>
-                <Text style={styles.textHeader}>JULIO AZPIZU RUIZ</Text>
-                <Text style={styles.textHeader}>AVE. MINA No. 1077 SUR GÓMEZ PALACIO, DGO.</Text>
-                <Text style={styles.textHeader}>TEL/FAX (871)714-4045</Text>
-            </View>
+            <Text style={styles.title}>Tornillos y lubricantes</Text>
         </View>
-        <View style={styles.dateOrdenIDContainer}>                      
-            <Text>FECHA: {date}</Text>
-            <Text>ORDEN DE TRABAJO: No. {IDOrder}</Text>
+        <View style={styles.idContainer}>
+            <Text style={styles.idText}>FOLIO: {IDOrder}</Text>
         </View>
-        <View style={styles.body}>                      
-            <Text style={styles.textBody}>VEHÍCULO: {make} {model} {year} {car.motor} {car.cylinder}</Text>
-            <Text style={styles.textBody}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>
-            <Text style={styles.textBody}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>
-            {Oil === "Si" ? (
-                <Text style={styles.textBody}>
+        <View style={styles.section}>                     
+            <Text style={styles.text}>TELÉFONO: {phone}</Text> 
+            <Text style={styles.text}>FECHA: {date}</Text>
+        </View>
+        <View style={styles.section}>                      
+            <Text style={styles.text}>VEHÍCULO: {make} {model} {year} {car.motor} {car.cylinder}</Text>
+        </View>
+        <View style={styles.section}>
+            {cleanInj === "Si" && <Text style={styles.text}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>}
+            {cleanAB === "Si" && <Text style={styles.text}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>}
+            {Oil === "Si" && (
+                <Text style={styles.text}>
                     ACEITE: {aceite.presentation === "Suelto" ? `${aceite.presentation} ${lts} ${aceite.make} ${aceite.viscosity} ${aceite.type}` : 
-                    `${aceite.presentation} ${aceite.make} ${aceite.viscosity} ${aceite.type}` }
+                    `${aceite.presentation} ${aceite.make} ${aceite.viscosity} ${aceite.type} ${ (aceite.name && aceite.name !== "none") ? aceite.name : '' }` }
                 </Text>
-            ):(
-                <Text style={styles.textBody}> ACEITE: No</Text>
             )}
-            <Text style={styles.textBody}>FILTRO DE ACEITE: {oilFilter !== "" ? 'Si' : 'No'}</Text>
-            <Text style={styles.textBody}>FILTRO DE GASOLINA: {fuelFilter !== "" ? 'Si' : 'No'}</Text>
-            <Text style={styles.textBody}>FILTRO DE AIRE: {airFilter !== "" ? 'Si' : 'No'}</Text>
-            <Text style={styles.textBody}>FILTRO DE AIRE DE CABINA: {cabineFilter !== "" ? 'Si' : 'No'}</Text>
-            <Text style={styles.textBody}>BUJÍAS: {sparkplug !== "" ? 'Si' : 'No'}</Text>
-            <Text style={styles.textBody}>JUEGO DE CABLES: {wiresets !== "" ? "Si" : "No"}</Text>
-            {coil === "Si" && <Text style={styles.textBody}>BOBINA: {coil}</Text>}
-            {antifreeze === "Si" && <Text style={styles.textBody}>ANTICONGELANTE: {antifreeze}</Text>}
-            {transmission === "Si" && <Text style={styles.textBody}>CAMBIO DE ACEITE DE TRANSMISIÓN: {transmission}</Text>}
-            <Text style={styles.subTitle}>FRENOS</Text>
-            <Text style={styles.textBody}>BALATAS: {(brakeshoeBack !== "" || brakeshoeFront !== "") ? 'Si' : 'No'}</Text>
-            <Text style={styles.textBody}>RECTIFICADO DE DISCOS: {rectifyDisk}</Text>
-            <Text style={styles.textBody}>NOTAS: {note}</Text>
-            <Text style={styles.textBody}>TOTAL: ${total}</Text>
+            { oilFilter !== "" && <Text style={styles.text}>FILTRO DE ACEITE: Si</Text>}
+            { fuelFilter !== "" && <Text style={styles.text}>FILTRO DE GASOLINA: Si</Text>}
+            { airFilter !== "" && <Text style={styles.text}>FILTRO DE AIRE: Si</Text>}
+            { cabineFilter !== "" && <Text style={styles.text}>FILTRO DE AIRE DE CABINA: Si</Text>}
+            {sparkplug !== "" && <Text style={styles.text}>BUJÍAS: Si</Text>}
+            {wiresets !== "" && <Text style={styles.text}>JUEGO DE CABLES: Si</Text>}
+            {coil === "Si" && <Text style={styles.text}>BOBINA: {coil}</Text>}
+            {antifreeze === "Si" && <Text style={styles.text}>ANTICONGELANTE: {antifreeze}</Text>}
+            {transmission === "Si" && <Text style={styles.text}>CAMBIO DE ACEITE DE TRANSMISIÓN: {transmission}</Text>}
+        </View>
+        {(rectifyDisk === "Si" || brakeshoeFront !== "" || brakeshoeBack !== "") && (
+            <View style={styles.section}>
+                <Text style={styles.text}>FRENOS</Text>
+                {brakeshoeFront !== "" && <Text style={styles.text}>BALATAS DELANTERAS: Si</Text>}
+                {brakeshoeBack !== "" && <Text style={styles.text}>BALATAS TRASERAS: Si</Text>}
+                {rectifyDisk === "Si" && <Text style={styles.text}>RECTIFICADO DE DISCOS: {rectifyDisk}</Text>}
+            </View>
+        )}
+        <View style={styles.section}>                      
+            <Text style={styles.text}>NOTAS: {note}</Text>
+            <Text style={styles.text}>TOTAL: ${total}</Text>
+        </View>
+        <View style={styles.footer}>                      
+            <Text style={styles.text}>Av. Mina 1077 Sur Gómez Palacio Dgo.</Text>
+            <Text style={styles.text}>Tel. (871) 714 4045</Text>
         </View>
     </Page>
 </Document>

@@ -9,7 +9,7 @@ function SignUp() {
 
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
-    const [redirect, setRedirect] = useState(false)
+    const [redirect, setRedirect] = useState(false) 
 
     const handleInputUser = e => setUser(e.target.value)
 
@@ -37,25 +37,28 @@ function SignUp() {
     if(redirect){ return <Redirect to="/"/> }
 
     return (
-        <>
-            <Navbar />
-            <form method="POST" action="/users/signup">
-                <label>Usuario</label>
+        <div id="login-container" className="form-container">
+            <img src={`${url}/images/logo-white.png`} id="login-logo"/>
+            <form method="POST" action="/users/signup" className="form" id="login">
                 <input 
                     value={user}
                     onChange={handleInputUser}
                     name="username"
+                    className="input"
+                    placeholder="USUARIO"
                 />
-                <label>Contraseña</label>
                 <input 
                     value={password}
                     onChange={handleInputPassword}
                     name="password"
                     type="password"
+                    className="input"
+                    placeholder="CONTRASEÑA"
                 />
-                <button type="submit" className="btn btn-primary">GUARDAR</button>
+                <div className="form-line"></div>
+                <button type="submit" className="btn-aspi">GUARDAR</button>
             </form>
-        </>
+        </div>
     )
 }
 

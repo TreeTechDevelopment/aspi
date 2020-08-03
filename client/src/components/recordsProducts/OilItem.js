@@ -3,10 +3,8 @@ import React, { useContext, useState } from 'react'
 import { appContext } from '../../context/Provider'
 import { url, messageServerError } from '../../../app.json'
 import Modal from '../Modal';
-
-function OilItem({ oil, openModal, updateOil }) {
-
-    console.log(oil)
+ 
+function OilItem({ oil, openModal, updateOil, idx }) {
 
     const context = useContext(appContext)
 
@@ -53,23 +51,30 @@ function OilItem({ oil, openModal, updateOil }) {
                 onSuccess={removeOil}
                 onCancel={closeModal}
             />
-            <td >
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { oil.make}
             </td>
-            <td>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { oil.viscosity}
             </td>
-            <td>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { oil.presentation}
             </td>
-            <td>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
                 { oil.oilType}
             </td>
-            <td>
-                <button className="bnt btn-primary" onClick={editOil}>EDITAR</button>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
+                { oil.name}
             </td>
-            <td>
-                <button className="bnt btn-primary" onClick={handleDeleteBtn}>ELIMINAR</button>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
+                <button className="btn-edit" onClick={editOil}>
+                    <img src={`${url}/images/edit.png`}/>
+                </button>
+            </td>
+            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
+                <button className="btn-edit" onClick={handleDeleteBtn}>
+                    <img src={`${url}/images/delete.png`}/>
+                </button>
             </td>
         </tr>
     )

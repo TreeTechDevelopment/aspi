@@ -15,6 +15,8 @@ import RecordsProduts from './src/views/RecordsProducts';
 import RecordsServices from './src/views/RecordsServices';
 import Orders from './src/views/Orders';
 import SignUp from './src/views/SignUp';
+import Search from './src/views/Search';
+import Cars from './src/views/Cars';
 import Provider from './src/context/Provider';
 
 
@@ -28,8 +30,14 @@ function Routes() {
           <Route exact path="/cross">
             <CrossR />
           </Route>
-          <Route exact path="/orders">
+          <Route exact path="/search/orders">
             <Provider> <Orders /> </Provider>
+          </Route>
+          <Route exact path="/search/cars">
+            <Provider> <Cars /> </Provider>
+          </Route>
+          <Route exact path="/search">
+            <Provider> <Search /> </Provider>
           </Route>
           <Route exact path="/service-order">
             <Provider> <ServiceOrd /> </Provider>

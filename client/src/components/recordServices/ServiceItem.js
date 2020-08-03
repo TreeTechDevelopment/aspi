@@ -3,14 +3,15 @@ import axios from 'axios';
 
 import { url, messageServerError } from '../../../app.json';
 
-function ServiceItem({ service, updateTable }) {
-
+function ServiceItem({ service, updateTable, idx }) {
+ 
     const [editing, setEditing] = useState(false)
     const [price, setPrice] = useState(service.price.toString())
 
     const editService = (e) => {
         e.preventDefault()
         if(editing){
+            if(price === ""){ return alert('El campo precio es necesario') }
             updateService({ id: service._id, price }).then(({ service }) => {
                 setEditing(false)
                 updateTable(service)
@@ -40,23 +41,27 @@ function ServiceItem({ service, updateTable }) {
 
     return (
         <tr>
-            <td>{service.label}</td>
-            <td>
+            <td className={ idx % 2 === 0 ? 'odd'  :'even' }>{service.label.toUpperCase()}</td>
+            <td className={ idx % 2 === 0 ? 'odd'  :'even' }>
                 {editing ? (
                     <input
                         value={price}
                         onChange={handleInput}
+                        className="input"
                     />
                 ): service.price}
             </td>
-            <td>
-                <button className="btn btn-primary" onClick={editService}>{ editing ? 'GUARDAR' : 'EDITAR' }</button>
+            <td className={`${editing ? '' : ''} ${ idx % 2 === 0 ? 'odd'  :'even' }`}>
+                <button className={`btn-aspi btn-edit-service ${ editing && 'margin-bottom' }`} onClick={editService}>{ editing ? 'GUARDAR' : 'EDITAR' }</button>
+                {editing && (
+                    <button className="btn-aspi btn-edit-service" onClick={cancelEditing}>CANCELAR</button>
+                )}
             </td>
-            {editing && (
-                 <td>
-                    <button className="btn btn-primary" onClick={cancelEditing}>CANCELAR</button>
+           {/*  {editing && (
+                 <td className={ idx % 2 === 0 ? 'odd'  :'even' }>
+                    <button className="btn-aspi" onClick={cancelEditing}>CANCELAR</button>
                 </td>
-            )}
+            )} */}
         </tr>
     )
 }

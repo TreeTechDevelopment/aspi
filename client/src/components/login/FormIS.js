@@ -47,7 +47,7 @@ function FormIS() {
             className="form"
         >
             <input 
-                type="input" 
+                type="input"  
                 placeholder="USUARIO" 
                 name="username"
                 value={userName}

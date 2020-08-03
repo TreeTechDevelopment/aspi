@@ -15,12 +15,11 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                             { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
                             { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
                             { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
-                            { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' }, { value: '5W60', label: '5W60' },
                             { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
 
     const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
 
-    const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' },
+    const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' }, { value: 'Garrafas 4 litros', label: 'Garrafas 4 litros' },
                                 { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }, { value: 'Suelto', label: 'Suelto' }]
     
     const oilMakeSelect = [{ value: 'Shell', label: 'Shell' }, { value: 'Quaker State', label: 'Quaker State' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'LTH', label: 'LTH' },
@@ -74,6 +73,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const [loading, setLoading] = useState(false)
     const [interfil, setInterfill] = useState('')
     const [price, setPrice] = useState('')
+    const [oilName, setOilName] = useState('')
     
     const [viscosity, setViscosity] = useState(viscositySelect[0])
     const [presentation, setPresentation] = useState(oilPresentationSelect[0])
@@ -234,6 +234,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
 
     const handleInputInterfill = (e) => setInterfill(e.target.value)
 
+    const handleInputOilName = (e) => setOilName(e.target.value)
+
     const saveFilter = () => {
         if(price !== ""){
             setLoading(true)
@@ -243,7 +245,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                 NGK, Champions, Bosh, LS, Roadstar, Wagner, oilMake: oilMake.value,
                 presentation: presentation.value, viscosity: viscosity.value,
                 oilType: oilType.value, filterType:filterType.value,
-                Sky, Seineca, Walmi, Joe, ECA
+                Sky, Seineca, Walmi, Joe, ECA, name: oilName
             }
             if(JSON.stringify(context.product) !== "{}") {
                 data.id = context.product._id
@@ -495,7 +497,16 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                         value={price}
                         onChange={handleInputPrice}
                     />
-                </div>               
+                </div>
+                {typeProduct.value === "oil" && (
+                    <div className="input-filters-container">
+                        <span>NOMBRE</span>
+                        <input 
+                            value={oilName}
+                            onChange={handleInputOilName}
+                        />
+                    </div>
+                )}   
                 <div id="input-filters-container-group">
                     { typeProduct.value === 'filter' ? (
                         <>

@@ -7,7 +7,7 @@ import ServiceItem from './ServiceItem';
 
 function Services() {
 
-    const [services, setServices] = useState([])
+    const [services, setServices] = useState([]) 
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -38,11 +38,11 @@ function Services() {
     }
 
     return (
-        <>
+        <div className="table-container">
             {loading ? (
                 <Loader
-                    type="Rings"
-                    color="#00BFFF"
+                    type="TailSpin" 
+                    color="#feb200"
                     height={50}
                     width={50}
                 />
@@ -50,22 +50,24 @@ function Services() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Servicio</th>
-                            <th>Precio</th>
+                            <th>SERVICIO</th>
+                            <th>PRECIO</th>
+                            <th>EDITAR</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {services.map( service => (
+                        {services.map( (service, idx) => (
                             <ServiceItem 
                                 key={service._id}
                                 service={service}
                                 updateTable={updateTable}
+                                idx={idx}
                             />
                         ) )}
                     </tbody>
                 </table>
             )}
-        </>
+        </div>
     )
 }
 

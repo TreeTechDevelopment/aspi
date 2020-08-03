@@ -15,7 +15,7 @@ function RecordsCars() {
     const [makesSelect, setMakesSelect] = useState([])
     const [cars, setCars] = useState([])  
     const [loading, setLoading] = useState(true)  
-    const [openModalNewCar, setOpenModalNewCar] = useState(false)    
+    const [openModalNewCar, setOpenModalNewCar] = useState(false)     
     const [make, setMake] = useState({})      
 
     useEffect(() => {

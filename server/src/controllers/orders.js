@@ -18,7 +18,7 @@ const createOrder = async (req, res) => {
             prevOrder.cleanAB = order.cleanAB
             prevOrder.cleanInj = order.cleanInj
             prevOrder.brakeshoeBack = order.brakeshoeBack
-            prevOrder.brakeshoeFront = order.brakeshoeFront
+            prevOrder.brakeshoeFront = order.brakeshoeFront 
             prevOrder.wiresets = order.wiresets
             prevOrder.coil = order.coil
             prevOrder.transmission = order.transmission
@@ -28,6 +28,7 @@ const createOrder = async (req, res) => {
             prevOrder.oil = order.oil
             prevOrder.filters = order.filters
             prevOrder.total = order.total
+            prevOrder.phone = order.phone
 
             prevOrder.save((err, orderDB) => {
                 console.log(err)
@@ -72,6 +73,7 @@ const updateOrder = async (req, res) => {
         orderDB.brakeshoeFront = order.brakeshoeFront
         orderDB.wiresets = order.wiresets
         orderDB.total = order.total
+        orderDB.phone = order.phone
                 
         orderDB.save((err, orerDB) => {
             if(err){ return res.sendStatus(500) }

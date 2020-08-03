@@ -93,7 +93,7 @@ const createProduct = async (req, res) => {
         const { interfil, OEM, ACD, Fram, Gonher, Motorcraft,
             Purolator, Wix, Mann, price, product,
             NGK, Champions, Bosh, LS, Roadstar, Wagner, viscosity, presentation,
-            oilMake, oilType, filterType, Sky, Seineca, Walmi, Joe, ECA } = req.body
+            oilMake, oilType, filterType, Sky, Seineca, Walmi, Joe, ECA, name } = req.body
 
         switch(product){
             case 'filter':
@@ -146,7 +146,7 @@ const createProduct = async (req, res) => {
 
             case 'oil':
 
-                let oil = new Oil({ make: oilMake, presentation, viscosity, oilType, price })
+                let oil = new Oil({ make: oilMake, presentation, viscosity, oilType, price, name })
 
                 oil.save((err, oilDB) => {
                     if(err){ return res.sendStatus(500) }
@@ -168,7 +168,7 @@ const updateProduct = async (req, res) => {
             Purolator, Wix, Mann, price, product,
             NGK, Champions, Bosh, LS, Roadstar, Wagner, id,
             oilMake, oilType, presentation, viscosity, Sky,
-            Seineca, Walmi, Joe, ECA } = req.body
+            Seineca, Walmi, Joe, ECA, name } = req.body
 
         switch(product){
             case 'filter':
@@ -253,6 +253,7 @@ const updateProduct = async (req, res) => {
                 oil.viscosity = viscosity
                 oil.presentation = presentation
                 oil.price = price
+                oil.name = name
 
                 oil.save((err, newOilDB) => {
                     if(err){ return res.sendStatus(500) }
