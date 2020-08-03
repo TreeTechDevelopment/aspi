@@ -25,7 +25,7 @@ function RecordsProduts() {
             <Navbar /> 
             <div className="select-container">
                 <div className="label-container">
-                    <label>PRODCUTO</label>
+                    <label>PRODUCTO</label>
                 </div>
                 <Select 
                     value={typeProduct}

@@ -276,7 +276,7 @@ const Service = ({order}) => {
             let idx = wiresetSelect.findIndex( wireset => wireset.label == order.wiresets )
             setWireset(wiresetSelect[idx]);
           }
-          if(order.oil.oilRequired === "Si"){
+          if(order.oil.oilRequired === "Si"){ 
             newDatos.Oil = "Si"
             let idxMake = oilMakeSelect.findIndex( make => make.label == order.oil.make )
             let idxPresentation = oilPresentationSelect.findIndex( presentation => presentation.label == order.oil.presentation )
@@ -514,7 +514,7 @@ const Service = ({order}) => {
 
   return (
     <>
-      <div className="third-window">
+      <div className="third-window padding-top">
         <form className="form align-items-start padding-left">
           <h1>SERVICIOS</h1>
           <div className="checkbox-container">
@@ -669,7 +669,7 @@ const Service = ({order}) => {
           </div>
         </form>
       </div>
-      <div className="third-window">
+      <div className="third-window padding-top">
         <form className="form">
         {Oil === "Si" && (
           <>
@@ -781,7 +781,7 @@ const Service = ({order}) => {
           {ChangeFuelFiltter === "Si" && (
             <div className="select-container big">
               <div className="label-container">
-                  <label>F. DE GASOLINA</label>
+                  <label>F. GASOLINA</label>
               </div>
               <Select
                 options={fuelFilterSelect}

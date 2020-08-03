@@ -8,8 +8,7 @@ const filterSchema = new Schema({
     },
     interfil: {
         type: String,
-        required: true,
-        unique: true
+        default: ''
     },
     OEM: {
         type: Array,

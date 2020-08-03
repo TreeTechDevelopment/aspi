@@ -116,7 +116,7 @@ function Form({ order }){
     },[model, make])
 
     useEffect(() => {
-        if(cars.length != 0 ){
+        if(cars.length != 0 ){ 
             let car = cars.find(car => car.year.indexOf(year.value) >= 0 && car.motor == motor.value && car.cylinder == cylinder.value  )
             if(car){                
                 context.dispatchCar({ type: 'SET', value: car })

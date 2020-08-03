@@ -28,7 +28,7 @@ function FilterOils({ setProducts, products, allProducts }) {
     const [presentation, setPresentation] = useState(oilPresentationSelect[0])
     const [oilMake, setOilMake] = useState(oilMakeSelect[0])
     const [oilType, setOilType] = useState(oilTypeSelect[0])
-    const [filterType, setFilterType] = useState(filterTypeSelect[0])
+    const [filterType, setFilterType] = useState(filterTypeSelect[0]) 
 
     const applyFilter = () => setFilter(!filter)
 

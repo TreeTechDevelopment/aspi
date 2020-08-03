@@ -100,6 +100,9 @@ function Products({ typeProduct, loading, setLoading }) {
                     allProducts={allProducts}
                 />
             )}
+            <button className="padding-horizontal-fit-content btn-aspi margin-vertical" onClick={openModal}>
+                AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}
+            </button>       
             <div className="table-container table-products">
                 {loading ? (
                     <Loader
@@ -143,7 +146,9 @@ function Products({ typeProduct, loading, setLoading }) {
                     )
                 )}
             </div>  
-            <button className="padding-horizontal-fit-content btn-aspi margin-vertical" onClick={openModal}>AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}</button>       
+            <button className="padding-horizontal-fit-content btn-aspi margin-vertical" onClick={openModal}>
+                AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}
+            </button>       
         </>
     )
 }

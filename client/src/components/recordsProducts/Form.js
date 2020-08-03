@@ -467,6 +467,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         setECAToRender([Math.random().toString()])
         setInterfill('')
         setPrice('')
+        setOilName('')
         setViscosity(viscositySelect[0])
         setPresentation(oilPresentationSelect[0])
         setOilMake(oilMakeSelect[0])
