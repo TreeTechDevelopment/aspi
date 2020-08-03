@@ -87,7 +87,8 @@ const PDF = ({
     IDOrder,
     rectifyDisk,
     total,
-    phone
+    phone,
+    orderToUpdate
 }) => {
 
 return(
@@ -105,7 +106,10 @@ return(
             <Text style={styles.text}>FECHA: {date}</Text>
         </View>
         <View style={styles.section}>                      
-            <Text style={styles.text}>VEHÍCULO: {make} {model} {year} {car.motor} {car.cylinder}</Text>
+            <Text style={styles.text}>
+                VEHÍCULO: {orderToUpdate ? `${orderToUpdate.car.make.name} ${orderToUpdate.car.model.name} ${orderToUpdate.carYear} ${orderToUpdate.car.motor} ${orderToUpdate.car.cylinder}` : 
+                `${make} ${model} ${year} ${car.motor} ${car.cylinder}`}
+            </Text>
         </View>
         <View style={styles.section}>                      
             {cleanInj === "Si" && <Text style={styles.text}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>}

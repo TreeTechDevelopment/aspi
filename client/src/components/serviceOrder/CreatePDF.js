@@ -171,6 +171,7 @@ function CreatePDF({
                     total={total}
                     rectifyDisk={rectifyDisk}
                     phone={phone}
+                    orderToUpdate={orderToUpdate}
                 />
             }             
         >
@@ -211,6 +212,7 @@ function CreatePDF({
                                     IDOrder={returnNumberIDOrder()}
                                     note={note}
                                     total={total}
+                                    orderToUpdate={orderToUpdate}
                                 />
                             }             
                         >

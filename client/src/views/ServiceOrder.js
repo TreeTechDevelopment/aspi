@@ -9,7 +9,7 @@ function ServiceOrd() {
     return (
         <div className="bg-white direction-row align-items-start bg-repeat">
             <Navbar />
-            <div className="third-window direction-column margin-vertical-auto">
+            <div className="third-window direction-column margin-vertical-auto max-height">
                 <Form />
             </div>
             <div className="line-separator"></div> 

@@ -176,7 +176,7 @@ function Form({ order }){
         setCylinder(cylindersSelect[0])
     }
 
-    const handleModelSelect = newModel => setModel(newModel)
+    const handleModelSelect = newModel => setModel(newModel) 
 
     const handleCylinderSelect = newCylinder => setCylinder(newCylinder)
     

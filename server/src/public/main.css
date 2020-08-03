@@ -279,6 +279,8 @@ nav, header, footer{
 .full-width{ width: 100%; }
 .full-height{ height: 100%; }
 
+.max-height{ max-height: 100%; }
+
 .padding-top{ padding-top: 7%; }
 
 .bg-white{

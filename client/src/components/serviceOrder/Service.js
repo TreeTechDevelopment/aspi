@@ -230,7 +230,7 @@ const Service = ({order}) => {
 
         if(order && context.services.length !== 0){
           let newDatos = { note: order.note }
-          setPhone(order.phone)
+          if(order.phone){ setPhone(order.phone) }
           if(order.antifreeze === "Si"){ newDatos.antifreeze = "Si" }
           if(order.cleanAB === "Si"){ newDatos.CleaningAB = "Si" }
           if(order.cleanInj === "Si"){ newDatos.CleaningInj = "Si" }
@@ -507,7 +507,6 @@ const Service = ({order}) => {
       oils = oils.map( oil => {
         return { value: oil.name ? oil.name : 'none', label: oil.name ? oil.name : 'SIN NOMBRE' }
       }) 
-      console.log(oils)
       setOilNames(oils)
     }
   }, [oilMake, oilType, presentation, viscosity, Oil])
@@ -669,7 +668,7 @@ const Service = ({order}) => {
           </div>
         </form>
       </div>
-      <div className="third-window padding-top">
+      <div className="third-window padding-top margin-bottom">
         <form className="form">
         {Oil === "Si" && (
           <>
