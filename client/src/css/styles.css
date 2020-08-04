@@ -1,11 +1,11 @@
 @font-face{
     font-family: SairaLight;
-    src: url('http://192.168.0.5:3000/fonts/Saira-Light.otf');
+    src: url('http://192.168.1.83:3000/fonts/Saira-Light.otf');
 }
 
 @font-face {
     font-family: SourceSans;
-    src: url('http://192.168.0.5:3000/fonts/SourceSansPro-Regular.ttf');
+    src: url('http://192.168.1.83:3000/fonts/SourceSansPro-Regular.ttf');
 }
 
 html, body, #app{
@@ -69,7 +69,7 @@ nav, header, footer{
 .bg-white{
     width: 100%;
     min-height: 100%;
-    background-image: url('http://192.168.0.5:3000/images/background.jpg');
+    background-image: url('http://192.168.1.83:3000/images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -356,8 +356,6 @@ nav, header, footer{
     
     text-align: center;
     
-    /* width: 1.9rem;
-    height: 1.99rem; */
     
     
     font-family: SourceSans;
@@ -423,8 +421,7 @@ nav, header, footer{
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius:  0.5rem;
     border-color: rgb(254, 177, 0);
-    border-top: 10px;
-    border-bottom: 10px;
+    height: 2.125rem;
     /* max-height: fit-content; */
     
 }
@@ -437,8 +434,9 @@ nav, header, footer{
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    border-top: 4px;
-    border-bottom: 4px;
+    border-top: 0.25rem;
+    border-bottom: 0.25rem;
+    height: 2.125rem;
     /* border-color: rgb(254, 177, 0); */
 
     
@@ -446,29 +444,37 @@ nav, header, footer{
 .si-filter{
     display: table-row;
     width: max-content;
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    border: 0.125rem solid rgb(254, 177, 0);
+
+}
+.si-filter-btn{
+    display: table-row;
+    width: max-content;
 }
 
 .input-container{
     display: inline-block;
-    margin-right: 4rem;
+    margin-right: 3.5rem;
     margin-left: 4rem;
     margin-bottom: 5rem;
     
 
 }
 .btn-guardar{
-    margin-top: 10rem;
+    margin-top: 3rem;
     justify-content: center;
     display: flex;
 }
  .select-car-records{
-    border: 2px solid rgb(254, 177, 0);
+    border: 0.125rem solid rgb(254, 177, 0);
     /*background-color: gainsboro;
     display: table-column; */
   /* border-bottom: 2px solid #962d22; */
-  color: white;
   border-radius: 0.5rem;
   width: auto;
+  /* height: 1.875rem; */
 } 
 .marca{
     text-align: center;
@@ -489,6 +495,10 @@ nav, header, footer{
 .si-filter-container{
     display: flex;
     flex: row;
+    /* border: 0.125rem solid rgb(254, 177, 0); */
+    /* border-top-right-radius: 0.6rem;
+    border-bottom-right-radius:  0.6rem;
+ */
 }
 
 .si-filter:first-child{
