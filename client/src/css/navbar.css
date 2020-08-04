@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: SourceSansBold;
-    src: url('https://talleraspi.herokuapp.com/fonts/SourceSansPro-Bold.ttf');
+    src: url('http://192.168.0.7:3000/fonts/SourceSansPro-Bold.ttf');
 }
 
 .navHome{
