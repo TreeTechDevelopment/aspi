@@ -13,10 +13,10 @@ import OilProducts from './OilProducts';
 
 function Products({ typeProduct, loading, setLoading }) {
 
-    const optionsTypeFilter = [{ value: 'air', label: 'FILTRO DE AIRE' },
-                                { value: 'oil', label: 'FILTRO DE ACEITE' },
-                                { value: 'fuel', label: 'FILTRO DE GASOLINA' },
-                                { value: 'cabine', label: 'FILTRO DE CABINA' }]  
+    const optionsTypeFilter = [{ value: 'air', label: 'Filtro de Aire' },
+                                { value: 'oil', label: 'Filtro de Aceite' },
+                                { value: 'fuel', label: 'Filtro de Gasolina' },
+                                { value: 'cabine', label: 'Filtro de Cabina' }]  
 
     const [products, setProducts] = useState([])
     const [modalProduct, setModalProduct] = useState(false)
@@ -30,8 +30,7 @@ function Products({ typeProduct, loading, setLoading }) {
         fetchProducts().then(({ products }) => {
             setProducts(products)
             setLoading(false)
-        }).catch((e) => {
-            console.log(e)
+        }).catch(() => {
             alert(`${messageServerError}`)
         })
     }, [typeProduct, typeFilter])
@@ -61,13 +60,6 @@ function Products({ typeProduct, loading, setLoading }) {
         setProducts(newProducts)
     }
 
-    const removeProducts = productDeleted => {
-        let newProducts = [...products]
-        let idx = newProducts.findIndex( product => product._id == productDeleted._id )
-        newProducts.splice(idx, 1)
-        setProducts(newProducts)
-    }
-
     return (
         <>
             <Form 
@@ -78,24 +70,11 @@ function Products({ typeProduct, loading, setLoading }) {
                 setProduct={setProduct}
                 addNewProduct={addNewProduct}
             />
-            {typeProduct.value === "filter" && (
-                <div className="select-container">
-                    <div className="label-container">
-                        <label>TIPO</label>
-                    </div>
-                    <Select 
-                        value={typeFilter}
-                        options={optionsTypeFilter}
-                        className="select"
-                        onChange={handleSelectTypeFilter}
-                    />
-                </div>
-            )}
-            <div className="table-container table-products">
+            <div className="table-records-container">
                 {loading ? (
                     <Loader
-                        type="TailSpin" 
-                        color="#feb200"
+                        type="Rings"
+                        color="#00BFFF"
                         height={100}
                         width={100}
                     />
@@ -104,37 +83,40 @@ function Products({ typeProduct, loading, setLoading }) {
                         <SparkPlugProducts 
                             sparkplugs={products}
                             openModal={openModal}
-                            removeSparkplug={removeProducts}
                         />
                     ) : typeProduct.value === "wiresets" ? ( 
                         <WiresetsProducts 
                             wiresets={products}
                             openModal={openModal}
-                            removeWireset={removeProducts}
                         />
                     ) : typeProduct.value === "filter" ? (
-                        <FilterProducts 
-                            filters={products}
-                            openModal={openModal}
-                            typeFilter={typeFilter}
-                            removeFilter={removeProducts}
-                        />
+                        <>
+                            <Select 
+                                value={typeFilter}
+                                options={optionsTypeFilter}
+                                className="select"
+                                onChange={handleSelectTypeFilter}
+                            />
+                            <FilterProducts 
+                                filters={products}
+                                openModal={openModal}
+                                typeFilter={typeFilter}
+                            />
+                        </>
                     ) : typeProduct.value === "brakeShoe" ? (
                         <BrakeshoeProducts 
                             brakeshoes={products}
                             openModal={openModal}
-                            removeBrakeshoe={removeProducts}
                         />
                     ) : (
                         <OilProducts 
                             oils={products}
                             openModal={openModal}
-                            removeOil={removeProducts} 
                         />
                     )
                 )}
             </div>  
-            <button className="padding-horizontal-fit-content btn-aspi margin-vertical" onClick={openModal}>AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}</button>       
+            <button className="btn btn-primary" onClick={openModal}>AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}</button>       
         </>
     )
 }

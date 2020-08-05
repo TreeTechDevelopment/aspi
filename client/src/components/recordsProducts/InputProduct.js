@@ -58,21 +58,6 @@ function InputFilter({ idx, setProducts, type }) {
                 case "Wagner":
                     if(context.product.Wagner[idx]){ setProduct(context.product.Wagner[idx]) }
                     break;
-                case "Sky":
-                    if(context.product.Sky[idx]){ setProduct(context.product.Sky[idx]) }
-                    break;
-                case "Seineca":
-                    if(context.product.Seineca[idx]){ setProduct(context.product.Seineca[idx]) }
-                    break;
-                case "Walmi":
-                    if(context.product.Walmi[idx]){ setProduct(context.product.Walmi[idx]) }
-                    break;
-                case "Joe":
-                    if(context.product.Joe[idx]){ setProduct(context.product.Joe[idx]) }
-                    break;
-                case "ECA":
-                    if(context.product.ECA[idx]){ setProduct(context.product.ECA[idx]) }
-                    break;
             }
         }
     },[context.product])

@@ -1,89 +1,45 @@
-import React, { useContext, useState } from 'react'
-import axios from'axios';
+import React, { useContext } from 'react'
 
 import { appContext } from '../../context/Provider'
-import { url, messageServerError } from '../../../app.json'
-import Modal from '../Modal';
 
-function SparkPlugItem({ sparkplug, openModal, updateSparkplugs, idx }) {
+function SparkPlugItem({ sparkplug, openModal }) {
 
     const context = useContext(appContext)
-
-    const [openModalRemoveProduct, setOpenModalRemoveProduct] = useState(false)
-
-    const closeModal = () => setOpenModalRemoveProduct(false)
 
     const editSparkplug = () => {        
         context.dispatchProduct({ type: 'SET', value: sparkplug }) 
         openModal()
     }
 
-    const removeSparkplug = () => {
-        deleteSparkplug().then(({ product }) => {
-            updateSparkplugs(product)
-        }).catch((e) => {
-            console.log(e)
-            alert(`${messageServerError}`)
-        })
-    }
-
-    const deleteSparkplug = async () => {
-        const res = await axios({
-            method: 'DELETE',
-            url: `${url}/products`,
-            timeout: 5000,
-            data: { type: 'sparkPlug', id: sparkplug._id }
-        })
-
-        return res.data
-    }
-
-    const handleDeleteBtn = e => {
-        e.preventDefault()
-        setOpenModalRemoveProduct(true)
-    }
-
     return (
         <tr>
-            <Modal 
-                openModal={openModalRemoveProduct}
-                closeModal={closeModal}
-                body="¿ESTÁ SEGURO QUE DESEA BORRAR ESTE PRODUCTO?"
-                onSuccess={removeSparkplug}
-                onCancel={closeModal}
-            />
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+            <td >
                 { sparkplug.NGK.map( NGK => (
-                    <p key={NGK + Math.random().toString()}>{NGK}</p>
+                    <p key={NGK}>{NGK}</p>
                 ) ) }
             </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+            <td>
                 { sparkplug.Champions.map( Champions => (
-                    <p key={Champions + Math.random().toString()}>{Champions}</p>
+                    <p key={Champions}>{Champions}</p>
                 ) ) }
             </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+            <td>
                 { sparkplug.Bosh.map( Bosh => (
-                    <p key={Bosh + Math.random().toString()}>{Bosh}</p>
+                    <p key={Bosh}>{Bosh}</p>
                 ) ) }
             </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+            <td>
                 { sparkplug.Motorcraft.map( Motorcraft => (
-                    <p key={Motorcraft + Math.random().toString()}>{Motorcraft}</p>
+                    <p key={Motorcraft}>{Motorcraft}</p>
                 ) ) }
             </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+            <td>
                 { sparkplug.ACD.map( ACD => (
-                    <p key={ACD + Math.random().toString()}>{ACD}</p>
+                    <p key={ACD}>{ACD}</p>
                 ) ) }
             </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                <button className="btn-edit" onClick={editSparkplug}>
-                    <img src={`${url}/images/edit.png`}/>
-                </button>
-            </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                <button className="btn-edit" onClick={handleDeleteBtn}>ELIMINAR</button>
+            <td>
+                <button className="bnt btn-primary" onClick={editSparkplug}>EDITAR</button>
             </td>
         </tr>
     )

@@ -2,29 +2,25 @@ import React from 'react'
 
 import SparkPlugItem from './SparkPlugItem'
 
-function SparkPlugProducts({ sparkplugs, openModal, removeSparkplug }) {
+function SparkPlugProducts({ sparkplugs, openModal }) {
 
     return (
-        <table >
+        <table className="table-products">
             <thead>
                 <tr>
                     <th>NGK</th>
-                    <th>CHAMPIONS</th>
-                    <th>BOSH</th>
-                    <th>MOTORCRAFT</th> 
-                    <th>ACDELCO</th>
-                    <th>EDITAR</th>
-                    <th>ELIMINAR</th>
+                    <th>Champions</th>
+                    <th>Bosh</th>
+                    <th>Motorcraft</th> 
+                    <th>ACDelco</th>
                 </tr>
             </thead>
             <tbody>
-                {sparkplugs.map((sparkplug, idx) => (
+                {sparkplugs.map(sparkplug => (
                     <SparkPlugItem 
                         sparkplug={sparkplug}
                         key={ sparkplug._id }
                         openModal={openModal}
-                        updateSparkplugs={removeSparkplug}
-                        idx={idx}
                     />
                 ))}
             </tbody>

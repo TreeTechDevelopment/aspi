@@ -2,7 +2,7 @@ import React from 'react'
 
 import WiresetItem from './WiresetItem'
 
-function WiresetsProducts({ wiresets, openModal, removeWireset }) {
+function WiresetsProducts({ wiresets, openModal }) {
     return (
         <table className="table-products">
             <thead>
@@ -19,7 +19,6 @@ function WiresetsProducts({ wiresets, openModal, removeWireset }) {
                         wireset={wireset}
                         key={ wireset._id }
                         openModal={openModal}
-                        updateWireset={removeWireset}
                     />
                 ))}
             </tbody>

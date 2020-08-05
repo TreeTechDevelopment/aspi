@@ -2,9 +2,7 @@ import React from 'react'
 
 import OilItem from './OilItem';
 
-function OilProducts({ oils, openModal, removeOil }) {
-    console.log(oils)
-
+function OilProducts({ oils, openModal }) {
     return (
         <table className="table-products">
             <thead>
@@ -12,7 +10,7 @@ function OilProducts({ oils, openModal, removeOil }) {
                     <th>Marca</th>
                     <th>Viscosidad</th>
                     <th>Presentación</th>
-                    <th>Tipo</th>
+                    <th>Litros/Galones</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,7 +19,6 @@ function OilProducts({ oils, openModal, removeOil }) {
                         oil={oil}
                         key={ oil._id }
                         openModal={openModal}
-                        updateOil={removeOil}
                     />
                 ))}
             </tbody>

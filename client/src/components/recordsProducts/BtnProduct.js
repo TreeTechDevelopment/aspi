@@ -13,9 +13,9 @@ function BtnProduct({ product, addProduct, removeProduct }) {
     }
 
     return (
-        <div className="btns-filter-container">
-            <button className="btn btn-primary" onClick={handleRemoveBtn}>-</button>
-            <button className="btn btn-primary" onClick={handleAddBtn}>+</button>
+        <div className="si-filter-btn">
+            <button className="btns-records" onClick={handleRemoveBtn}>-</button>
+            <button className="btns-records-left" onClick={handleAddBtn}>+</button>
         </div>
     )
 }
