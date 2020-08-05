@@ -35,6 +35,10 @@ nav, header, footer{
     display: flex;
     flex-direction: column;
 }
+.input-filters-container-products{
+    display: flex;
+    flex-direction: row;
+}
 
 #input-filters-container-group{
     display: flex;
@@ -377,6 +381,15 @@ nav, header, footer{
     margin-right: 1rem;
     /* flex-direction: column; */
 }
+.span-only{
+    text-align: left;
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    display: inline-table;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+}
 .input-records {
     border: 2px solid rgb(254, 177, 0);
     background-color: gainsboro;
@@ -385,6 +398,7 @@ nav, header, footer{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 .input-records-car{
     border: 2px solid rgb(254, 177, 0);
     background-color: gainsboro;
@@ -409,9 +423,16 @@ nav, header, footer{
     border-bottom-right-radius: 0;
     border-right: none;
 }
+.input-price{
+    border: 2px solid rgb(254, 177, 0);
+    background-color: gainsboro;
+    /* display: table-column;  */
+    border-radius: 0.5rem;
+}
 .btns-records-left{
     background-color: rgb(254, 177, 0);
     /* border-radius: 0.5rem; */
+    
     border: 0;
     color: white;
     display: inline-block;
@@ -447,7 +468,12 @@ nav, header, footer{
     border-bottom-left-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
     border: 0.125rem solid rgb(254, 177, 0);
-
+}
+.si-filter-price{
+    display: table-row;
+    width: max-content;
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;  
 }
 .si-filter-btn{
     display: table-row;
