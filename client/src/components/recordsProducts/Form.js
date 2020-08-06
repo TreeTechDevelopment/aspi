@@ -10,7 +10,7 @@ import InputFilter from './InputProduct'
 import BtnProduct from './BtnProduct'
 
 function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, typeProduct }) {
-
+    
     const viscositySelect = [{ value: '5W30', label: '5W30' }, { value: '5W20', label: '5W20' }, { value: '5W40', label: '5W40' }, 
                             { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
                             { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
@@ -480,159 +480,237 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
 
     const handleSelectMakeOil = newValue => setOilMake(newValue)
 
-    const handleSelectPresentation = newValue => setPresentation(newValue)
+    const handleSelectPresentation = newValue => setPresentation(newValue) 
 
     const handleSelectOilType = newValue => setOilType(newValue)
-    
 
     return (
         <Modal
             isOpen={modalIsOpen}
             onRequestClose={doBeforeCloseModal}
+            style={{
+                content: {
+                    width: '70%',
+                    height: typeProduct.value === "filter" ?  '80%' : '50%',
+                    top: typeProduct.value === "filter" ?  '10%' : '25%',
+                    left: '15%'
+                }
+            }}
         >
             <div className="form-car">
-                <span>{ filterType.label }</span>
-                <div className="input-filters-container">
-                    <span>{ presentation.value === "Suelto" ? 'Precio por litro' : 'Precio' }</span>
+                <h3>{ typeProduct.value === "filter" ?  filterType.label : typeProduct.label}</h3>
+                <div>
+                    <span className="span-only">{ presentation.value === "Suelto" ? 'Precio por litro' : 'Precio' }</span>
+                    <div className="si-filter-container">
+                    <div className="si-filter-price">
+
                     <input 
                         value={price}
                         onChange={handleInputPrice}
-                    />
+                        className="input-price"
+                        />
+                    </div>
                 </div>
                 {typeProduct.value === "oil" && (
                     <div className="input-filters-container">
-                        <span>NOMBRE</span>
-                        <input 
-                            value={oilName}
-                            onChange={handleInputOilName}
-                        />
+                        <span className="span-only">NOMBRE</span>
+                        <div className="si-filter-container">
+                            <div className="si-filter-price">
+                                <input 
+                                    value={oilName}
+                                    onChange={handleInputOilName}
+                                />
+                            </div>
+                        </div>
                     </div>
                 )}   
-                <div id="input-filters-container-group">
+                </div>               
+                <div className="input-filters-container-group">
                     { typeProduct.value === 'filter' ? (
                         <>
-                        <div className="input-filters-container">
-                            <span>interfil</span>
+
+                        <div className="input-filters-container-products">
+                            <div className="input-container padding-right">
+
+                            <span className="span-filter">Interfil</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             <input 
                                 value={interfil}
                                 onChange={handleInputInterfill}
-                            />
-                        </div>                        <div className="input-filters-container">
-                            <span>OEM</span>
+                                
+                                />
+                        
+                                </div>
+                            </div>
+                        </div>                        <div className="input-container">
+                            <span className="span-filter">OEM</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {OEMToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="OEM"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="OEM"
                                 />
-                            ))}
+                                ))}
+                            </div>
                             <BtnProduct product="OEM" addProduct={addProducts} removeProduct={removeProducts}/>
+                            </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>ACDelco</span>
+                        <div className="input-container">
+                            <span className="span-filter">ACDelco</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
+
                             {ACDToRender.map((key,idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="ACD"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="ACD"
+                                
                                 />
-                            ))}
+                                ))}
+                            </div>
                             <BtnProduct product="ACD" addProduct={addProducts} removeProduct={removeProducts}/>
+                            </div>
                         </div>
+                    </div>
                         </>
                     ) : typeProduct.value === "sparkPlug" ? (
                         <>
-                        <div className="input-filters-container">
-                            <span>NGK</span>
+                        <div className="input-container">
+                            <span className="span-filter">NGK</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
+
                             {NGKToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="NGK"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="NGK"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="NGK" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>Champions</span>
+                        <div className="input-container">
+                            <span className="span-filter">Champions</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
                             {ChampionsToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Champions"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Champions"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="Champions" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>Bosh</span>
+                        
+                        <div className="input-container">
+                            <span className="span-filter">Bosh</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {BoshToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Bosh"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Bosh"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="Bosh" addProduct={addProducts} removeProduct={removeProducts}/>
+                                    </div>
                         </div>
                         </>
                     ) : typeProduct.value === "brakeShoe" ? (
                         <>
-                        <div className="input-filters-container">
-                            <span>Wagner</span>
+                        <div className="input-container">
+                            <span className="span-filter">Wagner</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
+
                             {WagnerToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Wagner"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Wagner"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="Wagner" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                         </div>
                         </>
                     ): typeProduct.value === "wiresets" ? (
                         <>
-                        <div className="input-filters-container">
-                            <span>Bosh</span>
+                        
+                        <div className="input-container">
+                            <span className="span-filter">Bosh</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {WagnerToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Bosh"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Bosh"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="Bosh" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>Lancer & Silverline</span>
+                        <div className="input-container">
+                            <span className="span-filter">Lancer & Silverline</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {LSToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="LS"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="LS"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="LS" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>NGK</span>
+                        <div className="input-container">
+                            <span className="span-filter">NGK</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {NGKToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="NGK"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="NGK"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="NGK" addProduct={addProducts} removeProduct={removeProducts}/>
+                                    </div>
                         </div>
                         </>
                     ): (
@@ -665,224 +743,316 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                     )}
                     
                 </div>
-                <div id="input-filters-container-group">
+                <div className="input-filters-container-group">
                 { typeProduct.value === 'filter' ? (
                         <>
-                        <div className="input-filters-container">
-                            <span>Fram</span>
+                        <div className="input-filters-container-products">
+                        <div className="input-container">
+
+                            <span className="span-filter">Fram</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {FramToRender.map((key,idx) => (
                                 <InputFilter 
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    key={key}
-                                    type="Fram"
+                                idx={idx}
+                                setProducts={setProducts}
+                                key={key}
+                                type="Fram"
                                 />
-                            ))}
+                                ))}
+                            </div>
                             <BtnProduct product="Fram" addProduct={addProducts} removeProduct={removeProducts}/>
+                            </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>Gonher</span>
+                        <div className="input-container">
+
+                            <span className="span-filter">Gonher</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
                             {GonherToRender.map((key,idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Gonher"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Gonher"
                                 />
-                            ))}
+                                ))}
+                            </div>  
                             <BtnProduct product="Gonher" addProduct={addProducts} removeProduct={removeProducts}/>
                         </div>
-                        <div className="input-filters-container">
-                            <span>Motorcraft</span>
+                    </div>
+                        <div className="input-container">
+                            <span className="span-filter">Motorcraft</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {MotorcraftToRender.map((key,idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Motorcraft"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Motorcraft"
                                 />
-                            ))}
+                                ))}
+                            </div>
                             <BtnProduct product="Motorcraft" addProduct={addProducts} removeProduct={removeProducts}/>
+                            </div>
                         </div>
+                    </div>
                         </>
                     ) : typeProduct.value === "sparkPlug" ? (
                         <>
-                        <div className="input-filters-container">
-                            <span>Motorcraft</span>
+                        <div className="input-container">
+                            <span className="span-filter">Motorcraft</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {MotorcraftToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Motorcraft"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Motorcraft"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="Motorcraft" addProduct={addProducts} removeProduct={removeProducts}/>
+                                    </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>ACDelco</span>
+                        <div className="input-container">
+                            <span className="span-filter">ACDelco</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
                             {ACDToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="ACD"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="ACD"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="ACD" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                         </div>
                         </>
                     ) : typeProduct.value === "wiresets" && (
                         <>
-                        <div className="input-filters-container">
-                            <span>Roadstar</span>
+                        <div className="input-container">
+
+                            <span className="span-filter">Roadstar</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {RoadstarToRender.map((key, idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Roadstar"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Roadstar"
                                 />
-                            ))}
+                                ))}
+                                </div>
                             <BtnProduct product="Roadstar" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                         </div>
                         </>
                     )}
                 </div>
-                <div id="input-filters-container-group">
                 { typeProduct.value === 'filter' ? (
-                        <>
-                        <div className="input-filters-container">
-                            <span>Purolator</span>
+                        <div className="input-filters-container-group">
+                        <div className="input-filters-container-products">
+                        <div className="input-container">
+
+                            <span className="span-filter">Purolator</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
+
                             {PurolatorToRender.map((key,idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Purolator"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Purolator"
                                 />
-                            ))}
+                                ))}
+                                </div>
                            <BtnProduct product="Purolator" addProduct={addProducts} removeProduct={removeProducts}/>
-                        </div>
-                        <div className="input-filters-container">
-                            <span>Wix</span>
+                                </div>
+                            </div>
+                        <div className="input-container">
+                            <span className="span-filter">Wix</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
+
                             {WixToRender.map((key,idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Wix"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Wix"
                                 />
-                            ))}
+                                ))}
+                            </div>
                             <BtnProduct product="Wix" addProduct={addProducts} removeProduct={removeProducts}/>
+                            </div>
                         </div>
-                        <div className="input-filters-container">
-                            <span>Mann</span>
+                        <div className="input-container">
+                            <span className="span-filter">Mann</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
                             {MannToRender.map((key,idx) => (
                                 <InputFilter 
-                                    key={key}
-                                    idx={idx}
-                                    setProducts={setProducts}
-                                    type="Mann"
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Mann"
                                 />
-                            ))}
+                                ))}
+                            </div>
                            <BtnProduct product="Mann" addProduct={addProducts} removeProduct={removeProducts}/>
+                            </div>
                         </div>
-                        </>
+                    </div>
+                    </div>
                     ): typeProduct.value === "oil" && (
-                        <>
+                        <div className="input-filters-container-group">
                         <div className="input-filters-container">
                             <span>Tipo de aceite</span>
                             <Select 
                                 options={oilTypeSelect}
                                 value={oilType}
                                 onChange={handleSelectOilType}
-                            />
+                                />
                         </div>
-                        </>
+                        </div>
                     )}
-                </div>
-                { typeProduct.value === "filter" && (
-                    <>
-                        <div id="input-filters-container-group">
-                            <div className="input-filters-container">
-                                <span>Sky</span>
-                                {SkyToRender.map((key,idx) => (
-                                    <InputFilter 
-                                        key={key}
-                                        idx={idx}
-                                        setProducts={setProducts}
-                                        type="Sky"
-                                    />
+                {typeProduct.value === 'filter' && (
+                    <div className="input-filters-container-group">
+                     <div className="input-filters-container-products">
+                        <div className="input-container">
+                            <span className="span-filter">Sky</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
+
+                            {SkyToRender.map((key,idx) => (
+                                <InputFilter 
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Sky"
+                                />
                                 ))}
-                            <BtnProduct product="Sky" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
+                        <BtnProduct product="Sky" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
                             </div>
-                            <div className="input-filters-container">
-                                <span>Seineca</span>
-                                {SeinecaToRender.map((key,idx) => (
-                                    <InputFilter 
-                                        key={key}
-                                        idx={idx}
-                                        setProducts={setProducts}
-                                        type="Seineca"
-                                    />
-                                ))}
-                            <BtnProduct product="Seineca" addProduct={addProducts} removeProduct={removeProducts}/>
-                            </div>
-                            <div className="input-filters-container">
-                                <span>Walmi</span>
-                                {WalmiToRender.map((key,idx) => (
-                                    <InputFilter 
-                                        key={key}
-                                        idx={idx}
-                                        setProducts={setProducts}
-                                        type="Walmi"
-                                    />
-                                ))}
-                            <BtnProduct product="Walmi" addProduct={addProducts} removeProduct={removeProducts}/>
-                            </div>
-                        </div>
-                         <div id="input-filters-container-group">
-                            <div className="input-filters-container">
-                                <span>Roadstar</span>
-                                {RoadstarToRender.map((key,idx) => (
-                                    <InputFilter 
-                                        key={key}
-                                        idx={idx}
-                                        setProducts={setProducts}
-                                        type="Roadstar"
-                                    />
-                                ))}
-                            <BtnProduct product="Roadstar" addProduct={addProducts} removeProduct={removeProducts}/>
-                            </div>
-                            <div className="input-filters-container">
-                                <span>Joe</span>
-                                {JoeToRender.map((key,idx) => (
-                                    <InputFilter 
-                                        key={key}
-                                        idx={idx}
-                                        setProducts={setProducts}
-                                        type="Joe"
-                                    />
-                                ))}
-                            <BtnProduct product="Joe" addProduct={addProducts} removeProduct={removeProducts}/>
-                            </div>
-                            <div className="input-filters-container">
-                                <span>ECA</span>
-                                {ECAToRender.map((key,idx) => (
-                                    <InputFilter 
-                                        key={key}
-                                        idx={idx}
-                                        setProducts={setProducts}
-                                        type="ECA"
-                                    />
-                                ))}
-                            <BtnProduct product="ECA" addProduct={addProducts} removeProduct={removeProducts}/>
-                            </div>
-                        </div>
-                    </>
+                             <div className="input-container">
+                                 <span className="span-filter">Seineca</span>
+                                 <div className="si-filter-container">
+                                 <div className="si-filter">
+     
+     
+                                 {SeinecaToRender.map((key,idx) => (
+                                     <InputFilter 
+                                     key={key}
+                                     idx={idx}
+                                     setProducts={setProducts}
+                                     type="Seineca"
+                                     />
+                                     ))}
+                                 </div>
+                                 <BtnProduct product="Seineca" addProduct={addProducts} removeProduct={removeProducts}/>
+                                 </div>
+                             </div>
+                             <div className="input-container">
+                                 <span className="span-filter">Walmi</span>
+                                 <div className="si-filter-container">
+                                 <div className="si-filter">
+     
+                                 {WalmiToRender.map((key,idx) => (
+                                     <InputFilter 
+                                     key={key}
+                                     idx={idx}
+                                     setProducts={setProducts}
+                                     type="Walmi"
+                                     />
+                                     ))}
+                                 </div>
+                                <BtnProduct product="Walmi" addProduct={addProducts} removeProduct={removeProducts}/>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
                 )}
-                <button className="btn btn-primary" onClick={saveFilter}>GUARDAR</button>
+                {typeProduct.value === 'filter' && (
+                    <div className="input-filters-container-group">
+                     <div className="input-filters-container-products">
+                        <div className="input-container">
+                            <span className="span-filter">Joe</span>
+                            <div className="si-filter-container">
+                            <div className="si-filter">
+
+
+                            {JoeToRender.map((key,idx) => (
+                                <InputFilter 
+                                key={key}
+                                idx={idx}
+                                setProducts={setProducts}
+                                type="Joe"
+                                />
+                                ))}
+                                </div>
+                        <BtnProduct product="Joe" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
+                            </div>
+                             <div className="input-container">
+                                 <span className="span-filter">Roadstar</span>
+                                 <div className="si-filter-container">
+                                 <div className="si-filter">
+     
+     
+                                 {RoadstarToRender.map((key,idx) => (
+                                     <InputFilter 
+                                     key={key}
+                                     idx={idx}
+                                     setProducts={setProducts}
+                                     type="Seineca"
+                                     />
+                                     ))}
+                                 </div>
+                                 <BtnProduct product="Roadstar" addProduct={addProducts} removeProduct={removeProducts}/>
+                                 </div>
+                             </div>
+                             <div className="input-container">
+                                 <span className="span-filter">ECA</span>
+                                 <div className="si-filter-container">
+                                 <div className="si-filter">
+     
+                                 {ECAToRender.map((key,idx) => (
+                                     <InputFilter 
+                                     key={key}
+                                     idx={idx}
+                                     setProducts={setProducts}
+                                     type="ECA"
+                                     />
+                                     ))}
+                                 </div>
+                                <BtnProduct product="ECA" addProduct={addProducts} removeProduct={removeProducts}/>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                )}
+                <div className="btn-guardar">
+
+                <button className="btn-aspi" onClick={saveFilter}>GUARDAR</button>
+                </div>
                 {loading && (
                     <Loader
                         type="Rings"

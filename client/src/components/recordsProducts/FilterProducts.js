@@ -2,17 +2,17 @@ import React from 'react'
 
 import FilterItem from './FilterItem';
 
-function FilterProducts({ filters, openModal, typeFilter, removeFilter }) {
+function FilterProducts({ filters, openModal, typeFilter }) {
     return (
-        <table className="table-filters">
+        <table className="table-products">
             <thead>
                 <tr>
-                    <th>INTERFIL</th>
+                    <th>INTERFILL</th>
                     <th>OEM</th>
                     <th>ACDELCO</th>
                     <th>FRAM</th>
                     <th>GONHER</th>
-                    <th>MOTORCARFT</th> 
+                    <th>MOTORCRAFT</th> 
                     <th>PUROLATOR</th>
                     <th>WIX</th>
                     <th>MANN</th>
@@ -26,7 +26,7 @@ function FilterProducts({ filters, openModal, typeFilter, removeFilter }) {
                     <th>ELIMINAR</th>
                 </tr>
             </thead>
-            <tbody> 
+            <tbody>
                 {filters.map((filter, idx) => (
                     <FilterItem 
                         filter={filter}
@@ -34,7 +34,6 @@ function FilterProducts({ filters, openModal, typeFilter, removeFilter }) {
                         openModal={openModal}
                         edit={true}
                         typeFilter={typeFilter.value}
-                        updateFilters={removeFilter}
                         idx={idx}
                     />
                 ))}

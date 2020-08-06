@@ -104,6 +104,7 @@ function RecordsCars() {
                     className="select"
                 />
             </div>
+            <button className="padding-horizontal-fit-content btn-aspi margin-vertical" onClick={openModal}>AGREGAR CARRO</button>
             <div className="table-container">
                 {loading ? (
                     <Loader

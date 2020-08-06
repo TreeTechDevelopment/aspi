@@ -34,13 +34,23 @@ nav, header, footer{
 
 .input-filters-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
 }
 
-#input-filters-container-group{
+.input-filters-container-products{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    width: 100%;
+}
+
+.input-filters-container-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
 }
 
 .btns-filter-container{
@@ -83,9 +93,10 @@ nav, header, footer{
 }
 
 .bg-repeat{
-    background-repeat: repeat-y;
-    background-size: 100% auto;
-    
+    background-size: auto;
+    background-repeat: repeat;
+    width: fit-content;
+    min-width: 100%;
 }
 
 .justify-content-start{ justify-content: flex-start; }
@@ -97,6 +108,7 @@ nav, header, footer{
 .margin-bottom{ margin-bottom: 1rem; }
 .margin-right{ margin-right: 1rem; }
 .margin-vertical-auto{ margin: auto 0; }
+.padding-right{ padding-right: 2.5rem; }
 
 .checkbox-container{
     background-color: rgb( 254, 177, 0 );
@@ -282,12 +294,17 @@ nav, header, footer{
     align-items: center;
 }
 
-.table-products{
-    padding-top: 0;
+.flex-start{
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .table-container table{
     width: 100%;
+}
+
+.table-products{
+    padding-top: 0;
 }
 
 .table-container table tr th {
@@ -296,7 +313,6 @@ nav, header, footer{
     text-align: center;
     font-family: SairaLight;
     color: white;
-    width: 20%;
     border: 1rem solid white;
     border-bottom: 0;
 }
@@ -402,6 +418,15 @@ nav, header, footer{
     margin-right: 1rem;
     /* flex-direction: column; */
 }
+.span-only{
+    text-align: left;
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    display: inline-table;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+}
 .input-records {
     border: 2px solid rgb(254, 177, 0);
     background-color: gainsboro;
@@ -410,6 +435,7 @@ nav, header, footer{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 .input-records-car{
     border: 2px solid rgb(254, 177, 0);
     background-color: gainsboro;
@@ -434,9 +460,16 @@ nav, header, footer{
     border-bottom-right-radius: 0;
     border-right: none;
 }
+.input-price{
+    border: 2px solid rgb(254, 177, 0);
+    background-color: gainsboro;
+    /* display: table-column;  */
+    border-radius: 0.5rem;
+}
 .btns-records-left{
     background-color: rgb(254, 177, 0);
     /* border-radius: 0.5rem; */
+    
     border: 0;
     color: white;
     display: inline-block;
@@ -472,7 +505,12 @@ nav, header, footer{
     border-bottom-left-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
     border: 0.125rem solid rgb(254, 177, 0);
-
+}
+.si-filter-price{
+    display: table-row;
+    width: max-content;
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;  
 }
 .si-filter-btn{
     display: table-row;
@@ -481,9 +519,6 @@ nav, header, footer{
 
 .input-container{
     display: inline-block;
-    margin-right: 3.5rem;
-    margin-left: 4rem;
-    margin-bottom: 5rem;
     
 
 }
@@ -529,4 +564,11 @@ nav, header, footer{
 .si-filter:first-child{
     display: flex;
     flex-direction: column;
+}
+
+.form-car{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
 }

@@ -24,7 +24,10 @@ function Products({ typeProduct, loading, setLoading }) {
     const [modalProduct, setModalProduct] = useState(false)
     const [typeFilter, setTypeFilter] = useState(optionsTypeFilter[0])
 
-    const openModal = () => setModalProduct(true)
+    const openModal = (e) => {
+        e?.preventDefault()
+        if(!loading){ setModalProduct(true) }
+    }
 
     const closeModal = () => setModalProduct(false)
 
@@ -43,7 +46,7 @@ function Products({ typeProduct, loading, setLoading }) {
         const res = await axios({
             url: `${url}/products/${typeProduct.value}?type=${typeFilter.value}`,
             method: 'GET',
-            timeout: 5000
+            timeout: 15000
         })
 
         return res.data
@@ -103,7 +106,7 @@ function Products({ typeProduct, loading, setLoading }) {
             <button className="padding-horizontal-fit-content btn-aspi margin-vertical" onClick={openModal}>
                 AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}
             </button>       
-            <div className="table-container table-products">
+            <div className={`table-container table-products ${!loading ? 'flex-start' : ''}`}>
                 {loading ? (
                     <Loader
                         type="TailSpin" 

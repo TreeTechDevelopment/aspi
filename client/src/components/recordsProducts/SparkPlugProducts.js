@@ -2,10 +2,10 @@ import React from 'react'
 
 import SparkPlugItem from './SparkPlugItem'
 
-function SparkPlugProducts({ sparkplugs, openModal, removeSparkplug }) {
+function SparkPlugProducts({ sparkplugs, openModal }) {
 
     return (
-        <table >
+        <table className="table-products">
             <thead>
                 <tr>
                     <th>NGK</th>
@@ -23,7 +23,6 @@ function SparkPlugProducts({ sparkplugs, openModal, removeSparkplug }) {
                         sparkplug={sparkplug}
                         key={ sparkplug._id }
                         openModal={openModal}
-                        updateSparkplugs={removeSparkplug}
                         idx={idx}
                     />
                 ))}

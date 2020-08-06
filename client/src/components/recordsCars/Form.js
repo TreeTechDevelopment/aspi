@@ -461,7 +461,18 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
   };
 
   return (
-    <Modal isOpen={modalIsOpen} onRequestClose={doBeforeCloseModal}>
+    <Modal 
+      isOpen={modalIsOpen} 
+      onRequestClose={doBeforeCloseModal}
+      style={{
+        content: {
+            width: '70%',
+            height: '70%',
+            top: '15%',
+            left: '15%'
+        }
+      }}
+    >
       <form className="form-car">
         <div className="input-filters-container-group">
           <div className="input-container">
@@ -531,7 +542,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
           </div>
         </div>
         <div className="input-filters-container-group">
-          <div id="input-filters-container">
+          <div className="input-filters-container">
             <div className="input-container">
               <span className="span-filter">Filtro de Aire</span>
               <div className="si-filter-container">
@@ -632,7 +643,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
           </div>
         </div>
         <div className="input-filters-container-group">
-          <div id="input-filters-container">
+          <div className="input-filters-container">
             <div className="input-container">
               <span className="span-filter">Bujías</span>
               <div className="si-filter-container">
