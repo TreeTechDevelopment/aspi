@@ -546,7 +546,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     />
                   ))}
                 </div>
-                <div className="si-filter">
+                <div className="si-filter-btn">
                   <button className="btns-records" onClick={removeAirFilter}>
                     -
                   </button>
@@ -558,29 +558,34 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             </div>
             <div className="input-container">
               <span className="span-filter">Filtro de Aceite</span>
+              <div className="si-filter-container">
               <div className="si-filter">
                 {oilFiltersRender.map((key, idx) => (
-                  <InputFilter
+                    <InputFilter
                     idx={idx}
                     setFilters={setOilFilters}
                     key={key}
                     type="oilFilter"
                     className=""
-                  />
-                ))}
+                    />
+                    ))}
+                </div>
 
-                <button className="btns-records" onClick={removeOilFilter}>
-                  -
-                </button>
-                <button className="btns-records-left" onClick={addOilFilter}>
-                  +
-                </button>
-              </div>
+                <div className="si-filter-btn">
+                  <button className="btns-records" onClick={removeOilFilter}>
+                    -
+                  </button>
+                  <button className="btns-records-left" onClick={addOilFilter}>
+                    +
+                  </button>
+                </div>
             </div>
+        </div>
 
             <div className="input-container">
-              <span className="span-filter">Filtro de Aceite</span>
-              <div className="si-filter">
+              <span className="span-filter">Filtro de Combustible</span>
+        <div className="si-filter-container">
+            <div className="si-filter">
                 {fuelFiltersRender.map((key, idx) => (
                   <InputFilter
                     idx={idx}
@@ -589,17 +594,20 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     type="fuelFilter"
                   />
                 ))}
-
+            </div>
+            <div className="si-filter-btn">
                 <button className="btns-records" onClick={removeFuelFilter}>
                   -
                 </button>
                 <button className="btns-records-left" onClick={addFuelFilter}>
                   +
                 </button>
-              </div>
+                </div>
             </div>
+        </div>
             <div className="input-container">
               <span className="span-filter">Filtro de Aire de Cabina</span>
+              <div className="si-filter-container">
               <div className="si-filter">
                 {cabineFiltersRender.map((key, idx) => (
                   <InputFilter
@@ -609,6 +617,8 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     type="cabineFilter"
                   />
                 ))}
+                </div>
+                <div className="si-filter-btn">
 
                 <button className="btns-records" onClick={removeCabineFilter}>
                   -
@@ -616,6 +626,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 <button className="btns-records-left" onClick={addCabineFilter}>
                   +
                 </button>
+                </div>
               </div>
             </div>
           </div>
@@ -624,6 +635,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
           <div id="input-filters-container">
             <div className="input-container">
               <span className="span-filter">Bujías</span>
+              <div className="si-filter-container">
               <div className="si-filter">
                 {sparkplugRender.map((key, idx) => (
                   <InputFilter
@@ -633,6 +645,8 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     type="sparkplug"
                   />
                 ))}
+                </div>
+                <div className="si-filter-btn">
 
                 <button className="btns-records" onClick={removeSparkplug}>
                   -
@@ -640,11 +654,13 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 <button className="btns-records-left" onClick={addSparkplug}>
                   +
                 </button>
+                </div>
               </div>
             </div>
 
             <div className="input-container">
               <span className="span-filter">Juego de Cables</span>
+              <div className="si-filter-container">
               <div className="si-filter">
                 {wiresetsRender.map((key, idx) => (
                   <InputFilter
@@ -654,17 +670,20 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     type="wiresets"
                   />
                 ))}
-
+                </div>
+                <div className="si-filter-btn">
                 <button className="btns-records" onClick={removeWiresets}>
                   -
                 </button>
                 <button className="btns-records-left" onClick={addWiresets}>
                   +
                 </button>
+                </div>
               </div>
             </div>
             <div className="input-container">
               <span className="span-filter">Balatas Traseras</span>
+              <div className="si-filter-container">
               <div className="si-filter">
                 {brakeshoeBackRender.map((key, idx) => (
                   <InputFilter
@@ -674,6 +693,8 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     type="brakeshoeBack"
                   />
                 ))}
+                </div>
+                 <div className="si-filter-btn">
 
                 <button className="btns-records" onClick={removeBrakeshoeBack}>
                   -
@@ -681,13 +702,15 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 <button
                   className="btns-records-left"
                   onClick={addBrakeshoeBack}
-                >
+                  >
                   +
                 </button>
+                  </div>
               </div>
             </div>
             <div className="input-container">
               <span className="span-filter">Balatas Delanteras</span>
+              <div className="si-filter-container">
               <div className="si-filter">
                 {brakeshoeFrontRender.map((key, idx) => (
                   <InputFilter
@@ -697,6 +720,8 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                     type="brakeshoeFront"
                   />
                 ))}
+                </div>
+                <div className="si-filter-btn">
 
                 <button className="btns-records" onClick={removeBrakeshoeFront}>
                   -
@@ -704,9 +729,10 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 <button
                   className="btns-records-left"
                   onClick={addBrakeshoeFront}
-                >
+                  >
                   +
                 </button>
+                  </div>
               </div>
             </div>
           </div>
