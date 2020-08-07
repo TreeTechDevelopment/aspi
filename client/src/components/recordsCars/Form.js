@@ -506,14 +506,21 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 className="input-year-right"
               />
             </div>
-            {/* <span className="span-filter">Nuevo Modelo (Opcional)</span>     
+            
+            <div className="input-container">
+
+            <span className="span-filter">Nuevo Modelo (Opcional)</span>   
+            <div>
                 <input
                     placeholder="Nuevo Modelo"
                     value={newModel}
                     onChange={handleNewModel}
                     disabled={selectDisable}
-                    />  */}
-          </div>
+                    className="input-price"
+                    /> 
+                    </div>  
+                    </div>
+                    </div>
           <div className="input-container">
             <span className="span-filter">
               Cilindros {errCylinder && "Este campo es requerido"}
@@ -541,6 +548,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             </div>
           </div>
         </div>
+        
         <div className="input-filters-container-group">
           <div className="input-filters-container">
             <div className="input-container">
