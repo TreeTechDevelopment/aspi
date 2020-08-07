@@ -491,12 +491,14 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
             style={{
                 content: {
                     width: '70%',
-                    height: typeProduct.value === "filter" ?  '80%' : '50%',
-                    top: typeProduct.value === "filter" ?  '10%' : '25%',
+                    height: (typeProduct.value === "filter" ?  '95%' :(typeProduct.value === "oil" ? '75%' : '55%' )),
+                    top: (typeProduct.value === "filter" ?  '2%' :(typeProduct.value === "oil" ? '15%' :'30%')),
                     left: '15%'
+
                 }
             }}
         >
+            
             <div className="form-car">
                 <h3>{ typeProduct.value === "filter" ?  filterType.label : typeProduct.label}</h3>
                 <div>
@@ -511,19 +513,24 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                         />
                     </div>
                 </div>
+                
                 {typeProduct.value === "oil" && (
-                    <div className="input-filters-container">
-                        <span className="span-only">NOMBRE</span>
+                    <div className="input-container">
+                        <span className="span-filter">NOMBRE</span>
                         <div className="si-filter-container">
                             <div className="si-filter-price">
                                 <input 
                                     value={oilName}
                                     onChange={handleInputOilName}
+                                    className="input-price"
                                 />
                             </div>
                         </div>
                     </div>
-                )}   
+                )}
+                <div className="RGB">
+                
+                    </div>   
                 </div>               
                 <div className="input-filters-container-group">
                     { typeProduct.value === 'filter' ? (
@@ -715,29 +722,40 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                         </>
                     ): (
                         <>  
-                        <div className="input-filters-container">
-                            <span>Marca</span>
+                        <div className="input-container">
+                            <span className="span-filter">Marca</span>
+                            
+                            
                             <Select 
                                 options={oilMakeSelect}
                                 value={oilMake}
                                 onChange={handleSelectMakeOil}
+                                className="select-oil"
                             />
+                            
+                            
                         </div>
-                        <div className="input-filters-container">
-                            <span>Viscosidad</span>
+                        <div className="input-container">
+                            <span className="span-filter">Viscosidad</span>
+                            
                             <Select 
                                 options={viscositySelect}
                                 value={viscosity}
                                 onChange={handleSelectViscosity}
+                                className="select-car-records"
                             />
+                            
                         </div>
-                        <div className="input-filters-container">
-                            <span>Presentación</span>
+                        <div className="input-container">
+                            <span className="span-filter">Presentación</span>
+                            
                             <Select 
                                 options={oilPresentationSelect}
                                 value={presentation}
                                 onChange={handleSelectPresentation}
+                                className="select-car-records"
                             />
+                        
                         </div>
                         </>
                     )}
@@ -921,13 +939,16 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                     </div>
                     ): typeProduct.value === "oil" && (
                         <div className="input-filters-container-group">
-                        <div className="input-filters-container">
-                            <span>Tipo de aceite</span>
+                        <div className="input-container">
+                            <span className="span-filter">Tipo de aceite</span>
+                            
                             <Select 
                                 options={oilTypeSelect}
                                 value={oilType}
                                 onChange={handleSelectOilType}
+                                className="select-car-records"
                                 />
+                                
                         </div>
                         </div>
                     )}
