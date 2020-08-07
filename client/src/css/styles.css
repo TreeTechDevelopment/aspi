@@ -1,11 +1,11 @@
 @font-face{
     font-family: SairaLight;
-    src: url('http://192.168.137.1:3000/fonts/Saira-Light.otf');
+    src: url('http://192.168.0.7:3000/fonts/Saira-Light.otf');
 }
 
 @font-face {
     font-family: SourceSans;
-    src: url('http://192.168.137.1:3000/fonts/SourceSansPro-Regular.ttf');
+    src: url('http://192.168.0.7:3000/fonts/SourceSansPro-Regular.ttf');
 }
 
 html, body, #app{
@@ -84,7 +84,7 @@ nav, header, footer{
 .bg-white{
     width: 100%;
     min-height: 100%;
-    background-image: url('http://192.168.137.1:3000/images/background.jpg');
+    background-image: url('http://192.168.0.7:3000/images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -578,8 +578,10 @@ nav, header, footer{
     border-radius: 0.5rem;
 }
 hr{
-    height: 0.0625rem;
-    background-color: rgb(254, 177, 0);
+    height: 1px;
+    border: 1px solid rgb(254, 177, 0);
+    width: 80%;
+    background-color: rgb( 254, 177, 0 );
 }
 .RGB{
     height: 0.0625rem;

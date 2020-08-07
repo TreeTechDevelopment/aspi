@@ -36,7 +36,10 @@ function Cars() {
             let brakeshoeBackEquivalence = []
             let brakeshoeFrontEquivalence = []
 
-            airFilters = airFilters.filter( filter => context.car.airFilter.some( airFilter => airFilter == filter.interfil )  )
+            airFilters = airFilters.filter( filter => context.car.airFilter.some( airFilter => airFilter === filter.interfil || airFilter == filter.OEM ||
+                airFilter == filter.ACD || airFilter == filter.Fram  || airFilter == filter.Gonher || airFilter == filter.Motorcraft ||
+                airFilter == filter.Purolator || airFilter == filter.Wix || airFilter == filter.Mann  ||  airFilter == filter.Sky ||
+                airFilter == filter.Seineca || airFilter == filter.Walmi || airFilter == filter.Roadstar || airFilter == filter.ECA) )
             for(let i = 0; i < airFilters.length; i++){
                 airFiltersEquivalence = [...airFiltersEquivalence, airFilters[i].interfil, ...airFilters[i].OEM, ...airFilters[i].ACD,
                                   ...airFilters[i].Fram, ...airFilters[i].Gonher, ...airFilters[i].Motorcraft, ...airFilters[i].Purolator,
@@ -44,7 +47,10 @@ function Cars() {
                                 ...airFilters[i].Joe, ...airFilters[i].Roadstar, ...airFilters[i].ECA]
             }
 
-            oilFilters = oilFilters.filter( filter => context.car.oilFilter.some( oilFilter => oilFilter == filter.interfil )  )
+            oilFilters = oilFilters.filter( filter => context.car.oilFilter.some( oilFilter => oilFilter === filter.interfil || oilFilter == filter.OEM ||
+                oilFilter == filter.ACD || oilFilter == filter.Fram  || oilFilter == filter.Gonher || oilFilter == filter.Motorcraft ||
+                oilFilter == filter.Purolator || oilFilter == filter.Wix || oilFilter == filter.Mann  ||  oilFilter == filter.Sky ||
+                oilFilter == filter.Seineca || oilFilter == filter.Walmi || oilFilter == filter.Roadstar || oilFilter == filter.ECA )  )
             for(let i = 0; i < oilFilters.length; i++){
                 oilFiltersEquivalence = [...oilFiltersEquivalence, oilFilters[i].interfil, ...oilFilters[i].OEM, ...oilFilters[i].ACD,
                                   ...oilFilters[i].Fram, ...oilFilters[i].Gonher, ...oilFilters[i].Motorcraft, ...oilFilters[i].Purolator,
@@ -52,7 +58,10 @@ function Cars() {
                                 ...oilFilters[i].Joe, ...oilFilters[i].Roadstar, ...oilFilters[i].ECA]
             }
 
-            fuelFilters = fuelFilters.filter( filter => context.car.fuelFilter.some( fuelFilter => fuelFilter == filter.interfil )  )
+            fuelFilters = fuelFilters.filter( filter => context.car.fuelFilter.some( fuelFilter => fuelFilter === filter.interfil || fuelFilter == filter.OEM ||
+                fuelFilter == filter.ACD || fuelFilter == filter.Fram  || fuelFilter == filter.Gonher || fuelFilter == filter.Motorcraft ||
+                fuelFilter == filter.Purolator || fuelFilter == filter.Wix || fuelFilter == filter.Mann  ||  fuelFilter == filter.Sky ||
+                fuelFilter == filter.Seineca || fuelFilter == filter.Walmi || fuelFilter == filter.Roadstar || fuelFilter == filter.ECA )  )
             for(let i = 0; i < fuelFilters.length; i++){
                 fuelFiltersEquivalence = [...fuelFiltersEquivalence, fuelFilters[i].interfil, ...fuelFilters[i].OEM, ...fuelFilters[i].ACD,
                                   ...fuelFilters[i].Fram, ...fuelFilters[i].Gonher, ...fuelFilters[i].Motorcraft, ...fuelFilters[i].Purolator,
@@ -60,7 +69,10 @@ function Cars() {
                                 ...fuelFilters[i].Joe, ...fuelFilters[i].Roadstar, ...fuelFilters[i].ECA]
             }
 
-            cabineFilters = cabineFilters.filter( filter => context.car.cabineFilter.some( cabineFilter => cabineFilter == filter.interfil )  )
+            cabineFilters = cabineFilters.filter( filter => context.car.cabineFilter.some( cabineFilter => cabineFilter === filter.interfil || cabineFilter == filter.OEM ||
+                cabineFilter == filter.ACD || cabineFilter == filter.Fram  || cabineFilter == filter.Gonher || cabineFilter == filter.Motorcraft ||
+                cabineFilter == filter.Purolator || cabineFilter == filter.Wix || cabineFilter == filter.Mann  ||  cabineFilter == filter.Sky ||
+                cabineFilter == filter.Seineca || cabineFilter == filter.Walmi || cabineFilter == filter.Roadstar || cabineFilter == filter.ECA )  )
             for(let i = 0; i < cabineFilters.length; i++){
                 cabineFiltersEquivalence = [...cabineFiltersEquivalence, cabineFilters[i].interfil, ...cabineFilters[i].OEM, ...cabineFilters[i].ACD,
                                   ...cabineFilters[i].Fram, ...cabineFilters[i].Gonher, ...cabineFilters[i].Motorcraft, ...cabineFilters[i].Purolator,
@@ -68,13 +80,17 @@ function Cars() {
                                 ...cabineFilters[i].Joe, ...cabineFilters[i].Roadstar, ...cabineFilters[i].ECA]
             }
 
-            sparkplugs = sparkplugs.filter( sparkplugDB => context.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugNGK => sparkplug == sparkplugNGK ) )  )
+            sparkplugs = sparkplugs.filter( sparkplugDB => context.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugMake => sparkplug == sparkplugMake ) || 
+            sparkplugDB.Champions.some( sparkplugMake => sparkplug == sparkplugMake ) || sparkplugDB.ACD.some( sparkplugMake => sparkplug == sparkplugMake ) ||
+            sparkplugDB.Bosh.some( sparkplugMake => sparkplug == sparkplugMake ) || sparkplugDB.Motorcraft.some( sparkplugMake => sparkplug == sparkplugMake  ) )  )
             for(let i = 0; i < sparkplugs.length; i++){
                 sparkplugsEquivalence = [...sparkplugsEquivalence, ...sparkplugs[i].NGK, ...sparkplugs[i].Champions, ...sparkplugs[i].ACD,
                             ...sparkplugs[i].Bosh, ...sparkplugs[i].Motorcraft]
             }
 
-            wiresets = wiresets.filter( wiresetDB => context.car.wiresets.some( wireset => wiresetDB.Roadstar.some( wiresetRoadstar => wireset == wiresetRoadstar ) )  )
+            wiresets = wiresets.filter( wiresetDB => context.car.wiresets.some( wireset => wiresetDB.NGK.some( wiresetMake => wireset == wiresetMake ) || 
+            wiresetDB.LS.some( wiresetMake => wireset == wiresetMake ) || wiresetDB.Roadstar.some( wiresetMake => wireset == wiresetMake ) ||
+            wiresetDB.Bosh.some( wiresetMake => wireset == wiresetMake ) )  )
             for(let i = 0; i < wiresets.length; i++){
                 wiresetsEquivalence = [...wiresetsEquivalence, ...wiresets[i].NGK, ...wiresets[i].LS, ...wiresets[i].Roadstar, ...wiresets[i].Bosh]
             }

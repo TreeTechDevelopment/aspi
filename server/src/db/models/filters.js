@@ -19,7 +19,7 @@ const filterSchema = new Schema({
         type: Array,
         required: true,
         default: []
-    },
+    }, 
     Fram: {
         type: Array,
         required: true,

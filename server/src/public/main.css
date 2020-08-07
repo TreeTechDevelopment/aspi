@@ -784,3 +784,18 @@ nav, header, footer{
     height: 100%;
     justify-content: space-around;
 }
+.select-oil{
+    width: 9.5rem;
+    border: 0.125rem solid rgb(254, 177, 0);
+    border-radius: 0.5rem;
+}
+hr{
+    height: 1px;
+    border: 1px solid rgb(254, 177, 0);
+    width: 80%;
+    background-color: rgb( 254, 177, 0 );
+}
+.RGB{
+    height: 0.0625rem;
+    background-color: rgb(254, 177, 0);
+}

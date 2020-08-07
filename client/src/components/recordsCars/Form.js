@@ -548,7 +548,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             </div>
           </div>
         </div>
-        
+        <hr />
         <div className="input-filters-container-group">
           <div className="input-filters-container">
             <div className="input-container">

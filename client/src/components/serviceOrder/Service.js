@@ -102,12 +102,25 @@ const Service = ({order}) => {
         let cabineFilters = context.filters.filter( filterDB => filterDB.filterType === "cabine" )
 
         let airFiltersSelect = []
-        if(order){ airFilters = airFilters.filter( filter => order.car.airFilter.some( airFilter => airFilter === filter.interfil ) ) }
-        else{ airFilters = airFilters.filter( filter => context.car.airFilter.some( airFilter => airFilter == filter.interfil )  ) }
+        if(order){ airFilters = airFilters.filter( filter => order.car.airFilter.some( airFilter => airFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == airFilter ) ||
+                                                filter.ACD.some( filterMake => filterMake == airFilter ) || filter.Fram.some( filterMake => filterMake == airFilter )  || 
+                                                filter.Gonher.some( filterMake => filterMake == airFilter ) || filter.Motorcraft.some( filterMake => filterMake == airFilter ) ||
+                                                filter.Purolator.some( filterMake => filterMake == airFilter ) || filter.Wix.some( filterMake => filterMake == airFilter ) || 
+                                                filter.Mann.some( filterMake => filterMake == airFilter )  || filter.Sky.some( filterMake => filterMake == airFilter ) ||
+                                                filter.Seineca.some( filterMake => filterMake == airFilter ) || filter.Walmi.some( filterMake => filterMake == airFilter ) || 
+                                                filter.Roadstar.some( filterMake => filterMake == airFilter ) || filter.ECA.some( filterMake => filterMake == airFilter )) ) }
+        else{ airFilters = airFilters.filter( filter => context.car.airFilter.some( airFilter => airFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == airFilter ) ||
+          filter.ACD.some( filterMake => filterMake == airFilter ) || filter.Fram.some( filterMake => filterMake == airFilter )  || 
+          filter.Gonher.some( filterMake => filterMake == airFilter ) || filter.Motorcraft.some( filterMake => filterMake == airFilter ) ||
+          filter.Purolator.some( filterMake => filterMake == airFilter ) || filter.Wix.some( filterMake => filterMake == airFilter ) || 
+          filter.Mann.some( filterMake => filterMake == airFilter )  || filter.Sky.some( filterMake => filterMake == airFilter ) ||
+          filter.Seineca.some( filterMake => filterMake == airFilter ) || filter.Walmi.some( filterMake => filterMake == airFilter ) || 
+          filter.Roadstar.some( filterMake => filterMake == airFilter ) || filter.ECA.some( filterMake => filterMake == airFilter ) )  ) }
         for(let i = 0; i < airFilters.length; i++){
           airFiltersSelect = [...airFiltersSelect, airFilters[i].interfil, ...airFilters[i].OEM, ...airFilters[i].ACD,
                             ...airFilters[i].Fram, ...airFilters[i].Gonher, ...airFilters[i].Motorcraft, ...airFilters[i].Purolator,
-                            ...airFilters[i].Wix, ...airFilters[i].Mann]
+                            ...airFilters[i].Wix, ...airFilters[i].Mann, ...airFilters[i].Sky, ...airFilters[i].Seineca, ...airFilters[i].Walmi,
+                            ...airFilters[i].Joe, ...airFilters[i].Roadstar, ...airFilters[i].ECA]
           airFiltersSelect = airFiltersSelect.map( filter => {
             if(typeof filter === "object"){ return filter }
             return { value: `${airFilters[i].price}-${Math.random().toString()}`, label: filter };
@@ -115,12 +128,25 @@ const Service = ({order}) => {
         }
 
         let oilFiltersSelect = []
-        if(order){ oilFilters = oilFilters.filter( filter => order.car.oilFilter.some( oilFilter => oilFilter == filter.interfil )  ) }
-        else{ oilFilters = oilFilters.filter( filter => context.car.oilFilter.some( oilFilter => oilFilter == filter.interfil )  ) }
+        if(order){ oilFilters = oilFilters.filter( filter => order.car.oilFilter.some( oilFilter => oilFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == oilFilter ) ||
+          filter.ACD.some( filterMake => filterMake == oilFilter ) || filter.Fram.some( filterMake => filterMake == oilFilter )  || 
+          filter.Gonher.some( filterMake => filterMake == oilFilter ) || filter.Motorcraft.some( filterMake => filterMake == oilFilter ) ||
+          filter.Purolator.some( filterMake => filterMake == oilFilter ) || filter.Wix.some( filterMake => filterMake == oilFilter ) || 
+          filter.Mann.some( filterMake => filterMake == oilFilter )  || filter.Sky.some( filterMake => filterMake == oilFilter ) ||
+          filter.Seineca.some( filterMake => filterMake == oilFilter ) || filter.Walmi.some( filterMake => filterMake == oilFilter ) || 
+          filter.Roadstar.some( filterMake => filterMake == oilFilter ) || filter.ECA.some( filterMake => filterMake == oilFilter ) )  ) }
+        else{ oilFilters = oilFilters.filter( filter => context.car.oilFilter.some( oilFilter => oilFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == oilFilter ) ||
+          filter.ACD.some( filterMake => filterMake == oilFilter ) || filter.Fram.some( filterMake => filterMake == oilFilter )  || 
+          filter.Gonher.some( filterMake => filterMake == oilFilter ) || filter.Motorcraft.some( filterMake => filterMake == oilFilter ) ||
+          filter.Purolator.some( filterMake => filterMake == oilFilter ) || filter.Wix.some( filterMake => filterMake == oilFilter ) || 
+          filter.Mann.some( filterMake => filterMake == oilFilter )  || filter.Sky.some( filterMake => filterMake == oilFilter ) ||
+          filter.Seineca.some( filterMake => filterMake == oilFilter ) || filter.Walmi.some( filterMake => filterMake == oilFilter ) || 
+          filter.Roadstar.some( filterMake => filterMake == oilFilter ) || filter.ECA.some( filterMake => filterMake == oilFilter ) )  ) }
         for(let i = 0; i < oilFilters.length; i++){
           oilFiltersSelect = [...oilFiltersSelect, oilFilters[i].interfil, ...oilFilters[i].OEM, ...oilFilters[i].ACD,
                             ...oilFilters[i].Fram, ...oilFilters[i].Gonher, ...oilFilters[i].Motorcraft, ...oilFilters[i].Purolator,
-                            ...oilFilters[i].Wix, ...oilFilters[i].Mann]
+                            ...oilFilters[i].Wix, ...oilFilters[i].Mann, ...oilFilters[i].Sky, ...oilFilters[i].Seineca, ...oilFilters[i].Walmi,
+                            ...oilFilters[i].Joe, ...oilFilters[i].Roadstar, ...oilFilters[i].ECA]
           oilFiltersSelect = oilFiltersSelect.map( filter => {
             if(typeof filter === "object"){ return filter }
             return { value: `${oilFilters[i].price}-${Math.random().toString()}`, label: filter };
@@ -128,12 +154,25 @@ const Service = ({order}) => {
         }
 
         let fuelFiltersSelect = []
-        if(order){ fuelFilters = fuelFilters.filter( filter => order.car.fuelFilter.some( fuelFilter => fuelFilter == filter.interfil )  ) }
-        else{ fuelFilters = fuelFilters.filter( filter => context.car.fuelFilter.some( fuelFilter => fuelFilter == filter.interfil )  ) }
+        if(order){ fuelFilters = fuelFilters.filter( filter => order.car.fuelFilter.some( fuelFilter => fuelFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == fuelFilter ) ||
+          filter.ACD.some( filterMake => filterMake == fuelFilter ) || filter.Fram.some( filterMake => filterMake == fuelFilter )  || 
+          filter.Gonher.some( filterMake => filterMake == fuelFilter ) || filter.Motorcraft.some( filterMake => filterMake == fuelFilter ) ||
+          filter.Purolator.some( filterMake => filterMake == fuelFilter ) || filter.Wix.some( filterMake => filterMake == fuelFilter ) || 
+          filter.Mann.some( filterMake => filterMake == fuelFilter )  || filter.Sky.some( filterMake => filterMake == fuelFilter ) ||
+          filter.Seineca.some( filterMake => filterMake == fuelFilter ) || filter.Walmi.some( filterMake => filterMake == fuelFilter ) || 
+          filter.Roadstar.some( filterMake => filterMake == fuelFilter ) || filter.ECA.some( filterMake => filterMake == fuelFilter ) )  ) }
+        else{ fuelFilters = fuelFilters.filter( filter => context.car.fuelFilter.some( fuelFilter => fuelFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == fuelFilter ) ||
+          filter.ACD.some( filterMake => filterMake == fuelFilter ) || filter.Fram.some( filterMake => filterMake == fuelFilter )  || 
+          filter.Gonher.some( filterMake => filterMake == fuelFilter ) || filter.Motorcraft.some( filterMake => filterMake == fuelFilter ) ||
+          filter.Purolator.some( filterMake => filterMake == fuelFilter ) || filter.Wix.some( filterMake => filterMake == fuelFilter ) || 
+          filter.Mann.some( filterMake => filterMake == fuelFilter )  || filter.Sky.some( filterMake => filterMake == fuelFilter ) ||
+          filter.Seineca.some( filterMake => filterMake == fuelFilter ) || filter.Walmi.some( filterMake => filterMake == fuelFilter ) || 
+          filter.Roadstar.some( filterMake => filterMake == fuelFilter ) || filter.ECA.some( filterMake => filterMake == fuelFilter ) )  ) }
         for(let i = 0; i < fuelFilters.length; i++){
           fuelFiltersSelect = [...fuelFiltersSelect, fuelFilters[i].interfil, ...fuelFilters[i].OEM, ...fuelFilters[i].ACD,
                             ...fuelFilters[i].Fram, ...fuelFilters[i].Gonher, ...fuelFilters[i].Motorcraft, ...fuelFilters[i].Purolator,
-                            ...fuelFilters[i].Wix, ...fuelFilters[i].Mann]
+                            ...fuelFilters[i].Wix, ...fuelFilters[i].Mann, ...fuelFilters[i].Sky, ...fuelFilters[i].Seineca, ...fuelFilters[i].Walmi,
+                            ...fuelFilters[i].Joe, ...fuelFilters[i].Roadstar, ...fuelFilters[i].ECA]
           fuelFiltersSelect = fuelFiltersSelect.map( filter => {
             if(typeof filter === "object"){ return filter }
             return { value: `${fuelFilters[i].price}-${Math.random().toString()}`, label: filter };
@@ -141,12 +180,25 @@ const Service = ({order}) => {
         }
 
         let cabineFiltersSelect = []
-        if(order){ cabineFilters = cabineFilters.filter( filter => order.car.cabineFilter.some( cabineFilter => cabineFilter == filter.interfil )  ) }
-        else{ cabineFilters = cabineFilters.filter( filter => context.car.cabineFilter.some( cabineFilter => cabineFilter == filter.interfil )  ) }
+        if(order){ cabineFilters = cabineFilters.filter( filter => order.car.cabineFilter.some( cabineFilter => cabineFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == cabineFilter ) ||
+          filter.ACD.some( filterMake => filterMake == cabineFilter ) || filter.Fram.some( filterMake => filterMake == cabineFilter )  || 
+          filter.Gonher.some( filterMake => filterMake == cabineFilter ) || filter.Motorcraft.some( filterMake => filterMake == cabineFilter ) ||
+          filter.Purolator.some( filterMake => filterMake == cabineFilter ) || filter.Wix.some( filterMake => filterMake == cabineFilter ) || 
+          filter.Mann.some( filterMake => filterMake == cabineFilter )  || filter.Sky.some( filterMake => filterMake == cabineFilter ) ||
+          filter.Seineca.some( filterMake => filterMake == cabineFilter ) || filter.Walmi.some( filterMake => filterMake == cabineFilter ) || 
+          filter.Roadstar.some( filterMake => filterMake == cabineFilter ) || filter.ECA.some( filterMake => filterMake == cabineFilter ) )  ) }
+        else{ cabineFilters = cabineFilters.filter( filter => context.car.cabineFilter.some( cabineFilter => cabineFilter === filter.interfil || filter.OEM.some( filterMake => filterMake == cabineFilter ) ||
+          filter.ACD.some( filterMake => filterMake == cabineFilter ) || filter.Fram.some( filterMake => filterMake == cabineFilter )  || 
+          filter.Gonher.some( filterMake => filterMake == cabineFilter ) || filter.Motorcraft.some( filterMake => filterMake == cabineFilter ) ||
+          filter.Purolator.some( filterMake => filterMake == cabineFilter ) || filter.Wix.some( filterMake => filterMake == cabineFilter ) || 
+          filter.Mann.some( filterMake => filterMake == cabineFilter )  || filter.Sky.some( filterMake => filterMake == cabineFilter ) ||
+          filter.Seineca.some( filterMake => filterMake == cabineFilter ) || filter.Walmi.some( filterMake => filterMake == cabineFilter ) || 
+          filter.Roadstar.some( filterMake => filterMake == cabineFilter ) || filter.ECA.some( filterMake => filterMake == cabineFilter ) )  ) }
         for(let i = 0; i < cabineFilters.length; i++){
           cabineFiltersSelect = [...cabineFiltersSelect, cabineFilters[i].interfil, ...cabineFilters[i].OEM, ...cabineFilters[i].ACD,
                             ...cabineFilters[i].Fram, ...cabineFilters[i].Gonher, ...cabineFilters[i].Motorcraft, ...cabineFilters[i].Purolator,
-                            ...cabineFilters[i].Wix, ...cabineFilters[i].Mann]
+                            ...cabineFilters[i].Wix, ...cabineFilters[i].Mann, ...cabineFilters[i].Sky, ...cabineFilters[i].Seineca, ...cabineFilters[i].Walmi,
+                            ...cabineFilters[i].Joe, ...cabineFilters[i].Roadstar, ...cabineFilters[i].ECA]
           cabineFiltersSelect = cabineFiltersSelect.map( filter => {
             if(typeof filter === "object"){ return filter }
             return { value: `${cabineFilters[i].price}-${Math.random().toString()}`, label: filter };
@@ -155,8 +207,12 @@ const Service = ({order}) => {
 
         let sparkplugSelect = []
         let sparkplugsDB = []
-        if(order){ sparkplugsDB = context.sparkplugs.filter( sparkplugDB => order.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugNGK => sparkplug == sparkplugNGK ) )  ) }
-        else{ sparkplugsDB = context.sparkplugs.filter( sparkplugDB => context.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugNGK => sparkplug == sparkplugNGK ) )  ) }
+        if(order){ sparkplugsDB = context.sparkplugs.filter( sparkplugDB => order.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugMake => sparkplug == sparkplugMake ) || 
+                            sparkplugDB.Champions.some( sparkplugMake => sparkplug == sparkplugMake ) || sparkplugDB.ACD.some( sparkplugMake => sparkplug == sparkplugMake ) ||
+                            sparkplugDB.Bosh.some( sparkplugMake => sparkplug == sparkplugMake ) || sparkplugDB.Motorcraft.some( sparkplugMake => sparkplug == sparkplugMake )  )) }
+        else{ sparkplugsDB = context.sparkplugs.filter( sparkplugDB => context.car.sparkPlug.some( sparkplug => sparkplugDB.NGK.some( sparkplugMake => sparkplug == sparkplugMake ) || 
+                            sparkplugDB.Champions.some( sparkplugMake => sparkplug == sparkplugMake ) || sparkplugDB.ACD.some( sparkplugMake => sparkplug == sparkplugMake ) ||
+                            sparkplugDB.Bosh.some( sparkplugMake => sparkplug == sparkplugMake ) || sparkplugDB.Motorcraft.some( sparkplugMake => sparkplug == sparkplugMake  )  ) )}
         for(let i = 0; i < sparkplugsDB.length; i++){
           sparkplugSelect = [...sparkplugSelect, ...sparkplugsDB[i].NGK, ...sparkplugsDB[i].Champions, ...sparkplugsDB[i].ACD,
                             ...sparkplugsDB[i].Bosh, ...sparkplugsDB[i].Motorcraft]
@@ -168,8 +224,12 @@ const Service = ({order}) => {
 
         let wiresetSelect = []
         let wiresetsDB = []
-        if(order){ wiresetsDB = context.wiresets.filter( wiresetDB => order.car.wiresets.some( wireset => wiresetDB.Roadstar.some( wiresetRoadstar => wireset == wiresetRoadstar ) )  ) }
-        else{ wiresetsDB = context.wiresets.filter( wiresetDB => context.car.wiresets.some( wireset => wiresetDB.Roadstar.some( wiresetRoadstar => wireset == wiresetRoadstar ) )  ) }
+        if(order){ wiresetsDB = context.wiresets.filter( wiresetDB => order.car.wiresets.some( wireset => wiresetDB.NGK.some( wiresetMake => wireset == wiresetMake ) || 
+          wiresetDB.LS.some( wiresetMake => wireset == wiresetMake ) || wiresetDB.Roadstar.some( wiresetMake => wireset == wiresetMake ) ||
+          wiresetDB.Bosh.some( wiresetMake => wireset == wiresetMake ) )  ) }
+        else{ wiresetsDB = context.wiresets.filter( wiresetDB => context.car.wiresets.some( wireset => wiresetDB.NGK.some( wiresetMake => wireset == wiresetMake ) || 
+          wiresetDB.LS.some( wiresetMake => wireset == wiresetMake ) || wiresetDB.Roadstar.some( wiresetMake => wireset == wiresetMake ) ||
+          wiresetDB.Bosh.some( wiresetMake => wireset == wiresetMake ) )  ) }
         for(let i = 0; i < wiresetsDB.length; i++){
           wiresetSelect = [...wiresetSelect, ...wiresetsDB[i].NGK, ...wiresetsDB[i].LS, ...wiresetsDB[i].Roadstar, ...wiresetsDB[i].Bosh]
           wiresetSelect = wiresetSelect.map( wireset => {
