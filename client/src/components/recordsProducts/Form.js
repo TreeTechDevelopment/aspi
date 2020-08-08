@@ -295,6 +295,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
 
     useEffect(() => {
         if( JSON.stringify(context.product) !== "{}"){
+            console.log(context.product)
             if(context.product.interfil){ setInterfill(context.product.interfil) }
             if(context.product.OEM){ 
                 setOEM(context.product.OEM) 
