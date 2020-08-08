@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Select from "react-select";
 
-function FilterOils({ setProducts, products, allProducts }) {
+function FilterOils({ setProducts, products, allProducts }) { 
 
     const viscositySelect = [{ value: '5W30', label: '5W30' }, { value: '5W20', label: '5W20' }, { value: '5W40', label: '5W40' }, 
                             { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
@@ -28,7 +28,10 @@ function FilterOils({ setProducts, products, allProducts }) {
     const [presentation, setPresentation] = useState(oilPresentationSelect[0])
     const [oilMake, setOilMake] = useState(oilMakeSelect[0])
     const [oilType, setOilType] = useState(oilTypeSelect[0])
-    const [filterType, setFilterType] = useState(filterTypeSelect[0]) 
+    const [makeFilter, setMakeFilter] = useState(false)
+    const [viscosityFilter, setViscosityFilter] = useState(false)
+    const [presentationFilter, setPresentationFilter] = useState(false)
+    const [oilTypeFilter, setOilTypeFilter] = useState(false)
 
     const applyFilter = () => setFilter(!filter)
 
@@ -40,97 +43,31 @@ function FilterOils({ setProducts, products, allProducts }) {
 
     const handleSelectOilType = newValue => setOilType(newValue)
 
-    const handleSelectFilterType = newValue => setFilterType(newValue)
-
-    const renderSelect = () => {
-        switch(filterType.value){
-            case "make":
-                return (
-                    <div className="select-container small">
-                        <div className="label-container">
-                            <label>MARCA</label>
-                        </div>
-                        <Select        
-                            value={oilMake}
-                            options={oilMakeSelect}
-                            onChange={handleSelectMakeOil}
-                            className="select"
-                        />
-                    </div>
-                )
-            case "viscosity":
-                return(
-                    <div className="select-container small">
-                        <div className="label-container">
-                            <label>VISCOSIDAD</label>
-                        </div>
-                        <Select        
-                            value={viscosity}
-                            options={viscositySelect}
-                            onChange={handleSelectViscosity}
-                            className="select"
-                        />
-                    </div>
-                )
-            case "type":
-                return(
-                    <div className="select-container small">
-                        <div className="label-container">
-                            <label>TIPO</label>
-                        </div>
-                        <Select        
-                            value={oilType}
-                            options={oilTypeSelect}
-                            onChange={handleSelectOilType}
-                            className="select"
-                        />
-                    </div>
-                )
-            case "presentation":
-                return(
-                    <div className="select-container small">
-                        <div className="label-container">
-                            <label>PRESENTACIÓN</label>
-                        </div>
-                        <Select        
-                            value={presentation}
-                            options={oilPresentationSelect}
-                            onChange={handleSelectPresentation}
-                            className="select"
-                        />
-                    </div>
-                )
-        }
-    }
+    const handleCheckboxMake = () => setMakeFilter(!makeFilter)
+    
+    const handleCheckboxOilType = () => setOilTypeFilter(!oilTypeFilter)
+    
+    const handleCheckboxPresentation = () => setPresentationFilter(!presentationFilter)
+    
+    const handleCheckboxViscosity = () => setViscosityFilter(!viscosityFilter)
 
     useEffect(() => {
         if(filter){
-            let newProducts = []
-            switch(filterType.value){
-                case "make":
-                    newProducts = [...allProducts]
-                    newProducts = newProducts.filter( oil => oil.make == oilMake.value )
-                    setProducts(newProducts)
-                    break;
-                case "viscosity":
-                    newProducts = [...allProducts]
-                    newProducts = newProducts.filter( oil => oil.viscosity == viscosity.value )
-                    setProducts(newProducts)
-                    break;
-                case "type":
-                    newProducts = [...allProducts]
-                    newProducts = newProducts.filter( oil => oil.oilType == oilType.value )
-                    setProducts(newProducts)
-                    break;
-                case "presentation":
-                    newProducts = [...allProducts]
-                    newProducts = newProducts.filter( oil => oil.presentation == presentation.value )
-                    setProducts(newProducts)
-                    break;
-
-            }
+            let newProducts = [...allProducts]
+            newProducts = newProducts.filter( oil => {
+                let conditionMake = true
+                let conditionType = true
+                let conditionPresentation = true
+                let conditionViscosity = true
+                if(makeFilter){ conditionMake = oil.make == oilMake.value }
+                if(oilTypeFilter){ conditionType = oil.oilType == oilType.value }
+                if(presentationFilter){ conditionPresentation = oil.presentation == presentation.value }
+                if(viscosityFilter){ conditionViscosity = oil.viscosity == viscosity.value }
+                return conditionMake && conditionType && conditionPresentation && conditionViscosity
+            } )
+            setProducts(newProducts)
         }else{ setProducts(allProducts) }
-    }, [filterType, oilMake, oilType, viscosity, presentation, filter])
+    }, [ oilMake, oilType, viscosity, presentation, filter, makeFilter, oilTypeFilter, presentationFilter, viscosityFilter])
     
     return (
         <div className="filter-table-container">
@@ -144,18 +81,70 @@ function FilterOils({ setProducts, products, allProducts }) {
             </div>
             {filter && (
                 <>
-                <div className="select-container small margin-right">
-                    <div className="label-container">
-                        <label>TIPO</label>
-                    </div>
-                    <Select        
-                        value={filterType}
-                        options={filterTypeSelect}
-                        onChange={handleSelectFilterType}
-                        className="select"
+                <div className="checkbox-container w-select wo-padding padding-left-checkbox-container">
+                    <input
+                        type="checkbox"
+                        checked={makeFilter}
+                        onClick={handleCheckboxMake}
                     />
+                    <label htmlFor="transmission-id">MARCA</label>
+                    <div className="select-container wo-margin-top big">
+                        <Select        
+                            value={oilMake}
+                            options={oilMakeSelect}
+                            onChange={handleSelectMakeOil}
+                            className="select-big select"
+                        />
+                    </div>
                 </div>
-                {renderSelect()}
+                <div className="checkbox-container w-select wo-padding padding-left-checkbox-container">
+                    <input
+                        type="checkbox"
+                        checked={oilTypeFilter}
+                        onClick={handleCheckboxOilType}
+                    />
+                    <label htmlFor="transmission-id">TIPO</label>
+                    <div className="select-container wo-margin-top big">
+                        <Select        
+                            value={oilType}
+                            options={oilTypeSelect}
+                            onChange={handleSelectOilType}
+                            className="select-big select"
+                        />
+                    </div>
+                </div>
+                <div className="checkbox-container w-select wo-padding padding-left-checkbox-container">
+                    <input
+                        type="checkbox"
+                        checked={presentationFilter}
+                        onClick={handleCheckboxPresentation}
+                    />
+                    <label htmlFor="transmission-id">PRESENTACIÓN</label>
+                    <div className="select-container wo-margin-top big">
+                        <Select        
+                            value={presentation}
+                            options={oilPresentationSelect}
+                            onChange={handleSelectPresentation}
+                            className="select-big select"
+                        />
+                    </div>
+                </div>
+                <div className="checkbox-container w-select wo-padding padding-left-checkbox-container">
+                    <input
+                        type="checkbox"
+                        checked={viscosityFilter}
+                        onClick={handleCheckboxViscosity}
+                    />
+                    <label htmlFor="transmission-id">VISCOSIDAD</label>
+                    <div className="select-container wo-margin-top big">
+                        <Select        
+                            value={viscosity}
+                            options={viscositySelect}
+                            onChange={handleSelectViscosity}
+                            className="select-big select"
+                        />
+                    </div>
+                </div>
                 </>
             )}
         </div>

@@ -6,12 +6,13 @@ const Oil = require('../db/models/oil')
 
 const getFilters = async (req, res) => {
     try{
-        const { type, filter } = req.query
+        const { type, filter, limit, page } = req.query
                 
         if(type){            
-            const filters = await Filter.find({ filterType: type })
+            const filters = await Filter.find({ filterType: type }).limit(Number(limit)).skip(Number(limit) * Number(page))
+            const count = await Filter.find({ filterType: type }).countDocuments()
 
-            return res.json({ products: filters })
+            return res.json({ products: filters, count })
         }        
 
         let filters = await Filter.find({ $or: [

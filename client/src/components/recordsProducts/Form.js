@@ -736,15 +736,15 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                             
                         </div>
                         <div className="input-container">
-                            <span className="span-filter">Viscosidad</span>
+                            <span className="span-filter">Tipo de aceite</span>
                             
                             <Select 
-                                options={viscositySelect}
-                                value={viscosity}
-                                onChange={handleSelectViscosity}
+                                options={oilTypeSelect}
+                                value={oilType}
+                                onChange={handleSelectOilType}
                                 className="select-car-records"
-                            />
-                            
+                                />
+                                
                         </div>
                         <div className="input-container">
                             <span className="span-filter">Presentación</span>
@@ -939,17 +939,17 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                     </div>
                     ): typeProduct.value === "oil" && (
                         <div className="input-filters-container-group">
-                        <div className="input-container">
-                            <span className="span-filter">Tipo de aceite</span>
-                            
-                            <Select 
-                                options={oilTypeSelect}
-                                value={oilType}
-                                onChange={handleSelectOilType}
-                                className="select-car-records"
+                            <div className="input-container">
+                                <span className="span-filter">Viscosidad</span>
+                                
+                                <Select 
+                                    options={viscositySelect}
+                                    value={viscosity}
+                                    onChange={handleSelectViscosity}
+                                    className="select-car-records"
                                 />
                                 
-                        </div>
+                            </div>
                         </div>
                     )}
                 {typeProduct.value === 'filter' && (

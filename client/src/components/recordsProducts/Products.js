@@ -18,11 +18,16 @@ function Products({ typeProduct, loading, setLoading }) {
                                 { value: 'oil', label: 'FILTRO DE ACEITE' },
                                 { value: 'fuel', label: 'FILTRO DE GASOLINA' },
                                 { value: 'cabine', label: 'FILTRO DE CABINA' }]  
+    
+    const optionsLimitProducts = [{ value: 10, label: 10 }, { value: 20, label: 20 }, { value: 50, label: 50 }]  
 
     const [products, setProducts] = useState([])
     const [allProducts, setAllProducts] = useState([])
     const [modalProduct, setModalProduct] = useState(false)
     const [typeFilter, setTypeFilter] = useState(optionsTypeFilter[0])
+    const [limitProducts, setLimitProducts] = useState(optionsLimitProducts[0])
+    const [totalProducts, setTotalProducts] = useState(0)
+    const [page, setPage] = useState(0)
 
     const openModal = (e) => {
         e?.preventDefault()
@@ -32,19 +37,20 @@ function Products({ typeProduct, loading, setLoading }) {
     const closeModal = () => setModalProduct(false)
 
     useEffect(() => {
-        fetchProducts().then(({ products }) => {
+        fetchProducts().then(({ products, count }) => {
             setProducts(products)
             setLoading(false)
+            setTotalProducts(count)
             if(typeProduct.value === "oil"){ setAllProducts(products) }
         }).catch((e) => {
             console.log(e)
             alert(`${messageServerError}`)
         })
-    }, [typeProduct, typeFilter])
+    }, [typeProduct, typeFilter, limitProducts, page])
 
     const fetchProducts = async () => {
         const res = await axios({
-            url: `${url}/products/${typeProduct.value}?type=${typeFilter.value}`,
+            url: `${url}/products/${typeProduct.value}?type=${typeFilter.value}&limit=${limitProducts.value}&page=${page}`,
             method: 'GET',
             timeout: 15000
         })
@@ -53,6 +59,11 @@ function Products({ typeProduct, loading, setLoading }) {
     }
 
     const handleSelectTypeFilter = newFilter => setTypeFilter(newFilter)
+
+    const handleSelectLimitPorducts = newFilter => {
+        setLimitProducts(newFilter)
+        setPage(0)
+    }
 
     const setProduct = newProduct => {
         let newProducts = [...products]
@@ -72,6 +83,32 @@ function Products({ typeProduct, loading, setLoading }) {
         let idx = newProducts.findIndex( product => product._id == productDeleted._id )
         newProducts.splice(idx, 1)
         setProducts(newProducts)
+    }
+
+    useEffect(() => {
+        console.log(page)
+    }, [page])
+
+    const stepBackPage = e => {
+        e.preventDefault()
+        if(page >= 3){ setPage( page - 3) }
+    }
+
+    const lastPage = e => {
+        e.preventDefault()
+        if(page > 0){ setPage(page - 1) }
+    }
+
+    const nextPage = e => {
+        e.preventDefault()
+        console.log(totalProducts)
+        console.log(limitProducts)
+        if(page < (totalProducts / limitProducts.value) - 1){ setPage(page + 1) }
+    }
+
+    const stepForwardPage = e => {
+        e.preventDefault()
+        if(page < (totalProducts / limitProducts.value) - 4){ setPage(page + 3) }
     }
 
     return (
@@ -97,6 +134,19 @@ function Products({ typeProduct, loading, setLoading }) {
                     />
                 </div>
             )}
+            <div className="filter-table-container">
+                <div className="select-container small">
+                    <div className="label-container">
+                        <label>MOSTRAR</label>
+                    </div>
+                    <Select 
+                        value={limitProducts}
+                        options={optionsLimitProducts}
+                        className="select"
+                        onChange={handleSelectLimitPorducts}
+                    />
+                </div>
+            </div>
             {typeProduct.value === "oil" && (
                 <FilterOils 
                     setProducts={setProducts}
@@ -148,7 +198,13 @@ function Products({ typeProduct, loading, setLoading }) {
                         />
                     )
                 )}
-            </div>  
+            </div>
+            <div className="btn-pagination-container">
+                <button className="btn-aspi" onClick={stepBackPage}>&lt;&lt;</button>
+                <button className="btn-aspi" onClick={lastPage}>&lt;</button>
+                <button className="btn-aspi" onClick={nextPage}>&gt;</button>
+                <button className="btn-aspi" onClick={stepForwardPage}>&gt;&gt;</button>
+            </div>
             <button className="padding-horizontal-fit-content btn-aspi margin-vertical" onClick={openModal}>
                 AGREGAR {typeProduct.value === "wiresets" ? typeProduct.label.toUpperCase() : typeProduct.label.slice(0, -1).toUpperCase()}
             </button>       

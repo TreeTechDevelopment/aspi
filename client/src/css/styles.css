@@ -74,12 +74,6 @@ nav, header, footer{
 
 .btn-edit-service{ margin: 0 auto }
 
-.full-width{ width: 100%; }
-.full-height{ height: 100%; }
-
-.max-height{ max-height: 100%; }
-
-.padding-top{ padding-top: 7%; }
 
 .bg-white{
     width: 100%;
@@ -102,14 +96,6 @@ nav, header, footer{
 .justify-content-start{ justify-content: flex-start; }
 .align-items-start{ align-items: flex-start; }
 
-.padding-horizontal{ padding: 0 1rem; }
-.padding-left{ padding-left: 2rem; }
-.margin-top{ margin-top: 1rem; }
-.margin-bottom{ margin-bottom: 1rem; }
-.margin-right{ margin-right: 1rem; }
-.margin-vertical-auto{ margin: auto 0; }
-.padding-right{ padding-right: 2.5rem; }
-
 .checkbox-container{
     background-color: rgb( 254, 177, 0 );
     display: flex;
@@ -120,6 +106,8 @@ nav, header, footer{
     margin-top: 0.7rem;
     padding: 0.2rem;
 }
+
+.w-select{ width: 40%; }
 
 .checkbox-container input{
     width: 1.5rem;
@@ -221,6 +209,10 @@ nav, header, footer{
     border: 1px solid rgb( 254, 177, 0 );
     width: 70%;
     border-radius: 0.3rem;
+}
+
+.select-container .select-big{
+    width: 100%;
 }
 
 .select-container .select .css-1okebmr-indicatorSeparator{ background-color: rgb( 254, 177, 0 ); }
@@ -381,12 +373,39 @@ nav, header, footer{
 .filter-table-container{
     width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     padding-left: 10%;
 }
 
+.btn-pagination-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-pagination-container button{
+    margin: 0 2rem;
+}
+
 .small{ width: 30%; }
+.padding-horizontal{ padding: 0 1rem; }
+.padding-left{ padding-left: 2rem; }
+.margin-top{ margin-top: 1rem; }
+.margin-bottom{ margin-bottom: 1rem; }
+.margin-right{ margin-right: 1rem; }
+.margin-vertical-auto{ margin: auto 0; }
+.padding-right{ padding-right: 2.5rem; }
+.wo-margin-top{ margin-top: 0; }
+.wo-padding{ padding: 0; }
+.full-width{ width: 100%; }
+.full-height{ height: 100%; }
+.max-height{ max-height: 100%; }
+.padding-top{ padding-top: 7%; }
+.padding-left-checkbox-container{ padding-left: 0.2rem; }
 
 /*=============== CHAVA ====================== */
 
