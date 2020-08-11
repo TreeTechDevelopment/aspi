@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Navbar from '../components/Navbar';
 import Form from '../components/serviceOrder/Form';
@@ -12,7 +12,7 @@ function ServiceOrd() {
             <div className="third-window direction-column margin-vertical-auto max-height">
                 <Form />
             </div>
-            <div className="line-separator"></div> 
+            <div className="line-separator"></div>  
             <Service /> 
         </div>
     )

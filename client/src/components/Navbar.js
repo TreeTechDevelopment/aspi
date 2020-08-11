@@ -17,7 +17,7 @@ function Navbar({ isHome }) {
                     <a href={`${url}/search`}>BUSCAR</a>
                 </li>
                 <li>                    
-                    <a href={`${url}/service-order`}>ORDEN DE SERVICO</a>
+                    <a href={`${url}/services`}>SERVICIOS</a>
                 </li>
                 <li>                    
                     <a href={`${url}/cross`}>REFERENCIAS CRUZADAS</a>

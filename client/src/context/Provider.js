@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 
-import { defaultReducer } from './reducers';
+import { defaultReducer, listReducer } from './reducers';
 
 export const appContext = React.createContext()
 
@@ -20,6 +20,8 @@ function Provider({ children }) {
     const [wiresets, dispatchWiresets] = useReducer(defaultReducer, [])
     const [brakeshoes, dispatchBrakeshoes] = useReducer(defaultReducer, [])
     const [oils, dispatchOils] = useReducer(defaultReducer, [])
+    const [productsPrice, dispatchProductsPrice] = useReducer(listReducer, [])
+    const [totalSell, dispatchTotalSell] = useReducer(defaultReducer, 0)
 
     return (
         <appContext.Provider
@@ -38,6 +40,8 @@ function Provider({ children }) {
                 sparkplugs,
                 brakeshoes,
                 oils,
+                productsPrice,
+                totalSell,
                 dispatchMake,
                 dispatchModel,
                 dispatchCar,
@@ -51,7 +55,9 @@ function Provider({ children }) {
                 dispatchSparkplugs,
                 dispatchWiresets,
                 dispatchBrakeshoes,
-                dispatchOils
+                dispatchOils,
+                dispatchProductsPrice,
+                dispatchTotalSell
             }}
         >
             {children}

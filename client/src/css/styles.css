@@ -159,9 +159,9 @@ nav, header, footer{
     font-family: SourceSansBlack;
 }
 
-.direction-row{ flex-direction: row; }
+.direction-row{ display: flex; flex-direction: row; }
 
-.direction-column{ flex-direction: column; } 
+.direction-column{ display: flex; flex-direction: column; } 
 
 .half-window{
     width: 50%;
@@ -222,8 +222,9 @@ nav, header, footer{
 
 .line-separator{
     border: 1px solid rgb( 254, 177, 0 );
-    height: 40%;
+    height: 40rem;
     width: 1px;
+    margin: auto 0;
 }
 
 .order-searcher{
@@ -282,7 +283,7 @@ nav, header, footer{
     min-width: 80%;
     width: fit-content;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
 }
 
@@ -351,6 +352,9 @@ nav, header, footer{
 .btn-edit{
     background-color: transparent;
     border: 0;
+    font-family: SourceSans;
+    color: rgb(116,116,116);
+    font-size: 2rem;
 }
 
 .btn-edit img{
@@ -391,6 +395,115 @@ nav, header, footer{
     margin: 0 2rem;
 }
 
+.checkbox-sell-container{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+}
+
+.btn-shop{
+    position: fixed;
+    bottom: 5%;
+    right: 2%;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+    background-color: rgb( 254, 177, 0 );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+}
+
+.btn-shop:hover{ cursor: pointer; }
+.btn-shop:focus{ outline: 0; }
+
+.shop-list{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.shop-list table tr th {
+    background-color: rgb( 254, 177, 0 );
+    padding: 1rem 0.5rem;
+    text-align: center;
+    font-family: SairaLight;
+    color: white;
+}
+
+.shop-list table tr td {
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-family: SairaLight;
+    padding: 0.5rem 0;
+}
+
+.shop-list table tbody tr .odd{
+    background-color: rgb(228, 228, 228);
+}
+
+.shop-list table tbody tr .even{
+    background-color: rgb(243, 243, 243);
+}
+
+.btn-aspi-circle{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    background-color: rgb( 254, 177, 0 );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    border: 0;
+}
+
+.btn-aspi-circle:hover{ cursor: pointer; }
+.btn-aspi-circle:focus{ outline: 0; }
+
+.btn-shop-shop-list-container{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgb( 254, 177, 0 );
+}
+
+.shop-list-total-container{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 2rem;
+    font-family: SourceSans;
+}
+
+.toast{
+    width: 80%;
+    height: 5%;
+    border-radius: 1rem;
+    position: absolute;
+    left: 10%;
+    bottom: 5%;
+    background-color: rgba( 254, 177, 0, 0.7 );
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    font-family: SourceSans;
+    font-size: 1.2rem;
+}
+
 .small{ width: 30%; }
 .padding-horizontal{ padding: 0 1rem; }
 .padding-left{ padding-left: 2rem; }
@@ -398,7 +511,7 @@ nav, header, footer{
 .margin-bottom{ margin-bottom: 1rem; }
 .margin-right{ margin-right: 1rem; }
 .margin-vertical-auto{ margin: auto 0; }
-.padding-right{ padding-right: 2.5rem; }
+.padding-right{ padding-right: 2.5rem; }    
 .wo-margin-top{ margin-top: 0; }
 .wo-padding{ padding: 0; }
 .full-width{ width: 100%; }
@@ -406,6 +519,9 @@ nav, header, footer{
 .max-height{ max-height: 100%; }
 .padding-top{ padding-top: 7%; }
 .padding-left-checkbox-container{ padding-left: 0.2rem; }
+.width-fitcontent{ width: fit-content; }
+.justify-content-center{ justify-content: center; }
+.margin-btn-shop-list{ margin-left: 10rem; }
 
 /*=============== CHAVA ====================== */
 

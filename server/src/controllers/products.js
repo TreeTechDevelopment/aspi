@@ -43,6 +43,23 @@ const getFilters = async (req, res) => {
 
 const getSparkplug = async (req, res) => {
     try{
+
+        const { filter} = req.query
+
+        if(filter){
+            const sparkplugs = await Plug.find({
+                $or: [
+                    { 'NGK': { $in: [new RegExp(filter, "i")] } },
+                    { 'Champions': { $in: [new RegExp(filter, "i")] } },
+                    { 'Bosh': { $in: [new RegExp(filter, "i")] } },
+                    { 'Motorcraft': { $in: [new RegExp(filter, "i")] } },
+                    { 'ACD': { $in: [new RegExp(filter, "i")] } }
+                ]
+            })
+
+            return res.json({ filters: sparkplugs })  
+        }
+
         const plugs = await Plug.find({ })
 
         return res.json({ products: plugs })
@@ -67,6 +84,22 @@ const getOil = async (req, res) => {
 
 const getWireset = async (req, res) => {
     try{
+
+        const { filter} = req.query
+
+        if(filter){
+            const wiresets = await Plug.find({
+                $or: [
+                    { 'NGK': { $in: [new RegExp(filter, "i")] } },
+                    { 'LS': { $in: [new RegExp(filter, "i")] } },
+                    { 'Bosh': { $in: [new RegExp(filter, "i")] } },
+                    { 'Roadstar': { $in: [new RegExp(filter, "i")] } }
+                ]
+            })
+
+            return res.json({ filters: wiresets })  
+        }
+
         const wiresets = await Wireset.find({ })
 
         return res.json({ products: wiresets })
@@ -79,6 +112,15 @@ const getWireset = async (req, res) => {
 
 const getBrakeshoe = async (req, res) => {
     try{
+
+        const { filter} = req.query
+
+        if(filter){
+            const brakeshoes = await Plug.find({ 'Wagner': { $in: [new RegExp(filter, "i")] }})
+
+            return res.json({ filters: brakeshoes })  
+        }
+
         const brakeshoes = await Brakeshoe.find({ })
 
         return res.json({ products: brakeshoes })

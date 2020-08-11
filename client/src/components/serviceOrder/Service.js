@@ -22,7 +22,7 @@ const Service = ({order}) => {
                         { value: 'ACDelco', label: 'ACDelco' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Castrol', label: 'Castrol' }, { value: 'Nissan', label: 'Nissan' }, 
                         { value: 'Phillips 66', label: 'Phillips 66' }, { value: 'Repsol', label: 'Repsol' }, { value: 'Mexlub', label: 'Mexlub' }, { value: 'Pemex', label: 'Pemex' }, 
                         { value: 'HM9', label: 'HM9' }, { value: 'Chevron', label: 'Chevron' }, { value: 'Presson', label: 'Presson' }, { value: 'Akron', label: 'Akron' },
-                        { value: 'Bardahl', label: 'Bardahl' }]
+                        { value: 'Bardahl', label: 'Bardahl' }, { value: 'Motorcraft', label: 'Motorcraft' }, { value: 'Mobil', label: 'Mobil' }, { value: 'Pennzoil', label: 'Pennzoil' }]
 
   const context = useContext(appContext)
 

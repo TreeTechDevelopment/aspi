@@ -5,7 +5,6 @@ import axios from 'axios';
 import { url, messageServerError } from '../../../app.json';
 import { appContext } from '../../context/Provider';
 import PDF from './PDF';
-import PDFClient from './PDFClient';
 
 function CreatePDF({ 
         airFilter,
@@ -34,44 +33,42 @@ function CreatePDF({
         const ref = useRef(null)
         const setRef = useCallback(node => {          
             if (node) {
-                if(node.id === "atag2"){
-                    node.click()
-                    let order = {
-                        car: context.car._id,
-                        carYear: context.year,
-                        oil:{ oilRequired: Oil },
-                        filters: {
-                            airFilter, fuelFilter, oilFilter, cabineFilter
-                        },
-                        note, cleanAB, cleanInj, brakeshoeBack, brakeshoeFront,
-                        coil, transmission, antifreeze, sparkplugs: sparkplug,
-                        wiresets, idOrder: Number(getIDOrder()), total, phone
-                    }
-                    if(Oil === "Si"){ 
-                        order.oil.make = aceite.make 
-                        order.oil.presentation = aceite.presentation
-                        order.oil.viscosity = aceite.viscosity
-                        order.oil.oilType = aceite.type
-                        if(aceite.presentation === "Suelto"){ order.oil.lts = Number(lts) }
-                    }
-                    if(orderToUpdate){
-                        order.id = orderToUpdate._id
-                        updateOrder(order).then(() => {
-                            window.location.reload()
-                        }).catch((e) => {
-                            alert(`${messageServerError}`)
-                            window.location.reload()
-                        })
-                    }else{
-                        createOrder(order).then(() => {
-                            resetIDORder()
-                            window.location.reload()
-                        }).catch((e) => {
-                            console.log(e)
-                            alert(`${messageServerError}`)
-                        })
-                    }
-                }else{ node.click() }
+                node.click()
+                let order = {
+                    car: context.car._id,
+                    carYear: context.year,
+                    oil:{ oilRequired: Oil },
+                    filters: {
+                        airFilter, fuelFilter, oilFilter, cabineFilter
+                    },
+                    note, cleanAB, cleanInj, brakeshoeBack, brakeshoeFront,
+                    coil, transmission, antifreeze, sparkplugs: sparkplug,
+                    wiresets, idOrder: Number(getIDOrder()), total, phone
+                }
+                if(Oil === "Si"){ 
+                    order.oil.make = aceite.make 
+                    order.oil.presentation = aceite.presentation
+                    order.oil.viscosity = aceite.viscosity
+                    order.oil.oilType = aceite.type
+                    if(aceite.presentation === "Suelto"){ order.oil.lts = Number(lts) }
+                }
+                if(orderToUpdate){
+                    order.id = orderToUpdate._id
+                    updateOrder(order).then(() => {
+                        window.location.reload()
+                    }).catch((e) => {
+                        alert(`${messageServerError}`)
+                        window.location.reload()
+                    })
+                }else{
+                    createOrder(order).then(() => {
+                        resetIDORder()
+                        window.location.reload()
+                    }).catch((e) => {
+                        console.log(e)
+                        alert(`${messageServerError}`)
+                    })
+                }
             }            
             ref.current = node
         }, [])
@@ -82,7 +79,6 @@ function CreatePDF({
     const context = useContext(appContext)   
 
     const [aRef] = useHookWithRefCallback(); 
-    const [aRef2] = useHookWithRefCallback(); 
 
     const returnDate = () => {
         let month = ''
@@ -104,7 +100,7 @@ function CreatePDF({
         return `${hours}:${minutes}`
     }
 
-    const createOrder = async (data) => {
+    const createOrder = async (data) => { 
         const res = await axios({
             url: `${url}/orders`,
             method: 'POST',
@@ -177,71 +173,15 @@ function CreatePDF({
         >
             {({ blob, url, loading, error }) =>{
 
-                let url1 = url
-
                 return(
                     !loading ? (
-                        <>
-
-                        <BlobProvider 
-                            document={
-                                <PDFClient 
-                                    phone={phone}
-                                    rectifyDisk={rectifyDisk}                     
-                                    cleanInj={cleanInj}
-                                    cleanAB={cleanAB}
-                                    airFilter={airFilter}
-                                    oilFilter={oilFilter}
-                                    fuelFilter={fuelFilter}
-                                    cabineFilter={cabineFilter}
-                                    sparkplug={sparkplug}
-                                    coil={coil}
-                                    antifreeze={antifreeze}
-                                    transmission={transmission}
-                                    wiresets={wiresets}
-                                    brakeshoeBack={brakeshoeBack}
-                                    brakeshoeFront={brakeshoeFront}
-                                    date={returnDate()}
-                                    make={context.make}
-                                    model={context.model}
-                                    year={context.year}
-                                    lts={lts}
-                                    car={context.car}
-                                    aceite={aceite}
-                                    Oil={Oil}
-                                    IDOrder={returnNumberIDOrder()}
-                                    note={note}
-                                    total={total}
-                                    orderToUpdate={orderToUpdate}
-                                />
-                            }             
-                        >
-                            {({ blob, url, loading, error }) =>{
-                                
-                                return(
-                                    !loading ? (
-                                        <>
-                                        <a 
-                                            href={url1} 
-                                            download={`Orden de Servicio ${returnDate()} ${returnTime()}.pdf`} 
-                                            className="hidden-atag"
-                                            id="atag1"
-                                            ref={aRef}
-                                        ></a>
-                                        <a 
-                                            href={url} 
-                                            download={`Orden de Cliente ${returnDate()} ${returnTime()}.pdf`} 
-                                            className="hidden-atag"
-                                            id="atag2"
-                                            ref={aRef2}
-                                        ></a>
-                                        
-                                        </>
-                                    ): ( <></> )
-                                )
-                            }}
-                        </BlobProvider>
-                        </>
+                        <a 
+                            href={url} 
+                            download={`Orden de Servicio ${returnDate()} ${returnTime()}.pdf`} 
+                            className="hidden-atag"
+                            id="atag1"
+                            ref={aRef}
+                        ></a>
                     ): ( <></> )
                 )
             }}

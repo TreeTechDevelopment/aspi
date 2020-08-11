@@ -2,7 +2,7 @@ import React from 'react'
 
 import WiresetItem from './WiresetItem'
 
-function WiresetsProducts({ wiresets, openModal, removeWireset }) {
+function WiresetsProducts({ wiresets, openModal, removeWireset, edit, sell, sellFunction }) {
     return (
         <table className="table-products">
             <thead>
@@ -11,8 +11,13 @@ function WiresetsProducts({ wiresets, openModal, removeWireset }) {
                     <th>BOSH</th>
                     <th>LANCER & SILVERINE</th> 
                     <th>ROADSTAR</th>
-                    <th>EDITAR</th>
-                    <th>ELIMINAR</th>
+                    {edit && (
+                        <>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        </>
+                    )}
+                    {sell && <th>AGREGAR</th>}
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +28,9 @@ function WiresetsProducts({ wiresets, openModal, removeWireset }) {
                         openModal={openModal}
                         updateWireset={removeWireset}
                         idx={idx}
+                        edit={edit}
+                        sell={sell}
+                        sellFunction={sellFunction}
                     />
                 ))}
             </tbody>

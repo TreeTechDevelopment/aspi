@@ -170,12 +170,14 @@ function Products({ typeProduct, loading, setLoading }) {
                             sparkplugs={products}
                             openModal={openModal}
                             removeSparkplug={removeProducts}
+                            edit={true}
                         />
                     ) : typeProduct.value === "wiresets" ? ( 
                         <WiresetsProducts 
                             wiresets={products}
                             openModal={openModal}
                             removeWireset={removeProducts}
+                            edit={true}
                         />
                     ) : typeProduct.value === "filter" ? (
                         <FilterProducts 
@@ -183,12 +185,14 @@ function Products({ typeProduct, loading, setLoading }) {
                             openModal={openModal}
                             typeFilter={typeFilter}
                             removeFilter={removeProducts}
+                            edit={true}
                         />
                     ) : typeProduct.value === "brakeShoe" ? (
                         <BrakeshoeProducts 
                             brakeshoes={products}
                             openModal={openModal}
                             removeBrakeshoe={removeProducts}
+                            edit={true}
                         />
                     ) : (
                         <OilProducts 

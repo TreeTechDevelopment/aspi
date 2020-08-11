@@ -5,7 +5,7 @@ import { appContext } from '../../context/Provider'
 import { url, messageServerError } from '../../../app.json'
 import Modal from '../Modal';
 
-function FilterItem({ filter, openModal, edit, updateFilters, idx }) {
+function FilterItem({ filter, openModal, edit, updateFilters, idx, sell, sellFunction }) {
 
     const context = useContext(appContext)
 
@@ -42,6 +42,8 @@ function FilterItem({ filter, openModal, edit, updateFilters, idx }) {
 
         return res.data
     }
+
+    const addProductToList = () => sellFunction(filter)
     
     return (
         <tr>
@@ -138,6 +140,13 @@ function FilterItem({ filter, openModal, edit, updateFilters, idx }) {
                     </button>
                 </td>
                 </>
+            )}
+            {sell && (
+                <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                    <button className="btn-edit" onClick={addProductToList}>
+                        +
+                    </button>
+                </td>
             )}
         </tr>
     )

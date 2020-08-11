@@ -58,6 +58,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 10,
         paddingHorizontal: 5
+    },
+    productNameContainer:{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 });
 

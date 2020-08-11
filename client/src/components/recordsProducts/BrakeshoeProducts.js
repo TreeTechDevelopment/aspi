@@ -2,14 +2,19 @@ import React from 'react'
 
 import BrakeshoeItem from './BrakeshoeItem'
 
-function BrakeshoeProducts({ brakeshoes, openModal }) {
+function BrakeshoeProducts({ brakeshoes, openModal, edit, sell, sellFunction }) {
     return (
         <table className="table-products">
             <thead>
                 <tr>
                     <th>WAGNER</th>
-                    <th>EDITAR</th>
-                    <th>ELIMINAR</th>
+                    {edit && (
+                        <>
+                        <th>EDITAR</th> 
+                        <th>ELIMINAR</th>
+                        </>
+                    )}
+                    {sell && <th>AGREGAR</th>}
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +24,9 @@ function BrakeshoeProducts({ brakeshoes, openModal }) {
                         key={ brakeshoe._id }
                         openModal={openModal}
                         idx={idx}
+                        edit={edit}
+                        sell={sell}
+                        sellFunction={sellFunction}
                     />
                 ))}
             </tbody>

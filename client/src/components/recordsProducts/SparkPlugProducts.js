@@ -2,7 +2,7 @@ import React from 'react'
 
 import SparkPlugItem from './SparkPlugItem'
 
-function SparkPlugProducts({ sparkplugs, openModal }) {
+function SparkPlugProducts({ sparkplugs, openModal, edit, sell, sellFunction }) {
 
     return (
         <table className="table-products">
@@ -13,8 +13,13 @@ function SparkPlugProducts({ sparkplugs, openModal }) {
                     <th>BOSH</th>
                     <th>MOTORCRAFT</th> 
                     <th>ACDELCO</th>
-                    <th>EDITAR</th>
-                    <th>ELIMINAR</th>
+                    {edit && (
+                        <>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                        </>
+                    )}
+                    {sell && <th>AGREGAR</th>}
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +29,9 @@ function SparkPlugProducts({ sparkplugs, openModal }) {
                         key={ sparkplug._id }
                         openModal={openModal}
                         idx={idx}
+                        edit={edit}
+                        sell={sell}
+                        sellFunction={sellFunction}
                     />
                 ))}
             </tbody>

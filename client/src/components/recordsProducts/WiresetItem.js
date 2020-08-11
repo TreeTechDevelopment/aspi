@@ -5,7 +5,7 @@ import { appContext } from '../../context/Provider'
 import { url, messageServerError } from '../../../app.json'
 import Modal from '../Modal'
 
-function WiresetItem({ wireset, openModal, updateWireset, idx }) {
+function WiresetItem({ wireset, openModal, updateWireset, idx, edit, sell, sellFunction }) {
 
     const context = useContext(appContext)
 
@@ -13,7 +13,7 @@ function WiresetItem({ wireset, openModal, updateWireset, idx }) {
 
     const closeModal = () => setOpenModalRemoveProduct(false)
 
-    const editSparkplug = () => {         
+    const editWireset = () => {         
         context.dispatchProduct({ type: 'SET', value: wireset }) 
         openModal()
     }
@@ -42,6 +42,8 @@ function WiresetItem({ wireset, openModal, updateWireset, idx }) {
         e.preventDefault()
         setOpenModalRemoveProduct(true)
     }
+
+    const addProductToList = () => sellFunction(wireset)
 
     return (
         <tr>
@@ -72,16 +74,25 @@ function WiresetItem({ wireset, openModal, updateWireset, idx }) {
                     <p key={Roadstar + Math.random().toString()}>{Roadstar}</p>
                 ) ) }
             </td>
-            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
-                <button className="btn-edit" onClick={editSparkplug}>
-                    <img src={`${url}/images/edit.png`}/>
-                </button>
-            </td>
-            <td className={ idx % 2 === 0 ? 'odd' : 'even' }>
-                <button className="btn-edit" onClick={handleDeleteBtn}>
-                    <img src={`${url}/images/delete.png`}/>
-                </button>
-            </td>
+            {edit && (
+                <>
+                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                        <button className="btn-edit" onClick={editWireset}>
+                            <img src={`${url}/images/edit.png`}/>
+                        </button>
+                    </td>
+                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                        <button className="btn-edit" onClick={handleDeleteBtn}>
+                            <img src={`${url}/images/delete.png`}/>
+                        </button>
+                    </td>
+                </>
+            )}
+            {sell && (
+                <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                    <button className="btn-edit" onClick={addProductToList}>+</button>
+                </td>
+            )}
         </tr>
     )
 }

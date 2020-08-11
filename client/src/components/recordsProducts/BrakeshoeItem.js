@@ -5,7 +5,7 @@ import { appContext } from '../../context/Provider'
 import { url, messageServerError } from '../../../app.json'
 import Modal from '../Modal'
 
-function BrakeshoeItem({ brakeshoe, openModal, updateBrakeshoe, idx }) {
+function BrakeshoeItem({ brakeshoe, openModal, updateBrakeshoe, idx, edit, sell, sellFunction }) {
 
     const context = useContext(appContext)
 
@@ -42,6 +42,8 @@ function BrakeshoeItem({ brakeshoe, openModal, updateBrakeshoe, idx }) {
 
         return res.data
     }
+
+    const addProductToList = () => sellFunction(brakeshoe)
     
     return (
         <tr>
@@ -57,16 +59,25 @@ function BrakeshoeItem({ brakeshoe, openModal, updateBrakeshoe, idx }) {
                     <p key={Wagner + Math.random().toString()}>{Wagner}</p>
                 ) ) }
             </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                <button className="btn-edit" onClick={editFilter}>
-                    <img src={`${url}/images/edit.png`}/>
-                </button>
-            </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                <button className="btn-edit" onClick={handleDeleteBtn}>
-                    <img src={`${url}/images/delete.png`}/>
-                </button>
-            </td>
+            {edit && (
+                <>
+                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                        <button className="btn-edit" onClick={editFilter}>
+                            <img src={`${url}/images/edit.png`}/>
+                        </button>
+                    </td>
+                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                        <button className="btn-edit" onClick={handleDeleteBtn}>
+                            <img src={`${url}/images/delete.png`}/>
+                        </button>
+                    </td>
+                </>
+            )}
+            {sell && (
+                <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                    <button className="btn-edit" onClick={addProductToList}> + </button>
+                </td>
+            )}
         </tr>
     )
 }

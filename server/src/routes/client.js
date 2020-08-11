@@ -9,7 +9,9 @@ const {
 } = require('../controllers/client')
 
 app.get('/', handleClient)
-app.get('/service-order', handleClient)
+app.get('/services/service-order', handleClient)
+app.get('/services', handleClient)
+app.get('/services/sells', handleClient)
 app.get('/cross', handleClient)
 app.get('/iniciar-sesion', handleClient)
 app.get('/records', handleClient)

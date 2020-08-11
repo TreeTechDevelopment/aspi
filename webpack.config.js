@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports  = {
     entry: './client/index.js',
@@ -12,7 +13,7 @@ module.exports  = {
             {
               use: 'babel-loader',
               test: /\.js$/,
-              exclude: /node_modules/
+              exclude: [/node_modules/, /server/]
             },
             {
               test: /\.css$/i,

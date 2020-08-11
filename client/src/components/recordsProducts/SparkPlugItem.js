@@ -5,7 +5,7 @@ import { appContext } from '../../context/Provider'
 import { url, messageServerError } from '../../../app.json'
 import Modal from '../Modal';
 
-function SparkPlugItem({ sparkplug, openModal, updateSparkplugs, idx }) {
+function SparkPlugItem({ sparkplug, openModal, updateSparkplugs, idx, edit, sell, sellFunction }) {
 
     const context = useContext(appContext)
 
@@ -43,6 +43,8 @@ function SparkPlugItem({ sparkplug, openModal, updateSparkplugs, idx }) {
         setOpenModalRemoveProduct(true)
     }
 
+    const addProductToList = () => sellFunction(sparkplug)
+
     return (
         <tr>
             <Modal 
@@ -77,16 +79,25 @@ function SparkPlugItem({ sparkplug, openModal, updateSparkplugs, idx }) {
                     <p key={ACD + Math.random().toString()}>{ACD}</p>
                 ) ) }
             </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                <button className="btn-edit" onClick={editSparkplug}>
-                    <img src={`${url}/images/edit.png`}/>
-                </button>
-            </td>
-            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                <button className="btn-edit" onClick={handleDeleteBtn}>
-                    <img src={`${url}/images/delete.png`}/>
-                </button>
-            </td>
+            {edit && (
+                <>
+                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                        <button className="btn-edit" onClick={editSparkplug}>
+                            <img src={`${url}/images/edit.png`}/>
+                        </button>
+                    </td>
+                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                        <button className="btn-edit" onClick={handleDeleteBtn}>
+                            <img src={`${url}/images/delete.png`}/>
+                        </button>
+                    </td>
+                </>
+            )}
+            {sell && (
+                <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                    <button className="btn-edit" onClick={addProductToList}>+</button>
+                </td>
+            )}
         </tr>
     )
 }
