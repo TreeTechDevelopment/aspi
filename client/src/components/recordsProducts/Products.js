@@ -176,7 +176,7 @@ function Products({ typeProduct, loading, setLoading }) {
                         <WiresetsProducts 
                             wiresets={products}
                             openModal={openModal}
-                            removeWireset={removeProducts}
+                            removeWireset={removeProducts} 
                             edit={true}
                         />
                     ) : typeProduct.value === "filter" ? (

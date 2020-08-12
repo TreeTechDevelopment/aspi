@@ -2,7 +2,7 @@ import React from 'react'
 
 import FilterItem from './FilterItem';
 
-function FilterProducts({ filters, openModal, typeFilter, edit, sell, sellFunction }) {
+function FilterProducts({ filters, openModal, typeFilter, edit, sell, sellFunction, removeFilter }) {
     return (
         <table className="table-products">
             <thead>
@@ -19,7 +19,7 @@ function FilterProducts({ filters, openModal, typeFilter, edit, sell, sellFuncti
                     <th>SKY</th>
                     <th>SEINECA</th>
                     <th>WALMI</th>
-                    <th>JOE</th>
+                    <th>JOE</th> 
                     <th>ROADSTAR</th>
                     <th>ECA</th>
                     {edit && (
@@ -42,6 +42,7 @@ function FilterProducts({ filters, openModal, typeFilter, edit, sell, sellFuncti
                         idx={idx}
                         sell={sell}
                         sellFunction={sellFunction}
+                        updateFilters={removeFilter}
                     />
                 ))}
             </tbody>

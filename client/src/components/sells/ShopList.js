@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Modal from "react-modal";
 
 import { appContext } from '../../context/Provider'
@@ -6,12 +6,49 @@ import CreatePDF from './CreatePDF';
 
 Modal.setAppElement("#app");
 
+
+const InputLTS = ({ product, updateList }) => {
+
+    const context = useContext(appContext)
+
+    let productList = context.productsPrice.find( p => p._id == product._id)
+
+    const timeout = useRef(null)
+
+    const [lts, setLts] = useState(productList.quantity.toString())
+
+    const timeoutUpdate = () => {
+        console.log(timeout.current)
+        if(timeout.current){ 
+            clearTimeout(timeout.current) 
+        }
+        timeout.current = setTimeout(() => { updateList() }, 1000)
+        console.log(timeout.current)
+    }
+
+    const handleInputLts = (e) => {
+        context.dispatchProductsPrice({ type: 'UPDATE', value: { _id: product._id, quantity: e.target.value.replace( /[^0-9.]/g, '') } })
+        setLts(e.target.value.replace( /[^0-9.]/g, ''))
+        timeoutUpdate()
+    }
+
+    return(
+        <input 
+            value={lts}
+            onChange={handleInputLts}
+            className="input wo-margin-bottom small"
+        />
+    )
+}
+
+
 function ShopList({ modalIsOpen, closeModal, productsList, removeProduct }) {
 
     const context = useContext(appContext)
 
     const [rerender, setRerender] = useState(false)
     const [buy, setBuy] = useState(false)
+
 
     const createPDF = () => setBuy(true)
 
@@ -86,15 +123,24 @@ function ShopList({ modalIsOpen, closeModal, productsList, removeProduct }) {
                                     <td className={idx % 2 === 0 ? 'odd' : 'even'}>
                                         {product.product.interfil ? product.product.interfil : product.product.NGK ? product.product.NGK : product.product.Roadstar ? product.product.Roadstar : product.product.Wagner ? product.product.Wagner : product.product.name}
                                     </td>
-                                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                                        {product.quantity}
-                                    </td>
-                                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                                        <button className="btn-aspi-circle margin-btn-shop-list margin-right" onClick={() => removeOne(product)}>-</button>
-                                    </td>
-                                    <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                                        <button className="btn-aspi-circle  margin-right" onClick={() => addOne(product)}>+</button>
-                                    </td>
+                                    {product.product.name.split(' ')[2] === "Suelto" ? (
+                                        <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                                            <InputLTS product={product} updateList={updateList}/>
+                                        </td>
+                                    ):(
+                                        <>
+                                            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                                                {product.quantity}
+                                            </td>
+                                            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                                                <button className="btn-aspi-circle margin-btn-shop-list margin-right" onClick={() => removeOne(product)}>-</button>
+                                            </td>
+                                            <td className={idx % 2 === 0 ? 'odd' : 'even'}>
+                                                <button className="btn-aspi-circle  margin-right" onClick={() => addOne(product)}>+</button>
+                                            </td>
+                                        </>
+                                    )}
+                                   
                                 </tr>
                             ) )}
                         </tbody>

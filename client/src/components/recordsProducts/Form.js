@@ -15,9 +15,16 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                             { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
                             { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
                             { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
-                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
+                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }, { value: '80W90', label: '80W90' }, 
+                            { value: '85W140', label: '85W140' }, { value: '140', label: '140' }, { value: '190', label: '190' },
+                            { value: '250', label: '250' }, { value: '50', label: '50' },{ value: '40', label: '40' },{ value: 'H300', label: 'H300' },
+                            { value: '68', label: '68' },{ value: '303', label: '303' },{ value: '90', label: '90' },{ value: '75W140', label: '75W140' },
+                            { value: '75W90', label: '75W90' },{ value: 'Mercon V', label: 'Mercon V' },{ value: 'Mercon LV', label: 'Mercon LV' },
+                            { value: 'Mercon SP', label: 'Mercon SP' }, { value: 'Dexron III', label: 'Dexron III' },{ value: 'ATF +4', label: 'ATF +4' },
+                            { value: 'Dexron VI', label: 'Dexron VI' },{ value: 'Multivehiculo', label: 'Multivehiculo' },]
 
-    const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
+    const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' },
+                            { value: 'Transmisión Automática', label: 'Transmisión Automática' }, { value: 'Transmisión Manual', label: 'Transmisión Manual' }]
 
     const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' }, { value: 'Garrafas 4 litros', label: 'Garrafas 4 litros' },
                                 { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }, { value: 'Suelto', label: 'Suelto' }]
@@ -236,8 +243,20 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
 
     const handleInputOilName = (e) => setOilName(e.target.value)
 
+    const checkInputs = () => {
+        if(interfil === "" && (OEM.includes("") || !OEM[0]) && (ACD.includes("") || !ACD[0]) && (Fram.includes("") || !Fram[0]) && (Gonher.includes("") || !Gonher[0]) &&
+            (Motorcraft.includes("") || !Motorcraft[0]) && (Purolator.includes("") || !Purolator[0]) && (Wix.includes("") || !Wix[0]) && (Mann.includes("") || !Mann[0]) && 
+            (NGK.includes("") || !NGK[0]) && (Champions.includes('') === "" || !Champions[0]) && (Bosh.includes('') === "" || !Bosh[0]) && (LS.includes('') === "" || !LS[0]) && 
+            (Roadstar.includes("") || !Roadstar[0]) && (Wagner.includes("") || !Wagner[0]) && (Sky.includes("") || !Sky[0]) && (Seineca.includes("") || !Seineca[0]) && 
+            (Walmi.includes("") || !Walmi[0]) && (Joe.includes("") || !Joe[0]) && (ECA.includes("") || !ECA[0])){
+            return false
+        }
+
+        return true
+    }
+
     const saveFilter = () => {
-        if(price !== ""){
+        if(price !== "" && checkInputs()){
             setLoading(true)
             let data = {
                 interfil, OEM, ACD, Fram, Gonher, Motorcraft,
@@ -268,7 +287,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                     alert(`${messageServerError}`)
                 })
             }
-        }else{ alert('El campo precio es necesario') }
+        }else{ alert('Es necesario llenar el campo precio y al menos una de las marcas') }
     }
 
     const createProduct = async (data) => {
@@ -1077,12 +1096,14 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                 <button className="btn-aspi" onClick={saveFilter}>GUARDAR</button>
                 </div>
                 {loading && (
-                    <Loader
-                        type="Rings"
-                        color="#00BFFF"
-                        height={50}
-                        width={50}
-                    />
+                    <div className="full-width direction-row justify-content-center">
+                        <Loader
+                            type="TailSpin" 
+                            color="#feb200"
+                            height={50}
+                            width={50}
+                        />
+                    </div>
                 )}
             </div>
         </Modal>

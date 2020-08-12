@@ -17,9 +17,16 @@ function Sells() {
                             { value: '10W30', label: '10W30' }, { value: '15W40', label: '15W40' }, { value: '20W50', label: '20W50' },
                             { value: '25W50', label: '25W50' }, { value: '25W60', label: '25W60' }, { value: '0W20', label: '0W20' },
                             { value: '0W40', label: '0W40' }, { value: '5W50', label: '5W50' }, { value: '5W60', label: '5W60' },
-                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }]
+                            { value: '10W40', label: '10W40' }, { value: '20W60', label: '20W60' }, { value: '80W90', label: '80W90' }, 
+                            { value: '85W140', label: '85W140' }, { value: '140', label: '140' }, { value: '190', label: '190' },
+                            { value: '250', label: '250' }, { value: '50', label: '50' },{ value: '40', label: '40' },{ value: 'H300', label: 'H300' },
+                            { value: '68', label: '68' },{ value: '303', label: '303' },{ value: '90', label: '90' },{ value: '75W140', label: '75W140' },
+                            { value: '75W90', label: '75W90' },{ value: 'Mercon V', label: 'Mercon V' },{ value: 'Mercon LV', label: 'Mercon LV' },
+                            { value: 'Mercon SP', label: 'Mercon SP' }, { value: 'Dexron III', label: 'Dexron III' },{ value: 'ATF +4', label: 'ATF +4' },
+                            { value: 'Dexron VI', label: 'Dexron VI' },{ value: 'Multivehiculo', label: 'Multivehiculo' },]
 
-    const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' }]
+    const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' },
+                            { value: 'Transmisión Automática', label: 'Transmisión Automática' }, { value: 'Transmisión Manual', label: 'Transmisión Manual' }]
 
     const oilPresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Garrafas 5 litros', label: 'Garrafas 5 litros' }, { value: 'Garrafas 4 litros', label: 'Garrafas 4 litros' },
                                 { value: 'Cubetas 19 litros', label: 'Cubetas 19 litros' }, { value: 'Barril 208 litros', label: 'Barril 208 litros' }, { value: "Suelto", label: 'Suelto' },
