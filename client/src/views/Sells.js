@@ -10,7 +10,6 @@ import SparkPlugProducts from '../components/recordsProducts/SparkPlugProducts';
 import WiresetsProducts from '../components/recordsProducts/WiresetsProducts';
 import BrakeshoeProducts from '../components/recordsProducts/BrakeshoeProducts';
 import { appContext } from '../context/Provider';
-import oil from '../../../server/src/db/models/oil';
 
 function Sells() {
 
@@ -210,15 +209,6 @@ function Sells() {
                         className="select"
                     />
                 </div>
-                {presentation.value === "Suelto" && (
-                    <>
-                        <input 
-                        value={lts}
-                        onChange={handleinputLts}
-                        className="input big margin-top"
-                        />
-                    </>
-                )}
                 <button className="btn-aspi margin-top" onClick={addOil}>AGREGAR</button>
                 </>
             )}

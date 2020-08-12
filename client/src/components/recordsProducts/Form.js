@@ -412,7 +412,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                 setECAToRender(newECAFilters)
             }
             if(context.product.viscosity){ setViscosity({ value: context.product.viscosity, label: context.product.viscosity }) }
-            if(context.product.make){ setOilMake({ value: context.product.oilMake, label: context.product.oilMake }) }
+            if(context.product.make){ setOilMake({ value: context.product.make, label: context.product.make }) }
             if(context.product.oilType){ setOilType({ value: context.product.oilType, label: context.product.oilType }) }
             if(context.product.presentation){ setPresentation({ value: context.product.presentation, label: context.product.presentation }) }
             if(context.product.name){ setOilName(context.product.name) }
