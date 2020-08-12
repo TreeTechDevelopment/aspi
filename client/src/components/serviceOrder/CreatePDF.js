@@ -123,6 +123,9 @@ function CreatePDF({
     }   
 
     const returnNumberIDOrder = () => {
+        if(orderToUpdate){
+            return orderToUpdate.idOrder
+        }
         let IDOrder = Number(getIDOrder())
         let IDOrderString = ''
         if(IDOrder >= 0){ IDOrderString = `000${IDOrder}` }
