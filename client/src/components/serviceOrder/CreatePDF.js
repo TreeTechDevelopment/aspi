@@ -27,6 +27,7 @@ function CreatePDF({
         note,
         phone,
         orderToUpdate,
+        antifreezeObj,
         cleanAB }) {
 
     function useHookWithRefCallback() {
@@ -38,11 +39,12 @@ function CreatePDF({
                     car: context.car._id,
                     carYear: context.year,
                     oil:{ oilRequired: Oil },
+                    antifreeze:{ antifreezeRequired: antifreeze },
                     filters: {
                         airFilter, fuelFilter, oilFilter, cabineFilter
                     },
                     note, cleanAB, cleanInj, brakeshoeBack, brakeshoeFront,
-                    coil, transmission, antifreeze, sparkplugs: sparkplug,
+                    coil, transmission, sparkplugs: sparkplug,
                     wiresets, idOrder: Number(getIDOrder()), total, phone
                 }
                 if(Oil === "Si"){ 
@@ -51,6 +53,12 @@ function CreatePDF({
                     order.oil.viscosity = aceite.viscosity
                     order.oil.oilType = aceite.type
                     if(aceite.presentation === "Suelto"){ order.oil.lts = Number(lts) }
+                }
+                if(antifreeze === "Si"){ 
+                    order.antifreeze.antifreezeMake = antifreezeObj.antifreezeMake 
+                    order.antifreeze.antifreezeType = antifreezeObj.antifreezeType
+                    order.antifreeze.antifreezePresentation = antifreezeObj.antifreezePresentation
+                    if(antifreezeObj.antifreezePresentation === "Suelto"){ order.antifreeze.lts = Number(antifreezeObj.antifreezeLts) }
                 }
                 if(orderToUpdate){
                     order.id = orderToUpdate._id
@@ -171,6 +179,7 @@ function CreatePDF({
                     rectifyDisk={rectifyDisk}
                     phone={phone}
                     orderToUpdate={orderToUpdate}
+                    antifreezeObj={antifreezeObj}
                 />
             }             
         >

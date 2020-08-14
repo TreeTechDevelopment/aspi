@@ -16,7 +16,8 @@ const Service = ({order}) => {
                             { value: '68', label: '68' },{ value: '303', label: '303' },{ value: '90', label: '90' },{ value: '75W140', label: '75W140' },
                             { value: '75W90', label: '75W90' },{ value: 'Mercon V', label: 'Mercon V' },{ value: 'Mercon LV', label: 'Mercon LV' },
                             { value: 'Mercon SP', label: 'Mercon SP' }, { value: 'Dexron III', label: 'Dexron III' },{ value: 'ATF +4', label: 'ATF +4' },
-                            { value: 'Dexron VI', label: 'Dexron VI' },{ value: 'Multivehiculo', label: 'Multivehiculo' },]
+                            { value: 'Dexron VI', label: 'Dexron VI' },{ value: 'Multivehiculo', label: 'Multivehiculo' },{ value: '30', label: '30' }, 
+                            { value: '60', label: '60' }]
 
     const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' },
                             { value: 'Transmisión Automática', label: 'Transmisión Automática' }, { value: 'Transmisión Manual', label: 'Transmisión Manual' }]
@@ -31,6 +32,14 @@ const Service = ({order}) => {
                         { value: 'HM9', label: 'HM9' }, { value: 'Chevron', label: 'Chevron' }, { value: 'Presson', label: 'Presson' }, { value: 'Akron', label: 'Akron' },
                         { value: 'Bardahl', label: 'Bardahl' }, { value: 'Motorcraft', label: 'Motorcraft' }, { value: 'Mobil', label: 'Mobil' }, { value: 'Pennzoil', label: 'Pennzoil' }]
 
+  const antifreezeMakeSelect = [{ value: 'Quaker State', label: 'Quaker State' }, { value: 'Bardahl', label: 'Bardahl' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'Peak', label: 'Peak' },
+                        { value: 'Prestone', label: 'Prestone' }, { value: 'TBreaker', label: 'TBreaker' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Motorcraft', label: 'Motorcraft' }, 
+                        { value: 'Gonher', label: 'Gonher' }]
+    
+  const antifreezePresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Suelto', label: 'Suelto' }]
+
+  const antifreezeTypeSelect = [{ value: 'Concentrado', label: 'Concentrado' }, { value: 'Coolant', label: 'Coolant' }]
+
   const context = useContext(appContext)
 
   const [airFilterSelect, setAirFilterSelect] = useState([]);
@@ -41,8 +50,12 @@ const Service = ({order}) => {
   const [wiresetSelect, setWiresetSelect] = useState([]);
   const [brakeshoeBackSelect, setBrakeshoeBackSelect] = useState([]);
   const [brakeshoeFrontSelect, setBrakeshoeFrontSelect] = useState([]);
+  const [coilSelect, setCoilSelect] = useState([]);
   const [oilNames, setOilNames] = useState([]);
+  const [antifreezeSpecifications, setAntifreezeSpecifications] = useState([]);
   const [oilName, setOilName] = useState({});
+  const [antifreezeSpecification, setAntifreezeSpecification] = useState({});
+  const [coil, setCoil] = useState({});
   const [airFilter, setAirFilter] = useState({});
   const [oilFilter, setOilFilter] = useState({});
   const [fuelFilter, setFuelFilter] = useState({});
@@ -51,12 +64,16 @@ const Service = ({order}) => {
   const [wireset, setWireset] = useState({});
   const [brakeshoeBack, setBrakeshoeBack] = useState({});
   const [brakeshoeFront, setBrakeshoeFront] = useState({})
-  const [lts, setLts] = useState('')
   const [viscosity, setViscosity] = useState(viscositySelect[0])
   const [presentation, setPresentation] = useState(oilPresentationSelect[0])
   const [oilMake, setOilMake] = useState(oilMakeSelect[0])
   const [oilType, setOilType] = useState(oilTypeSelect[0])
+  const [antifreezePresentation, setAntifreezePresentation] = useState(antifreezePresentationSelect[0])
+  const [antifreezeMake, setAntifreezeMake] = useState(antifreezeMakeSelect[0])
+  const [antifreezeType, setAntifreezeType] = useState(antifreezeTypeSelect[0])
   const [phone, setPhone] = useState('')
+  const [antifreezeLts, setAntifreezeLts] = useState('')
+  const [lts, setLts] = useState('')
 
   const [datos, guardarDatos] = useState({
     CleaningInj: "No",
@@ -68,7 +85,7 @@ const Service = ({order}) => {
     ChangeFuelFiltter: "No",
     plugs: "No",
     wiresets: "No",
-    coil: "No",
+    changeCoil: "No",
     antifreeze: "No",
     transmission: "No",
     rectifyDisk: "No",
@@ -92,7 +109,7 @@ const Service = ({order}) => {
     ChangeFuelFiltter,
     plugs,
     wiresets,
-    coil,
+    changeCoil,
     antifreeze,
     transmission,
     note,
@@ -269,6 +286,18 @@ const Service = ({order}) => {
           });
         }
 
+        let coilSelect = []
+        let coilDB = []
+        if(order){ coilDB = context.coils.filter( coilDB => order.car.coil.some( coil => coilDB.Injecth.some( coilInjecth => coil == coilInjecth ) || coilDB.Kem.some( coilKem => coil == coilKem ) )  ) }
+        else{ coilDB = context.coils.filter( coilDB => context.car.coil.some( coil => coilDB.Injecth.some( coilInjecth => coil == coilInjecth ) || coilDB.Kem.some( coilKem => coil == coilKem ) )  ) }
+        for(let i = 0; i < coilDB.length; i++){
+          coilSelect = [...coilSelect, ...coilDB[i].Injecth, ...coilDB[i].Kem ]
+          coilSelect = coilSelect.map( coil => {
+            if(typeof coil === "object"){ return coil }
+            return { value: `${coilDB[i].price}-${Math.random().toString()}`, label: coil };
+          });
+        }
+
         airFiltersSelect.push({ value: 'none', label: 'SIN FILTRO' })
         oilFiltersSelect.push({ value: 'none', label: 'SIN FILTRO' })
         fuelFiltersSelect.push({ value: 'none', label: 'SIN FILTRO' })
@@ -277,6 +306,7 @@ const Service = ({order}) => {
         wiresetSelect.push({ value: 'none', label: 'SIN CABLES' })
         brakeshoeBackSelect.push({ value: 'none', label: 'SIN BALATA' })
         brakeshoeFrontSelect.push({ value: 'none', label: 'SIN BALATA' })
+        coilSelect.push({ value: 'none', label: 'SIN BOBINA' })
         
         setAirFilterSelect(airFiltersSelect);
         setAirFilter(airFiltersSelect[0]);
@@ -294,6 +324,8 @@ const Service = ({order}) => {
         setBrakeshoeBack(brakeshoeBackSelect[0])
         setBrakeshoeFrontSelect(brakeshoeFrontSelect)
         setBrakeshoeFront(brakeshoeFrontSelect[0])
+        setCoilSelect(coilSelect)
+        setCoil(coilSelect[0])
 
         if(order && context.services.length !== 0){
           let newDatos = { note: order.note }
@@ -301,12 +333,16 @@ const Service = ({order}) => {
           if(order.antifreeze === "Si"){ newDatos.antifreeze = "Si" }
           if(order.cleanAB === "Si"){ newDatos.CleaningAB = "Si" }
           if(order.cleanInj === "Si"){ newDatos.CleaningInj = "Si" }
-          if(order.coil === "Si"){ newDatos.coil = "Si" }
           if(order.transmission === "Si"){ newDatos.transmission = "Si" }
           if(order.brakeshoeBack !== ""){
             newDatos.changeBrakeshoeBack = "Si"
             let idx = brakeshoeBackSelect.findIndex( brakeshoe => brakeshoe.label == order.brakeshoeBack )
             setBrakeshoeBack(brakeshoeBackSelect[idx]);
+          }
+          if(order.coil !== ""){
+            newDatos.changeCoil = "Si"
+            let idx = coilSelect.findIndex( coil => coil.label == order.coil )
+            setCoil(coilSelect[idx]);
           }
           if(order.brakeshoeFront !== ""){
             newDatos.changeBrakeshoeFront = "Si"
@@ -354,6 +390,15 @@ const Service = ({order}) => {
             setOilType(oilTypeSelect[idxType])
             setViscosity(viscositySelect[idxViscosity])
           }
+          if(order.antifreeze.antifreezeRequired === "Si"){ 
+            newDatos.antifreeze = "Si"
+            let idxMake = antifreezeMakeSelect.findIndex( make => make.label == order.antifreeze.antifreezeMake )
+            let idxPresentation = antifreezePresentationSelect.findIndex( presentation => presentation.label == order.antifreeze.antifreezePresentation )
+            let idxType = antifreezeTypeSelect.findIndex( type => type.label == order.antifreeze.antifreezeType )
+            setAntifreezeMake(antifreezeMakeSelect[idxMake])
+            setAntifreezePresentation(antifreezePresentationSelect[idxPresentation])
+            setAntifreezeType(antifreezeTypeSelect[idxType])
+          }
           guardarDatos({
             ...datos,
             ...newDatos
@@ -361,7 +406,7 @@ const Service = ({order}) => {
         }
 
     }
-  }, [context.car, context.services, context.filters]);
+  }, [context.car, context.services, context.filters, context.coils]);
 
   const obtenerInformacion = (e) => {
     if(context.services.length !== 0){
@@ -391,7 +436,7 @@ const Service = ({order}) => {
       case "ChangeFuelFiltter": return ChangeFuelFiltter
       case "wiresets": return wiresets
       case "plugs": return plugs
-      case "coil": return coil
+      case "changeCoil": return changeCoil
       case "antifreeze": return antifreeze
       case "transmission": return transmission
       case "rectifyDisk": return rectifyDisk
@@ -416,6 +461,8 @@ const Service = ({order}) => {
       if(wireset?.value !== "none"){ total += Number(wireset?.value.split('-')[0]) }
     }if(changeBrakeshoeBack === "Si"){ 
       if(brakeshoeBack?.value !== "none"){ total += Number(brakeshoeBack?.value.split('-')[0]) }
+    }if(changeCoil === "Si"){ 
+      if(coil?.value !== "none"){ total += Number(coil?.value.split('-')[0]) }
     }if(changeBrakeshoeFront === "Si"){ 
       if(brakeshoeFront?.value !== "none"){ total += Number(brakeshoeFront?.value.split('-')[0]) }
     }if( Oil === "Si" ){
@@ -423,6 +470,13 @@ const Service = ({order}) => {
         let oil = context.oils.find( oilDB => oilDB.make == oilMake.value && oilDB.oilType == oilType.value && oilDB.presentation == presentation.value && oilDB.viscosity == viscosity.value)
         if(presentation.value === "Suelto"){ total += oil ? oil.price * Number(lts) : 0}
           else{ total += oil ? oil.price : 0 }  
+      }
+    }if( antifreeze === "Si" ){
+      if(antifreezePresentation.value !== "none"){
+        let antifreeze = context.antifreezes.find( antifreezeDB => antifreezeDB.antifreezeMake == antifreezeMake.value && antifreezeDB.antifreezePresentation == antifreezePresentation.value && 
+          antifreezeDB.antifreezeType == antifreezeType.value )
+        if(antifreezePresentation.value === "Suelto"){ total += antifreeze ? antifreeze.price * Number(lts) : 0}
+        else{ total += antifreeze ? antifreeze.price : 0 }  
       }
     }
     return total
@@ -450,7 +504,7 @@ const Service = ({order}) => {
     }if(transmission === "Si"){
         let idx = services.findIndex( service => service.name === "transmission" )
         total += services[idx].price
-    }if(coil === "Si"){
+    }if(changeCoil === "Si"){
         let idx = services.findIndex( service => service.name === "coil" )
         total += services[idx].price
     }if(wiresets === "Si"){
@@ -486,9 +540,11 @@ const Service = ({order}) => {
     }if(Oil === "Si"){
       let idx = services.findIndex( service => service.name === "changeOil" )
       total += services[idx].price
-  }
+    }
     return total
 } 
+
+  const handleSelectCoil = newValue => setCoil(newValue)
 
   const handleSelectAirFilter = newValue => setAirFilter(newValue)
   
@@ -516,7 +572,17 @@ const Service = ({order}) => {
 
   const handleSelectOilName = newValue => setOilName(newValue)
 
-  const handleinputLts = e => setLts(e.target.value.replace( /[^0-9]/g, ''))
+  const handleSelectAntifreezeType = newValue => setAntifreezeType(newValue)
+
+  const handleSelectAntifreezeMake = newValue => setAntifreezeMake(newValue)
+
+  const handleSelectAntifrezePresentation = newValue => setAntifreezePresentation(newValue)
+
+  const handleSelectAntifrezeSpecification = newValue => setAntifreezeSpecification(newValue)
+
+  const handleinputLts = e => setLts(e.target.value.replace( /[^0-9.]/g, ''))
+
+  const handleinputAntifreezeLts = e => setAntifreezeLts(e.target.value.replace( /[^0-9.]/g, ''))
 
   const handlePhone = e => setPhone(e.target.value.replace( /[^0-9]/g, ''))
 
@@ -526,6 +592,10 @@ const Service = ({order}) => {
       case "wireset":
         total += context.services.find( service => service.name === "wiresets" ).price
         if(wireset && wireset.value !== "none"){ total += Number(wireset.value.split('-')[0]) }
+        break;
+      case "coil":
+        total += context.services.find( service => service.name === "coil" ).price
+        if(coil && coil.value !== "none"){ total += Number(coil.value.split('-')[0]) }
         break;
       case "brakeshoeBack":
         total += context.services.find( service => service.name === "changeBrakeshoeBack" ).price
@@ -562,7 +632,12 @@ const Service = ({order}) => {
           if(presentation.value === "Suelto"){ total += oil ? oil.price * Number(lts) : 0}
           else{ total += oil ? oil.price : 0 }  
         }
-        
+      case "antifreeze":
+        total += context.services.find( service => service.name === "antifreeze" ).price
+        let antifreeze = context.antifreezes.find( antifreezeDB => antifreezeDB.antifreezeMake == antifreezeMake.value && antifreezeDB.antifreezePresentation == antifreezePresentation.value && 
+          antifreezeDB.antifreezeType == antifreezeType.value )
+        if(antifreezePresentation.value === "Suelto"){ total += antifreeze ? antifreeze.price * Number(antifreezeLts) : 0}
+        else{ total += antifreeze ? antifreeze.price : 0 }
         break;
     }
     return total
@@ -575,8 +650,21 @@ const Service = ({order}) => {
         return { value: oil.name ? oil.name : 'none', label: oil.name ? oil.name : 'SIN NOMBRE' }
       }) 
       setOilNames(oils)
+      setOilName(oils[0])
     }
   }, [oilMake, oilType, presentation, viscosity, Oil])
+
+  useEffect(() => {
+    if(antifreeze === "Si"){
+      let antifreezes = context.antifreezes.filter( antifreezeDB => antifreezeDB.antifreezeMake == antifreezeMake.value && antifreezeDB.antifreezePresentation == antifreezePresentation.value && 
+        antifreezeDB.antifreezeType == antifreezeType.value)
+        antifreezes = antifreezes.map( antifreeze => {
+        return { value: antifreeze.specification ? antifreeze.specification : 'none', label: antifreeze.specification ? antifreeze.specification : 'SIN ESPECIFICACIONES' }
+      }) 
+      setAntifreezeSpecifications(antifreezes)
+      setAntifreezeSpecification(antifreezes[0])
+    }
+  }, [antifreezeMake, antifreezePresentation, antifreezeType, antifreeze])
 
   return (
     <>
@@ -676,12 +764,12 @@ const Service = ({order}) => {
           <div className="checkbox-container">
             <input
               type="checkbox"
-              name="coil"
-              checked={coil === "Si"}
+              name="changeCoil"
+              checked={changeCoil === "Si"}
               onClick={obtenerInformacion}
-              id="coils"
+              id="changeCoil"
             />
-            <label htmlFor="coils">BOBINAS {coil === "Si" &&  `$${context.services.find( service => service.name == "coil" ).price}` }</label>
+            <label htmlFor="changeCoil">BOBINAS {changeCoil === "Si" &&  `$${renderTotalProducts('coil')}` }</label>
           </div>
           <div className="checkbox-container">
             <input
@@ -691,7 +779,7 @@ const Service = ({order}) => {
               onClick={obtenerInformacion}
               id="antifreeze-id"
             />
-            <label htmlFor="antifreeze-id">ANTICONGELANTE {antifreeze === "Si" &&  `$${context.services.find( service => service.name == "antifreeze" ).price}` }</label>
+            <label htmlFor="antifreeze-id">ANTICONGELANTE {antifreeze === "Si" &&  `$${renderTotalProducts('antifreeze')}` }</label>
           </div>
           <div className="checkbox-container">
             <input
@@ -805,8 +893,63 @@ const Service = ({order}) => {
             )}
           </>
           )}
-          {ChangeAirFiltter === "Si" && (
+          {antifreeze === "Si" && (
+          <>
             <div className="select-container big">
+              <div className="label-container">
+                  <label>ANTI. MARCA</label>
+              </div>
+              <Select        
+                value={antifreezeMake}
+                options={antifreezeMakeSelect}
+                onChange={handleSelectAntifreezeMake}
+                className="select"
+              />
+            </div>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>ANTI. PRESEN.</label>
+              </div>
+              <Select        
+                value={antifreezePresentation}
+                options={antifreezePresentationSelect}
+                onChange={handleSelectAntifrezePresentation}
+                className="select"
+              />
+            </div>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>ANTI. TIPO</label>
+              </div>
+              <Select        
+                value={antifreezeType}
+                options={antifreezeTypeSelect}
+                onChange={handleSelectAntifreezeType}
+                className="select"
+              />
+            </div>
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>ANTI. ESPEC.</label>
+              </div>
+              <Select        
+                value={antifreezeSpecification}
+                options={antifreezeSpecifications}
+                onChange={handleSelectAntifrezeSpecification}
+                className="select"
+              />
+            </div>
+            {antifreezePresentation.value === "Suelto" && (
+              <input 
+                value={antifreezeLts}
+                onChange={handleinputAntifreezeLts}
+                className="input big margin-top"
+              />
+            )}
+          </>
+          )}
+          {ChangeAirFiltter === "Si" && (
+            <div className="select-container big"> 
               <div className="label-container">
                   <label>F. DE AIRE</label>
               </div>
@@ -909,6 +1052,19 @@ const Service = ({order}) => {
               />
             </div>
           )}
+          {changeCoil === "Si" && (
+            <div className="select-container big">
+              <div className="label-container">
+                  <label>BOBINAS</label>
+              </div>
+              <Select
+                options={coilSelect}
+                className="select"
+                value={coil}
+                onChange={handleSelectCoil}
+              />
+            </div>
+          )}
           <label>TELÉFONO</label>
           <input 
               className="input"
@@ -937,8 +1093,9 @@ const Service = ({order}) => {
               wiresets={(wiresets === "Si" && wireset) ? wireset.label : ''}
               brakeshoeBack={(changeBrakeshoeBack === "Si" && brakeshoeBack) ? brakeshoeBack.label : ''}
               brakeshoeFront={(changeBrakeshoeFront === "Si" && brakeshoeFront) ? brakeshoeFront.label : ''}
-              coil={coil}
+              coil={(changeCoil === "Si" && coil ) ? coil.label : ''}
               antifreeze={antifreeze}
+              antifreezeObj={{antifreezeMake: antifreezeMake.value, antifreezeType: antifreezeType.value, antifreezePresentation: antifreezePresentation.value, antifreezeSpecification: antifreezeSpecification?.value, antifreezeLts}}
               transmission={transmission}
               note={note}
               total={total}

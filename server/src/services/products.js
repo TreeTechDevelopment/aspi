@@ -3,6 +3,7 @@ const Filter = require('../db/models/filters');
 const Brakeshoe = require('../db/models/brakeshoe');
 const Plug = require('../db/models/plugs');
 const Wireset = require('../db/models/wiresets');
+const Coil = require('../db/models/coil');
 
 const createFilterDB = async (filter) => {
 
@@ -79,6 +80,18 @@ const checkWiresetsExist = async (wiresets) => {
     return existWiresetDB
 }
 
+const checkCoilsExist = async (coils) => {
+    let existCoilDB = true
+    for(let i = 0; i < coils.length; i++){
+        let coilDB = await Coil.findOne({ $or: [
+            { 'Injecth': { $in: [coils[i]] } },
+            { 'Kem': { $in: [coils[i]] } }
+        ] })
+        if(!coilDB){ existCoilDB = false }
+    }
+    return existCoilDB
+}
+
 const checkProductsExistMiddleware = async (req, res, next) => {
     const newCar = req.body
 
@@ -103,6 +116,11 @@ const checkProductsExistMiddleware = async (req, res, next) => {
     let existWiresets = await checkWiresetsExist(newCar.wiresets)
 
     if(!existWiresets){ return res.status(400).send('Alguna de las juegos de cables introducidos no existen') }
+
+    let existCoils = await checkCoilsExist(newCar.coil)
+
+    if(!existCoils){ return res.status(400).send('Alguna de las bobinas no existen') }
+
 
     next()
 }

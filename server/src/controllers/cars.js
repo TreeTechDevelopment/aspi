@@ -9,6 +9,8 @@ const Plug = require('../db/models/plugs');
 const Wireset = require('../db/models/wiresets');
 const Brakeshoe = require('../db/models/brakeshoe');
 const Oil = require('../db/models/oil');
+const Coil = require('../db/models/coil');
+const Antifreeze = require('../db/models/antifreeze');
 
 const getAllInfo = async (req, res) => {
     try{
@@ -23,6 +25,8 @@ const getAllInfo = async (req, res) => {
         const wiresets = await Wireset.find({})
         const brakeshoes = await Brakeshoe.find({})
         const oils = await Oil.find({})
+        const coils = await Coil.find({})
+        const antifreezes = await Antifreeze.find({})
 
         const idOrder = app.idOrder
 
@@ -32,7 +36,7 @@ const getAllInfo = async (req, res) => {
             app.save()
         }
         
-        res.json({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes, oils})
+        res.json({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes, oils, coils, antifreezes})
     }catch(e){
         console.log(e)
         res.sendStatus(500)
@@ -120,6 +124,7 @@ const updateCar = async (req, res) => {
         car.wiresets = newCar.wiresets
         car.brakeShoeFront = newCar.brakeShoeFront
         car.brakeShoeBack = newCar.brakeShoeBack
+        car.coil = newCar.coil
 
         car.save((err, newCarDB) => {
             if(err){ return res.sendStatus(500) }

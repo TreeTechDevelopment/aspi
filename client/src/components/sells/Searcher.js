@@ -32,6 +32,14 @@ function Searcher({ setProducts, typeProduct, setTypeProduct }) {
         setProducts([])
         setTypeProduct('oil')
     }
+    const handleAntifreezeCheckbox = () => {
+        setProducts([])
+        setTypeProduct('antifreeze')
+    }
+    const handleCoilCheckbox = () => {
+        setProducts([])
+        setTypeProduct('coil')
+    }
 
     const handleProduct = e => setProduct(e.target.value)
 
@@ -61,9 +69,10 @@ function Searcher({ setProducts, typeProduct, setTypeProduct }) {
     }
 
     useEffect(() => {
-        if(typeProduct === "oil"){
+        if(typeProduct === "oil" || typeProduct === "antifreeze"){
             fetchProducts().then(({ products }) => {
-                context.dispatchOils({ type: 'SET', value: products })
+                if(typeProduct === "oil"){ context.dispatchOils({ type: 'SET', value: products }) }
+                else{ context.dispatchAntifreezes({ type: 'SET', value: products }) }
                 setLoading(false)
             }).catch(() => {
                 setLoading(false)
@@ -114,12 +123,29 @@ function Searcher({ setProducts, typeProduct, setTypeProduct }) {
             <div className="checkbox-container">
                 <input
                     type="checkbox"
-                    name="ChangeOilFiltter"
+                    checked={typeProduct === "coil"}
+                    onClick={handleCoilCheckbox}
+                    id="coilCheckbox"
+                />
+                <label htmlFor="coilCheckbox">BOBINAS</label>
+            </div>
+            <div className="checkbox-container">
+                <input
+                    type="checkbox"
                     checked={typeProduct === "oil"}
                     onClick={handleOilCheckbox}
                     id="oilCheckbox"
                 />
                 <label htmlFor="oilCheckbox">ACEITES</label>
+            </div>
+            <div className="checkbox-container">
+                <input
+                    type="checkbox"
+                    checked={typeProduct === "antifreeze"}
+                    onClick={handleAntifreezeCheckbox}
+                    id="antifreezeCheckbox"
+                />
+                <label htmlFor="antifreezeCheckbox">ANTICONGELANTES</label>
             </div>
         </div>
         {typeProduct !== "oil" && (

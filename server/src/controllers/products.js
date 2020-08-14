@@ -3,6 +3,8 @@ const Plug = require('../db/models/plugs')
 const Wireset = require('../db/models/wiresets')
 const Brakeshoe = require('../db/models/brakeshoe')
 const Oil = require('../db/models/oil')
+const Antifreeze = require('../db/models/antifreeze')
+const Coil = require('../db/models/coil')
 
 const getFilters = async (req, res) => {
     try{
@@ -82,6 +84,44 @@ const getOil = async (req, res) => {
     }
 }
 
+const getAntifreeze = async (req, res) => {
+    try{
+        const antifreezes = await Antifreeze.find({ })
+
+        return res.json({ products: antifreezes })
+
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
+const getCoil = async (req, res) => {
+    try{
+
+        const { filter} = req.query
+
+        if(filter){
+            const coils = await Coil.find({
+                $or: [
+                    { 'Injecth': { $in: [new RegExp(filter, "i")] } },
+                    { 'Kem': { $in: [new RegExp(filter, "i")] } }
+                ]
+            })
+
+            return res.json({ filters: coils })  
+        }
+
+        const coils = await Coil.find({ })
+
+        return res.json({ products: coils })
+
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+
 const getWireset = async (req, res) => {
     try{
 
@@ -136,7 +176,8 @@ const createProduct = async (req, res) => {
         const { interfil, OEM, ACD, Fram, Gonher, Motorcraft,
             Purolator, Wix, Mann, price, product,
             NGK, Champions, Bosh, LS, Roadstar, Wagner, viscosity, presentation,
-            oilMake, oilType, filterType, Sky, Seineca, Walmi, Joe, ECA, name } = req.body
+            oilMake, oilType, filterType, Sky, Seineca, Walmi, Joe, ECA, name, antifreezeMake,
+            antifreezeType, antifreezePresentation, specification, Injecth, Kem } = req.body
 
         switch(product){
             case 'filter':
@@ -197,6 +238,28 @@ const createProduct = async (req, res) => {
                 })
 
                 break;
+
+            case 'antifreeze':
+
+                let antifreeze = new Antifreeze({ antifreezeMake, antifreezeType, antifreezePresentation, specification, price })
+
+                antifreeze.save((err, antifreezeDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: antifreezeDB })
+                })
+
+                break;
+
+            case 'coil':
+
+                let coil = new Coil({ Injecth, Kem, price })
+
+                coil.save((err, coilDB) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: coilDB })
+                })
+
+                break;
         }
 
     }catch(e){
@@ -211,7 +274,8 @@ const updateProduct = async (req, res) => {
             Purolator, Wix, Mann, price, product,
             NGK, Champions, Bosh, LS, Roadstar, Wagner, id,
             oilMake, oilType, presentation, viscosity, Sky,
-            Seineca, Walmi, Joe, ECA, name } = req.body
+            Seineca, Walmi, Joe, ECA, name, antifreezeMake,
+            antifreezeType, antifreezePresentation, specification, Injecth, Kem } = req.body
 
         switch(product){
             case 'filter':
@@ -304,6 +368,36 @@ const updateProduct = async (req, res) => {
                 })
 
                 break;
+
+            case "antifreeze":
+                let antifreeze = await Antifreeze.findById(id)
+
+                antifreeze.antifreezeMake = antifreezeMake
+                antifreeze.antifreezeType = antifreezeType
+                antifreeze.antifreezePresentation = antifreezePresentation
+                antifreeze.specification = specification
+                antifreeze.price = price
+
+                antifreeze.save((err, newAntifreeze) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newAntifreeze })
+                })
+
+                break;
+
+             case "coil":
+                let coil = await Coil.findById(id)
+
+                coil.Injecth = Injecth
+                coil.Kem = Kem
+                coil.price = price
+
+                coil.save((err, newCoil) => {
+                    if(err){ return res.sendStatus(500) }
+                    res.json({ newProduct: newCoil })
+                })
+
+                break;
         }
         
     }catch(e){
@@ -352,6 +446,20 @@ const deleteProducts = async (req, res) => {
                 res.json({ product: oil })
 
                 break;
+
+            case "antifreeze":
+                let antifreeze = await Antifreeze.findByIdAndRemove(id)
+
+                res.json({ product: antifreeze })
+
+                break;
+
+            case "coil":
+                let coil = await Coil.findByIdAndRemove(id)
+
+                res.json({ product: coil })
+
+                break;
         }
     }catch(e){
         console.log(e)
@@ -367,5 +475,7 @@ module.exports = {
     getBrakeshoe,
     getWireset,
     getOil,
-    deleteProducts
+    deleteProducts,
+    getAntifreeze,
+    getCoil
 }

@@ -11,6 +11,8 @@ import WiresetsProducts from './WiresetsProducts';
 import BrakeshoeProducts from './BrakeshoeProducts';
 import OilProducts from './OilProducts';
 import FilterOils from './FilterOils';
+import AntifreezeProducts from './AntifreezeProducts';
+import CoilProducts from './CoilProducts';
 
 function Products({ typeProduct, loading, setLoading }) {
 
@@ -134,19 +136,21 @@ function Products({ typeProduct, loading, setLoading }) {
                     />
                 </div>
             )}
-            <div className="filter-table-container">
-                <div className="select-container small">
-                    <div className="label-container">
-                        <label>MOSTRAR</label>
+            {typeProduct.value === "filter" && (
+                <div className="filter-table-container">
+                    <div className="select-container small">
+                        <div className="label-container">
+                            <label>MOSTRAR</label>
+                        </div>
+                        <Select 
+                            value={limitProducts}
+                            options={optionsLimitProducts}
+                            className="select"
+                            onChange={handleSelectLimitPorducts}
+                        />
                     </div>
-                    <Select 
-                        value={limitProducts}
-                        options={optionsLimitProducts}
-                        className="select"
-                        onChange={handleSelectLimitPorducts}
-                    />
                 </div>
-            </div>
+            )}
             {typeProduct.value === "oil" && (
                 <FilterOils 
                     setProducts={setProducts}
@@ -194,11 +198,24 @@ function Products({ typeProduct, loading, setLoading }) {
                             removeBrakeshoe={removeProducts}
                             edit={true}
                         />
-                    ) : (
+                    ) : typeProduct.value === "oil" ? (
                         <OilProducts 
                             oils={products}
                             openModal={openModal}
                             removeOil={removeProducts} 
+                        />
+                    ) : typeProduct.value === "coil" ? (
+                        <CoilProducts 
+                            coils={products}
+                            openModal={openModal}
+                            removeCoil={removeProducts}
+                            edit={true}
+                        />
+                    ) : (
+                        <AntifreezeProducts 
+                            antifreezes={products}
+                            openModal={openModal}
+                            removeAntifreeze={removeProducts} 
                         />
                     )
                 )}

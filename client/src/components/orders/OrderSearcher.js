@@ -36,7 +36,7 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, order }) {
         })
 
         return res.data 
-    }
+    } 
 
     return (
         <form className={`form ${order ? 'order-searcher height-content' : ''}`}>
@@ -54,8 +54,8 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, order }) {
             <button className="btn-aspi" onClick={searchOrder}>BUSCAR</button>
             {loading && (
                 <Loader
-                    type="Rings"
-                    color="#00BFFF"
+                    type="TailSpin" 
+                    color="#feb200"
                     height={50}
                     width={50}
                 />

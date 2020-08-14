@@ -81,7 +81,7 @@ function Form({ order }){
         let newIDOrDER = false
         let IDOrder = getIDORder()
         if((Number(IDOrder) === -1 || !IDOrder) && !order){ newIDOrDER = true }
-        fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes, oils }) => {
+        fetchAllInfo(newIDOrDER).then(({ models, makes, idOrder, services, filters, sparkplugs, wiresets, brakeshoes, oils, coils, antifreezes }) => {
             if(order){
                 setYear({ value: order.carYear, label: order.carYear })
                 setMake({ value: order.car.make.name, label: order.car.make.name })
@@ -91,11 +91,13 @@ function Form({ order }){
                 setInfoFetched(true)
             }else{ setData(models, makes) }
             context.dispatchServices({ type: 'SET', value: services })
-            context.dispatchFilters({ type: 'SET', value: filters })
+            context.dispatchFilters({ type: 'SET', value: filters }) 
             context.dispatchSparkplugs({ type: 'SET', value: sparkplugs })
             context.dispatchWiresets({ type: 'SET', value: wiresets })
             context.dispatchBrakeshoes({ type: 'SET', value: brakeshoes })
             context.dispatchOils({ type: 'SET', value: oils })
+            context.dispatchCoils({ type: 'SET', value: coils })
+            context.dispatchAntifreezes({ type: 'SET', value: antifreezes })
             if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
         }).catch((e) => {
             setInfoFetched(true)

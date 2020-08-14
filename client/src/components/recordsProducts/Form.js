@@ -21,7 +21,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                             { value: '68', label: '68' },{ value: '303', label: '303' },{ value: '90', label: '90' },{ value: '75W140', label: '75W140' },
                             { value: '75W90', label: '75W90' },{ value: 'Mercon V', label: 'Mercon V' },{ value: 'Mercon LV', label: 'Mercon LV' },
                             { value: 'Mercon SP', label: 'Mercon SP' }, { value: 'Dexron III', label: 'Dexron III' },{ value: 'ATF +4', label: 'ATF +4' },
-                            { value: 'Dexron VI', label: 'Dexron VI' },{ value: 'Multivehiculo', label: 'Multivehiculo' },]
+                            { value: 'Dexron VI', label: 'Dexron VI' },{ value: 'Multivehiculo', label: 'Multivehiculo' },{ value: '30', label: '30' }, 
+                            { value: '60', label: '60' }]
 
     const oilTypeSelect = [{ value: 'Mineral', label: 'Mineral' }, { value: 'Sintetico', label: 'Sintetico' }, { value: 'Semisintético', label: 'Semisintético' },
                             { value: 'Transmisión Automática', label: 'Transmisión Automática' }, { value: 'Transmisión Manual', label: 'Transmisión Manual' }]
@@ -34,6 +35,14 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                         { value: 'Phillips 66', label: 'Phillips 66' }, { value: 'Repsol', label: 'Repsol' }, { value: 'Mexlub', label: 'Mexlub' }, { value: 'Pemex', label: 'Pemex' }, 
                         { value: 'HM9', label: 'HM9' }, { value: 'Chevron', label: 'Chevron' }, { value: 'Presson', label: 'Presson' }, { value: 'Akron', label: 'Akron' },
                         { value: 'Bardahl', label: 'Bardahl' }, { value: 'Motorcraft', label: 'Motorcraft' }, { value: 'Mobil', label: 'Mobil' }, { value: 'Pennzoil', label: 'Pennzoil' }]
+
+    const antifreezeMakeSelect = [{ value: 'Quaker State', label: 'Quaker State' }, { value: 'Bardahl', label: 'Bardahl' }, { value: 'Roshfrans', label: 'Roshfrans' }, { value: 'Peak', label: 'Peak' },
+                        { value: 'Prestone', label: 'Prestone' }, { value: 'TBreaker', label: 'TBreaker' }, { value: 'Mopar', label: 'Mopar' }, { value: 'Motorcraft', label: 'Motorcraft' }, 
+                        { value: 'Gonher', label: 'Gonher' }]
+    
+    const antifreezePresentationSelect = [{ value: 'Litros', label: 'Litros' }, { value: 'Galones', label: 'Galones' }, { value: 'Suelto', label: 'Suelto' }]
+
+    const antifreezeTypeSelect = [{ value: 'Concentrado', label: 'Concentrado' }, { value: 'Coolant', label: 'Coolant' }]
 
     const context = useContext(appContext)
     
@@ -56,6 +65,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const [JoeToRender, setJoeToRender] = useState([Math.random().toString()])
     const [ECAToRender, setECAToRender] = useState([Math.random().toString()])
     const [WagnerToRender, setWagnerToRender] = useState([Math.random().toString()])
+    const [InjecthToRender, setInjecthToRender] = useState([Math.random().toString()])
+    const [KemToRender, setKemToRender] = useState([Math.random().toString()])
 
     const [OEM, setOEM] = useState([])
     const [ACD, setACD] = useState([])
@@ -76,16 +87,23 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const [Walmi, setWalmi] = useState([])
     const [Joe, setJoe] = useState([])
     const [ECA, setECA] = useState([])
+    const [Injecth, setInjecth] = useState([])
+    const [Kem, setKem] = useState([])
 
     const [loading, setLoading] = useState(false)
     const [interfil, setInterfill] = useState('')
     const [price, setPrice] = useState('')
     const [oilName, setOilName] = useState('')
+    const [antifreezeSpecifications, setAntifreezeSpecifications] = useState('')
     
     const [viscosity, setViscosity] = useState(viscositySelect[0])
     const [presentation, setPresentation] = useState(oilPresentationSelect[0])
     const [oilMake, setOilMake] = useState(oilMakeSelect[0])
     const [oilType, setOilType] = useState(oilTypeSelect[0])
+
+    const [antifreezePresentation, setAntifreezePresentation] = useState(antifreezePresentationSelect[0])
+    const [antifreezeMake, setAntifreezeMake] = useState(antifreezeMakeSelect[0])
+    const [antifreezeType, setAntifreezeType] = useState(antifreezeTypeSelect[0])
 
     const getArrayProductsRender = product => {
 
@@ -109,6 +127,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         else if( product === "Walmi" ){ newProducts = {productsRender: [...WalmiToRender], products: [...Walmi]}}
         else if( product === "Joe" ){ newProducts = {productsRender: [...JoeToRender], products: [...Joe]}}
         else if( product === "ECA" ){ newProducts = {productsRender: [...ECAToRender], products: [...ECA]}}
+        else if( product === "Injecth" ){ newProducts = {productsRender: [...InjecthToRender], products: [...Injecth]}}
+        else if( product === "Kem" ){ newProducts = {productsRender: [...KemToRender], products: [...Kem]}}
         return newProducts
 
     }
@@ -171,6 +191,12 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         }else if( product === "ECA" ){ 
             setECAToRender(newProducts) 
             if(products){ setECA(products) }
+        }else if( product === "Injecth" ){ 
+            setInjecthToRender(newProducts) 
+            if(products){ setInjecth(products) }
+        }else if( product === "Kem" ){ 
+            setKemToRender(newProducts) 
+            if(products){ setKem(products) }
         }
     }
 
@@ -208,6 +234,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         else if( product === "Walmi" ){ newProducts = [...Walmi] }
         else if( product === "Joe" ){ newProducts = [...Joe] }
         else if( product === "ECA" ){ newProducts = [...ECA] }
+        else if( product === "Injecth" ){ newProducts = [...Injecth] }
+        else if( product === "Kem" ){ newProducts = [...Kem] }
         return newProducts
     }
 
@@ -231,6 +259,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         else if( product === "Walmi" ){ setWalmi(newProducts) }
         else if( product === "Joe" ){ setJoe(newProducts) }
         else if( product === "ECA" ){ setECA(newProducts) }
+        else if( product === "Injecth" ){ setInjecth(newProducts) }
+        else if( product === "Kem" ){ setKem(newProducts) }
     }
 
     const setProducts = (value, idx, product) => {
@@ -244,11 +274,12 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const handleInputOilName = (e) => setOilName(e.target.value)
 
     const checkInputs = () => {
+        if(typeProduct.value === "oil" || typeProduct.value === "antifreeze"){ return true }
         if(interfil === "" && (OEM.includes("") || !OEM[0]) && (ACD.includes("") || !ACD[0]) && (Fram.includes("") || !Fram[0]) && (Gonher.includes("") || !Gonher[0]) &&
             (Motorcraft.includes("") || !Motorcraft[0]) && (Purolator.includes("") || !Purolator[0]) && (Wix.includes("") || !Wix[0]) && (Mann.includes("") || !Mann[0]) && 
             (NGK.includes("") || !NGK[0]) && (Champions.includes('') === "" || !Champions[0]) && (Bosh.includes('') === "" || !Bosh[0]) && (LS.includes('') === "" || !LS[0]) && 
             (Roadstar.includes("") || !Roadstar[0]) && (Wagner.includes("") || !Wagner[0]) && (Sky.includes("") || !Sky[0]) && (Seineca.includes("") || !Seineca[0]) && 
-            (Walmi.includes("") || !Walmi[0]) && (Joe.includes("") || !Joe[0]) && (ECA.includes("") || !ECA[0])){
+            (Walmi.includes("") || !Walmi[0]) && (Joe.includes("") || !Joe[0]) && (ECA.includes("") || !ECA[0]) && (Injecth.includes("") || !Injecth[0]) && (Kem.includes("") || !Kem[0])){
             return false
         }
 
@@ -264,11 +295,14 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                 NGK, Champions, Bosh, LS, Roadstar, Wagner, oilMake: oilMake.value,
                 presentation: presentation.value, viscosity: viscosity.value,
                 oilType: oilType.value, filterType:filterType.value,
-                Sky, Seineca, Walmi, Joe, ECA, name: oilName
+                Sky, Seineca, Walmi, Joe, ECA, name: oilName, antifreezeMake: antifreezeMake.value,
+                antifreezeType: antifreezeType.value, antifreezePresentation: antifreezePresentation.value,
+                specification: antifreezeSpecifications, Injecth, Kem
             }
             if(JSON.stringify(context.product) !== "{}") {
                 data.id = context.product._id
                 updateProduct(data).then(({newProduct}) => {
+
                     setLoading(false)
                     setProduct(newProduct)
                     doBeforeCloseModal()
@@ -314,7 +348,6 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
 
     useEffect(() => {
         if( JSON.stringify(context.product) !== "{}"){
-            console.log(context.product)
             if(context.product.interfil){ setInterfill(context.product.interfil) }
             if(context.product.OEM){ 
                 setOEM(context.product.OEM) 
@@ -430,12 +463,28 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                 for(let i = 0; i < context.product.ECA.length; i++){ newECAFilters.push(Math.random().toString()) }
                 setECAToRender(newECAFilters)
             }
+            if(context.product.Injecth){ 
+                setInjecth(context.product.Injecth) 
+                let newInjecth = []
+                for(let i = 0; i < context.product.Injecth.length; i++){ newInjecth.push(Math.random().toString()) }
+                setInjecthToRender(newInjecth)
+            }
+            if(context.product.Kem){ 
+                setKem(context.product.Kem) 
+                let newKem = []
+                for(let i = 0; i < context.product.Kem.length; i++){ newKem.push(Math.random().toString()) }
+                setKemToRender(newKem)
+            }
             if(context.product.viscosity){ setViscosity({ value: context.product.viscosity, label: context.product.viscosity }) }
             if(context.product.make){ setOilMake({ value: context.product.make, label: context.product.make }) }
             if(context.product.oilType){ setOilType({ value: context.product.oilType, label: context.product.oilType }) }
             if(context.product.presentation){ setPresentation({ value: context.product.presentation, label: context.product.presentation }) }
             if(context.product.name){ setOilName(context.product.name) }
             if(context.product.price){ setPrice(context.product.price.toString()) }
+            if(context.product.antifreezeMake){ setAntifreezeMake({ value: context.product.antifreezeMake, label: context.product.antifreezeMake }) }
+            if(context.product.antifreezeType){ setAntifreezeType({ value: context.product.antifreezeType, label: context.product.antifreezeType }) }
+            if(context.product.antifreezePresentation){ setAntifreezePresentation({ value: context.product.antifreezePresentation, label: context.product.antifreezePresentation }) }
+            if(context.product.sprecification){ setAntifreezeSpecifications(context.product.sprecification) }
 
         }
     }, [context.product])
@@ -467,6 +516,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         setWalmi([])
         setJoe([])
         setECA([])
+        setKem([])
+        setInjecth([])
         setOEMToRender([Math.random().toString()])
         setACDToRender([Math.random().toString()])
         setFramToRender([Math.random().toString()])
@@ -486,6 +537,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         setWagnerToRender([Math.random().toString()])
         setJoeToRender([Math.random().toString()])
         setECAToRender([Math.random().toString()])
+        setKemToRender([Math.random().toString()])
+        setInjecthToRender([Math.random().toString()])
         setInterfill('')
         setPrice('')
         setOilName('')
@@ -493,9 +546,15 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
         setPresentation(oilPresentationSelect[0])
         setOilMake(oilMakeSelect[0])
         setOilType(oilTypeSelect[0])
+        setAntifreezeType(antifreezeTypeSelect[0])
+        setAntifreezeMake(antifreezeMakeSelect[0])
+        setAntifreezePresentation(antifreezePresentationSelect[0])
+        setAntifreezeSpecifications('')
     }
 
     const handleInputPrice = e => setPrice(e.target.value.replace(/[^0-9]/g, ''))
+
+    const handleInputAntifreezeSpecifications = e => setAntifreezeSpecifications(e.target.value)
 
     const handleSelectViscosity = newValue => setViscosity(newValue)
 
@@ -504,6 +563,12 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
     const handleSelectPresentation = newValue => setPresentation(newValue) 
 
     const handleSelectOilType = newValue => setOilType(newValue)
+
+    const handleSelectAntifreezeType = newValue => setAntifreezeType(newValue)
+
+    const handleSelectAntifreezeMake = newValue => setAntifreezeMake(newValue)
+
+    const handleSelectAntifrezePresentation = newValue => setAntifreezePresentation(newValue)
 
     return (
         <Modal
@@ -523,7 +588,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
             <div className="form-car">
                 <h3>{ typeProduct.value === "filter" ?  filterType.label : typeProduct.label}</h3>
                 <div>
-                    <span className="span-only">{ presentation.value === "Suelto" ? 'Precio por litro' : 'Precio' }</span>
+                    <span className="span-only">{ (presentation.value === "Suelto" || antifreezePresentation.value === "Suelto") ? 'Precio por litro' : 'Precio' }</span>
                     <div className="si-filter-container">
                     <div className="si-filter-price">
 
@@ -543,6 +608,20 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                                 <input 
                                     value={oilName}
                                     onChange={handleInputOilName}
+                                    className="input-price"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {typeProduct.value === "antifreeze" && (
+                    <div className="input-container">
+                        <span className="span-filter">ESPECIFICACIONES</span>
+                        <div className="si-filter-container">
+                            <div className="si-filter-price">
+                                <input 
+                                    value={antifreezeSpecifications}
+                                    onChange={handleInputAntifreezeSpecifications}
                                     className="input-price"
                                 />
                             </div>
@@ -741,7 +820,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                                     </div>
                         </div>
                         </>
-                    ): (
+                    ): typeProduct.value === "oil" ? (
                         <>  
                         <div className="input-container">
                             <span className="span-filter">Marca</span>
@@ -778,6 +857,74 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                             />
                         
                         </div>
+                        </>
+                    ) : typeProduct.value === "antifreeze" ? (
+                        <>
+                            <div className="input-container">
+                                <span className="span-filter">Marca</span>
+                                <Select 
+                                    options={antifreezeMakeSelect}
+                                    value={antifreezeMake}
+                                    onChange={handleSelectAntifreezeMake}
+                                    className="select-oil"
+                                />
+                            </div>
+                            <div className="input-container">
+                                <span className="span-filter">Tipo de anticongelante</span>
+                                <Select 
+                                    options={antifreezeTypeSelect}
+                                    value={antifreezeType}
+                                    onChange={handleSelectAntifreezeType}
+                                    className="select-car-records"
+                                    />
+                            </div>
+                            <div className="input-container">
+                                <span className="span-filter">Presentación</span>
+                                <Select 
+                                    options={antifreezePresentationSelect}
+                                    value={antifreezePresentation}
+                                    onChange={handleSelectAntifrezePresentation}
+                                    className="select-car-records"
+                                />
+                            </div>
+                        </>
+                    ):(
+                        <>
+                            <div className="input-container">
+                                <span className="span-filter">Injecth</span>
+                                <div className="si-filter-container">
+                                <div className="si-filter">
+
+                                {InjecthToRender.map((key, idx) => (
+                                    <InputFilter 
+                                        key={key}
+                                        idx={idx}
+                                        setProducts={setProducts}
+                                        type="Injecth"
+                                    />
+                                ))}
+                                </div>
+                                    <BtnProduct product="Injecth" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
+                            </div>
+                            <div className="input-container">
+                                <span className="span-filter">Kem</span>
+                                <div className="si-filter-container">
+                                <div className="si-filter">
+
+                                {KemToRender.map((key, idx) => (
+                                    <InputFilter 
+                                        key={key}
+                                        idx={idx}
+                                        setProducts={setProducts}
+                                        type="Kem"
+                                    />
+                                ))}
+                                </div>
+                                    <BtnProduct product="Kem" addProduct={addProducts} removeProduct={removeProducts}/>
+                                </div>
+                            </div>
+
                         </>
                     )}
                     

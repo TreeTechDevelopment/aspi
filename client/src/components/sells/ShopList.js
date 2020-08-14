@@ -18,12 +18,10 @@ const InputLTS = ({ product, updateList }) => {
     const [lts, setLts] = useState(productList.quantity.toString())
 
     const timeoutUpdate = () => {
-        console.log(timeout.current)
         if(timeout.current){ 
             clearTimeout(timeout.current) 
         }
         timeout.current = setTimeout(() => { updateList() }, 1000)
-        console.log(timeout.current)
     }
 
     const handleInputLts = (e) => {
@@ -121,9 +119,9 @@ function ShopList({ modalIsOpen, closeModal, productsList, removeProduct }) {
                             {context.productsPrice.map( (product, idx) => (
                                 <tr key={Math.random().toString()}>
                                     <td className={idx % 2 === 0 ? 'odd' : 'even'}>
-                                        {product.product.interfil ? product.product.interfil : product.product.NGK ? product.product.NGK : product.product.Roadstar ? product.product.Roadstar : product.product.Wagner ? product.product.Wagner : product.product.name}
+                                        {product.product.interfil ? product.product.interfil : product.product.NGK ? product.product.NGK : product.product.Roadstar ? product.product.Roadstar : product.product.Wagner ? product.product.Wagner : product.product.Injecth ? product.product.Injecth : product.product.name ? product.product.name.replace(/_/g, ' ') : ''}
                                     </td>
-                                    {product.product.name.split(' ')[2] === "Suelto" ? (
+                                    {(product.product.name && product.product.name.split('_')[2] === "Suelto") ? (
                                         <td className={idx % 2 === 0 ? 'odd' : 'even'}>
                                             <InputLTS product={product} updateList={updateList}/>
                                         </td>

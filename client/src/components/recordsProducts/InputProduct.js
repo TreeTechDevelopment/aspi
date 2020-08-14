@@ -73,6 +73,12 @@ function InputFilter({ idx, setProducts, type }) {
                 case "Joe":
                     if(context.product.Joe[idx]){ setProduct(context.product.Joe[idx]) }
                     break;
+                case "Injecth":
+                    if(context.product.Injecth[idx]){ setProduct(context.product.Injecth[idx]) }
+                    break;
+                case "Kem":
+                    if(context.product.Kem[idx]){ setProduct(context.product.Kem[idx]) }
+                    break;
             }
         }
     },[context.product])

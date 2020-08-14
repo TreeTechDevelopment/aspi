@@ -10,7 +10,9 @@ function RecordsProduts() {
                                 { value: 'brakeShoe', label: 'BALATAS' },
                                 { value: 'filter', label: 'FILTROS' },
                                 { value: 'wiresets', label: 'JUEGO DE CABLES' },
-                                { value: 'oil', label: 'ACEITES' }]
+                                { value: 'oil', label: 'ACEITES' },
+                                { value: 'coil', label: 'BOBINAS' },
+                                { value: 'antifreeze', label: 'ANTICONGELANTES' }]
         
     const [typeProduct, setTypeProduct] = useState(optionsTypeProducts[2])
     const [loading, setLoading] = useState(true)

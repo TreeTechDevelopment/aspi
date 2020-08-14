@@ -44,13 +44,16 @@ const orderSchema = new Schema({
     brakeshoeBack: { type: String },
     brakeshoeFront: { type: String },
     phone: { type: String },
-    coil: {
-        required: true,
-        type: String
-    },
+    coil: { type: String },
     antifreeze: {
-        required: true,
-        type: String
+        antifreezeRequired: {
+            required: true,
+            type: String
+        },
+        antifreezeType: { type: String },
+        antifreezeMake: { type: String },
+        antifreezePresentation: { type: String },
+        lts: { type: Number }
     },
     transmission: {
         required: true,

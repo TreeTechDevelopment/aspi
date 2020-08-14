@@ -21,6 +21,8 @@ function Provider({ children }) {
     const [brakeshoes, dispatchBrakeshoes] = useReducer(defaultReducer, [])
     const [oils, dispatchOils] = useReducer(defaultReducer, [])
     const [productsPrice, dispatchProductsPrice] = useReducer(listReducer, [])
+    const [coils, dispatchCoils] = useReducer(defaultReducer, [])
+    const [antifreezes, dispatchAntifreezes] = useReducer(defaultReducer, [])
     const [totalSell, dispatchTotalSell] = useReducer(defaultReducer, 0)
 
     return (
@@ -42,6 +44,8 @@ function Provider({ children }) {
                 oils,
                 productsPrice,
                 totalSell,
+                coils,
+                antifreezes,
                 dispatchMake,
                 dispatchModel,
                 dispatchCar,
@@ -57,7 +61,9 @@ function Provider({ children }) {
                 dispatchBrakeshoes,
                 dispatchOils,
                 dispatchProductsPrice,
-                dispatchTotalSell
+                dispatchTotalSell,
+                dispatchCoils,
+                dispatchAntifreezes
             }}
         >
             {children}

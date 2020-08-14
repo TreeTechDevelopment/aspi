@@ -40,6 +40,9 @@ function InputFilter({ idx, setFilters, type }) {
                 case 'brakeshoeBack':
                     if(context.carToEdit.brakeShoeBack[idx]){ setFilter(context.carToEdit.brakeShoeBack[idx]) }
                     break;
+                case 'coil':
+                    if(context.carToEdit.coil[idx]){ setFilter(context.carToEdit.coil[idx]) }
+                    break;
             }
         }
     }, [context.carToEdit])

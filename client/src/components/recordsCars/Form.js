@@ -22,6 +22,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
   const [wiresets, setWiresets] = useState([]);
   const [brakeshoeFront, setBrakeshoeFront] = useState([]);
   const [brakeshoeBack, setBrakeshoeBack] = useState([]);
+  const [coils, setCoils] = useState([]);
   const [airFiltersRender, setAirFiltersRender] = useState([
     Math.random().toString(),
   ]);
@@ -44,6 +45,9 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     Math.random().toString(),
   ]);
   const [brakeshoeBackRender, setBrakeshoeBackRender] = useState([
+    Math.random().toString(),
+  ]);
+  const [coilRender, setCoilRender] = useState([
     Math.random().toString(),
   ]);
   const [model, setModel] = useState({});
@@ -195,6 +199,29 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
     let newBrakeshoes = [...brakeshoeFront];
     newBrakeshoes[idx] = brakeshoe;
     setBrakeshoeFront(newBrakeshoes);
+  };
+
+  const setCoil = (coil, idx) => {
+    let newCoils = [...coils];
+    newCoils[idx] = coil;
+    setCoils(newCoils);
+  };
+
+  const addCoil = (e) => {
+    e.preventDefault();
+    let newCoils = [...coilRender];
+    newCoils.push(Math.random().toString());
+    setCoilRender(newCoils);
+  };
+
+  const removeCOil = (e) => {
+    e.preventDefault();
+    let newCoilsRender = [...coilRender];
+    let newCoilsValue = [...coils];
+    newCoilsRender.splice(-1, 1);
+    newCoilsValue.splice(-1, 1);
+    setCoilRender(newCoilsRender);
+    setCoils(newCoilsValue);
   };
 
   const addAirFilter = (e) => {
@@ -351,6 +378,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
         wiresets,
         brakeShoeFront: brakeshoeFront,
         brakeShoeBack: brakeshoeBack,
+        coil: coils
       };
 
       if (newModel !== "") {
@@ -756,13 +784,48 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             </div>
           </div>
         </div>
+        <div className="input-filters-container-group">
+          <div className="input-filters-container">
+            <div className="input-container">
+              <span className="span-filter">Bobinas</span>
+              <div className="si-filter-container">
+              <div className="si-filter">
+                {coilRender.map((key, idx) => (
+                  <InputFilter
+                    idx={idx}
+                    setFilters={setCoil}
+                    key={key}
+                    type="coil"
+                  />
+                ))}
+                </div>
+                <div className="si-filter-btn">
+
+                <button className="btns-records" onClick={removeCOil}>
+                  -
+                </button>
+                <button className="btns-records-left" onClick={addCoil}>
+                  +
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="btn-guardar">
           <button className="btn-aspi" onClick={saveCar}>
             GUARDAR
           </button>
         </div>
         {loading && (
-          <Loader type="Rings" color="#00BFFF" height={50} width={50} />
+          <div className="full-width direction-row justify-content-center">
+            <Loader
+              type="TailSpin" 
+              color="#feb200"
+              height={50}
+              width={50}
+            />
+          </div>
         )}
       </form>
     </Modal>

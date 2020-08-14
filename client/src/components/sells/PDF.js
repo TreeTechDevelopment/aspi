@@ -19,11 +19,12 @@ const PDF = ({
         for(let i = 0; i < products.length; i++){
             productsToRender.push(
                 <View style={styles.productNameContainer} key={Math.random().toString()}>
-                    <Text style={styles.text}>
+                    <Text style={styles.textProduct}>
                         { 
                             products[i].product.name ? (
-                                `${products[i].product.name.split(' ')[0]} ${products[i].product.name.split(' ')[1]} \n ${products[i].product.name.split(' ')[2]} ${products[i].product.name.split(' ')[3]} ${products[i].product.name.split(' ')[4] ? products[i].product.name.split(' ')[4] : ''}`                            ):(
-                                products[i].product.interfil ? products[i].product.interfil : products[i].product.NGK ? products[i].product.NGK : products[i].product.Roadstar ? products[i].product.Roadstar : products[i].product.Wagner
+                                products[i].product.name.replace(/_/g, ' ')):(
+                                products[i].product.interfil ? products[i].product.interfil : products[i].product.NGK ? products[i].product.NGK : products[i].product.Roadstar ? products[i].product.Roadstar : 
+                                products[i].product.Wagner ? products[i].product.Wagner : products[i].product.Injecth
                             )
                         }
                     </Text>

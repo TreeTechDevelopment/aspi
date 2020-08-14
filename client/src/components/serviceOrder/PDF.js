@@ -49,6 +49,11 @@ export const styles = StyleSheet.create({
         fontFamily: 'BlueHighWayBold',
         fontSize: 13
     },
+    textProduct:{
+        fontFamily: 'BlueHighWayBold',
+        fontSize: 13,
+        maxWidth: 120
+    },
     footer:{
         marginTop: 30,
         borderTop: 5,
@@ -80,6 +85,7 @@ const PDF = ({
     coil,
     transmission,
     antifreeze,
+    antifreezeObj,
     date,
     make,
     model,
@@ -121,8 +127,14 @@ return(
             {cleanAB === "Si" && <Text style={styles.text}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>}
             {Oil === "Si" && (
                 <Text style={styles.text}>
-                    ACEITE: {aceite.presentation === "Suelto" ? `${aceite.presentation} ${lts} ${aceite.make} ${aceite.viscosity} ${aceite.type}` : 
+                    ACEITE: {aceite.presentation === "Suelto" ? `${aceite.presentation} ${lts} ${aceite.make} ${aceite.viscosity} ${aceite.type} ${ (aceite.name && aceite.name !== "none") ? aceite.name : '' }` : 
                     `${aceite.presentation} ${aceite.make} ${aceite.viscosity} ${aceite.type} ${ (aceite.name && aceite.name !== "none") ? aceite.name : '' }` }
+                </Text>
+            )}
+            {antifreeze === "Si" && (
+                <Text style={styles.text}>
+                    ANTICONGELANTE: {antifreezeObj.antifreezePresentation === "Suelto" ? `${antifreezeObj.antifreezePresentation} ${antifreezeObj.antifreezeLts} ${antifreezeObj.antifreezeMake} ${antifreezeObj.antifreezeType} ${ (antifreezeObj.antifreezeSpecification && antifreezeObj.antifreezeSpecification !== "none") ? antifreezeObj.antifreezeSpecification : '' }` : 
+                    `${antifreezeObj.antifreezePresentation} ${antifreezeObj.antifreezeMake} ${antifreezeObj.antifreezeType} ${ (antifreezeObj.antifreezeSpecification && antifreezeObj.antifreezeSpecification !== "none") ? antifreezeObj.antifreezeSpecification : '' }` }
                 </Text>
             )}
             { oilFilter !== "" && <Text style={styles.text}>FILTRO DE ACEITE: {oilFilter}</Text>}
@@ -131,8 +143,7 @@ return(
             { cabineFilter !== "" && <Text style={styles.text}>FILTRO DE AIRE DE CABINA: {cabineFilter}</Text>}
             {sparkplug !== "" && <Text style={styles.text}>BUJÍAS: {sparkplug}</Text>}
             {wiresets !== "" && <Text style={styles.text}>JUEGO DE CABLES: {wiresets}</Text>}
-            {coil === "Si" && <Text style={styles.text}>BOBINA: {coil}</Text>}
-            {antifreeze === "Si" && <Text style={styles.text}>ANTICONGELANTE: {antifreeze}</Text>}
+            {coil !== "" && <Text style={styles.text}>BOBINA: {coil}</Text>}
             {transmission === "Si" && <Text style={styles.text}>CAMBIO DE ACEITE DE TRANSMISIÓN: {transmission}</Text>}
         </View>                      
         {(rectifyDisk === "Si" || brakeshoeFront !== "" || brakeshoeBack !== "") && (

@@ -31,7 +31,8 @@ const carSchema = new Schema({
     sparkPlug: { type: Array, default: [] },
     wiresets: { type: Array, default: [] },
     brakeShoeFront: { type: Array, default: [] },
-    brakeShoeBack: { type: Array, default: [] }
+    brakeShoeBack: { type: Array, default: [] },
+    coil: { type: Array, default: [] }
 })
 
 module.exports = mongoose.model('carros', carSchema)

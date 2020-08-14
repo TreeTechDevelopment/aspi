@@ -21,7 +21,7 @@ function Orders() {
                 order={JSON.stringify(order) !== "{}"}
             />
             {found && !foundOrder && (
-                <p className="label-dont-found">No se ha encontrado ninguna orden con ese ID</p>
+                <p className="label-dont-found">NO SE HA ENCONTRADO NINGUNA ORDEN CON ESE ID</p>
             )}
             {JSON.stringify(order) !== "{}" && (
                 <>
