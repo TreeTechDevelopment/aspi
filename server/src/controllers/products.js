@@ -11,7 +11,9 @@ const getFilters = async (req, res) => {
         const { type, filter, limit, page } = req.query
                 
         if(type){            
-            const filters = await Filter.find({ filterType: type }).limit(Number(limit)).skip(Number(limit) * Number(page))
+            let filters = []
+            if(limit === "all"){ filters = await Filter.find({ filterType: type }) }
+            else{ filters = await Filter.find({ filterType: type }).limit(Number(limit)).skip(Number(limit) * Number(page)) }
             const count = await Filter.find({ filterType: type }).countDocuments()
 
             return res.json({ products: filters, count })

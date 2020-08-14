@@ -61,7 +61,7 @@ function ShopList({ modalIsOpen, closeModal, productsList, removeProduct }) {
         for(let i=0; i < context.productsPrice.length; i++){
             total += context.productsPrice[i].price * context.productsPrice[i].quantity
         }
-        return total
+        return total.toFixed(2)
     }
 
     const removeOne = (product) => {

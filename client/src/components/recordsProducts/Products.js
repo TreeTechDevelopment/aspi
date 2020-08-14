@@ -21,7 +21,7 @@ function Products({ typeProduct, loading, setLoading }) {
                                 { value: 'fuel', label: 'FILTRO DE GASOLINA' },
                                 { value: 'cabine', label: 'FILTRO DE CABINA' }]  
     
-    const optionsLimitProducts = [{ value: 10, label: 10 }, { value: 20, label: 20 }, { value: 50, label: 50 }]  
+    const optionsLimitProducts = [{ value: 10, label: 10 }, { value: 20, label: 20 }, { value: 50, label: 50 }, { value: 'all', label: 'TODOS' }]  
 
     const [products, setProducts] = useState([])
     const [allProducts, setAllProducts] = useState([])
