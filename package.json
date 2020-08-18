@@ -7,7 +7,7 @@
     "dev": "nodemon server/server ",
     "wp": "webpack --watch --config webpack.dev.js",
     "start": "node server/server",
-    "build" : "webpack --config webpack.prod.js"
+    "deploy" : "webpack --config webpack.prod.js"
   },
   "author": "Tree Tech Development",
   "license": "ISC",
