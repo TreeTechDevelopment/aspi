@@ -66,6 +66,10 @@ const orderSchema = new Schema({
     total: {
         type: Number,
         required: true
+    },
+    sparkPlugsQuantity: {
+        type: Number,
+        required: true
     }
 })
 

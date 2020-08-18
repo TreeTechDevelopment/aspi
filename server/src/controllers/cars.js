@@ -107,8 +107,6 @@ const updateCar = async (req, res) => {
     try{        
         const newCar = req.body
 
-        console.log(newCar)
-
         let car = await Car.findById(newCar.id)
 
         const make = await Make.findById(newCar.make)

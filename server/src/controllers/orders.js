@@ -29,9 +29,9 @@ const createOrder = async (req, res) => {
             prevOrder.filters = order.filters
             prevOrder.total = order.total
             prevOrder.phone = order.phone
+            prevOrder.sparkPlugsQuantity = order.sparkPlugsQuantity
 
             prevOrder.save((err, orderDB) => {
-                console.log(err)
                 if(err){ return res.sendStatus(500) }
 
                 res.sendStatus(200)
@@ -39,7 +39,6 @@ const createOrder = async (req, res) => {
         }else{
             let newOrder = new Order(order)
             newOrder.save((err, orderDB) => {
-                console.log(err)
                 if(err){ return res.sendStatus(500) }
 
                 res.sendStatus(200)
@@ -47,7 +46,6 @@ const createOrder = async (req, res) => {
         }
         
     }catch(e){
-        console.log(e)
         res.sendStatus(500)
     }
 }
@@ -74,6 +72,7 @@ const updateOrder = async (req, res) => {
         orderDB.wiresets = order.wiresets
         orderDB.total = order.total
         orderDB.phone = order.phone
+        orderDB.sparkPlugsQuantity = order.sparkPlugsQuantity
                 
         orderDB.save((err, orerDB) => {
             if(err){ return res.sendStatus(500) }
@@ -83,7 +82,6 @@ const updateOrder = async (req, res) => {
         
 
     }catch(e){
-        console.log(e)
         res.sendStatus(500) 
     }
 }
@@ -100,7 +98,6 @@ const getOrder = async (req, res) => {
         res.json({ order })
 
     }catch(e){
-        console.log(e)
         res.sendStatus(500)
     }
 }
