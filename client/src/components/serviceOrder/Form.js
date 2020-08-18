@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 import { appContext } from '../../context/Provider'
 
 function Form({ order }){
@@ -101,6 +101,7 @@ function Form({ order }){
             if(Number(IDOrder) === -1 || !IDOrder){ setIDORder(idOrder) }            
         }).catch((e) => {
             setInfoFetched(true)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
             alert(`${messageServerError}`)
         })
     },[])
@@ -113,7 +114,10 @@ function Form({ order }){
         if( make && model && make.value && model.value && !order){    
             fetchCar().then(({cars}) => {
                 setDataCars(cars)
-            }).catch(e => alert(`${messageServerError}`))
+            }).catch(e => { 
+                if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
+                alert(`${messageServerError}`) 
+            })
         }
     },[model, make])
 

@@ -18,7 +18,7 @@ const logout = (req, res) => {
         req.logout()
         res.redirect('/')
     }catch(e){
-        console.log(e)
+        console.log(e) 
         res.sendStatus(500)
     }
 }

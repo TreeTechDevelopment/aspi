@@ -632,6 +632,11 @@ nav, header, footer{
 .btn-shop:hover{ cursor: pointer; }
 .btn-shop:focus{ outline: 0; }
 
+.btn-shop img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 .shop-list{
     width: 100%;
     height: 80%;

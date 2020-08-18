@@ -8,13 +8,12 @@ const {
 } = require('../controllers/services')
 
 const {
-    isAuthenticated,
     isAuthenticatedAdmin
 } = require('../controllers/client')
 
-app.get('/all', getAllServices)
+app.get('/all', isAuthenticatedAdmin, getAllServices)
 
-app.put('/', updateService)
+app.put('/', isAuthenticatedAdmin, updateService)
 
 
 module.exports = app

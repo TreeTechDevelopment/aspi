@@ -5,8 +5,9 @@
   "main": "server/server.js",
   "scripts": {
     "dev": "nodemon server/server ",
-    "wp": "webpack --mode development --watch",
-    "start": "node server/server"
+    "wp": "webpack --watch --config webpack.dev.js",
+    "start": "node server/server",
+    "build" : "webpack --config webpack.prod.js"
   },
   "author": "Tree Tech Development",
   "license": "ISC",
@@ -45,6 +46,7 @@
     "react-select": "^3.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
+    "webpack-merge": "^5.1.1",
     "webpack-node-externals": "^2.5.1"
   },
   "nodemonConfig": {

@@ -10,10 +10,10 @@ const {
 
 const { isAuthenticated } = require('../controllers/client')
 
-app.get('/find', getOrder)
+app.get('/find', isAuthenticated, getOrder)
 
-app.post('/', createOrder)
+app.post('/', isAuthenticated, createOrder)
 
-app.put('/', updateOrder)
+app.put('/', isAuthenticated, updateOrder)
 
 module.exports = app

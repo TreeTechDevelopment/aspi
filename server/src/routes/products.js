@@ -20,18 +20,18 @@ const {
     isAuthenticatedAdmin
 } = require('../controllers/client')
 
-app.get('/filter', getFilters)
-app.get('/sparkPlug', getSparkplug)
-app.get('/wiresets', getWireset)
-app.get('/brakeShoe', getBrakeshoe)
-app.get('/oil', getOil)
-app.get('/antifreeze', getAntifreeze)
-app.get('/coil', getCoil)
+app.get('/filter', isAuthenticated, getFilters)
+app.get('/sparkPlug', isAuthenticated, getSparkplug)
+app.get('/wiresets', isAuthenticated, getWireset)
+app.get('/brakeShoe', isAuthenticated, getBrakeshoe)
+app.get('/oil', isAuthenticated, getOil)
+app.get('/antifreeze', isAuthenticated, getAntifreeze)
+app.get('/coil', isAuthenticated, getCoil)
 
-app.post('/', createProduct)
+app.post('/', isAuthenticatedAdmin, createProduct)
 
-app.put('/', updateProduct)
+app.put('/', isAuthenticatedAdmin, updateProduct)
 
-app.delete('/', deleteProducts)
+app.delete('/', isAuthenticatedAdmin, deleteProducts)
 
 module.exports = app

@@ -14,13 +14,15 @@ const {
 
 const { checkProductsExistMiddleware } = require('../services/products')
 
-app.get('/all-info', getAllInfo)
-app.get('/info', getInfoCars)
-app.get('/all', getCars)
-app.get('/', getCar)
+const { isAuthenticated, isAuthenticatedAdmin } = require('../controllers/client')
 
-app.post('/', checkProductsExistMiddleware, postNewCar)
+app.get('/all-info', isAuthenticated, getAllInfo)
+app.get('/info', isAuthenticated, getInfoCars)
+app.get('/all', isAuthenticated, getCars)
+app.get('/', isAuthenticated, getCar)
 
-app.put('/', checkProductsExistMiddleware, updateCar)
+app.post('/', isAuthenticatedAdmin, checkProductsExistMiddleware, postNewCar)
+
+app.put('/', isAuthenticatedAdmin, checkProductsExistMiddleware, updateCar)
 
 module.exports = app

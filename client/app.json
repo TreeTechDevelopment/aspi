@@ -1,5 +1,6 @@
 {
-    "url": "http://192.168.0.7:3000",
+    "url": "https://talleraspi.com",
     "messageServerError": "Ha ocurrido un error en el servidor. Intentalo más tarde.",
-    "messageLoginError": "Usuario o contraseña incorrectos."
+    "messageLoginError": "Usuario o contraseña incorrectos.",
+    "messageUnauthorized": "No está autorizado para hacer esa operación. Vuelva iniciar sesión o reinicie la página."
 }

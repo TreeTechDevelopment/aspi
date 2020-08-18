@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner';
 import Select from 'react-select';
 
 import { appContext } from '../../context/Provider'
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError,messageUnauthorized } from '../../../app.json'
 import InputFilter from './InputProduct'
 import BtnProduct from './BtnProduct'
 
@@ -307,8 +307,8 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                     setProduct(newProduct)
                     doBeforeCloseModal()
                 }).catch((e) => {
-                    console.log(e)
                     setLoading(false)
+                    if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
                     alert(`${messageServerError}`)
                 })
             }else{
@@ -318,6 +318,7 @@ function Form({ modalIsOpen, closeModal, filterType, addNewProduct, setProduct, 
                     doBeforeCloseModal()
                 }).catch(() => {
                     setLoading(false)
+                    if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
                     alert(`${messageServerError}`)
                 })
             }

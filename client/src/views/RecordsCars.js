@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner';
 import Navbar from '../components/Navbar'
 import CarItem from '../components/recordsCars/CarItem'
 import Form from '../components/recordsCars/Form'
-import { url, messageServerError } from '../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../app.json'
 
 function RecordsCars() {
 
@@ -25,7 +25,10 @@ function RecordsCars() {
             setMakesSelect(makesSelect)
             setMake(makesSelect[0])
             setModels(models)
-        }).catch(() => alert(`${messageServerError}`))
+        }).catch((e) => {
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
+            alert(`${messageServerError}`)
+        })
     }, [])
 
     useEffect(() => {
@@ -35,6 +38,7 @@ function RecordsCars() {
                 setCars(cars)                
             }).catch(() => {
                 setLoading(false)
+                if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
                 alert(`${messageServerError}`)
             })
         }

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import axios from'axios';
 
 import { appContext } from '../../context/Provider'
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 import Modal from '../Modal'
 
 function WiresetItem({ wireset, openModal, updateWireset, idx, edit, sell, sellFunction }) {
@@ -22,7 +22,7 @@ function WiresetItem({ wireset, openModal, updateWireset, idx, edit, sell, sellF
         deleteWireset().then(({ product }) => {
             updateWireset(product)
         }).catch((e) => {
-            console.log(e)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
             alert(`${messageServerError}`)
         })
     }

@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import Loader from "react-loader-spinner";
 
 import InputFilter from "./InputFilter";
-import { url, messageServerError } from "../../../app.json";
+import { url, messageServerError, messageUnauthorized } from "../../../app.json";
 import { appContext } from "../../context/Provider";
 
 Modal.setAppElement("#app");
@@ -409,6 +409,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             if (e.response.status === 400) {
               return alert(e.response.data);
             }
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
             alert(`${messageServerError}`);
           });
       } else {
@@ -425,6 +426,7 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
             if (e.response.status === 400) {
               return alert(e.response.data);
             }
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  }
             alert(`${messageServerError}`);
           });
       }

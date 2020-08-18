@@ -8,7 +8,15 @@ const isAuthenticated = (req, res, next) => {
     try{
         const isAuthenticated = req.isAuthenticated()
         if(isAuthenticated){ return next() }
-        res.redirect('/')
+        else{
+            switch(req.method){
+                case 'GET':
+                    if(JSON.stringify(req.query) !== "{}" || req.originalUrl === "/services/all" || req.originalUrl === "/services/all"){ return res.sendStatus(401) }
+                    return res.redirect('/')
+                default:
+                    return res.sendStatus(401)
+            }
+        }
     }catch(e){        
         res.sendStatus(500)
     }
@@ -16,9 +24,27 @@ const isAuthenticated = (req, res, next) => {
 
 const isAuthenticatedAdmin = (req, res, next) => {
     try{        
+        console.log(req.originalUrl)
         if(req.user && req.user.role === "ADMIN"){ return next() }
-        res.redirect('/')
+        else{
+            switch(req.method){
+                case 'GET':
+                    if(JSON.stringify(req.query) !== "{}" || req.originalUrl === "/services/all" || req.originalUrl === "/services/all"){ return res.sendStatus(401) }
+                    return res.redirect('/')
+                default:
+                    return res.sendStatus(401)
+            }
+        }
     }catch(e){         
+        res.sendStatus(500)
+    }
+}
+
+const isAuthenticatedStatus = (req, res, next) => {
+    try{
+        const isAuthenticated = req.isAuthenticated()
+        res.json({ isLogged: isAuthenticated })
+    }catch(e){        
         res.sendStatus(500)
     }
 }
@@ -26,5 +52,6 @@ const isAuthenticatedAdmin = (req, res, next) => {
 module.exports ={
     handleClient,
     isAuthenticated,
-    isAuthenticatedAdmin
+    isAuthenticatedAdmin,
+    isAuthenticatedStatus
 }

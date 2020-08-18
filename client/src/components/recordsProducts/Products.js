@@ -3,7 +3,7 @@ import axios from 'axios';
 import Select from "react-select";
 import Loader from 'react-loader-spinner';
 
-import { url, messageServerError } from '../../../app.json'  ;
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'  ;
 import Form from './Form';
 import FilterProducts from './FilterProducts';
 import SparkPlugProducts from './SparkPlugProducts';
@@ -45,7 +45,7 @@ function Products({ typeProduct, loading, setLoading }) {
             setTotalProducts(count)
             if(typeProduct.value === "oil"){ setAllProducts(products) }
         }).catch((e) => {
-            console.log(e)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
             alert(`${messageServerError}`)
         })
     }, [typeProduct, typeFilter, limitProducts, page])

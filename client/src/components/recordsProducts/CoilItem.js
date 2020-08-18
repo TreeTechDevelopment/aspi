@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import axios from'axios';
 
 import { appContext } from '../../context/Provider'  
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 import Modal from '../Modal'
 
 function CoilItem({ coil, openModal, updateCoil, idx, edit, sell, sellFunction }) {
@@ -27,7 +27,7 @@ function CoilItem({ coil, openModal, updateCoil, idx, edit, sell, sellFunction }
         deleteCoil().then(({ product }) => {
             updateCoil(product)
         }).catch((e) => {
-            console.log(e)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
             alert(`${messageServerError}`)
         })
     }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import { url, messageServerError } from '../../../app.json';
+import { url, messageServerError, messageUnauthorized } from '../../../app.json';
 
 function ServiceItem({ service, updateTable, idx }) {
  
@@ -15,7 +15,8 @@ function ServiceItem({ service, updateTable, idx }) {
             updateService({ id: service._id, price }).then(({ service }) => {
                 setEditing(false)
                 updateTable(service)
-            }).catch((e) => {                
+            }).catch((e) => {      
+                if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  }           
                 alert(`${messageServerError}`)
             })
         }else{ setEditing(true) }

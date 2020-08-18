@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import axios from'axios';
 
 import { appContext } from '../../context/Provider'
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 import Modal from '../Modal';
 
 function AntifreezeItem({ antifreeze, openModal, updateAntifreeze, idx }) {
@@ -22,7 +22,7 @@ function AntifreezeItem({ antifreeze, openModal, updateAntifreeze, idx }) {
         deleteAntifreeze().then(({ product }) => {
             updateAntifreeze(product)
         }).catch((e) => {
-            console.log(e)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
             alert(`${messageServerError}`)
         }) 
     }

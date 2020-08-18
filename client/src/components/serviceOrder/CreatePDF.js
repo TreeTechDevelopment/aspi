@@ -2,7 +2,7 @@ import React, { useContext, useRef, useCallback } from 'react';
 import { BlobProvider } from '@react-pdf/renderer';
 import axios from 'axios';
 
-import { url, messageServerError } from '../../../app.json';
+import { url, messageServerError, messageUnauthorized } from '../../../app.json';
 import { appContext } from '../../context/Provider';
 import PDF from './PDF';
 
@@ -65,6 +65,7 @@ function CreatePDF({
                     updateOrder(order).then(() => {
                         window.location.reload()
                     }).catch((e) => {
+                        if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
                         alert(`${messageServerError}`)
                         window.location.reload()
                     })
@@ -73,7 +74,7 @@ function CreatePDF({
                         resetIDORder()
                         window.location.reload()
                     }).catch((e) => {
-                        console.log(e)
+                        if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
                         alert(`${messageServerError}`)
                     })
                 }

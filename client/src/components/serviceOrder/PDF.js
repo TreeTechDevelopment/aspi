@@ -3,8 +3,6 @@ import { Page, Text, View, Document, StyleSheet, Image, Font  } from '@react-pdf
 
 import { url } from '../../../app.json';
 
-console.log(url)
-
 Font.register({ family: 'BlueHighWay', src: `${url}/fonts/blue-highway-rg.ttf` });
 Font.register({ family: 'BlueHighWayBold', src: `${url}/fonts/blue-highway-bd.ttf` });
 

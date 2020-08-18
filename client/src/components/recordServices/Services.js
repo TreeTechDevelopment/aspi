@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Loader from 'react-loader-spinner';
 
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 import ServiceItem from './ServiceItem';
 
 function Services() {
@@ -14,8 +14,9 @@ function Services() {
         fetchServices().then(({ services }) => {
             setServices(services)
             setLoading(false)
-        }).catch(() => {
+        }).catch((e) => {
             setLoading(false)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
             alert(`${messageServerError}`)
         })
     }, [])

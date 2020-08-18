@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import Loader from 'react-loader-spinner';
 
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 
 function OrderSearcher({ setOrder,  setFoundOrder, setFound, order }) {
 
@@ -22,9 +22,10 @@ function OrderSearcher({ setOrder,  setFoundOrder, setFound, order }) {
                 setFoundOrder(true)
                 setOrder(order)
             }else{ setFoundOrder(false) }
-        }).catch(() => {            
-            alert(`${messageServerError}`) 
+        }).catch((e) => {            
             setLoading(false)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
+            alert(`${messageServerError}`)
         })
     }
 

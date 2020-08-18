@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Loader from 'react-loader-spinner';
 
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 import { appContext } from '../../context/Provider'
 
 function Searcher({ setProducts, typeProduct, setTypeProduct }) {
@@ -76,6 +76,7 @@ function Searcher({ setProducts, typeProduct, setTypeProduct }) {
                 setLoading(false)
             }).catch(() => {
                 setLoading(false)
+                if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  } 
                 alert(`${messageServerError}`)
             })
         }

@@ -5,22 +5,27 @@ const app = express();
 const {
     handleClient,
     isAuthenticated,
-    isAuthenticatedAdmin
+    isAuthenticatedAdmin,
+    isAuthenticatedStatus
 } = require('../controllers/client')
 
+const { logout } = require('../controllers/users')
+
 app.get('/', handleClient)
-app.get('/services/service-order', handleClient)
-app.get('/services', handleClient)
-app.get('/services/sells', handleClient)
-app.get('/cross', handleClient)
+app.get('/services/service-order', isAuthenticated, handleClient)
+app.get('/services', isAuthenticated, handleClient)
+app.get('/services/sells', isAuthenticated, handleClient)
+app.get('/cross', isAuthenticated, handleClient)
 app.get('/iniciar-sesion', handleClient)
-app.get('/records', handleClient)
-app.get('/records/cars', handleClient)
-app.get('/records/products', handleClient)
-app.get('/records/services', handleClient)
-app.get('/signup', handleClient)
-app.get('/search/orders', handleClient)
-app.get('/search', handleClient)
-app.get('/search/cars', handleClient)
+app.get('/records', isAuthenticatedAdmin, handleClient)
+app.get('/records/cars', isAuthenticatedAdmin, handleClient)
+app.get('/records/products', isAuthenticatedAdmin, handleClient)
+app.get('/records/services', isAuthenticatedAdmin, handleClient)
+app.get('/signup', isAuthenticatedAdmin, handleClient)
+app.get('/search/orders', isAuthenticated, handleClient)
+app.get('/search', isAuthenticated, handleClient)
+app.get('/search/cars', isAuthenticated, handleClient)
+app.get('/logout', logout)
+app.get('/islogged', isAuthenticatedStatus)
 
 module.exports = app

@@ -3,7 +3,7 @@ import React, { useState
 import axios from 'axios';
 import Loader from 'react-loader-spinner';
 
-import { url, messageServerError } from '../../../app.json'
+import { url, messageServerError, messageUnauthorized } from '../../../app.json'
 import FilterItem from '../recordsProducts/FilterItem'
 
 function FormEq({ searchFailure, searchSuccess }) {
@@ -31,8 +31,9 @@ function FormEq({ searchFailure, searchSuccess }) {
                 setFilters([])
                 searchFailure()
             }
-        }).catch(() => {
+        }).catch((e) => {
             setLoading(false)
+            if(e.response.status === 401){ return alert(`${messageUnauthorized}`)  }
             alert(`${messageServerError}`)
         })
     }

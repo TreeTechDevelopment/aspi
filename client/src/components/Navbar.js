@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
 
 import { url } from '../../app.json'
 
+console.log(window.location.pathname)
+
 function Navbar({ isHome }) {
+
+    const [isLogged, setIsLogged] = useState('INICIAR SESIÓN')
+
+    useEffect(() => {
+        if(window.location.pathname === "/"){
+            fetchIsLogged().then(({ isLogged }) => {
+                if(isLogged){ setIsLogged('CERRAR SESIÓN') }
+            }).catch(() => {})
+        }
+    }, [])
+
+    const fetchIsLogged = async () => {
+        const res = await axios({
+            url: `${url}/islogged`,
+            method: 'GET',
+            timeout: 5000
+        })
+
+        return res.data
+    }
+
     return (
         <nav className={isHome ? 'navHome' : 'navDefault'}>
             <ul className="navbar">
@@ -26,7 +50,7 @@ function Navbar({ isHome }) {
                     <a href={`${url}/records`}>REGISTROS</a>
                 </li>
                 <li>                    
-                    <a href={`${url}/iniciar-sesion`}>INICIAR SESIÓN</a>        
+                    <a href={window.location.pathname === "/" ?( isLogged === "INICIAR SESIÓN" ? `${url}/iniciar-sesion` : `${url}/logout` ) : `${url}/logout`}>{window.location.pathname === "/" ? isLogged : 'CERRAR SESIÓN'}</a>        
                 </li>
             </ul>
         </nav>

@@ -11,6 +11,7 @@ import WiresetsProducts from '../components/recordsProducts/WiresetsProducts';
 import BrakeshoeProducts from '../components/recordsProducts/BrakeshoeProducts';
 import CoilProducts from '../components/recordsProducts/CoilProducts';
 import { appContext } from '../context/Provider';
+import { url } from '../../app.json'
 
 function Sells() {
 
@@ -323,7 +324,9 @@ function Sells() {
                 <button className="btn-aspi margin-top" onClick={addAntifreeze}>AGREGAR</button>
                 </>
             )}
-            <button className="btn-shop" onClick={openList}>?</button>
+            <button className="btn-shop" onClick={openList}>
+                <img src={`${url}/images/shopping.png`}/>
+            </button>
             {toastOpen && (
                 <Toast text="EL PRODUCTO HA SIDO AGREGADO EXCITOSAMENTE"/>
             )}
