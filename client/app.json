@@ -1,6 +1,0 @@
-{
-    "url": "https://talleraspi.com",
-    "messageServerError": "Ha ocurrido un error en el servidor. Intentalo más tarde.",
-    "messageLoginError": "Usuario o contraseña incorrectos.",
-    "messageUnauthorized": "No está autorizado para hacer esa operación. Vuelva iniciar sesión o reinicie la página."
-}
