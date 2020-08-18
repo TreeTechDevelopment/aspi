@@ -497,9 +497,10 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
       style={{
         content: {
             width: '70%',
-            height: '70%',
-            top: '15%',
-            left: '15%'
+            height: '90%',
+            top: '10%',
+            left: '15%'/* ,
+            bottom: '15%' */
         }
       }}
     >
