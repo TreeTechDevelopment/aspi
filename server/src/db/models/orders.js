@@ -29,7 +29,8 @@ const orderSchema = new Schema({
         make: { type: String },
         viscosity:{ type: String },
         presentation: { type: String },
-        lts: { type: Number }
+        lts: { type: Number },
+        extraOil: { type: String }
     },
     cleanInj: {
         required: true,
@@ -43,7 +44,7 @@ const orderSchema = new Schema({
     wiresets: { type: String },
     brakeshoeBack: { type: String },
     brakeshoeFront: { type: String },
-    phone: { type: String },
+    phone: { type: String }, 
     coil: { type: String },
     antifreeze: {
         antifreezeRequired: {

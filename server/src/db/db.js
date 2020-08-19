@@ -7,6 +7,7 @@ const Filter = require('./models/filters');
 const App = require('./models/aplication');
 const Service = require('./models/services');
 const Order = require('./models/orders');
+const User = require('./models/users');
 
 /* const excelToJson = require('convert-excel-to-json');
 const fs = require('fs')
@@ -30,6 +31,8 @@ const DBconfig = {
 mongoose.connect( process.env.DB, DBconfig ,async (db) => {
     console.log("DB connected")
 
-    //await Model.findByIdAndRemove('5ee6c972b79c46273c2a179c')
+    //await User.findByIdAndRemove('5f3c6796ae0c0c35b8e799a4')
+
+    //mongoose.connection.db.dropCollection('orders', function(err, result) {});
 
 } )

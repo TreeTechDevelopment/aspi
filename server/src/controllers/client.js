@@ -23,8 +23,7 @@ const isAuthenticated = (req, res, next) => {
 }
 
 const isAuthenticatedAdmin = (req, res, next) => {
-    try{        
-        console.log(req.originalUrl)
+    try{ 
         if(req.user && req.user.role === "ADMIN"){ return next() }
         else{
             switch(req.method){
@@ -43,7 +42,7 @@ const isAuthenticatedAdmin = (req, res, next) => {
 const isAuthenticatedStatus = (req, res, next) => {
     try{
         const isAuthenticated = req.isAuthenticated()
-        res.json({ isLogged: isAuthenticated })
+        res.json({ isLogged: isAuthenticated, role: req.user ? req.user.role : '' })
     }catch(e){        
         res.sendStatus(500)
     }

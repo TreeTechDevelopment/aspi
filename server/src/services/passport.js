@@ -27,7 +27,7 @@ passport.use( 'signup', new LocalStrategy(async (username, password, done) => {
    
     let newUser = new User({
         userName: username,
-        password
+        password : bcrypt.hashSync(password, 10) 
     })  
 
     newUser.save((err, user) => {
