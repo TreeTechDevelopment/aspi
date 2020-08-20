@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
+const helmet = require("helmet");
 
 const app = express()
 
@@ -28,12 +29,13 @@ app.use(session({
     secret: process.env.SESSION_SECRET_KEY,    
     saveUninitialized: false,
     resave: false,    
-    // PRODUCTION cookie: { secure: true }
+    cookie: { secure: true }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(helmet());
 
-//PRODUCTION app.set('trust proxy', 1)
+app.set('trust proxy', 1)
 
 app.use(require('./src/routes/routes'))
 
