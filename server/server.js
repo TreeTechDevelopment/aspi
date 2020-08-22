@@ -29,7 +29,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET_KEY,    
     saveUninitialized: false,
     resave: false,    
-    //cookie: { secure: true }
+    cookie: { secure: true }
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -37,7 +37,7 @@ app.use(passport.session())
 app.use(helmet.hidePoweredBy());
 app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
-app.use(helmet.contentSecurityPolicy());
+//app.use(helmet.contentSecurityPolicy());
 app.use(helmet.ieNoOpen());
 app.use(helmet.frameguard());
 
