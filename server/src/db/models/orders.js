@@ -72,6 +72,10 @@ const orderSchema = new Schema({
         required: true,
         type: String
     },
+    phone: {
+        required: true,
+        type: String
+    },
     idOrder: {
         type: Number,
         required: true
