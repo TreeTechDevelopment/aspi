@@ -12,8 +12,8 @@ const {
 const { logout } = require('../controllers/users')
 
 app.get('/', handleClient)
-app.get('/services/service-order', isAuthenticated, handleClient)
-app.get('/services', isAuthenticated, handleClient)
+app.get('/services/service-order',  handleClient)
+app.get('/services',  handleClient)
 app.get('/services/sells', isAuthenticated, handleClient)
 app.get('/cross', isAuthenticated, handleClient)
 app.get('/iniciar-sesion', handleClient)

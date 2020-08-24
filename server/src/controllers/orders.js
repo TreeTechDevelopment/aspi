@@ -1,9 +1,4 @@
 const Order = require('../db/models/orders');
-const Service = require('../db/models/services');
-const Plug = require('../db/models/plugs');
-const Wireset = require('../db/models/wiresets');
-const Brakeshoe = require('../db/models/brakeshoe');
-const Filter = require('../db/models/filters');
 
 const createOrder = async (req, res) => {
     try{
@@ -23,13 +18,12 @@ const createOrder = async (req, res) => {
             prevOrder.coil = order.coil
             prevOrder.transmission = order.transmission
             prevOrder.antifreeze = order.antifreeze
-            prevOrder.sparkplugs = order.sparkplugs
+            prevOrder.sparkplug = order.sparkplugs
             prevOrder.note = order.note
             prevOrder.oil = order.oil
-            prevOrder.filters = order.filters
             prevOrder.total = order.total
             prevOrder.phone = order.phone
-            prevOrder.sparkPlugsQuantity = order.sparkPlugsQuantity
+            prevOrder.products = order.products
 
             prevOrder.save((err, orderDB) => {
                 if(err){ return res.sendStatus(500) }
@@ -39,6 +33,7 @@ const createOrder = async (req, res) => {
         }else{
             let newOrder = new Order(order)
             newOrder.save((err, orderDB) => {
+                console.log(err)
                 if(err){ return res.sendStatus(500) }
 
                 res.sendStatus(200)
@@ -46,6 +41,7 @@ const createOrder = async (req, res) => {
         }
         
     }catch(e){
+        console.log(e)
         res.sendStatus(500)
     }
 }

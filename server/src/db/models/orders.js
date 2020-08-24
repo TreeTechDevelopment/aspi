@@ -7,31 +7,11 @@ const orderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'carros'
     },
-    filters:{
-        airFilter: { type: String },
-        fuelFilter: { type: String },
-        oilFilter: { type: String },
-        cabineFilter: { type: String }
-    },
     carYear: {
         required: true,
         type: String
     },
-    note: {        
-        type: String
-    },
-    oil: {
-        oilRequired: {
-            required: true,
-            type: String
-        },
-        oilType: { type: String },
-        make: { type: String },
-        viscosity:{ type: String },
-        presentation: { type: String },
-        lts: { type: Number },
-        extraOil: { type: String }
-    },
+    note: { type: String },
     cleanInj: {
         required: true,
         type: String
@@ -40,23 +20,55 @@ const orderSchema = new Schema({
         required: true,
         type: String
     },
-    sparkplugs: { type: String },
-    wiresets: { type: String },
-    brakeshoeBack: { type: String },
-    brakeshoeFront: { type: String },
-    phone: { type: String }, 
-    coil: { type: String },
+    airFilter: {
+        required: true,
+        type: String
+    },
+    cabineFilter: {
+        required: true,
+        type: String
+    },
+    oilFilter: {
+        required: true,
+        type: String
+    },
+    fuelFilter: {
+        required: true,
+        type: String
+    },
+    sparkplug: {
+        required: true,
+        type: String
+    },
+    wiresets: {
+        required: true,
+        type: String
+    },
+    coil: {
+        required: true,
+        type: String
+    },
     antifreeze: {
-        antifreezeRequired: {
-            required: true,
-            type: String
-        },
-        antifreezeType: { type: String },
-        antifreezeMake: { type: String },
-        antifreezePresentation: { type: String },
-        lts: { type: Number }
+        required: true,
+        type: String
     },
     transmission: {
+        required: true,
+        type: String
+    },
+    rectifyDisk: {
+        required: true,
+        type: String
+    },
+    brakeshoeBack: {
+        required: true,
+        type: String
+    },
+    brakeshoeFront: {
+        required: true,
+        type: String
+    },
+    oil: {
         required: true,
         type: String
     },
@@ -68,9 +80,10 @@ const orderSchema = new Schema({
         type: Number,
         required: true
     },
-    sparkPlugsQuantity: {
-        type: Number,
-        required: true
+    products: {
+        type: Array,
+        required: true,
+        default: []
     }
 })
 

@@ -28,10 +28,10 @@ const DBconfig = {
     useFindAndModify: false
 }
 
-mongoose.connect( process.env.DB, DBconfig ,async (db) => {
+mongoose.connect( process.env.DB, DBconfig ,(err, db) => {
     console.log("DB connected")
-
-    //await User.findByIdAndRemove('5f3c6796ae0c0c35b8e799a4')
+    if(err){ console.log(err) }
+    //await User.findByIdAndRemove('5ed19226ea93ea108cbea16b')
 
     //mongoose.connection.db.dropCollection('orders', function(err, result) {});
 
