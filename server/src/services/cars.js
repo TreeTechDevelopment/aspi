@@ -5,6 +5,8 @@ const Car = require('../db//models/cars');
 
 const createCarDB = async (car, models) => {
 
+    console.log(car)
+
     let newCar = {
         oilFilter: [],
         airFilter: [],
@@ -13,7 +15,8 @@ const createCarDB = async (car, models) => {
         sparkPlug: [],
         wiresets: [],
         brakeShoeFront: [],
-        brakeShoeBack: []
+        brakeShoeBack: [],
+        coil: []
     }
     
     let filterControl = ''

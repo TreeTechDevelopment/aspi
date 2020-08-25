@@ -8,16 +8,25 @@ const Coil = require('../db/models/coil');
 const createFilterDB = async (filter) => {
 
     let newFilter = {
-        filterType: 'cabine', 
+        filterType: 'air', 
         price: 100
     }
     
     newFilter.interfil = filter.Interfil
-    if(filter.OEM !== ""){ newFilter.OEM = filter.OEM.split(' / ') }    
-    if(filter.Fram !== ""){ newFilter.Fram = filter.Fram.split(' / ') }    
-    if(filter.Purolator !== ""){ newFilter.Purolator = filter.Purolator.split(' / ') }
-    if(filter.Wix !== ""){ newFilter.Wix = filter.Wix.split(' / ') }
-    if(filter.Mann !== ""){ newFilter.Mann = filter.Mann.split(' / ') }
+    if(filter.OEM && filter.OEM !== ""){ newFilter.OEM = filter.OEM.toString().split(' / ') }    
+    if(filter.Fram && filter.Fram !== ""){ newFilter.Fram = filter.Fram.toString().split(' / ') }    
+    if(filter.Purolator && filter.Purolator !== ""){ newFilter.Purolator = filter.Purolator.toString().split(' / ') }
+    if(filter.Wix && filter.Wix !== ""){ newFilter.Wix = filter.Wix.toString().split(' / ') }
+    if(filter.Mann && filter.Mann !== ""){ newFilter.Mann = filter.Mann.toString().split(' / ') }
+    if(filter.ACD && filter.ACD !== ""){ newFilter.ACD = filter.ACD.toString().split(' / ') }
+    if(filter.Gonher && filter.Gonher !== ""){ newFilter.Gonher = filter.Gonher.toString().split(' / ') }
+    if(filter.Motorcraft && filter.Motorcraft !== ""){ newFilter.Motorcraft = filter.Motorcraft.toString().split(' / ') }
+    if(filter.Sky && filter.Sky !== ""){ newFilter.Sky = filter.Sky.toString().split(' / ') }
+    if(filter.Seineca && filter.Seineca !== ""){ newFilter.Seineca = filter.Seineca.toString().split(' / ') }
+    if(filter.Walmi && filter.Walmi !== ""){ newFilter.Walmi = filter.Walmi.toString().split(' / ') }
+    if(filter.Joe && filter.Joe !== ""){ newFilter.Joe = filter.Joe.toString().split(' / ') }
+    if(filter.Roadstar && filter.Roadstar !== ""){ newFilter.Roadstar = filter.Roadstar.toString().split(' / ') }
+    if(filter.ECA && filter.ECA !== ""){ newFilter.ECA = filter.ECA.toString().split(' / ') }
 
     return newFilter
 }
