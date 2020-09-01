@@ -30,19 +30,24 @@ const DBconfig = {
     useFindAndModify: false
 }
 
-mongoose.connect( process.env.DB_DEMO, DBconfig ,async (err, db) => {
+mongoose.connect( process.env.DB, DBconfig ,async (err, db) => {
     console.log("DB connected")
     if(err){ console.log(err) }
-    //await User.findByIdAndRemove('5ed19226ea93ea108cbea16b')
+    //await Service.findByIdAndRemove('5f48606e9b8573118079e714')
 
     //mongoose.connection.db.dropCollection('filters', function(err, result) {});
 
-    /* for(let i = 3; i < equi[0].length; i++){
-        let filter = await createFilterDB(equi[0][i])
-        let newFilter = new Filter(filter)
+    /* let services = [{ name: 'changeAirFilter', label: 'CAMBIO DE FILTRO DE AIRE', price: 100 },{ name: 'changeOilFilter', label: 'CAMBIO DE FILTRO DE ACEITE', price: 100 },
+                    { name: 'cleanAB', label: 'LIMPIEZA DE CUERPO DE ACELERACIÓN', price: 100 }, { name: 'cleanInj', label: 'LIMPIEZA DE INYECTORES', price: 100 }]
+
+    for(let i = 0; i < services.length; i++){
+        let newFilter = new Service(services[i])
         newFilter.save()
     } */
 
-    console.log('TERMINADO')
+    /* let newApp = new App({ idOrder: 1 })
+    newApp.save() */
+
+    //console.log('TERMINADO')
 
 } )
