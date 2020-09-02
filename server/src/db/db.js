@@ -30,7 +30,7 @@ const DBconfig = {
     useFindAndModify: false
 }
 
-mongoose.connect( process.env.DB_DEMO, DBconfig ,async (err, db) => {
+mongoose.connect( process.env.DB, DBconfig ,async (err, db) => {
     console.log("DB connected")
     if(err){ console.log(err) }
     //await Service.findByIdAndRemove('5f48606e9b8573118079e714')
