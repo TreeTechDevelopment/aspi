@@ -20,7 +20,7 @@ const {
     isAuthenticatedAdmin
 } = require('../controllers/client')
 
-app.get('/filter', isAuthenticated, getFilters)
+app.get('/filter', isAuthenticated, getFilters) 
 app.get('/sparkPlug', isAuthenticated, getSparkplug)
 app.get('/wiresets', isAuthenticated, getWireset)
 app.get('/brakeShoe', isAuthenticated, getBrakeshoe)
