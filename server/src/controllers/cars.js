@@ -107,6 +107,8 @@ const updateCar = async (req, res) => {
     try{        
         const newCar = req.body
 
+        console.log(newCar)
+
         let car = await Car.findById(newCar.id)
 
         const make = await Make.findById(newCar.make)
@@ -123,6 +125,7 @@ const updateCar = async (req, res) => {
         car.brakeShoeFront = newCar.brakeShoeFront
         car.brakeShoeBack = newCar.brakeShoeBack
         car.coil = newCar.coil
+        car.year = newCar.year
 
         car.save((err, newCarDB) => {
             if(err){ return res.sendStatus(500) }

@@ -2,7 +2,7 @@
 @font-face { 
     font-family: SourceSansBold;
     src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf');
-}
+} 
 
 @font-face {
     font-family: BlueHighWay;
@@ -51,7 +51,7 @@
     font-family: SourceSansBold;
     src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf');
 }
-
+ 
 .navHome{
     position: absolute;
     bottom: 15%;
@@ -117,7 +117,7 @@
     font-family: SourceSans;
     src: url('https://talleraspi.com/fonts/SourceSansPro-Regular.ttf');
 }
-
+ 
 @font-face {
     font-family: SourceSansBlack;
     src: url('https://talleraspi.com/fonts/SourceSansPro-Black.ttf'); 
@@ -728,7 +728,7 @@ nav, header, footer{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} 
 
 .btn-container-quantity-products button{
     width: 2rem;
