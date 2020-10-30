@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: BlueHighWay;
-    src: url('https://talleraspi.com/fonts/blue-highway-rg.ttf'); 
+    src: url('https://talleraspi.com/fonts/blue-highway-rg.ttf');  
 } 
 
 #home {
@@ -49,7 +49,7 @@
 
 @font-face {
     font-family: SourceSansBold;
-    src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf');
+    src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf'); 
 }
  
 .navHome{
@@ -120,7 +120,7 @@
  
 @font-face {
     font-family: SourceSansBlack;
-    src: url('https://talleraspi.com/fonts/SourceSansPro-Black.ttf'); 
+    src: url('https://talleraspi.com/fonts/SourceSansPro-Black.ttf');  
 }
 
 #login-container{
@@ -730,7 +730,7 @@ nav, header, footer{
     align-items: center;
 } 
 
-.btn-container-quantity-products button{
+.btn-container-quantity-products button{ 
     width: 2rem;
     height: 2rem;
     border-radius: 0.5rem;
