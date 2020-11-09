@@ -1,7 +1,7 @@
 
 @font-face { 
     font-family: SourceSansBold;
-    src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf');
+    src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf'); 
 } 
 
 @font-face {
@@ -47,7 +47,7 @@
     font-size: 3rem;
 }
 
-@font-face {
+@font-face { 
     font-family: SourceSansBold;
     src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf'); 
 }
@@ -113,7 +113,7 @@
 
 .navDefault ul li #a-logo:hover{ border-bottom: 0 }
 
-@font-face {
+@font-face { 
     font-family: SourceSans;
     src: url('https://talleraspi.com/fonts/SourceSansPro-Regular.ttf');
 }
@@ -728,7 +728,7 @@ nav, header, footer{
     display: flex;
     justify-content: center;
     align-items: center;
-} 
+}  
 
 .btn-container-quantity-products button{ 
     width: 2rem;
