@@ -104,8 +104,6 @@ const checkCoilsExist = async (coils) => {
 const checkProductsExistMiddleware = async (req, res, next) => {
     const newCar = req.body
 
-    console.log(newCar)
-
     let existAirFilterDB = await checkFilterExist(newCar.airFilter, 'air')
     let existOilFilterDB = await checkFilterExist(newCar.oilFilter, 'oil')
     let existFuelFilterDB = await checkFilterExist(newCar.fuelFilter, 'fuel')
