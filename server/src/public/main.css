@@ -2,7 +2,7 @@
 @font-face { 
     font-family: SourceSansBold;
     src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf'); 
-} 
+}  
 
 @font-face {
     font-family: BlueHighWay;
@@ -53,7 +53,7 @@
 }
  
 .navHome{
-    position: absolute; 
+    position: absolute;  
     bottom: 15%;
     left: 0%;
     width: 100%;
@@ -164,10 +164,10 @@
 .input-center{ text-align: center; }
 
 .form-line{
-    border: 1px solid rgb(254, 177, 0);
+    border: 1px solid rgb(254, 177, 0); 
     width: 20rem;
     height: 1px;
-    margin-top: 0.5rem;
+    margin-top: 0.5rem; 
     margin-bottom: 2rem;
 }
 
@@ -225,7 +225,7 @@ html, body, #app{
     height: 100%;
     margin: 0;
     padding: 0;
-}
+} 
 
 
 #imgLogo{
