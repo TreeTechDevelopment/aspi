@@ -1,7 +1,7 @@
 
 @font-face { 
     font-family: SourceSansBold;
-    src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf');  
+    src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf');   
 }  
 
 @font-face {
@@ -48,7 +48,7 @@
 }
 
 @font-face { 
-    font-family: SourceSansBold; 
+    font-family: SourceSansBold;  
     src: url('https://talleraspi.com/fonts/SourceSansPro-Bold.ttf'); 
 }
  
@@ -163,7 +163,7 @@
 
 .input-center{ text-align: center; }
 
-.form-line{ 
+.form-line{  
     border: 1px solid rgb(254, 177, 0); 
     width: 20rem;
     height: 1px;
@@ -227,7 +227,7 @@ html, body, #app{
     padding: 0;
 } 
 
- 
+  
 #imgLogo{
     width: 3rem; 
     height: 3rem;
