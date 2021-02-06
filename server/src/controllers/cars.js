@@ -10,7 +10,7 @@ const Wireset = require('../db/models/wiresets');
 const Brakeshoe = require('../db/models/brakeshoe');
 const Oil = require('../db/models/oil');
 const Coil = require('../db/models/coil');
-const Antifreeze = require('../db/models/antifreeze');
+const Antifreeze = require('../db/models/antifreeze'); 
 
 const getAllInfo = async (req, res) => {
     try{
