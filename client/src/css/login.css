@@ -1,0 +1,98 @@
+
+@font-face { 
+    font-family: SourceSans;
+    src: url('http://192.168.0.15:3000/fonts/SourceSansPro-Regular.ttf');
+}
+ 
+@font-face {
+    font-family: SourceSansBlack;
+    src: url('http://192.168.0.15:3000/fonts/SourceSansPro-Black.ttf');   
+}
+
+#login-container{
+    background-image: url('http://192.168.0.15:3000/images/background-color.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    width: 100%; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-logo{
+    width: 15rem;
+    height: 15rem;
+} 
+ 
+#login{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input{
+    width: 30rem;
+    height: 2.5rem;
+    background-color: rgba(110, 110, 110, 0.5);
+    border: 0;
+    padding-left: 1rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    font-family: SourceSansBlack;
+}
+
+.input-center{ text-align: center; }
+
+.form-line{  
+    border: 1px solid rgb(254, 177, 0); 
+    width: 20rem;
+    height: 1px;
+    margin-top: 0.5rem; 
+    margin-bottom: 2rem;
+}
+
+.btn-aspi{
+    background-color: rgb(254, 177, 0);
+    text-align: center;
+    border-radius: 0.5rem;
+    width: 10rem;
+    height: 2.5rem;
+    border: 0;
+    color: white;
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-aspi:hover{ cursor: pointer; }
+.btn-aspi:focus{ outline: 0; }
+
+.btn-aspi-gray{
+    background-color: rgba(110, 110, 110, 0.5); 
+    width: 17%;
+    height: 10%;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.btn-aspi-gray a{
+    font-family: SourceSans;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.btn-aspi-gray a:hover{
+    text-decoration: none;
+    color: white;
+}

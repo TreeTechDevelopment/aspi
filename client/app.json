@@ -1,0 +1,6 @@
+{
+    "url": "http://192.168.0.15:3000", 
+    "messageServerError": "Ha ocurrido un error en el servidor. Intentalo más tarde.",
+    "messageLoginError": "Usuario o contraseña incorrectos.",
+    "messageUnauthorized": "No está autorizado para hacer esa operación. Vuelva iniciar sesión o reinicie la página." 
+}          
