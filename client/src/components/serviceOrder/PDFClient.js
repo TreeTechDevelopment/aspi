@@ -56,7 +56,7 @@ return(
         </View>
         <View style={styles.section}>
             {cleanInj === "Si" && <Text style={styles.text}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>}
-            {cleanAB === "Si" && <Text style={styles.text}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>}
+            {cleanAB === "Si" && <Text style={styles.text}>LIMPIEZA INYECTORES ULTRA..: {cleanAB}</Text>}
             {Oil === "Si" && (
                 <Text style={styles.text}>
                     ACEITE: {aceite.presentation === "Suelto" ? `${aceite.presentation} ${lts} ${aceite.make} ${aceite.viscosity} ${aceite.type}` : 

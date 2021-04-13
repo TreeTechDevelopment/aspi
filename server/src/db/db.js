@@ -38,7 +38,7 @@ mongoose.connect( process.env.DB, DBconfig ,async (err, db) => {
     //mongoose.connection.db.dropCollection('filters', function(err, result) {});
 
     /* let services = [{ name: 'changeAirFilter', label: 'CAMBIO DE FILTRO DE AIRE', price: 100 },{ name: 'changeOilFilter', label: 'CAMBIO DE FILTRO DE ACEITE', price: 100 },
-                    { name: 'cleanAB', label: 'LIMPIEZA DE CUERPO DE ACELERACIÓN', price: 100 }, { name: 'cleanInj', label: 'LIMPIEZA DE INYECTORES', price: 100 }]
+                    { name: 'cleanAB', label: 'LIMPIEZA INYECTORES ULTRA..', price: 100 }, { name: 'cleanInj', label: 'LIMPIEZA DE INYECTORES', price: 100 }]
 
     for(let i = 0; i < services.length; i++){
         let newFilter = new Service(services[i])

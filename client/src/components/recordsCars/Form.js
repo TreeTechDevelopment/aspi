@@ -831,6 +831,42 @@ function Form({ modalIsOpen, make, models, closeModal, addCar, updateCar }) {
                 </div>
               </div>
             </div>
+            <div className="input-container">
+              <span className="span-filter">Mano de Obra</span>
+              <div className="si-filter-container">
+              <div className="si-filter">
+                {coilRender.map((key, idx) => (
+                  <InputFilter
+                    idx={idx}
+                    setFilters={setCoil}
+                    key={key}
+                    type="coil"
+                  />
+                ))}
+                </div>
+                <div className="si-filter-btn">
+
+                </div>
+              </div>
+            </div>
+            <div className="input-container">
+              <span className="span-filter">Empaque y Sedaso</span>
+              <div className="si-filter-container">
+              <div className="si-filter">
+                {coilRender.map((key, idx) => (
+                  <InputFilter
+                    idx={idx}
+                    setFilters={setCoil}
+                    key={key}
+                    type="coil"
+                  />
+                ))}
+                </div>
+                <div className="si-filter-btn">
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="btn-guardar">

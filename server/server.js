@@ -13,7 +13,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const helmet = require("helmet");
 
-const app = express()
+const app = express();
 
 const PORT = process.env.PORT || 3000
 
@@ -49,3 +49,4 @@ app.use(require('./src/routes/routes'))
 app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
 })
+console.log(process.env.SESSION_SECRET_KEY)

@@ -827,7 +827,7 @@ const Service = ({order}) => {
               onClick={obtenerInformacion}
               id="cleanAB"
             />
-            <label htmlFor="cleanAB">LIMPIEZA DE CUERPO DE ACELERACIÓN {CleaningAB === "Si" &&  `$${context.services.find( service => service.name == "cleanAB" ).price}` }</label>
+            <label htmlFor="cleanAB">LIMPIEZA INYECTORES ULTRA.. {CleaningAB === "Si" &&  `$${context.services.find( service => service.name == "cleanAB" ).price}` }</label>
           </div>
           <div className="checkbox-container">
             <input

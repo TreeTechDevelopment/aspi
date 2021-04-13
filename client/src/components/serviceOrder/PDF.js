@@ -174,7 +174,7 @@ return(
             </View>
             <View style={styles.section}>                      
                 {cleanInj === "Si" && <Text style={styles.text}>LIMPIEZA DE INYECTORES: {cleanInj}</Text>}
-                {cleanAB === "Si" && <Text style={styles.text}>LIMPIEZA DE CUERPO DE ACELERACIÓN: {cleanAB}</Text>}
+                {cleanAB === "Si" && <Text style={styles.text}>LIMPIEZA INYECTORES ULTRA..: {cleanAB}</Text>}
                 {Oil === "Si" && ( returnProducts('oil') )}
                 {antifreeze === "Si" && ( returnProducts('antifreeze') )}
                 {oilFilter === "Si" && ( returnProducts('oilFilter') )}
