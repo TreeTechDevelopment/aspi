@@ -33,7 +33,7 @@ const DBconfig = {
 mongoose.connect( process.env.DB, DBconfig ,async (err, db) => {
     console.log("DB connected")
     if(err){ console.log(err) }
-    //await Service.findByIdAndRemove('5f48606e9b8573118079e714')
+    await Car.findByIdAndRemove('60070232fdb6979860ce4a52')
 
     //mongoose.connection.db.dropCollection('filters', function(err, result) {});
 

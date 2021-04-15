@@ -402,7 +402,6 @@ const Service = ({order}) => {
 
   useEffect(() => {
     if(JSON.stringify(oilMake) !== "{}" && JSON.stringify(viscosity) !== "{}" && oilMake && viscosity){
-      console.log('a')
       let oilsPresentation = context.oils.filter( item => item.make === oilMake?.value && item.viscosity === viscosity?.value )
       oilsPresentation = [... new Set(oilsPresentation.map(item => item.presentation))]
       oilsPresentation = oilsPresentation.map(item => {  return { value: item, label: item } })
@@ -574,10 +573,10 @@ const Service = ({order}) => {
   const getTotalServices = () => {
     const services = context.services
     let total = 0
-    if(CleaningAB === "Si"){
+    /* if(CleaningAB === "Si"){
         let idx = services.findIndex( service => service.name === "cleanAB" )
         total += services[idx].price
-    }if(CleaningInj === "Si"){
+    } */if(CleaningInj === "Si"){
         let idx = services.findIndex( service => service.name === "cleanInj" )
         total += services[idx].price
     }if(transmission === "Si"){
@@ -800,8 +799,12 @@ const Service = ({order}) => {
           addProducts({ name: coil.label, price: Number(coil.value.split('-')[0]), _id: coil.label, type: product })
         }
         break;
-
     }
+  }
+
+  const addCleanABShopList = (e) => {
+    obtenerInformacion(e)
+    addProducts({ name: "Limpieza inyectores ultrasonidos", price: context.services.find( service => service.name == "cleanAB" ).price, id: Math.random().toString() })
   }
 
   return (
@@ -824,10 +827,10 @@ const Service = ({order}) => {
               type="checkbox"
               name="CleaningAB"
               checked={CleaningAB === "Si"}
-              onClick={obtenerInformacion}
+              onClick={addCleanABShopList}
               id="cleanAB"
             />
-            <label htmlFor="cleanAB">LIMPIEZA INYECTORES ULTRA.. {CleaningAB === "Si" &&  `$${context.services.find( service => service.name == "cleanAB" ).price}` }</label>
+            <label htmlFor="cleanAB">LIMPIEZA INYECTORES ULTRA. {CleaningAB === "Si" &&  `$${context.services.find( service => service.name == "cleanAB" ).price}` }</label>
           </div>
           <div className="checkbox-container">
             <input

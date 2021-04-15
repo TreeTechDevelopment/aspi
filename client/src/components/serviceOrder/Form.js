@@ -40,6 +40,7 @@ function Form({ order }){
     }
 
     const setDataCars = cars => {
+        console.log(cars)
         let yearsSelect = []
         for(let i = 0; i < cars.length; i++){
             for(let j = 0; j < cars[i].year.length; j++){
@@ -124,7 +125,11 @@ function Form({ order }){
 
     useEffect(() => {
         if(cars.length != 0 ){ 
+            console.log(year)
+            console.log(motor)
+            console.log(cylinder)
             let car = cars.find(car => car.year.indexOf(year.value) >= 0 && car.motor == motor.value && car.cylinder == cylinder.value  )
+            
             
             if(car){                
                 context.dispatchCar({ type: 'SET', value: car })

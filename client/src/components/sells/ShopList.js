@@ -18,9 +18,7 @@ const InputLTS = ({ product, updateList }) => {
     const [lts, setLts] = useState(productList.quantity.toString())
 
     const timeoutUpdate = () => {
-        if(timeout.current){ 
-            clearTimeout(timeout.current) 
-        }
+        if(timeout.current){ clearTimeout(timeout.current) }
         timeout.current = setTimeout(() => { updateList() }, 1000)
     }
 

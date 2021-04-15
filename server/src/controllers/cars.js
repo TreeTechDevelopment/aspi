@@ -62,10 +62,14 @@ const getCar = async (req, res) => {
 
         let query = {}
 
+        console.log(req.query)
+
         if(model){ query.model = model }
         if(make){ query.make = make }
 
         const cars = await Car.find(query).populate('make').populate('model')
+
+        //console.log(cars)
 
         res.json({ cars })
     }catch(e){

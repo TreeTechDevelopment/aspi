@@ -5,7 +5,7 @@ import { url } from '../../../app.json'
 
 function CarItem({ car, openModal, idx }) {
 
-    if(!car.make || !car.model){ console.log(car) }
+    if(car.model.name === "Sedan"){ console.log(car) }
 
     const context = useContext(appContext)
 

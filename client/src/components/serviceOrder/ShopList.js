@@ -40,7 +40,7 @@ const InputLTS = ({ product, updateList }) => {
 
 function ShopList({ modalIsOpen, closeModal, productsList, removeProduct }) {
 
-    console.log(productsList)
+    
 
     const doBeforeCloseModal = () => {
         closeModal()
@@ -48,6 +48,7 @@ function ShopList({ modalIsOpen, closeModal, productsList, removeProduct }) {
 
     const renderTotal = () => {
         let total = 0
+        console.log(productsList)
         for(let i=0; i < productsList.length; i++){
             total += productsList[i].price * productsList[i].quantity
         }
