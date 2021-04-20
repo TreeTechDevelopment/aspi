@@ -8,7 +8,7 @@ OSCAR.xlsx
 
 design/
 
-#client/node_modules/
+client/node_modules/
 
 equivalecias.json
 
