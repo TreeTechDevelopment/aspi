@@ -1,6 +1,6 @@
-node_modules/
+#node_modules/
 
-server/.env
+#server/.env
 
 users.txt
 
@@ -8,8 +8,8 @@ OSCAR.xlsx
 
 design/
 
-client/node_modules/
+#client/node_modules/
 
 equivalecias.json
 
-client/
+#client/
