@@ -1,7 +1,7 @@
 
 @font-face { 
     font-family: SourceSansBold;  
-    src: url('http://192.168.0.15:3000/fonts/SourceSansPro-Bold.ttf'); 
+    src: url('http://localhost:3000/fonts/SourceSansPro-Bold.ttf'); 
 }
  
 .navHome{

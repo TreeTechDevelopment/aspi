@@ -1,16 +1,16 @@
 
 @font-face { 
     font-family: SourceSans;
-    src: url('http://192.168.0.15:3000/fonts/SourceSansPro-Regular.ttf');
+    src: url('http://localhost:3000/fonts/SourceSansPro-Regular.ttf');
 }
  
 @font-face {
     font-family: SourceSansBlack;
-    src: url('http://192.168.0.15:3000/fonts/SourceSansPro-Black.ttf');   
+    src: url('http://localhost:3000/fonts/SourceSansPro-Black.ttf');   
 }
 
 #login-container{
-    background-image: url('http://192.168.0.15:3000/images/background-color.jpg'); 
+    background-image: url('http://localhost:3000/images/background-color.jpg'); 
     background-repeat: no-repeat;
     background-size: cover; 
     width: 100%; 
