@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000
 
 if (process.env.NODE_ENV !== 'production') { 
     const cors = require('cors')
-    app.use(cors({credentials: true, origin: 'http://localhost:3000'})) 
+    app.use(cors({credentials: true, origin: 'https://talleraspi.com'})) 
 }
 app.use(express.static(path.resolve( __dirname, 'src/public' )))
 app.use(bodyParser.json())
